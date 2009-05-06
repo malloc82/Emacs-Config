@@ -84,7 +84,6 @@
 (require 'yasnippet-bundle)
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets")
 (yas/load-directory "~/.emacs.d/yasnippet/snippets")
 
 

@@ -50,7 +50,7 @@
 (load-library "my-syntax")
 ;; (load-library "my-desktop")
 
-(load-library "my-slime")
+;; (load-library "my-slime")
 ;; (load-library "my-mail")
 
 (if (eq current-path nil)
