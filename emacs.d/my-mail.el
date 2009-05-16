@@ -5,7 +5,7 @@
 ;;       smtpmail-starttls-credentials
 ;;       '(("smtp.gmail.com" 587 nil nil))
 ;;       smtpmail-auth-credentials
-;;       '(("smtp.gmail.com" 587 "ritchiecai@gmail.com" nil))
+;;       '(("smtp.gmail.com" 587 "EMAIL_ACCOUNT_HERE" nil))
 ;;       smtpmail-default-smtp-server "smtp.gmail.com"
 ;;       smtpmail-smtp-server "smtp.gmail.com"
 ;;       smtpmail-smtp-service 587
@@ -36,20 +36,20 @@
 
 (setq vm-spool-files `(
                        ("~/Mail/inbox.mbox"
-                        "imap-ssl:imap.gmail.com:993:inbox:login:voodoochild2006:*"
+                        "imap-ssl:imap.gmail.com:993:inbox:login:EMAIL_ACCOUNT_HERE:*"
                         "~/Mail/inbox.crash.mbox")))
 
 
 (setq vm-imap-auto-expunge-alist
       '(
         ;; leave message on the server
-        ("imap-ssl:imap.gmail.com:993:inbox:login:voodoochild2006:*" . nil)
+        ("imap-ssl:imap.gmail.com:993:inbox:login:EMAIL_ACCOUNT_HERE:*" . nil)
         ;; expunge immediately
         ;; ("imap:hilo.harkie.org:143:inbox:login:kyle:*" . t)
         )
       )
 
 ;; (add-to-list 'vm-spool-files
-;;              '("~/Mail/ritchiecai@gmail.com"
-;;                "imap:imap.gmail.com:993:ritchiecai@gmail.com:login:ritchie:*"
+;;              '("~/Mail/EMAIL_ACCOUNT_HERE"
+;;                "imap:imap.gmail.com:993:EMAIL_ADDRESS_HERE:login:ACCOUNT_HERE:*"
 ;;                "~/Mail/IMAP-INBOX.CRASH"))
