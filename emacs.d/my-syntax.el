@@ -36,6 +36,8 @@
          ("\\.mm$"                     . objc-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
          ("\\.[Ss]"                    . gas-mode)
+         ;; ("\\.js$"                     . js2-mode)
+         ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
 
 ;; (set-variable 'c-default-style "stroustrup")
@@ -50,6 +52,13 @@
 (add-hook 'c-mode-hook (lambda () (outline-minor-mode 1)))
 (add-hook 'c++-mode-hook (lambda () (outline-minor-mode 1)))
 
+
+;; =================================
+;; javascript-mode configuration
+;; =================================
+
+(add-hook 'javascript-mode
+          '(autoload 'javascript-mode "javascript" nil t))
 
 ;; =================================
 ;; python-mode configuration
