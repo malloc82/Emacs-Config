@@ -24,8 +24,8 @@
 
 ;; (setq exec-path (cons exec-path "/usr/local/bin"))
 
-(add-to-list 'exec-path "/usr/local/bin")
-;; (add-to-list 'exec-path "/opt/local/bin")
+(add-to-list 'exec-path "/usr/local/bin/")
+(add-to-list 'exec-path "/opt/local/bin/")
 (add-to-list 'exec-path "/usr/local/cuda/bin")
 (add-to-list 'exec-path "/usr/texbin")
 
@@ -52,6 +52,11 @@
 
 ;; (load-library "my-slime")
 ;; (load-library "my-mail")
+
+
+;; version control
+(require 'mercurial)
+
 
 (if (eq current-path nil)
     (cd "~/.")
