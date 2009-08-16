@@ -18,6 +18,7 @@
       (append
        '(
          ("\\.h$"                      . c++-mode)
+         ("\\.i$"                      . c++-mode) ;; swig
          ("\\.cu$"                     . c++-mode)         
          ("\\.dps$"                    . pascal-mode)
          ("\\.py$"                     . python-mode)
@@ -40,14 +41,15 @@
          ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
 
-;; (set-variable 'c-default-style "stroustrup")
+(set-variable 'c-default-style "stroustrup")
 
-(setq c-default-style '((c-mode    . "stroustrup") 
-                        (c++-mode  . "stroustrup")
-                        (objc-mode . "stroustrup")
-                        (java-mode . "java")
-                        (awk-mode  . "awk")
-                        (other     . "gnu")))
+
+;; (setq c-default-style '((c-mode    . "stroustrup") 
+;;                         (c++-mode  . "stroustrup")
+;;                         (objc-mode . "stroustrup")
+;;                         (java-mode . "java")
+;;                         (awk-mode  . "awk")
+;;                         (other     . "gnu")))
 
 (add-hook 'c-mode-hook (lambda () (outline-minor-mode 1)))
 (add-hook 'c++-mode-hook (lambda () (outline-minor-mode 1)))

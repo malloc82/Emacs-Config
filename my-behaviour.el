@@ -14,6 +14,25 @@
 ;; to it using the following functions: forward-sexp 
 ;; or backward-sexp.
 
+;; ===========================
+;; Compilation
+;; ===========================
+
+(setq compilation-scroll-output t)
+
+(defun cc-goto-first-error( buffer exit-condition )
+  (with-current-buffer buffer 
+    (goto-char (point-min)) 
+    (compilation-next-error 1)))
+(add-to-list 'compilation-finish-functions 'cc-goto-first-error) 
+
+
+;; ===========================
+;; Frame setting
+;; ===========================
+
+(setq special-display-buffer-names '("*grep*", "*compilation*"))
+;; (setq display-buffer-reuse-frames t)
 
 ;; ===========================
 ;; No tabs in files

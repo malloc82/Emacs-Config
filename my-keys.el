@@ -16,8 +16,8 @@
 
 (define-key global-map [?\M-\`] 'other-frame)
 (define-key global-map [?\M-\\] 'other-window)
-(global-set-key        [?\M-\[] 'previous-buffer)
-(global-set-key        [?\M-\]] 'next-buffer)
+(global-set-key        [?\M-\]] 'previous-buffer)
+(global-set-key        [?\M-\[] 'next-buffer)
 
 
 ;; shrink window vertically

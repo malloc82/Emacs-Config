@@ -28,11 +28,11 @@
 ;; GDB configuration 
 ;; =================================
 
-(require 'gud)
-(if (>= emacs-major-version 22)
-    (progn
-      (message "Loading GDB-ui")
-      (require 'gdb-ui)))
+;; (require 'gud)
+;; (if (>= emacs-major-version 22)
+;;     (progn
+;;       (message "Loading GDB-ui")
+;;       (require 'gdb-ui)))
 
 ;; (if (>= emacs-major-version 23)
 ;;     (progn
