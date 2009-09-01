@@ -38,7 +38,7 @@
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
          ("\\.[Ss]"                    . gas-mode)
          ;; ("\\.js$"                     . js2-mode)
-         ("\\.js\\'"                   . javascript-mode)
+         ;; ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
 
 (set-variable 'c-default-style "stroustrup")
@@ -51,10 +51,30 @@
 ;;                         (awk-mode  . "awk")
 ;;                         (other     . "gnu")))
 
-(add-hook 'c-mode-hook (lambda () (outline-minor-mode 1)))
-(add-hook 'c++-mode-hook (lambda () (outline-minor-mode 1)))
+(add-hook 'c-mode-hook
+          '(lambda ()
+            (outline-minor-mode 1)))
 
+(add-hook 'c++-mode-hook
+          '(lambda ()
+            (outline-minor-mode 1)))
 
+(add-hook 'objc-mode-hook
+          '(lambda ()
+            (outline-minor-mode 1)))
+
+(add-hook 'cperl-mode-hook
+          '(lambda ()
+            (outline-minor-mode 1)))
+
+(add-hook 'php-mode-hook
+          '(lambda ()
+            (outline-minor-mode 1)))
+
+(add-hook 'tramp-util-unload-hook '
+          (lambda ()
+            (message "loading tramp ......... ")
+            (global-pabbrev-mode nil)))
 ;; =================================
 ;; javascript-mode configuration
 ;; =================================
@@ -76,6 +96,7 @@
 
 (add-hook 'python-mode-hook
        	  '(lambda ()
+            (message "loading python-mode ......... ")
             (load-library "my-python")))
 
 

@@ -11,8 +11,11 @@
       (set-face-background 'secondary-selection "red")
       )
     (progn
-      (let ((bg-color "white")
-            (fg-color "black")
+      ;; (let ((bg-color "ARGBBB000000")
+      ;;       (fg-color "white")
+      ;;       (cur-color "yellow"))
+      (let ((bg-color  "white")
+            (fg-color  "black")
             (cur-color "blue"))
         ;; ================================
         ;; Color for black background
@@ -55,6 +58,9 @@
                                           (background-color . "white")
                                           (foreground-color . "black")
                                           (cursor-color     . "blue")
+                                          ;; (background-color . "ARGBBB000000") ;; transparent 
+                                          ;; (foreground-color . "white")
+                                          ;; (cursor-color     . "yellow")
                                           (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")
                                           ))
               (setq default-frame-alist '((width . 95)  (height . 50)
@@ -65,8 +71,20 @@
                                           (background-color . "white")
                                           (foreground-color . "black")
                                           (cursor-color     . "blue")
+                                          ;; (background-color . "ARGBBB000000") ;; transparent 
+                                          ;; (foreground-color . "white")
+                                          ;; (cursor-color     . "yellow")
                                           (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")
                                           ))
+              (setq special-display-frame-alist '((width . 95) (height . 50)
+                                          (background-color . "white")
+                                          (foreground-color . "black")
+                                          (cursor-color     . "blue")
+                                          ;; (background-color . "ARGBBB000000") transparent 
+                                          ;; (foreground-color . "white")
+                                          ;; (cursor-color     . "yellow")
+                                          (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")                                                  
+                                                  ))
               )
             (progn
               (setq initial-frame-alist '((top   . 25)  (left   . 10)

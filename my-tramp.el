@@ -2,14 +2,16 @@
 ;; Tramp configuration
 ;; ===============================
 
+(setq tramp-verbose 10)
+
 (if (>= emacs-major-version 23)
     (progn 
-      ;; (message "Load config for emacs (23) %ds" emacs-major-version)
+      (message "Load config for emacs (23) %ds" emacs-major-version)
       (setq tramp-default-method "ssh")
-      (setq tramp-encoding-shell "/bin/bash"))
+      (setq tramp-encoding-shell "/bin/sh"))
     ;; else, for emacs 22
     (progn 
-      ;; (message "Load config for emacs (22) %ds" emacs-major-version)
+      (message "Load config for emacs (22) %ds" emacs-major-version)
       (eval-after-load "tramp"
         '(progn
           (setq tramp-default-user "zcai")

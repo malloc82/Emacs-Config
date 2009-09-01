@@ -14,6 +14,15 @@
 ;; to it using the following functions: forward-sexp 
 ;; or backward-sexp.
 
+
+;; ===========================
+;; pabbrev-mode
+;; ===========================
+(require 'pabbrev )
+(global-pabbrev-mode)
+(setq pabbrev-read-only-error nil)
+
+
 ;; ===========================
 ;; Compilation
 ;; ===========================
@@ -31,7 +40,7 @@
 ;; Frame setting
 ;; ===========================
 
-(setq special-display-buffer-names '("*grep*", "*compilation*"))
+(setq special-display-buffer-names '("*compilation*", "*ASCII*"))
 ;; (setq display-buffer-reuse-frames t)
 
 ;; ===========================
@@ -56,6 +65,18 @@
 ;; keys for buffer creation and navigation
 (global-set-key [(control x) (control b)] 'iswitchb-buffer)
 (global-set-key [(control x) (f)] 'find-file)
+
+
+;; ============================
+;; Command frequency logging
+;; ============================
+
+(setq-default command-frequency-table-file "~/.emacs.d/frequencies")
+(require 'command-frequency)
+(command-frequency-table-load)
+(command-frequency-mode 1)
+(command-frequency-autosave-mode 1)
+
 
 ;; ============================
 ;; Display
@@ -140,3 +161,10 @@
 ;; -------- (autoload 'nuke-trailing-whitespace "whitespace" nil t)
 ;; -------- (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 
+
+;; (add-hook 'first-change-hook 
+;;           #'(lambda nil 
+;;               ;; set for all 'regular' buffers 
+;;               (unless (string-match "\\`[ *].*[*]\\'" 
+;;                                     (buffer-name)) 
+;;                 (setq buffer-offer-save t)))) 
