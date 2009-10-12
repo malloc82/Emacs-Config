@@ -7,6 +7,9 @@
 (setq org-log-done 'time)
 ;;(setq org-log-done 'note)
 
+;; (add-hook 'org-mode-hook 
+;;           (lambda () (setq truncate-lines nil)))
+
 (setq org-hide-leading-stars t)
 (setq org-odd-levels-only t)
     

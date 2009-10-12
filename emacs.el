@@ -14,7 +14,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/")
 
-
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/") 
 (normal-top-level-add-subdirs-to-load-path)
@@ -29,6 +28,10 @@
 (add-to-list 'exec-path "/usr/local/cuda/bin")
 (add-to-list 'exec-path "/usr/texbin")
 
+(if (string= system-type "darwin")
+    (progn
+      (require 'growl)
+      (growl "Emacs" "Loading .emacs ... ")))
 
 (setq turn-on-follow-mouse t)
 
@@ -56,7 +59,7 @@
 
 ;; version control
 (require 'mercurial)
-
+(require 'emacs-lock)
 
 (if (eq current-path nil)
     (cd "~/.")
@@ -180,12 +183,23 @@
      
 ;;;; records-mode end
 
+;; start emacs server 
+;; (server-force-delete)
+(if (>= emacs-major-version 23)
+    (server-force-delete))
+(server-start)
 
 ;; Timer Part2
 (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
                            (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
+(if (string= system-type "darwin")
+    (growl "Emacs" (format "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
+                                                       (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))))
+
 (message "Emacs version = %ds" emacs-major-version)
 (message "Emacs is running on: %s" system-type)
+
+
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -210,3 +224,4 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+

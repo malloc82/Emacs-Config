@@ -75,6 +75,13 @@
           (lambda ()
             (message "loading tramp ......... ")
             (global-pabbrev-mode nil)))
+
+;; (add-hook 'org-mode-hook 
+;;           (lambda () (setq truncate-lines nil)))
+
+
+
+
 ;; =================================
 ;; javascript-mode configuration
 ;; =================================

@@ -18,9 +18,9 @@
 ;; ===========================
 ;; pabbrev-mode
 ;; ===========================
-(require 'pabbrev )
-(global-pabbrev-mode)
-(setq pabbrev-read-only-error nil)
+;; (require 'pabbrev )
+;; (global-pabbrev-mode)
+;; (setq pabbrev-read-only-error nil)
 
 
 ;; ===========================

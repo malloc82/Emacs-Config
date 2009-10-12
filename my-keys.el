@@ -2,6 +2,7 @@
 ;; Key mappings
 ;; ============================
 
+(global-set-key (kbd "<f6>") 'toggle-truncate-lines)
 (global-set-key [(M-down)]   'scroll-up)        ; C-.
 (global-set-key [(M-up)]     'scroll-down)      ; C-;
 
