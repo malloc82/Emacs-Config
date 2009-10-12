@@ -60,6 +60,8 @@
 ;; version control
 (require 'mercurial)
 (require 'emacs-lock)
+;; AUCTeX in linux
+;; (require 'tex-site)
 
 (if (eq current-path nil)
     (cd "~/.")
@@ -208,20 +210,27 @@
   ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex -file-line-error")
  '(LaTeX-math-menu-unicode t)
- '(TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o && preview %s.pdf") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+ ;; Mac OS X style
+ ;; '(TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o && preview %s.pdf") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+ ;; Linux style 
+ '(TeX-output-view-style (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o")))) 
+ '(column-number-mode t)
  '(default-truncate-lines nil t)
+ '(display-time-mode t)
  '(large-file-warning-threshold nil)
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
  '(paren-sexp-mode nil)
  '(show-paren-mode t)
- '(transient-mark-mode t)
  '(truncate-partial-width-windows nil))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
+ ;; On Linux, use this:
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "unknown" :family "Monaco")))) 
  )
 
