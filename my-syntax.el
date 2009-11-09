@@ -10,6 +10,7 @@
 (require 'gas-mode)
 ;; (if (string= system-type "gnu/linux")
 (require 'apt-sources)
+(require 'cuda-mode)
 
 ;; ========================================================
 ;; Set up which modes to use for which file extensions
@@ -17,9 +18,10 @@
 (setq auto-mode-alist
       (append
        '(
-         ("\\.h$"                      . c++-mode)
+         ("\\.[Hh]$"                   . c++-mode)
          ("\\.i$"                      . c++-mode) ;; swig
-         ("\\.cu$"                     . c++-mode)         
+         ;; ("\\.cu$"                     . c++-mode)         
+         ("\\.[Cc][Uu]$"               . cuda-mode)
          ("\\.dps$"                    . pascal-mode)
          ("\\.py$"                     . python-mode)
          ("\\.Xdefaults$"              . xrdb-mode)

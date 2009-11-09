@@ -1926,6 +1926,11 @@ public:
   )
 'cc-mode)
 
+;;; snippets for c++-mode
+(yas/define-snippets 'cuda-mode
+'()
+'c++-mode)
+
 ;;; snippets for c-mode
 (yas/define-snippets 'c-mode
 '(
