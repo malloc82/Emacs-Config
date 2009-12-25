@@ -61,6 +61,11 @@
           '(lambda ()
             (outline-minor-mode 1)))
 
+(add-hook 'cuda-mode-hook
+          '(lambda ()
+            (yas/minor-mode 1)
+            (outline-minor-mode 1)))
+
 (add-hook 'objc-mode-hook
           '(lambda ()
             (outline-minor-mode 1)))

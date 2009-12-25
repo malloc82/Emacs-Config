@@ -7,7 +7,10 @@
       ;; use color-theme-select to check out other themes 
       (require 'color-theme)
       (color-theme-initialize)
-      (color-theme-hober)
+      ;; (color-theme-subtle-hacker)
+      ;; (color-theme-hober)
+      (color-theme-tty-dark)
+      ;; (color-theme-vim-colors)
       (set-face-background 'secondary-selection "red")
       )
     (progn
@@ -25,7 +28,6 @@
         ;; (set-cursor-color     "yellow")
         ;; (set-face-background 'region "blue")
         ;; (set-face-foreground 'font-lock-comment-face "chocolate1")
-        
         
         ;; ================================
         ;; Color for white background
