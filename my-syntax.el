@@ -12,6 +12,8 @@
 (require 'apt-sources)
 (require 'cuda-mode)
 
+;; (require 'matlab)
+
 ;; ========================================================
 ;; Set up which modes to use for which file extensions
 ;; ========================================================
@@ -35,7 +37,8 @@
          ("\\.el$"                     . lisp-mode)
          ("\\.ASM$"                    . asm-mode)
          ("\\.[Kk][Aa][Nn]"            . jde-mode)
-         ("\\.m$"                      . objc-mode)
+         ;; ("\\.m$"                      . objc-mode)
+         ("\\.m$"                      . matlab-mode)
          ("\\.mm$"                     . objc-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
          ("\\.[Ss]"                    . gas-mode)
@@ -230,7 +233,9 @@
 ;; Matlab Mode
 ;; ===========================
 
-(autoload 'matlab-mode "matlab.elc" "Enter Matlab mode." t)
-(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
-(autoload 'matlab-shell "matlab.elc" "Interactive Matlab mode." t)
+;; (autoload 'matlab-mode "matlab.elc" "Enter Matlab mode." t)
+(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
+(setq matlab-indent-function t)
+(setq matlab-shell-command "matlab")
 
