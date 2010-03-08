@@ -22,8 +22,8 @@
        '(
          ("\\.[Hh]$"                   . c++-mode)
          ("\\.i$"                      . c++-mode) ;; swig
-         ("\\.cu$"                     . c-mode)         
-         ;; ("\\.[Cc][Uu]$"               . cuda-mode)
+         ;; ("\\.cu$"                     . c-mode)         
+         ("\\.[Cc][Uu]$"               . cuda-mode)
          ("\\.dps$"                    . pascal-mode)
          ("\\.py$"                     . python-mode)
          ("\\.Xdefaults$"              . xrdb-mode)

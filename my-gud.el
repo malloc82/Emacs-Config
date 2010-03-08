@@ -35,8 +35,8 @@
 ;;       (require 'gdb-ui)))
 
 ;; (if (>= emacs-major-version 23)
-;;     (progn
-;;       (setq gud-gdb-command-name "gdbtui -nw --annotat=3"))
+;;     ;; (progn
+;;     ;;   (setq gud-gdb-command-name "gdbtui -nw --annotat=3"))
 ;;     (progn
 ;;       (setq gud-gdb-command-name "gdb --annotat=3")))
 
