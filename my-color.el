@@ -59,9 +59,9 @@
       
       (if (string= system-type "darwin")
           (darwin-setting)
-          (setq initial-frame-alist '((top   . 25)  (left   . 10)
+          (setq initial-frame-alist `((top   . 25)  (left   . 10)
                                       ,@face-config))
-          (setq default-frame-alist '((width . 95)  (height . 50)
+          (setq default-frame-alist `((width . 95)  (height . 50)
                                       ,@face-config)))))
         
 
