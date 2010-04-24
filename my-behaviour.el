@@ -71,11 +71,11 @@
 ;; Command frequency logging
 ;; ============================
 
-(setq-default command-frequency-table-file "~/.emacs.d/frequencies")
-(require 'command-frequency)
-(command-frequency-table-load)
-(command-frequency-mode 1)
-(command-frequency-autosave-mode 1)
+;; (setq-default command-frequency-table-file "~/.emacs.d/frequencies")
+;; (require 'command-frequency)
+;; (command-frequency-table-load)
+;; (command-frequency-mode 1)
+;; (command-frequency-autosave-mode 1)
 
 
 ;; ============================

@@ -3,8 +3,8 @@
 ;; ============================
 
 (global-set-key (kbd "<f6>") 'toggle-truncate-lines)
-(global-set-key [(M-down)]   'scroll-up)        ; C-.
-(global-set-key [(M-up)]     'scroll-down)      ; C-;
+;; (global-set-key [(M-down)]   'scroll-up)        ; C-.
+;; (global-set-key [(M-up)]     'scroll-down)      ; C-;
 
 (line-number-mode 'default )
 
@@ -37,8 +37,8 @@
 (define-key global-map '[C-f9] 'previous-error)
 ;;(define-key global-map '[f12] 'bury-buffer)
 
-(global-set-key (kbd "C-c b")   'beginning-of-buffer)
-(global-set-key (kbd "C-c e")   'end-of-buffer)
+;; (global-set-key (kbd "C-c b")   'beginning-of-buffer)
+;; (global-set-key (kbd "C-c e")   'end-of-buffer)
 
 (if window-system
     (progn

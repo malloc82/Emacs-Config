@@ -22,7 +22,8 @@
        '(
          ("\\.[Hh]$"                   . c++-mode)
          ("\\.i$"                      . c++-mode) ;; swig
-         ;; ("\\.cu$"                     . c-mode)         
+         ;; ("\\.cu$"                     . c-mode)
+         ("\\.d$"                      . c-mode) ;; dtrace
          ("\\.[Cc][Uu]$"               . cuda-mode)
          ("\\.dps$"                    . pascal-mode)
          ("\\.py$"                     . python-mode)
