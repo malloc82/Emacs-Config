@@ -1,3 +1,3 @@
 install:
-    cp emacs.el ~/.emacs
+	cp emacs.el ~/.emacs
 
