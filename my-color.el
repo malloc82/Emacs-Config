@@ -30,13 +30,14 @@
     (terminal-settings)
     ;; Emacs 23.1 on OS X transparent background : "ARGBBB000000"
 
-    ;; (let ((bg-color  "black")
-    ;;       (fg-color  "white")
-    ;;       (cur-color "yellow"))
+    (let ((bg-color  "black")
+          (fg-color  "white")
+          (cur-color "yellow"))
 
-    (let ((bg-color  "white")
-          (fg-color  "black")
-          (cur-color "blue"))
+    ;; (let ((bg-color  "white")
+    ;;       (fg-color  "black")
+    ;;       (cur-color "blue"))
+      
       (setq face-config  `((background-color . ,bg-color)
                            (foreground-color . ,fg-color)
                            (cursor-color     . ,cur-color)))
@@ -48,14 +49,14 @@
       ;; =================================
       (set-face-background 'secondary-selection "PaleVioletRed3")
 
-      ;; (cond ((string= bg-color "white")
-      ;;        (set-face-background 'region "LightGoldenrod2")
-      ;;        (set-face-foreground 'font-lock-comment-face "Firebrick")
-      ;;        (set-face-foreground 'font-lock-comment-face "chocolate2"))
+      (cond ;; ((string= bg-color "white")
+            ;;  (set-face-background 'region "LightGoldenrod2")
+            ;;  (set-face-foreground 'font-lock-comment-face "Firebrick")
+            ;;  (set-face-foreground 'font-lock-comment-face "chocolate2"))
 
-      ;;       ((string= bg-color "black")
-      ;;        (set-face-background 'region "red")
-      ;;        (set-face-foreground 'font-lock-comment-face "chocolate1")))
+            ((string= bg-color "black")
+             (set-face-background 'region "blue")
+             (set-face-foreground 'font-lock-comment-face "chocolate1")))
       
       (if (string= system-type "darwin")
           (darwin-setting)

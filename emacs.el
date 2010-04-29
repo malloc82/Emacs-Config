@@ -7,7 +7,7 @@
 ;; Load path
 ;; ==========================================================
 
-(require 'cl)
+;; (require 'cl)
 
 ;; Timer Part1
 (defvar *emacs-load-start* (current-time))
@@ -218,6 +218,7 @@
  '(default-truncate-lines nil t)
  '(display-time-mode t)
  '(large-file-warning-threshold nil)
+ '(matlab-fill-code nil)
  '(ns-alternate-modifier (quote none))
  '(ns-command-modifier (quote meta))
  '(paren-sexp-mode nil)

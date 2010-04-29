@@ -22,9 +22,11 @@
        '(
          ("\\.[Hh]$"                   . c++-mode)
          ("\\.i$"                      . c++-mode) ;; swig
+         ("\\.inl$"                    . c++-mode) ;; template functions 
          ;; ("\\.cu$"                     . c-mode)
          ("\\.d$"                      . c-mode) ;; dtrace
          ("\\.[Cc][Uu]$"               . cuda-mode)
+         ("\\.[Cc][Uu][Hh]$"           . cuda-mode)
          ("\\.dps$"                    . pascal-mode)
          ("\\.py$"                     . python-mode)
          ("\\.Xdefaults$"              . xrdb-mode)
