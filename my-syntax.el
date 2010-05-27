@@ -11,6 +11,7 @@
 ;; (if (string= system-type "gnu/linux")
 (require 'apt-sources)
 (require 'cuda-mode)
+(require 'csharp-mode)
 
 ;; (require 'matlab)
 
@@ -45,6 +46,7 @@
          ("\\.mm$"                     . objc-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
          ("\\.[Ss]"                    . gas-mode)
+         ("\\.[Cc][Ss]$"               . csharp-mode)
          ;; ("\\.js$"                     . js2-mode)
          ;; ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
