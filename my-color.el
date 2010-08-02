@@ -3,14 +3,18 @@
 ;; ==========================================================
 
 (defun terminal-settings ()
-      ;; use color-theme-select to check out other themes 
-      (require 'color-theme)
-      (color-theme-initialize)
-      ;; (color-theme-subtle-hacker)
-      ;; (color-theme-hober)
-      (color-theme-tty-dark)
-      ;; (color-theme-vim-colors)
-      (set-face-background 'secondary-selection "red"))
+  (set-face-foreground 'font-lock-preprocessor-face "magenta")
+  (set-face-foreground 'font-lock-comment-face "blue")
+  (set-face-foreground 'font-lock-comment-delimiter-face "blue")
+  (set-face-foreground 'font-lock-type-face "green")
+  (set-face-foreground 'font-lock-keyword-face "yellow")
+  (set-face-foreground 'font-lock-variable-name-face "white")
+  (set-face-foreground 'font-lock-function-name-face "white")
+  (set-face-foreground 'font-lock-string-face "red")
+  (set-face-foreground 'font-lock-constant-face "cyan")
+
+  (set-face-background 'region "blue")
+  (set-face-background 'secondary-selection "cyan"))
 
 
 (defun darwin-setting ()
@@ -30,13 +34,13 @@
     (terminal-settings)
     ;; Emacs 23.1 on OS X transparent background : "ARGBBB000000"
 
-    (let ((bg-color  "black")
-          (fg-color  "white")
-          (cur-color "yellow"))
+    ;; (let ((bg-color  "black")
+    ;;       (fg-color  "white")
+    ;;       (cur-color "yellow"))
 
-    ;; (let ((bg-color  "white")
-    ;;       (fg-color  "black")
-    ;;       (cur-color "blue"))
+    (let ((bg-color  "white")
+          (fg-color  "black")
+          (cur-color "blue"))
       
       (setq face-config  `((background-color . ,bg-color)
                            (foreground-color . ,fg-color)
@@ -49,14 +53,25 @@
       ;; =================================
       (set-face-background 'secondary-selection "PaleVioletRed3")
 
-      (cond ;; ((string= bg-color "white")
-            ;;  (set-face-background 'region "LightGoldenrod2")
-            ;;  (set-face-foreground 'font-lock-comment-face "Firebrick")
-            ;;  (set-face-foreground 'font-lock-comment-face "chocolate2"))
+      (cond ((string= bg-color "white")
+             ;; (set-face-background 'region "LightGoldenrod2")
+             (set-face-background 'region "LightBlue2")
+             ;; (set-face-foreground 'font-lock-comment-face "Firebrick")
+             ;; (set-face-foreground 'font-lock-comment-face "chocolate2")
+             (set-face-foreground 'font-lock-comment-face "ForestGreen")
+             (set-face-foreground 'font-lock-preprocessor-face "Brown")
+             (set-face-foreground 'font-lock-type-face "Purple")
+             (set-face-foreground 'font-lock-keyword-face "Purple")
+             (set-face-foreground 'font-lock-variable-name-face "Black")
+             (set-face-foreground 'font-lock-function-name-face "Blue")
+             (set-face-foreground 'font-lock-string-face "Red")
+             (set-face-foreground 'font-lock-constant-face "DarkCyan")
+             )
 
             ((string= bg-color "black")
              (set-face-background 'region "blue")
-             (set-face-foreground 'font-lock-comment-face "chocolate1")))
+             (set-face-foreground 'font-lock-comment-face "chocolate1"))
+             )
       
       (if (string= system-type "darwin")
           (darwin-setting)

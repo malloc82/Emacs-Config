@@ -4,6 +4,13 @@
 ;; ====================================================
 
 
+;; =======================
+;; ipython
+;; =======================
+
+(require 'ipython)
+(setq py-python-command-args '( "-colors" "Linux"))
+
 
 ;; ==========================
 ;; Pymacs, rope, ropemacs
@@ -15,22 +22,14 @@
 (autoload 'pymacs-load "pymacs" nil t)
 
 (eval-after-load "pymacs"
- '(add-to-list 'pymacs-load-path "/Library/Python/2.5/site-packages/Pymacs"))
+ '(add-to-list 'pymacs-load-path "/Library/Python/2.6/site-packages/Pymacs"))
 (pymacs-load "ropemacs" "rope-")
 (setq ropemacs-enable-autoimport t)
-
-;; =======================
-;; ipython
-;; =======================
-
-(require 'ipython)
 
 ;; ===========================
 ;; python-mode extension 
 ;; ===========================
 
-;; (add-hook 'python-mode-hook
-;;        	  '(lambda ()
 (outline-minor-mode 1)
 
 (set-variable 'py-indent-offset 4)

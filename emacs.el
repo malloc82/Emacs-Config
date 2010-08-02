@@ -210,6 +210,7 @@
   ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex -file-line-error")
  '(LaTeX-math-menu-unicode t)
+ ;; This config is for AUCTeX 11.85 only
  ;; Mac OS X style
  ;; '(TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o && preview %s.pdf") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
  ;; Linux style 

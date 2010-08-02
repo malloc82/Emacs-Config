@@ -12,6 +12,7 @@
 (require 'apt-sources)
 (require 'cuda-mode)
 (require 'csharp-mode)
+(require 'd-mode)
 
 ;; (require 'matlab)
 
@@ -25,7 +26,7 @@
          ("\\.i$"                      . c++-mode) ;; swig
          ("\\.inl$"                    . c++-mode) ;; template functions 
          ;; ("\\.cu$"                     . c-mode)
-         ("\\.d$"                      . c-mode) ;; dtrace
+         ("\\.d$"                      . d-mode) ;; dtrace
          ("\\.[Cc][Uu]$"               . cuda-mode)
          ("\\.[Cc][Uu][Hh]$"           . cuda-mode)
          ("\\.dps$"                    . pascal-mode)
