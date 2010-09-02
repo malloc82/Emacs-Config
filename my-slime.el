@@ -1,12 +1,18 @@
 ;; ===========================
 ;; Slime configuratuion
 ;; ===========================
+;; SBCL command:
+;;      start swank server: (swank:create-server)
+
 
 (add-to-list 'load-path "/Users/zcai/Emacs/slime/")
 
 (require 'slime)
 
+;; REPL does not load automatically, so need to load slime-repl or slime-fancy
+;; (slime-setup '(slime-repl))
 (slime-setup '(slime-fancy slime-asdf))
+
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
@@ -73,7 +79,7 @@
 (define-key slime-mode-map (kbd "C-<return>") 'paredit-newline)
 ;;;; i hate having to take my key off of ctrl for this and i don't use complete-form anyway...
 (define-key slime-mode-map (kbd "C-c C-i") 'slime-inspect)
-(define-key global-map (kbd "<f12>") 'slime-selector)
+(define-key global-map (kbd "M-<f12>") 'slime-selector)
 
 
 (setf slime-save-buffers nil)

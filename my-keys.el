@@ -2,7 +2,6 @@
 ;; Key mappings
 ;; ============================
 
-(global-set-key (kbd "<f6>") 'toggle-truncate-lines)
 ;; (global-set-key [(M-down)]   'scroll-up)        ; C-.
 ;; (global-set-key [(M-up)]     'scroll-down)      ; C-;
 
@@ -10,6 +9,21 @@
 
 (define-key global-map '[f3] 'uncomment-region)
 (define-key global-map '[f4] 'comment-region)
+(define-key global-map '[f5] 'list-buffers)
+(global-set-key (kbd "<f6>") 'toggle-truncate-lines)
+(global-set-key [f7] 'compile)
+(global-set-key [M-f7] 'compile)
+
+(define-key global-map '[M-f8]   'first-error)
+(define-key global-map '[M-f9]   'next-error)
+(define-key global-map '[C-f9] 'previous-error)
+;;(define-key global-map '[f12] 'bury-buffer)
+
+;; (define-key global-map '[f7] 'compile)
+;; set up the compiling options
+(setq compile-command "make"
+      compilation-ask-about-save nil
+      compilation-window-height 10)
 
 ;; goto line
 ;; default: M-g g
@@ -24,18 +38,7 @@
 ;; shrink window vertically
 (define-key global-map [?\C-x ?&] 'shrink-window)
 
-;; (define-key global-map '[f7] 'compile)
-;; set up the compiling options
-(setq compile-command "make"
-      compilation-ask-about-save nil
-      compilation-window-height 10)
 
-(global-set-key [f7] 'compile)
-
-(define-key global-map '[M-f8]   'first-error)
-(define-key global-map '[M-f9]   'next-error)
-(define-key global-map '[C-f9] 'previous-error)
-;;(define-key global-map '[f12] 'bury-buffer)
 
 ;; (global-set-key (kbd "C-c b")   'beginning-of-buffer)
 ;; (global-set-key (kbd "C-c e")   'end-of-buffer)
