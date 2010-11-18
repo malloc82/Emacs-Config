@@ -18,15 +18,15 @@
 (defvar font-lock-hexnumber "0[xX][0-9a-fA-F]+")
 
 (add-hook 'font-lock-mode-hook
-  (function (lambda ()
-    (setq font-lock-keywords
-      (append font-lock-keywords
-        (list
-          (list (concat "\\<\\(" font-lock-number "\\)\\>" )
-                (list 0 font-lock-number-face))
-          (list (concat "\\<\\(" font-lock-hexnumber "\\)\\>" )
-                (list 0 font-lock-number-face))
-          ))))))
+          #'(lambda ()
+              (setq font-lock-keywords
+                    (append font-lock-keywords
+                            (list
+                             (list (concat "\\<\\(" font-lock-number "\\)\\>" )
+                                   (list 0 font-lock-number-face))
+                             (list (concat "\\<\\(" font-lock-hexnumber "\\)\\>" )
+                                   (list 0 font-lock-number-face))
+                             )))))
 
 
 (defun terminal-settings ()

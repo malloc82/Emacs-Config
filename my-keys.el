@@ -52,6 +52,7 @@
 
 
 (global-set-key [C-tab]         'hide-subtree)
+(global-set-key (kbd "C-`")   'show-subtree)
 (global-set-key (kbd "C-c s")   'show-subtree)
 
 ;; multi-term

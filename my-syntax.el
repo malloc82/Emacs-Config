@@ -13,6 +13,7 @@
 (require 'cuda-mode)
 (require 'csharp-mode)
 (require 'd-mode)
+(require 'scilab)
 
 ;; (require 'matlab)
 
@@ -43,6 +44,8 @@
          ("\\.ASM$"                    . asm-mode)
          ("\\.[Kk][Aa][Nn]"            . jde-mode)
          ;; ("\\.m$"                      . objc-mode)
+         ("\\.sci$"                    . scilab-mode)
+         ("\\.sce$"                    . scilab-mode)
          ("\\.m$"                      . matlab-mode)
          ("\\.mm$"                     . objc-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
@@ -96,7 +99,10 @@
 ;; (add-hook 'org-mode-hook 
 ;;           (lambda () (setq truncate-lines nil)))
 
-
+(add-hook 'term-mode-hook
+          #'(lambda ()
+              (message "term mode hook ...")
+              (font-lock-mode nil)))
 
 
 ;; =================================
@@ -105,6 +111,13 @@
 
 (add-hook 'javascript-mode
           '(autoload 'javascript-mode "javascript" nil t))
+
+;; =================================
+;; python-mode configuration
+;; =================================
+(load "~/.emacs.d/nxhtml/autostart.el")
+(setq mumamo-background-colors nil) 
+(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
 
 ;; =================================
 ;; python-mode configuration
