@@ -7,6 +7,7 @@
 
 (line-number-mode 'default )
 
+(define-key global-map '[f2] 'delete-window)
 (define-key global-map '[f3] 'uncomment-region)
 (define-key global-map '[f4] 'comment-region)
 (define-key global-map '[f5] 'list-buffers)
