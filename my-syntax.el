@@ -91,18 +91,13 @@
           '(lambda ()
             (outline-minor-mode 1)))
 
-(add-hook 'tramp-util-unload-hook '
-          (lambda ()
+(add-hook 'tramp-util-unload-hook
+          '(lambda ()
             (message "loading tramp ......... ")
             (global-pabbrev-mode nil)))
 
 ;; (add-hook 'org-mode-hook 
 ;;           (lambda () (setq truncate-lines nil)))
-
-(add-hook 'term-mode-hook
-          #'(lambda ()
-              (message "term mode hook ...")
-              (font-lock-mode nil)))
 
 
 ;; =================================
@@ -259,3 +254,50 @@
 (setq matlab-indent-function t)
 (setq matlab-shell-command "matlab")
 
+;; ===========================
+;; Lisp Mode
+;; ===========================
+
+(require 'paredit)
+(defsubst lisp-mode-addon (mode-type)
+  (define-key mode-type (kbd "(") 'paredit-open-parenthesis)
+  (define-key mode-type (kbd ")") 'paredit-close-parenthesis)
+  
+  (define-key mode-type (kbd "\"") 'paredit-doublequote)
+  (define-key mode-type (kbd "\\") 'paredit-backslash)
+  
+  (define-key mode-type (kbd "RET") 'paredit-newline)
+  (define-key mode-type (kbd "<return>") 'paredit-newline)
+  (define-key mode-type (kbd "C-j") 'newline)
+  
+  ;; nb: this assumes dvorak key layout
+  ;; (define-key mode-type (kbd "C-h") 'backward-sexp) ;; use C-M-<left>
+  ;; (define-key mode-type (kbd "C-n") 'forward-sexp)  ;; use C-M-<right>
+  ;; (define-key mode-type (kbd "C-k") 'kill-sexp)
+  (define-key mode-type (kbd "C-t") 'transpose-sexps)
+  (define-key mode-type (kbd "C-M-t") 'transpose-chars)
+  (define-key mode-type (kbd "C-M-k") 'paredit-kill)
+  ;; (define-key mode-type (kbd "C-'") 'paredit-splice-sexp)
+  (define-key mode-type (kbd "C-M-l") 'paredit-recentre-on-sexp)
+  (define-key mode-type (kbd "C-,") 'paredit-backward-slurp-sexp)
+  (define-key mode-type (kbd "C-.") 'paredit-forward-slurp-sexp)
+  (define-key mode-type (kbd "C-<") 'paredit-backward-barf-sexp)
+  (define-key mode-type (kbd "C->") 'paredit-forward-barf-sexp)
+  ;; (define-key mode-type (kbd "C-/") 'backward-up-list)
+  (define-key mode-type (kbd "C-=") 'down-list)
+  (define-key mode-type (kbd "TAB") 'slime-indent-and-complete-symbol)
+  (define-key mode-type (kbd "C-c TAB") 'slime-complete-form)
+  ;; this may seem strange, but i often use the C-<whatever> motion
+  ;; commands in sequence to reformat code and having to take a finger off of control
+  ;; to add a return is a pain
+  (define-key mode-type (kbd "C-<return>") 'paredit-newline)
+  ;; i hate having to take my key off of ctrl for this and i don't use complete-form anyway...
+  (define-key mode-type (kbd "C-c C-i") 'slime-inspect))
+
+(add-hook 'lisp-mode-hook
+          '(lambda ()
+             (lisp-mode-addon lisp-mode-map)))
+
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+             (lisp-mode-addon emacs-lisp-mode-map)))
