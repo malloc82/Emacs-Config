@@ -4,9 +4,8 @@
 ;; SBCL command:
 ;;      start swank server: (swank:create-server)
 
-
-(add-to-list  'load-path      "/Users/zcai/Emacs/slime/")
-(defvar *sbcl-bin-path* "/opt/local/bin/sbcl")
+(add-to-list  'load-path      "~/Emacs/slime/")
+(defvar *lisp-bin-path* "/opt/local/bin/sbcl")
 
 (require 'slime)
 
@@ -17,7 +16,7 @@
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 ;; Optionally, specify the lisp program you are using. Default is "lisp"
-(setq inferior-lisp-program *sbcl-bin-path*
+(setq inferior-lisp-program *lisp-bin-path*
      lisp-indent-function 'common-lisp-indent-function
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
 ;      common-lisp-hyperspec-root ""
@@ -41,7 +40,7 @@
     (interactive)
     (slime, lisp)))
 
-(defslime-start sbcl *sbcl-bin-path*)
+(defslime-start sbcl *lisp-bin-path*)
 
 ;; lisp-mode-addon is defined in my-syntax.el
 (add-hook 'slime-mode-hook
@@ -146,5 +145,4 @@
 
 
 ;(setq slime-close-parens-at-point t)
- 
 

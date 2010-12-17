@@ -40,7 +40,8 @@
 ;; Frame setting
 ;; ===========================
 
-(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*"))
+(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*terminal<1>*"))
+(setq special-display-regexps '("\*terminal\<1\>\*"))
 ;; (setq display-buffer-reuse-frames t)
 
 ;; ===========================

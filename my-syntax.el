@@ -14,7 +14,6 @@
 (require 'csharp-mode)
 (require 'd-mode)
 (require 'scilab)
-
 ;; (require 'matlab)
 
 ;; ========================================================
@@ -66,30 +65,29 @@
 ;;                         (awk-mode  . "awk")
 ;;                         (other     . "gnu")))
 
-(add-hook 'c-mode-hook
-          '(lambda ()
-            (outline-minor-mode 1)))
 
-(add-hook 'c++-mode-hook
-          '(lambda ()
-            (outline-minor-mode 1)))
+(setq mode-list '(c-mode-hook
+                  c++-mode-hook
+                  objc-mode-hook
+                  cuda-mode-hook
+                  lisp-mode-hook
+                  emacs-lisp-mode-hook
+                  python-mode-hook
+                  cperl-mode-hook
+                  matlab-mode-hook
+                  gas-mode-hook
+                  php-mode-hook
+                  javascript-mode-hook))
+
+(dolist (mode mode-list)
+  (add-hook mode
+            '(lambda ()
+              (outline-minor-mode 1)
+              (pabbrev-mode))))
 
 (add-hook 'cuda-mode-hook
           '(lambda ()
-            (yas/minor-mode 1)
-            (outline-minor-mode 1)))
-
-(add-hook 'objc-mode-hook
-          '(lambda ()
-            (outline-minor-mode 1)))
-
-(add-hook 'cperl-mode-hook
-          '(lambda ()
-            (outline-minor-mode 1)))
-
-(add-hook 'php-mode-hook
-          '(lambda ()
-            (outline-minor-mode 1)))
+            (yas/minor-mode 1)))
 
 (add-hook 'tramp-util-unload-hook
           '(lambda ()
@@ -104,7 +102,7 @@
 ;; javascript-mode configuration
 ;; =================================
 
-(add-hook 'javascript-mode
+(add-hook 'javascript-mode-hook
           '(autoload 'javascript-mode "javascript" nil t))
 
 ;; =================================
@@ -129,6 +127,7 @@
 (add-hook 'python-mode-hook
        	  '(lambda ()
             (message "loading python-mode ......... ")
+            
             (load-library "my-python")))
 
 
@@ -139,6 +138,7 @@
 (add-hook 'LaTeX-mode-hook
           '(lambda ()
             (outline-minor-mode 1)
+            
             (setq LaTeX-math-mode t)))
 
 
@@ -296,8 +296,9 @@
 
 (add-hook 'lisp-mode-hook
           '(lambda ()
-             (lisp-mode-addon lisp-mode-map)))
+            (lisp-mode-addon lisp-mode-map)))
 
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
-             (lisp-mode-addon emacs-lisp-mode-map)))
+            (lisp-mode-addon emacs-lisp-mode-map)))
+
