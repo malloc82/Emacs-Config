@@ -29,12 +29,13 @@
 
 (setq compilation-scroll-output t)
 
-(defun cc-goto-first-error( buffer exit-condition )
-  (with-current-buffer buffer 
-    (goto-char (point-min)) 
-    (compilation-next-error 1)))
-(add-to-list 'compilation-finish-functions 'cc-goto-first-error) 
+;; (defun cc-goto-first-error( buffer exit-condition )
+;;   (with-current-buffer buffer 
+;;     (goto-char (point-min)) 
+;;     (compilation-next-error 1)))
+;; (add-to-list 'compilation-finish-functions 'cc-goto-first-error) 
 
+(setq compilation-auto-jump-to-first-error 1)
 
 ;; ===========================
 ;; Frame setting
@@ -42,7 +43,10 @@
 
 (setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*terminal<1>*"))
 (setq special-display-regexps '("\*terminal\<1\>\*"))
-;; (setq display-buffer-reuse-frames t)
+
+(setq display-buffer-reuse-frames t)
+(setq pop-up-frames nil)
+(setq pop-up-windows nil)
 
 ;; ===========================
 ;; No tabs in files
@@ -58,7 +62,8 @@
 
 ;; Iswitchb is much nicer for inter-buffer navigation.
 (cond ((fboundp 'iswitchb-mode)                ; GNU Emacs 21
-       (iswitchb-mode 1))
+       (iswitchb-mode 1)
+       (setq iswitchb-default-method 'samewindow))
       ((fboundp 'iswitchb-default-keybindings) ; Old-style activation
        (iswitchb-default-keybindings))
       (t nil))                                 ; Oh well.

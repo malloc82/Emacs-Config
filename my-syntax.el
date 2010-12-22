@@ -57,14 +57,12 @@
 
 (set-variable 'c-default-style "stroustrup")
 
-
 ;; (setq c-default-style '((c-mode    . "stroustrup") 
 ;;                         (c++-mode  . "stroustrup")
 ;;                         (objc-mode . "stroustrup")
 ;;                         (java-mode . "java")
 ;;                         (awk-mode  . "awk")
 ;;                         (other     . "gnu")))
-
 
 (setq mode-list '(c-mode-hook
                   c++-mode-hook

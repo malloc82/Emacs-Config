@@ -15,9 +15,10 @@
 (global-set-key [f7] 'compile)
 (global-set-key [M-f7] 'compile)
 
-(define-key global-map '[M-f8]   'first-error)
-(define-key global-map '[M-f9]   'next-error)
-(define-key global-map '[C-f9] 'previous-error)
+;; (define-key global-map '[M-f8]   'first-error) ;; C-x `
+;; (define-key global-map '[M-f9]   'next-error)  ;; C-x` or M-g n or M-g M-n
+;; (define-key global-map '[C-f9] 'previous-error) ;; M-g p or M-g M-p
+
 ;;(define-key global-map '[f12] 'bury-buffer)
 
 ;; (define-key global-map '[f7] 'compile)
@@ -38,8 +39,6 @@
 
 ;; shrink window vertically
 (define-key global-map [?\C-x ?&] 'shrink-window)
-
-
 
 ;; (global-set-key (kbd "C-c b")   'beginning-of-buffer)
 ;; (global-set-key (kbd "C-c e")   'end-of-buffer)
