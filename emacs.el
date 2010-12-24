@@ -2,6 +2,10 @@
 
 ;; Emacs's environment 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:/opt/local/bin:."))
+(if (string= system-type "darwin")
+    (progn
+      (setq ns-command-modifier 'meta)
+      (setq ns-alternate-modifier 'none)))
 
 ;; ==========================================================
 ;; Load path
@@ -13,6 +17,7 @@
 (defvar *emacs-load-start* (current-time))
 
 (add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
 
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/") 
@@ -35,10 +40,9 @@
 
 (setq turn-on-follow-mouse t)
 
-(load-library "my-behaviour")
+(load-library "my-keys")
 (load-library "my-backup")
 (load-library "my-mouse")
-(load-library "my-keys")
 
 (load-library "my-dired.el")
 (load-library "my-function")
@@ -51,6 +55,8 @@
 
 (load-library "my-gud")
 (load-library "my-syntax")
+(load-library "my-behaviour")
+
 ;; (load-library "my-desktop")
 
 ;; (load-library "my-slime")
@@ -58,10 +64,8 @@
 
 
 ;; version control
-(require 'mercurial)
+;; (require 'mercurial)
 (require 'emacs-lock)
-;; AUCTeX in linux
-;; (require 'tex-site)
 
 (if (eq current-path nil)
     (cd "~/.")
@@ -187,9 +191,9 @@
 
 ;; start emacs server 
 ;; (server-force-delete)
-(if (>= emacs-major-version 23)
-    (server-force-delete))
-(server-start)
+;; (if (>= emacs-major-version 23)
+;;     (server-force-delete))
+;; (server-start)
 
 ;; Timer Part2
 (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
@@ -208,20 +212,11 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(LaTeX-command "latex -file-line-error")
- '(LaTeX-math-menu-unicode t)
- ;; This config is for AUCTeX 11.85 only
- ;; Mac OS X style
- ;; '(TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o && preview %s.pdf") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
- ;; Linux style 
- '(TeX-output-view-style (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o")))) 
+ '(blink-cursor-mode t)
  '(column-number-mode t)
  '(default-truncate-lines nil t)
  '(display-time-mode t)
  '(large-file-warning-threshold nil)
- '(matlab-fill-code nil)
- '(ns-alternate-modifier (quote none))
- '(ns-command-modifier (quote meta))
  '(paren-sexp-mode nil)
  '(show-paren-mode t)
  '(truncate-partial-width-windows nil))

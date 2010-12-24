@@ -41,7 +41,7 @@
 ;; Frame setting
 ;; ===========================
 
-(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*terminal<1>*"))
+(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*TeX Help*",  "*terminal<1>*"))
 (setq special-display-regexps '("\*terminal\<1\>\*"))
 
 (setq display-buffer-reuse-frames t)
@@ -82,6 +82,29 @@
 ;; (command-frequency-table-load)
 ;; (command-frequency-mode 1)
 ;; (command-frequency-autosave-mode 1)
+
+;; ============================
+;; AUCTeX Settings
+;; ============================
+
+(require 'tex-site)
+(setq LaTeX-command "latex -file-line-error")
+(setq LaTeX-math-menu-unicode t)
+
+(if (string= system-type "darwin")
+    (progn
+      (setq TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+      (setq TeX-view-program-list (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
+      (setq TeX-view-program-selection (quote ((output-dvi "simpdftex") (output-pdf "Preview") (output-html "xdg-open"))))
+      )
+    
+    (setq TeX-output-view-style (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+    (setq TeX-view-program-list (quote (("kdvi" "kdvi  %o"))))
+    (setq TeX-view-program-selection (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open"))))
+    )
+
+;; (setq TeX-view-program-list '(("Preview" "preview %u") ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %q")))
+;; (setq TeX-view-program-selection (quote ((output-pdf "Preview") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-html "xdg-open"))))
 
 
 ;; ============================
@@ -174,3 +197,5 @@
 ;;               (unless (string-match "\\`[ *].*[*]\\'" 
 ;;                                     (buffer-name)) 
 ;;                 (setq buffer-offer-save t)))) 
+
+

@@ -133,11 +133,11 @@
 ;; latex configuration
 ;; =================================
 
-(add-hook 'LaTeX-mode-hook
-          '(lambda ()
-            (outline-minor-mode 1)
+;; (add-hook 'LaTeX-mode-hook
+;;           '(lambda ()
+;;             (outline-minor-mode 1)
             
-            (setq LaTeX-math-mode t)))
+;;             (setq LaTeX-math-mode t)))
 
 
 ;; =================================
@@ -251,6 +251,7 @@
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 (setq matlab-indent-function t)
 (setq matlab-shell-command "matlab")
+(setq matlab-fill-code nil)
 
 ;; ===========================
 ;; Lisp Mode
