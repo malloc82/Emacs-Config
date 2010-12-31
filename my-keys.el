@@ -57,6 +57,7 @@
 
 ;; multi-term
 (global-set-key (kbd "C-c t") 'multi-term)
+(global-set-key (kbd "C-c y") 'term-paste)
 
 ;; hi-lock-mode
 ;; C-x w l
