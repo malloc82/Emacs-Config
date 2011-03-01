@@ -27,8 +27,8 @@
          ("\\.inl$"                    . c++-mode) ;; template functions 
          ;; ("\\.cu$"                     . c-mode)
          ("\\.d$"                      . d-mode) ;; dtrace
-         ("\\.[Cc][Uu]$"               . cuda-mode)
-         ("\\.[Cc][Uu][Hh]$"           . cuda-mode)
+         ("\\.[Cc][Uu]$"               . c++-mode) ;;cuda-mode)
+         ("\\.[Cc][Uu][Hh]$"           . c++-mode) ;;cuda-mode)
          ("\\.dps$"                    . pascal-mode)
          ("\\.py$"                     . python-mode)
          ("\\.Xdefaults$"              . xrdb-mode)

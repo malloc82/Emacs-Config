@@ -87,21 +87,36 @@
 ;; AUCTeX Settings
 ;; ============================
 
-(require 'tex-site)
-(setq LaTeX-command "latex -file-line-error")
-(setq LaTeX-math-menu-unicode t)
 
-(if (string= system-type "darwin")
-    (progn
-      (setq TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-      (setq TeX-view-program-list (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
-      (setq TeX-view-program-selection (quote ((output-dvi "simpdftex") (output-pdf "Preview") (output-html "xdg-open"))))
-      )
+
+(let ((tex-site-path  nil))
+  (cond ((string= system-type "darwin")
+         (setq tex-site-path
+               (concat invocation-directory "../Resources/site-lisp/tex-site.el")))
+        ((string= system-type "gnu/linux")
+         (when (string-match "\\.\\([[:digit:]]\\)*$" emacs-version)
+           (setq tex-site-path
+                 (concat invocation-directory "../share/emacs/" (replace-match "" nil nil emacs-version) "/site-lisp/tex-site.el"))))
+        )
+  (when (and tex-site-path (file-exists-p tex-site-path))
+    (message "tex-site.el found, loading tex settings")
+    (require 'tex-site)
+    (setq LaTeX-command "latex -file-line-error")
+    (setq LaTeX-math-menu-unicode t)
     
-    (setq TeX-output-view-style (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-    (setq TeX-view-program-list (quote (("kdvi" "kdvi  %o"))))
-    (setq TeX-view-program-selection (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open"))))
+    (if (string= system-type "darwin")
+        (progn
+          (setq TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+          (setq TeX-view-program-list (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
+          (setq TeX-view-program-selection (quote ((output-dvi "simpdftex") (output-pdf "Preview") (output-html "xdg-open"))))
+          )
+
+        (setq TeX-output-view-style (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+        (setq TeX-view-program-list (quote (("kdvi" "kdvi  %o"))))
+        (setq TeX-view-program-selection (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open"))))
+        )
     )
+  )
 
 ;; (setq TeX-view-program-list '(("Preview" "preview %u") ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %q")))
 ;; (setq TeX-view-program-selection (quote ((output-pdf "Preview") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-html "xdg-open"))))
@@ -129,7 +144,9 @@
 
 ;; highlight matches from searches
 (setq isearch-highlight t)
+;; highlight incremental search
 (setq search-highlight t)
+
 (setq-default transient-mark-mode t)
 
 ;; (when (fboundp 'blink-cursor-mode)
@@ -156,7 +173,7 @@
 (setq next-line-add-newlines nil)
 
 ;; scroll just one line when hitting the bottom of the window
-(setq scroll-step 4)
+(setq scroll-step 5)
 (setq scroll-conservatively 20)
 
 ;; format the title-bar to always include the buffer name
@@ -164,11 +181,11 @@
 
 ;; show a menu only when running within X (save real estate when
 ;; in console)
-(menu-bar-mode (if window-system 1 -1))
+;; (menu-bar-mode (if window-system 1 -1))
 
 ;; turn off the toolbar
-(if (and  (>= emacs-major-version 21) window-system)
-    (tool-bar-mode -1))
+;; (if (and  (>= emacs-major-version 21) window-system)
+;;     (tool-bar-mode -1))
 
 ;; turn on word wrapping in text mode
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -182,9 +199,6 @@
 
 ;; highlight during searching
 (setq query-replace-highlight t)
-
-;; highlight incremental search
-(setq search-highlight t)
 
 ;; kill trailing white space on save
 ;; -------- (autoload 'nuke-trailing-whitespace "whitespace" nil t)
