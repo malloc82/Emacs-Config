@@ -51,6 +51,7 @@
          ("\\.[Ss]$"                   . gas-mode)
          ("\\.[Cc][Ss]$"               . csharp-mode)
          ("\\.[Ss][Hh]$"               . sh-mode)
+         ("^[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*" . makefile-mode)
          ;; ("\\.js$"                     . js2-mode)
          ;; ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
