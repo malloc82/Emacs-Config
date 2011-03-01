@@ -284,20 +284,17 @@
   (define-key mode-type (kbd "C->") 'paredit-forward-barf-sexp)
   ;; (define-key mode-type (kbd "C-/") 'backward-up-list)
   (define-key mode-type (kbd "C-=") 'down-list)
-  (define-key mode-type (kbd "TAB") 'slime-indent-and-complete-symbol)
-  (define-key mode-type (kbd "C-c TAB") 'slime-complete-form)
   ;; this may seem strange, but i often use the C-<whatever> motion
   ;; commands in sequence to reformat code and having to take a finger off of control
   ;; to add a return is a pain
   (define-key mode-type (kbd "C-<return>") 'paredit-newline)
-  ;; i hate having to take my key off of ctrl for this and i don't use complete-form anyway...
-  (define-key mode-type (kbd "C-c C-i") 'slime-inspect))
+  )
 
 (add-hook 'lisp-mode-hook
           '(lambda ()
-            (lisp-mode-addon lisp-mode-map)))
+             (lisp-mode-addon lisp-mode-map)))
 
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
-            (lisp-mode-addon emacs-lisp-mode-map)))
+             (lisp-mode-addon emacs-lisp-mode-map)))
 
