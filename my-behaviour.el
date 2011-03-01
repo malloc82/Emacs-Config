@@ -99,22 +99,28 @@
                  (concat invocation-directory "../share/emacs/" (replace-match "" nil nil emacs-version) "/site-lisp/tex-site.el"))))
         )
   (when (and tex-site-path (file-exists-p tex-site-path))
-    (message "tex-site.el found, loading tex settings")
+    (message "AUCTeX is installed, loading tex settings")
+    (message "tex-site.el: " tex-site-path)
     (require 'tex-site)
     (setq LaTeX-command "latex -file-line-error")
     (setq LaTeX-math-menu-unicode t)
     
-    (if (string= system-type "darwin")
-        (progn
-          (setq TeX-output-view-style (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-          (setq TeX-view-program-list (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
-          (setq TeX-view-program-selection (quote ((output-dvi "simpdftex") (output-pdf "Preview") (output-html "xdg-open"))))
+    (cond ((string= system-type "darwin")
+           (setq TeX-output-view-style
+                 (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+           (setq TeX-view-program-list
+                 (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
+           (setq TeX-view-program-selection
+                 (quote ((output-dvi "simpdftex") (output-pdf "Preview") (output-html "xdg-open")))))
+          
+          (t
+           (setq TeX-output-view-style
+                 (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+           (setq TeX-view-program-list
+                 (quote (("kdvi" "kdvi  %o"))))
+           (setq TeX-view-program-selection
+                 (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open")))))
           )
-
-        (setq TeX-output-view-style (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-        (setq TeX-view-program-list (quote (("kdvi" "kdvi  %o"))))
-        (setq TeX-view-program-selection (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open"))))
-        )
     )
   )
 
