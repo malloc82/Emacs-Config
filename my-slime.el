@@ -17,14 +17,14 @@
 
 ;; (defvar *lisp-bin-path* "/opt/local/bin/sbcl")
 
-(let ((slime-path "~/Emacs/slime/")
+(let ((slime-dir "~/Emacs/slime/")
       (lisp-bin-path "/opt/local/bin/sbcl"))
   
-  (when (file-directory-p slime-path)
+  (when (file-directory-p slime-dir)
     (message "==> Slime is installed, loading slime-mode settings")
-    (message "==> Slime path: " slime-path)
+    (message "==> Slime path: %s" slime-dir)
     
-    (add-to-list  'load-path  slime-path)
+    (add-to-list  'load-path  slime-dir)
 
     (require 'slime)
     

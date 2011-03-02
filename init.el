@@ -1,7 +1,7 @@
 ;; ~/.emacs.d/init.el
 
 ;; Emacs's environment 
-(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:."))
+(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:."))
 (if (string= system-type "darwin")
     (progn
       (setq ns-command-modifier 'meta)
@@ -29,12 +29,13 @@
 ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
 ;; (load "auctex.el" nil t t)
 
-;; (setq exec-path (cons exec-path "/usr/local/bin"))
+(dolist (path '("/usr/local/bin/"
+                "/opt/local/bin/"
+                "/usr/local/cuda/bin"
+                "/usr/texbin"
+                "~/racket/bin"))
+  (add-to-list 'exec-path path))
 
-(add-to-list 'exec-path "/usr/local/bin/")
-(add-to-list 'exec-path "/opt/local/bin/")
-(add-to-list 'exec-path "/usr/local/cuda/bin")
-(add-to-list 'exec-path "/usr/texbin")
 
 (when (string= system-type "darwin")
   (require 'growl)
@@ -42,27 +43,13 @@
 
 (setq turn-on-follow-mouse t)
 
-(load-library "my-keys")
-(load-library "my-backup")
-(load-library "my-mouse")
-
-(load-library "my-dired.el")
-(load-library "my-function")
-(load-library "my-abbrev")
-(load-library "my-color")
-(load-library "my-tramp")
-(load-library "my-org-mode")
-
-;; (load-library "my-python")
-
-(load-library "my-gud")
-(load-library "my-syntax")
-(load-library "my-behaviour")
-
-;; (load-library "my-desktop")
-
-(load-library "my-slime")
-;; (load-library "my-mail")
+(dolist (config-file '("my-keys" "my-backup" "my-mouse" "my-dired.el"
+                       "my-function" "my-abbrev" "my-color" "my-tramp"
+                       "my-org-mode" "my-gud" "my-syntax" "my-behaviour"
+                       ;; "my-desktop"
+                       ;; "my-mail"
+                       "my-slime" "my-scheme"))
+  (load-library config-file))
 
 ;; version control
 ;; (require 'mercurial)

@@ -87,20 +87,18 @@
 ;; AUCTeX Settings
 ;; ============================
 
-
-
-(let ((tex-site-path  nil))
+(let ((tex-site-dir  nil))
   (cond ((string= system-type "darwin")
-         (setq tex-site-path
+         (setq tex-site-dir
                (concat invocation-directory "../Resources/site-lisp/tex-site.el")))
         ((string= system-type "gnu/linux")
          (when (string-match "\\.\\([[:digit:]]\\)*$" emacs-version)
-           (setq tex-site-path
+           (setq tex-site-dir
                  (concat invocation-directory "../share/emacs/" (replace-match "" nil nil emacs-version) "/site-lisp/tex-site.el"))))
         )
-  (when (and tex-site-path (file-exists-p tex-site-path))
+  (when (and tex-site-dir (file-exists-p tex-site-dir))
     (message "==> AUCTeX is installed, loading tex settings")
-    (message "==> tex-site.el: " tex-site-path)
+    (message "==> tex-site.el: %s" tex-site-dir)
     (require 'tex-site)
     (setq LaTeX-command "latex -file-line-error")
     (setq LaTeX-math-menu-unicode t)

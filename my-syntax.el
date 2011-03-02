@@ -291,6 +291,15 @@
   (define-key mode-type (kbd "C-<return>") 'paredit-newline)
   )
 
+;; (dolist (mode `((lisp-mode-hook    ,lisp-mode-map)
+;;                 (emacs-lisp-hook   ,emacs-lisp-mode-map)
+;;                 ;; (scheme-mode-hook  ,scheme-mode-map)
+;;                 ;; (inferior-scheme-mode-hook  ,inferior-scheme-mode-map)
+;;                 ))
+;;     (add-hook (car mode)
+;;               `(lambda ()
+;;                  (lisp-mode-addon ,(cadr mode)))))
+
 (add-hook 'lisp-mode-hook
           '(lambda ()
              (lisp-mode-addon lisp-mode-map)))
@@ -298,4 +307,12 @@
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
              (lisp-mode-addon emacs-lisp-mode-map)))
+
+(add-hook 'scheme-mode-hook
+          '(lambda ()
+             (lisp-mode-addon scheme-mode-map)))
+
+;; (add-hook 'inferior-scheme-mode-hook
+;;           '(lambda ()
+;;              (lisp-mode-addon inferior-scheme-mode-map)))
 
