@@ -1,0 +1,50 @@
+
+* TODO my-gud.el fix
+*** Error message in Emacs CVS:
+    - Warning: `save-excursion' defeated by `set-buffer'
+*** Possible solutions:
+    - [[http://old.nabble.com/%60save-excursion'-defeated-by-%60set-buffer'-td26840925.html][Solution 1]]:
+      save-excursion only saves point in the current buffer, so 
+      (save-excursion (set-buffer foo) (goto-char (point-min))) 
+      will move point in foo and the point-saving done by save-excursion is 
+      useless.  So either you want to use 
+      (save-current-buffer (set-buffer foo) (goto-char (point-min))) 
+      aka 
+      (with-current-buffer foo (goto-char (point-min))) 
+      if moving point in foo is what you wanted, or 
+      (with-current-buffer foo (save-excursion (goto-char (point-min)))) 
+      if you didn't want to move point in foo. 
+
+* TODO my-color.el improvment
+*** Use radiance theme as model, make other theme's implementation like that
+*** Radiance theme code:
+    (deftheme radiance
+      "A Theme that should look nice with the Radiance light theme in Ubuntu.")
+
+    (custom-theme-set-faces
+      'radiance
+      '(default ((t (:background "#ffffff" :foreground "#333333"))))
+      '(cursor ((t (:background "#aea79f" :foreground "#aea79f"))))
+      '(region ((t (:background "#f6f5ef" :foreground "#333333"))))
+      '(mode-line ((t (:background "#f6f5ef" :foreground "#333333"))))
+      '(mode-line-inactive ((t (:background "#ffffff" :foreground "#333333"))))
+      '(fringe ((t (:background "#f6f5ef"))))
+      '(minibuffer-prompt ((t (:foreground "#f47321" :weight bold))))
+      '(font-lock-builtin-face ((t (:foreground "#62124b"))))
+      '(font-lock-comment-face ((t (:slant italic :foreground "#aea79f"))))
+      '(font-lock-constant-face ((t (:foreground "#f68d47"))))
+      '(font-lock-function-name-face ((t (:foreground "#860e73" :weight bold))))
+      '(font-lock-keyword-face ((t (:foreground "#f47321" :weight bold))))
+      '(font-lock-string-face ((t (:foreground "#dd1144"))))
+      '(font-lock-type-face ((t (:foreground "#83a525"))))
+      '(font-lock-variable-name-face ((t (:foreground "#8b005a"))))
+      '(font-lock-warning-face ((t (:foreground "#e80000" :weight bold))))
+      '(isearch ((t (:background "#fedfc7" :foreground "#333333"))))
+      '(lazy-highlight ((t (:background "#f6f5ef"))))
+      '(link ((t (:foreground "#0086b3" :underline t))))
+      '(link-visited ((t (:foreground "#800080" :underline t))))
+      '(button ((t (:background "#f6f5ef" :weight bold))))
+      '(header-line ((t (:background "#ffffff" :foreground "#62124b"))))
+      '(hl-line ((t (:background "#f6f5ef")))))
+      
+    (provide-theme 'radiance)

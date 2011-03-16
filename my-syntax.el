@@ -51,7 +51,8 @@
          ("\\.[Ss]$"                   . gas-mode)
          ("\\.[Cc][Ss]$"               . csharp-mode)
          ("\\.[Ss][Hh]$"               . sh-mode)
-         ("^[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*" . makefile-mode)
+         ("[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*" . makefile-mode)
+         ("\\.ml[iyl]?$"               . caml-mode)         
          ;; ("\\.js$"                     . js2-mode)
          ;; ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
@@ -316,3 +317,10 @@
 ;;           '(lambda ()
 ;;              (lisp-mode-addon inferior-scheme-mode-map)))
 
+;; ========================================================
+;; Ocaml Settings
+;; ========================================================
+
+(autoload 'caml-mode "ocaml" (interactive)
+  "Major mode for editing Caml code." t)
+(autoload 'camldebug "camldebug" (interactive) "Debug caml mode")

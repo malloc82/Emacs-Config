@@ -9,13 +9,13 @@
   "Overlay variable for GUD highlighting.")
 
 (defadvice gud-display-line (after my-gud-highlight act)
-           "Highlight current line."
-           (let* ((ov gud-overlay)
-                  (bf (gud-find-file true-file)))
-             (save-excursion
-                 (set-buffer bf)
-                   (move-overlay ov (line-beginning-position) (line-end-position)
-                                   (current-buffer)))))
+  "Highlight current line."
+  (let* ((ov gud-overlay)
+         (bf (gud-find-file true-file)))
+    (save-excursion
+      (set-buffer bf) ;; <== Warning: `save-excursion' defeated by `set-buffer'
+      (move-overlay ov (line-beginning-position) (line-end-position)
+                    (current-buffer)))))
 
 (defun gud-kill-buffer ()
   (if (eq major-mode 'gud-mode)

@@ -188,8 +188,8 @@
 ;; (menu-bar-mode (if window-system 1 -1))
 
 ;; turn off the toolbar
-;; (if (and  (>= emacs-major-version 21) window-system)
-;;     (tool-bar-mode -1))
+(when (and  (>= emacs-major-version 21) window-system)
+    (tool-bar-mode 1))
 
 ;; turn on word wrapping in text mode
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)

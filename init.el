@@ -45,7 +45,8 @@
 
 (dolist (config-file '("my-keys" "my-backup" "my-mouse" "my-dired.el"
                        "my-function" "my-abbrev" "my-color" "my-tramp"
-                       "my-org-mode" "my-gud" "my-syntax" "my-behaviour"
+                       "my-org-mode" "my-syntax" "my-behaviour"
+                       "my-gud"
                        ;; "my-desktop"
                        ;; "my-mail"
                        "my-slime" "my-scheme"))
@@ -203,6 +204,6 @@
    ;; If there is more than one, they won't work right.
  
    ;; On Linux, use this:
-   '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "unknown" :family "Monaco")))) 
+   '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "unknown" :family "Monaco")))) 
    )
 )
