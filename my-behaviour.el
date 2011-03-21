@@ -141,7 +141,7 @@
 (display-time-mode t)
 
 ;; Show column number at bottom of screen
-(column-number-mode 1)
+(column-number-mode t)
 
 ;; alias y to yes and n to no
 (defalias 'yes-or-no-p 'y-or-n-p)
