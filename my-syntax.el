@@ -51,8 +51,7 @@
          ("\\.[Ss]$"                   . gas-mode)
          ("\\.[Cc][Ss]$"               . csharp-mode)
          ("\\.[Ss][Hh]$"               . sh-mode)
-         ("[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*" . makefile-mode)
-         ("\\.ml[iyl]?$"               . caml-mode)         
+         ("[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*$" . makefile-mode)
          ;; ("\\.js$"                     . js2-mode)
          ;; ("\\.js\\'"                   . javascript-mode)
          ) auto-mode-alist))
@@ -66,24 +65,37 @@
 ;;                         (awk-mode  . "awk")
 ;;                         (other     . "gnu")))
 
-(setq mode-list '(c-mode-hook
-                  c++-mode-hook
-                  objc-mode-hook
-                  cuda-mode-hook
-                  lisp-mode-hook
-                  emacs-lisp-mode-hook
-                  python-mode-hook
-                  cperl-mode-hook
-                  matlab-mode-hook
-                  gas-mode-hook
-                  php-mode-hook
-                  javascript-mode-hook))
+;; (setq mode-list '(c-mode-hook
+;;                   c++-mode-hook
+;;                   objc-mode-hook
+;;                   cuda-mode-hook
+;;                   lisp-mode-hook
+;;                   emacs-lisp-mode-hook
+;;                   python-mode-hook
+;;                   cperl-mode-hook
+;;                   matlab-mode-hook
+;;                   gas-mode-hook
+;;                   php-mode-hook
+;;                   javascript-mode-hook))
 
-(dolist (mode mode-list)
-  (add-hook mode
-            '(lambda ()
-              (outline-minor-mode 1)
-              (pabbrev-mode))))
+
+(let ((mlist '(c-mode-hook
+               c++-mode-hook
+               objc-mode-hook
+               cuda-mode-hook
+               lisp-mode-hook
+               emacs-lisp-mode-hook
+               python-mode-hook
+               cperl-mode-hook
+               matlab-mode-hook
+               gas-mode-hook
+               php-mode-hook
+               javascript-mode-hook)))
+  (dolist (mode mlist)
+    (add-hook mode
+              '(lambda ()
+                 (outline-minor-mode 1)
+                 (pabbrev-mode)))))
 
 (add-hook 'cuda-mode-hook
           '(lambda ()
@@ -255,6 +267,14 @@
 (setq matlab-shell-command "matlab")
 (setq matlab-fill-code nil)
 
+;; ========================================================
+;; Ocaml Settings
+;; ========================================================
+
+(autoload 'caml-mode "ocaml" (interactive)
+  "Major mode for editing Caml code." t)
+(autoload 'camldebug "camldebug" (interactive) "Debug caml mode")
+
 ;; ===========================
 ;; Lisp Mode
 ;; ===========================
@@ -263,7 +283,8 @@
 (defsubst lisp-mode-addon (mode-type)
   (define-key mode-type (kbd "(") 'paredit-open-parenthesis)
   (define-key mode-type (kbd ")") 'paredit-close-parenthesis)
-  
+  (define-key mode-type (kbd "M-0") 'paredit-escape) ;; also try : \
+
   (define-key mode-type (kbd "\"") 'paredit-doublequote)
   (define-key mode-type (kbd "\\") 'paredit-backslash)
   
@@ -317,10 +338,7 @@
 ;;           '(lambda ()
 ;;              (lisp-mode-addon inferior-scheme-mode-map)))
 
-;; ========================================================
-;; Ocaml Settings
-;; ========================================================
-
 (autoload 'caml-mode "ocaml" (interactive)
   "Major mode for editing Caml code." t)
 (autoload 'camldebug "camldebug" (interactive) "Debug caml mode")
+

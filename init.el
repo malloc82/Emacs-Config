@@ -15,14 +15,22 @@
 ;; Timer Part1
 (defvar *emacs-load-start* (current-time))
 
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
-
 ;; ===========================
 ;; Used for ~/.emacs
 ;; ===========================
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/")
+
+(add-to-list 'load-path "~/.emacs.d/")
+
+(cond ((string= system-type "darwin")
+       (add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
+       (require 'growl)
+       (growl "Emacs" "Loading init.el ... "))
+      
+      ((string= system-type "gnu/linux")
+       (add-to-list 'load-path "~/lib/python2.7/site-packages/Pymacs"))
+      )
 
 (normal-top-level-add-subdirs-to-load-path)
 
@@ -35,11 +43,6 @@
                 "/usr/texbin"
                 "~/racket/bin"))
   (add-to-list 'exec-path path))
-
-
-(when (string= system-type "darwin")
-  (require 'growl)
-  (growl "Emacs" "Loading init.el ... "))
 
 (setq turn-on-follow-mouse t)
 

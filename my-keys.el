@@ -33,6 +33,7 @@
 
 (define-key global-map [?\M-\`] 'other-frame)
 (define-key global-map [?\M-\\] 'other-window)
+(global-unset-key [?\M-\d])  ;; unset M-backsapce
 (global-set-key        [?\M-\[] 'previous-buffer)
 (global-set-key        [?\M-\]] 'next-buffer)
 
@@ -51,14 +52,14 @@
       (global-set-key [ (control /)]  'undo)))
 
 
-(global-set-key [C-tab]         'hide-subtree)
+(global-set-key [C-tab]       'hide-subtree)
 (global-set-key (kbd "C-`")   'show-subtree)
-(global-set-key (kbd "C-c s")   'show-subtree)
+(global-set-key (kbd "C-c s") 'show-subtree)
 
 ;; multi-term
 (global-set-key (kbd "C-c t") 'multi-term)
+(global-set-key (kbd "C-z")   'multi-term)
 (global-set-key (kbd "C-c y") 'term-paste)
-
 ;; hi-lock-mode
 ;; C-x w l
 

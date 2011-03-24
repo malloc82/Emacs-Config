@@ -3,14 +3,12 @@
 ;; this file should be loaded in python-mode-hook
 ;; ====================================================
 
-
 ;; =======================
 ;; ipython
 ;; =======================
 
 (require 'ipython)
 (setq py-python-command-args '( "-colors" "Linux"))
-
 
 ;; ==========================
 ;; Pymacs, rope, ropemacs
@@ -21,8 +19,17 @@
 (autoload 'pymacs-exec "pymacs" nil t)
 (autoload 'pymacs-load "pymacs" nil t)
 
-(eval-after-load "pymacs"
- '(add-to-list 'pymacs-load-path "/Library/Python/2.6/site-packages/Pymacs"))
+
+(cond ((string= system-type "darwin")
+       (eval-after-load "pymacs"
+         '(add-to-list 'pymacs-load-path "/Library/Python/2.6/site-packages/Pymacs"))
+       )
+      ((string= system-type "gnu/linux")
+       (eval-after-load "pymacs"
+         '(add-to-list 'pymacs-load-path "~/lib/python2.7/site-packages/Pymacs"))
+       )
+      )
+
 (pymacs-load "ropemacs" "rope-")
 (setq ropemacs-enable-autoimport t)
 
@@ -45,6 +52,8 @@
 (setq outline-regexp "def\\|class ")
 (load "py-mode-ext")  
 (load "pyp")
+
+(message "pymacs path : %s" pymacs-load-path)
 
 (require 'pycomplete)
 
