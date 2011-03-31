@@ -47,9 +47,9 @@
 (setq turn-on-follow-mouse t)
 
 (dolist (config-file '("my-keys" "my-backup" "my-mouse" "my-dired.el"
-                       "my-function" "my-abbrev" "my-color" "my-tramp"
+                       "my-abbrev" "my-color" "my-tramp"
                        "my-org-mode" "my-syntax" "my-behaviour"
-                       "my-gud"
+                       "my-gud" "my-utils"
                        ;; "my-desktop"
                        ;; "my-mail"
                        "my-slime" "my-scheme"))

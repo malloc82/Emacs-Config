@@ -217,3 +217,9 @@
 ;;                 (setq buffer-offer-save t)))) 
 
 
+;; =======================
+;; line-number-mode
+;; =======================
+
+(require 'linum+)
+(setq global-linum-mode t) 

@@ -58,11 +58,15 @@
 
 ;; multi-term
 (global-set-key (kbd "C-c t") 'multi-term)
-(global-set-key (kbd "C-z")   'multi-term)
+(global-unset-key (kbd "C-z"))
 (global-set-key (kbd "C-c y") 'term-paste)
 ;; hi-lock-mode
 ;; C-x w l
 
+(require 'highlight-symbol)
+(global-set-key (kbd "<f10>") 'highlight-symbol-at-point)
+(global-set-key (kbd "<f11>") 'highlight-symbol-next)
+(global-set-key (kbd "<f12>") 'highlight-symbol-prev)
 
 ;;(defun scroll-up-one-line ()
 ;;      (interactive)
