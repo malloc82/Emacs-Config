@@ -57,7 +57,7 @@
 
 (require 'pycomplete)
 
-;; (define-key py-mode-map [f12] 'pyp)
+(define-key py-mode-map [M-f12] 'pyp)
 ;; (define-key py-mode-map "\C-c\C-c" 'py-execute-prog)
 (define-key py-mode-map "\C-c\C-c" 'py-execute-buffer)
 (define-key py-mode-map "\C-c\C-g" 'py-call-pdb)

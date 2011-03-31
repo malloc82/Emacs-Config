@@ -222,4 +222,5 @@
 ;; =======================
 
 (require 'linum+)
-(setq global-linum-mode t) 
+(require 'linum)
+(global-linum-mode t) 
