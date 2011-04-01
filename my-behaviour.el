@@ -222,5 +222,11 @@
 ;; =======================
 
 (require 'linum+)
-(require 'linum)
-(global-linum-mode t) 
+(global-linum-mode t)
+
+(require 'which-func)
+(which-func-mode t)
+(setq which-func-unknown "unknown")
+
+(setq x-select-enable-clipboard t)
+
