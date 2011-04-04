@@ -221,8 +221,10 @@
 ;; line-number-mode
 ;; =======================
 
-(require 'linum+)
-(global-linum-mode t)
+(unless (string= system-type "darwin")
+  (require 'linum+)
+  (global-linum-mode t)
+  )
 
 (require 'which-func)
 (which-func-mode t)

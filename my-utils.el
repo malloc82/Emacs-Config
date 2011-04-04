@@ -70,7 +70,8 @@
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
-(setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
+;; (setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
+(setq ctags-bin "/opt/local/bin/ctags") ;; mac os x 
 
 (defun create-tags (ctags-command)
   "Create tags file."

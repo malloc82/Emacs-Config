@@ -23,6 +23,15 @@
 
 (add-to-list 'load-path "~/.emacs.d/")
 
+(normal-top-level-add-subdirs-to-load-path)
+
+(dolist (path '("/usr/local/bin/"
+                "/opt/local/bin/"
+                "/usr/local/cuda/bin"
+                "/usr/texbin"
+                "~/racket/bin"))
+  (add-to-list 'exec-path path))
+
 (cond ((string= system-type "darwin")
        (add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
        (require 'growl)
@@ -32,17 +41,6 @@
        (add-to-list 'load-path "~/lib/python2.7/site-packages/Pymacs"))
       )
 
-(normal-top-level-add-subdirs-to-load-path)
-
-;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
-;; (load "auctex.el" nil t t)
-
-(dolist (path '("/usr/local/bin/"
-                "/opt/local/bin/"
-                "/usr/local/cuda/bin"
-                "/usr/texbin"
-                "~/racket/bin"))
-  (add-to-list 'exec-path path))
 
 (setq turn-on-follow-mouse t)
 
