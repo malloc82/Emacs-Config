@@ -2,7 +2,6 @@
 ;; ==========================================================
 ;; Setup syntax, background, and foreground coloring
 ;; ==========================================================
-
 (require 'font-lock)
 (global-font-lock-mode t)
 ;; (setq font-lock-auto-fontify t)
@@ -47,6 +46,10 @@
 
 (require 'dired)
 
+(add-hook 'eshell-mode-hook
+          '(lambda ()
+                (set-face-attribute 'eshell-prompt  nil :foreground "DodgerBlue")))
+
 (defun dark-night (&optional cur-frame)
   (let ((bg-color "black")
         (fg-color "white")
@@ -64,11 +67,11 @@
     (set-face-attribute 'font-lock-number-face  cur-frame :foreground "LightSalmon")
     (set-face-attribute 'font-lock-builtin-face cur-frame :foreground "LightSteelBlue")
     (set-face-attribute 'font-lock-type-face    cur-frame :foreground "PaleGreen")
-    (set-face-attribute 'font-lock-keyword-face cur-frame :foreground "Cyan1" :weight 'bold)
+    (set-face-attribute 'font-lock-keyword-face cur-frame :foreground "Cyan1" :weight 'normal)
     (set-face-attribute 'font-lock-variable-name-face cur-frame :foreground "LightGoldenrod")
     (set-face-attribute 'font-lock-warning-face       cur-frame :foreground "Pink" :weight 'bold)
-    (set-face-attribute 'font-lock-constant-face      cur-frame :foreground "Aquamarine" :weight 'bold)
-    (set-face-attribute 'font-lock-function-name-face cur-frame :foreground "DeepSkyBlue" :weight 'bold)
+    (set-face-attribute 'font-lock-constant-face      cur-frame :foreground "Aquamarine" :weight 'normal)
+    (set-face-attribute 'font-lock-function-name-face cur-frame :foreground "DeepSkyBlue" :weight 'normal)
     ;; (set-face-foreground 'font-lock-function-name-face "gray70" cur-frame)
     (set-face-attribute 'font-lock-preprocessor-face  cur-frame :foreground "LightSteelBlue")
     (set-face-attribute 'dired-directory              cur-frame :foreground "SkyBlue2")
@@ -101,11 +104,11 @@
     (set-face-attribute 'font-lock-number-face  cur-frame :foreground "LightSalmon")
     (set-face-attribute 'font-lock-builtin-face cur-frame :foreground "LightSteelBlue")
     (set-face-attribute 'font-lock-type-face    cur-frame :foreground "PaleGreen")
-    (set-face-attribute 'font-lock-keyword-face cur-frame :foreground "Cyan1" :weight 'bold)
+    (set-face-attribute 'font-lock-keyword-face cur-frame :foreground "Cyan1" :weight 'normal)
     (set-face-attribute 'font-lock-variable-name-face cur-frame :foreground "LightGoldenrod")
     (set-face-attribute 'font-lock-warning-face       cur-frame :foreground "Pink" :weight 'bold)
-    (set-face-attribute 'font-lock-constant-face      cur-frame :foreground "Aquamarine" :weight 'bold)
-    (set-face-attribute 'font-lock-function-name-face cur-frame :foreground "DeepSkyBlue" :weight 'bold)
+    (set-face-attribute 'font-lock-constant-face      cur-frame :foreground "Aquamarine" :weight 'normal)
+    (set-face-attribute 'font-lock-function-name-face cur-frame :foreground "DeepSkyBlue" :weight 'normal)
     ;; (set-face-foreground 'font-lock-function-name-face "gray65" cur-frame)
     (set-face-attribute 'font-lock-preprocessor-face  cur-frame :foreground "LightSteelBlue")
     (set-face-attribute 'dired-directory              cur-frame :foreground "SkyBlue2")
@@ -149,7 +152,7 @@
     (set-face-attribute 'dired-directory              cur-frame :foreground "blue")
     (set-face-attribute 'minibuffer-prompt            cur-frame :foreground "blue" :weight 'bold)
     (set-face-attribute 'secondary-selection          cur-frame :foreground "PaleVioletRed3")
-    
+
     (set-face-attribute 'isearch        cur-frame :foreground "lightskyblue1" :background "magenta3")
     (set-face-attribute 'lazy-highlight cur-frame :background "paleturquoise")
     (set-face-attribute 'link           cur-frame :foreground "blue1" :underline t)
@@ -201,9 +204,13 @@
     (set-face-attribute 'button         cur-frame :background "#f6f5ef" :weight 'bold)
     ;; (set-face-attribute 'hl-line        cur-frame :background "#f6f5ef")
 
-    ;; ===========================
+    ;; ===============================================================
     ;; Original radiance below
-    ;; ===========================
+    ;; - For some reason, custom-set-faces can only change
+    ;;   settings of one frame when mixed with set-face-attribute,
+    ;;   so I decided to to use set-face-attribute. It's longer to
+    ;;   write, but it safer, and I have more control.
+    ;; ===============================================================
     ;; (custom-set-faces
     ;; `(default ((t (:background ,bg-color :foreground ,fg-color))))
     ;; `(cursor ((t (:background ,cur-color :foreground ,cur-color))))

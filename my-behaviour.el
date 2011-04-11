@@ -232,3 +232,13 @@
 
 (setq x-select-enable-clipboard t)
 
+;; =======================
+;; eshell setting
+;; =======================
+
+(setq eshell-prompt-function
+      (lambda ()
+        (concat (format-time-string "%Y-%m-%d %H:%M " (current-time))
+                (eshell/pwd)
+                (if (= (user-uid) 0) " # " " $ "))))
+
