@@ -5,7 +5,7 @@
 ;; Created: June 25, 2002
 ;; Version:
 
-(defvar mlint-version "1.3"
+(defvar mlint-version "1.3.1"
   "The current version of mlint minor mode.")
 
 ;; Copyright (C) 2002-2005 The MathWorks Inc.
@@ -34,8 +34,18 @@
 
 ;;; Code:
 (defvar mlint-platform
+  ;; xxx which matlab
+  ;;     MATLABROOT/bin/util/arch.sh (or arch.bat)
   (cond ((eq system-type 'darwin)
-	 "mac")
+	 (if (string-match "i386" system-configuration)
+	     (let ((mt (getenv "MACHTYPE")))
+	       (if (and (stringp mt) (string= "x86_32" mt))
+		   ;; This hack is bad since an Emacs started from
+		   ;; the doc doesn't have this variable, thus by defaulting
+		   ;; to checking the 32 bit (not common anymore) version,
+		   ;; we'll get the right answer most of the time.
+		   "maci" "maci64"))
+	   "mac"))
 	((eq system-type 'gnu/linux)
 	 (cond ((string-match "64\\|i686" system-configuration)
 		"glnxa64")
@@ -45,7 +55,12 @@
 	((eq system-type 'hpux)
 	 "hpux")
 	((eq system-type 'windows-nt)
-	 "win32")
+         ;; Thought about checking the env PROCESSOR_ARCHITEW6432,
+         ;; but this said AMD on my Intel, which seemed suspicious.
+	 (let ((proc (getenv "PROCESSOR_IDENTIFIER")))
+	   (if (and (stringp proc) (string-match "64" proc))
+	       "win64"
+	     "win32")))
 	(t "unknown"))
   "Platform we are running mlint on.")
 
@@ -69,6 +84,9 @@ SYMBOL is the variable being set.  VALUE is the new value."
       (custom-set-default symbol value)
     (error (set symbol value)))
   (mlint-reset-program))
+
+(defvar mlint-program-selection-fcn nil
+  "Function use to specify the `mlint-program' for the current buffer.")
 
 (defvar mlint-program nil
   "Program to run for MLint.
@@ -158,6 +176,7 @@ Argument STRING is the text to interpret."
 If BUFFER is nil, use the current buffer."
   (when (and (file-exists-p (buffer-file-name)) mlint-program)
     (let* ((fn (buffer-file-name (current-buffer)))
+	   (buffer-mlint-program mlint-program)
            (dd default-directory)
            (show-mlint-warnings matlab-show-mlint-warnings)
            (highlight-cross-function-variables
@@ -181,7 +200,7 @@ If BUFFER is nil, use the current buffer."
 	(erase-buffer)
 	(when mlint-verbose (message "Running mlint..."))
 
-	(apply 'call-process mlint-program nil (current-buffer) nil
+	(apply 'call-process buffer-mlint-program nil (current-buffer) nil
 	       (append flags (list fn)))
 
 	(when mlint-verbose (message "Running mlint...done"))
@@ -760,14 +779,20 @@ With prefix ARG, turn mlint minor mode on iff ARG is positive.
 	(error "M-Lint minor mode is only for MATLAB Major mode")))
   (if (not mlint-minor-mode)
       (progn
-	;; We are linting, so don't verify on save.
-	(make-variable-buffer-local 'matlab-verify-on-save-flag)
-	(setq matlab-verify-on-save-flag nil)
         (mlint-clear-nested-function-info-overlays)
 	(mlint-clear-warnings)
 	(remove-hook 'after-save-hook 'mlint-buffer t)
 	(easy-menu-remove mlint-minor-menu)
 	)
+    (when mlint-program-selection-fcn
+      (let ((ans (funcall mlint-program-selection-fcn))
+            )
+        (when ans
+          (make-local-variable 'mlint-program)
+          (setq mlint-program ans)
+          )
+        )
+      )
     (if (not mlint-program)
 	(if (y-or-n-p "No MLINT program available.  Configure it?")
 	    (customize-variable 'mlint-programs))

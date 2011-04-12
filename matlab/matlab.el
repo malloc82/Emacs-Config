@@ -1209,10 +1209,6 @@ All Key Bindings:
   (matlab-enable-block-highlighting 1)
   (if window-system (matlab-frame-init))
 
-  ; If the buffer already has a function definition, figure out the correct
-  ; settings for matlab-functions-have-end and matlab-indent-function.
-  (goto-char (point-max))
-
   ;; If first function is terminated with an end statement, then functions have
   ;; ends.
   (if (matlab-do-functions-have-end-p)
@@ -1230,31 +1226,34 @@ All Key Bindings:
   ;;    - look at the first line of code and if indented, keep indentation
   ;;      otherwise use MathWorks-Standard
   ;;
-  (cond 
+  (cond
    ((eq matlab-indent-function-body 'MathWorks-Standard)
     )
 
    ((eq matlab-indent-function-body 'guess)
-    (if (re-search-backward matlab-defun-regex nil t)
-	(let ((beg (point))
-	      end			; filled in later
-	      (cc (current-column))
-              )
-	  (setq end (if matlab-functions-have-end 
-                        (progn (forward-line 0) (point)) 
-                      (point-max)))
-	  (goto-char beg)
-	  (catch 'done
-	    (while (progn (forward-line 1) (< (point) end))
-	      (if (looking-at "\\s-*\\(%\\|$\\)")
-		  nil			; go on to next line
-		(looking-at "\\s-*")
-		(goto-char (match-end 0))
-		(setq matlab-indent-function-body (> (current-column) cc))
-		(throw 'done nil))))
-          )
-      (setq matlab-indent-function-body 'MathWorks-Standard)
-      )
+    (save-excursion
+      (goto-char (point-max))
+
+      (if (re-search-backward matlab-defun-regex nil t)
+	  (let ((beg (point))
+		end			; filled in later
+		(cc (current-column))
+		)
+	    (setq end (if matlab-functions-have-end
+			  (progn (forward-line 0) (point))
+			(point-max)))
+	    (goto-char beg)
+	    (catch 'done
+	      (while (progn (forward-line 1) (< (point) end))
+		(if (looking-at "\\s-*\\(%\\|$\\)")
+		    nil			; go on to next line
+		  (looking-at "\\s-*")
+		  (goto-char (match-end 0))
+		  (setq matlab-indent-function-body (> (current-column) cc))
+		  (throw 'done nil))))
+	    )
+	(setq matlab-indent-function-body 'MathWorks-Standard)
+	))
     )
     
    (t)
@@ -1275,8 +1274,9 @@ All Key Bindings:
 	;; If there is an error loading the stuff, don't
 	;; continue.
 	(error nil)))
-  (goto-char (point-min))
-  (run-hooks 'matlab-mode-hook)
+  (save-excursion
+    (goto-char (point-min))
+    (run-hooks 'matlab-mode-hook))
   (if matlab-vers-on-startup (matlab-show-version)))
 
 ;;; Utilities =================================================================
@@ -3850,8 +3850,12 @@ If optional FAST is non-nil, do not perform usually lengthy checks."
   (if matlab-highlight-cross-function-variables
       (if matlab-show-mlint-warnings
           (mlint-buffer)        ; became true, recompute mlint info
-        (mlint-clear-warnings)) ; became false, just remove hilighting
-    (mlint-minor-mode)))        ; change mlint mode altogether
+        (mlint-clear-warnings))) ; became false, just remove hilighting
+  ;; change mlint mode altogether
+  (mlint-minor-mode 
+   (if (or matlab-highlight-cross-function-variables
+           matlab-show-mlint-warnings)
+       1 -1)))
 
 (defun matlab-toggle-highlight-cross-function-variables ()
   "Toggle `matlab-highlight-cross-function-variables'."
@@ -3862,8 +3866,11 @@ If optional FAST is non-nil, do not perform usually lengthy checks."
       (if matlab-highlight-cross-function-variables
           (mlint-buffer)        ; became true, recompute mlint info
                                 ; became false, just remove hilighting ...
-        (mlint-clear-cross-function-variable-highlighting))
-    (mlint-minor-mode)))        ; change mlint mode altogether
+        (mlint-clear-cross-function-variable-highlighting)))
+  (mlint-minor-mode 
+   (if (or matlab-highlight-cross-function-variables
+           matlab-show-mlint-warnings)
+       1 -1)))        ; change mlint mode altogether
 
 ;;
 ;; Add more auto verify/fix functions here!
@@ -4022,7 +4029,7 @@ desired.  Optional argument FAST is not used."
   "Keymap used in MATLAB mode to provide a menu.")
 
 (defun matlab-frame-init ()
-  "Initialize Emacs 19+ menu system."
+  "Initialize Emacs menu system."
   (interactive)
   ;; make a menu keymap
   (easy-menu-define
@@ -4030,7 +4037,12 @@ desired.  Optional argument FAST is not used."
    matlab-mode-map
    "MATLAB menu"
    '("MATLAB"
-     ["Start MATLAB" matlab-shell (not (matlab-with-emacs-link)) ]
+     ["Start MATLAB" matlab-shell
+      :active (not (or (matlab-with-emacs-link) (matlab-shell-active-p)))
+      :visible (not (matlab-shell-active-p)) ]
+     ["Switch to MATLAB" matlab-shell
+      :active (and (not (matlab-with-emacs-link)) (matlab-shell-active-p))
+      :visible (matlab-shell-active-p) ]
      ["Save and go" matlab-shell-save-and-go t]
      ["Run Region" matlab-shell-run-region t]
      ["Run Cell" matlab-shell-run-cell t]
@@ -4152,10 +4164,12 @@ Command switches are a list of strings.  Each entry is one switch."
   "The version of MATLAB running in the current `matlab-shell' buffer.")
 (defvar matlab-shell-running-matlab-release nil
   "The release of MATLAB running in the curbrent `matlab-shell' buffer.")
-(defvar matlab-shell-use-emacs-toolbox 
-  (let ((dir (expand-file-name "toolbox/emacsinit.m"
-			       (file-name-directory (locate-library "matlab")))))
-    (file-exists-p dir))
+(defvar matlab-shell-use-emacs-toolbox
+  ;; matlab may not be on path.  (Name change, explicit load, etc)
+  (let* ((mlfile (locate-library "matlab"))
+	 (dir (expand-file-name "toolbox/emacsinit.m"
+				(file-name-directory (or mlfile "")))))
+    (and mlfile (file-exists-p dir)))
   "Add the `matlab-shell' MATLAB toolbox to the MATLAB path on startup.")
 (defvar matlab-shell-emacsclient-command "emacsclient -n"
   "The command to use as an external editor for MATLAB.
@@ -4394,6 +4408,11 @@ in a popup buffer.
 	comint-dynamic-complete-functions '(comint-replace-by-expanded-history)
 	comint-process-echoes matlab-shell-echoes
 	)
+  ;; matlab-shell variable setup
+  (make-local-variable 'matlab-shell-last-error-anchor)
+  (setq matlab-shell-last-error-anchor nil)
+
+  ;; Shell Setup
   (require 'shell)
   (if (fboundp 'shell-directory-tracker)
       (add-hook 'comint-input-filter-functions 'shell-directory-tracker))
@@ -4480,24 +4499,16 @@ in a popup buffer.
 (defvar gud-matlab-marker-regexp-prefix "error:\\|opentoline"
   "A prefix to scan for to know if output might be scarfed later.")
 
-;; The regular expression covers the following form:
-;; Errors:  Error in ==> <filename>
-;;          On line # ==> <command_name>
-;; Syntax:  Syntax error in ==> <filename>
-;;          On line # ==> <sample-text>
-;; Warning: In <filename> at line # <stuff>
-(defvar gud-matlab-error-regexp
-  (concat "\\(Error in ==>\\|Syntax error in ==>\\|In\\) "
-	  "\\([-@.a-zA-Z_0-9/ \\\\:]+\\).*[\n ][Oa][nt]\\(?: line\\)? "
-	  "\\([0-9]+\\) ?")
-  "Regular expression finding where an error occurred.")
+(defvar matlab-shell-html-map
+  (let ((km (make-sparse-keymap)))
+    (if (string-match "XEmacs" emacs-version)
+	(define-key km [button2] 'matlab-shell-html-click)
+      (define-key km [mouse-2] 'matlab-shell-html-click))
+    (define-key km [return] 'matlab-shell-html-go)
+    km)
+  "Keymap used on overlays that represent errors.")
 
-(defvar matlab-shell-html-map (make-sparse-keymap))
-(if (string-match "XEmacs" emacs-version)
-    (define-key matlab-shell-html-map [button2] 'matlab-shell-html-click)
-  (define-key matlab-shell-html-map [mouse-2] 'matlab-shell-html-click))
-
-(defvar matlab-anchor-beg "<a href=\"\\([^\"]+\\)\">"
+(defvar matlab-anchor-beg "<a href=\"\\(?:matlab: \\)?\\([^\"]+\\)\">"
   "Beginning of html anchor.")
 
 (defvar matlab-anchor-end "</a>"
@@ -4519,54 +4530,63 @@ Argument STR is the text for the anchor."
             (matlab-overlay-put o 'face 'underline)
             (matlab-overlay-put o 'matlab-url anchor-text)
             (matlab-overlay-put o 'keymap matlab-shell-html-map)
+	    (matlab-overlay-put o 'help-echo anchor-text)
             (delete-region anchor-end-start anchor-end-finish)
             (delete-region anchor-beg-start anchor-beg-finish)
             ))))
   )
 
-(defvar matlab-shell-error-stack-start "^{\\?\\?\\?\\s-"
-  "Regexp for the start of a stack from an error.
-These error stacks are for MATLAB version R2009a or so.
-Disable this if anchors are ever supported.")
+;; The regular expression covers the following form:
+;; Errors:  Error in ==> <function name>
+;;          On line # ==> <command_name>
+;; Errors:  Error using ==> <function name> at <#>
+;; Syntax:  Syntax error in ==> <filename>
+;;          On line # ==> <sample-text>
+;; Warning: In <filename> at line # <stuff>
+(defvar gud-matlab-error-regexp
+  (concat "\\(Error \\(?:in\\|using\\) ==>\\|Syntax error in ==>\\|In\\) "
+	  "\\([-@.a-zA-Z_0-9/ \\\\:]+\\)\\(?:>[^ ]+\\)?.*[\n ]\\(?:On\\|at\\)\\(?: line\\)? "
+	  "\\([0-9]+\\) ?")
+  "Regular expression finding where an error occurred.")
 
-(defvar matlab-shell-error-stack-end "^}\\s-*$"
-  "Regexp for the start of a stack from an error.
-These error stacks are for MATLAB version R2009a or so.
-Disable this if anchors are ever supported.")
+(defvar matlab-shell-last-error-anchor nil
+  "Last point where an error anchor was set.")
 
 (defun matlab-shell-render-errors-as-anchor (str)
   "Detect non-url errors, and treat them as if they were url anchors.
 Argument STR is the text that might have errors in it."
-  (when (string-match matlab-shell-error-stack-end str)
-    (save-excursion
-      (when (re-search-backward matlab-shell-error-stack-start nil t)
-	(let ((groupend nil)
-	      (first nil))
-	  (save-excursion
-	    (setq groupend (re-search-forward matlab-shell-error-stack-end))
-	    )
-	  ;; We have found an error stack to investigate.
-	  (while (re-search-forward gud-matlab-error-regexp nil t)
-	    (let* ((err-start (match-beginning 0))
-		   (err-end (match-end 0))
-		   (err-text (match-string 0))
-		   (err-file (match-string 2))
-		   (err-line (match-string 3))
-		   (o (matlab-make-overlay err-start err-end))
-		   (url (concat "opentoline('" err-file "'," err-line ",0)"))
-		   )
-	      (matlab-overlay-put o 'mouse-face 'highlight)
-	      (matlab-overlay-put o 'face 'underline)
-	      ;; The url will recycle opentoline code.
-	      (matlab-overlay-put o 'matlab-url url)
-	      (matlab-overlay-put o 'keymap matlab-shell-html-map)
-	      ;; Keep track of the very first error in this error stack.
-	      ;; It will represent the "place to go" for "go-to-last-error".
-	      (matlab-overlay-put o 'first-in-error-stack first)
-	      (when (not first) (setq first url))
-	      ))
-
-	  )))))
+  (save-excursion
+    ;; We have found an error stack to investigate.
+    (let ((first nil)
+	  (overlaystack nil))
+      (while (re-search-backward gud-matlab-error-regexp
+				 (if matlab-shell-last-error-anchor
+				     (min matlab-shell-last-error-anchor (point))
+				   (point))
+				 t)
+	(let* ((err-start (match-beginning 0))
+	       (err-end (match-end 0))
+	       (err-text (match-string 0))
+	       (err-file (match-string 2))
+	       (err-line (match-string 3))
+	       (o (matlab-make-overlay err-start err-end))
+	       (url (concat "opentoline('" err-file "'," err-line ",0)"))
+	       )
+	  (matlab-overlay-put o 'mouse-face 'highlight)
+	  (matlab-overlay-put o 'face 'underline)
+	  ;; The url will recycle opentoline code.
+	  (matlab-overlay-put o 'matlab-url url)
+	  (matlab-overlay-put o 'keymap matlab-shell-html-map)
+	  (matlab-overlay-put o 'help-echo (concat "Jump to error at " err-file "."))
+	  (setq first url)
+	  (push o overlaystack)
+	  ))
+      ;; Keep track of the very first error in this error stack.
+      ;; It will represent the "place to go" for "go-to-last-error".
+      (dolist (O overlaystack)
+	(matlab-overlay-put O 'first-in-error-stack first))
+      ;; Once we've found something, don't scan it again.
+      (setq matlab-shell-last-error-anchor (point-marker)))))
 
 (defvar gud-matlab-marker-regexp-1 "^K>>"
   "Regular expression for finding a file line-number.")
@@ -4648,10 +4668,12 @@ end\n"
     ;; the first half of that file name.
     ;; The below used to match against the prompt, not \n, but then text that
     ;; had error: in it for some other reason wouldn't display at all.
-    (if (and (not frame)
+    (if (and matlab-prompt-seen ;; Don't collect during boot
+	     (not frame) ;; don't collect debug stuff
 	     (let ((start (string-match gud-matlab-marker-regexp-prefix gud-marker-acc)))
 	       (and start
 		    (not (string-match "\n" gud-marker-acc start))
+		    ;;(not (string-match "^K?>>\\|\\?\\?\\?\\s-Error while evaluating" gud-marker-acc start))
 		    )))
 	;; We could be collecting something.  Wait for a while.
 	nil
@@ -4812,6 +4834,8 @@ Returns a string path to the root of the executing MATLAB."
 	(string-match "$" output)
 	(substring output 0 (match-beginning 0))))))
 
+(defvar matlab-shell-window-exists-for-display-completion-flag nil
+  "Non-nil means there was an 'other-window' available when `display-completion-list' is called.")
 
 (defun matlab-shell-tab ()
    "Send [TAB] to the currently running matlab process and retrieve completion."
@@ -4852,23 +4876,53 @@ Returns a string path to the root of the executing MATLAB."
 	     (progn
 	       (insert (car (car completions)))
 	       ;; kill completions buffer if still visible
-	       (when (get-buffer "*Completions*")
-		 (delete-windows-on "*Completions*")))
+	       (matlab-shell-tab-hide-completions))
 	   (let ((try (try-completion lastcmd completions)))
 	     ;; Insert in a good completion.
 	     (cond ((or (eq try nil) (eq try t)
 			(and (stringp try)
 			     (string= try lastcmd)))
 		    (insert lastcmd)
+		    ;; Before displaying the completions buffer, check to see if
+		    ;; the completions window is already displayed, or if there is
+		    ;; a next window to display.  This determines how to remove the
+		    ;; completions later.
+		    (if (get-buffer-window "*Completions*")
+			nil ;; Recycle old value of the display flag.
+		      ;; Else, reset this variable.
+		      (setq matlab-shell-window-exists-for-display-completion-flag
+			    ;; Else, it isn't displayed, save an action.
+			    (if (eq (next-window) (selected-window))
+				;; If there is no other window, the post action is
+				;; to delete.
+				'delete
+			      ;; If there is a window to display, the post
+			      ;; action is to bury.
+			      'bury)))
 		    (with-output-to-temp-buffer "*Completions*"
 		      (display-completion-list (mapcar 'car completions) lastcmd)))
 		   ((stringp try)
 		    (insert try)
-		    (when (get-buffer "*Completions*")
-		      (delete-windows-on "*Completions*")))
+		    (matlab-shell-tab-hide-completions))
 		   (t
 		    (insert lastcmd))))
 	   )))))
+
+(defun matlab-shell-tab-hide-completions ()
+  "Hide any completion windows for `matlab-shell-tab'."
+  (cond ((eq matlab-shell-window-exists-for-display-completion-flag 'delete)
+	 (when (get-buffer "*Completions*")
+	   (delete-windows-on "*Completions*")))
+	((eq matlab-shell-window-exists-for-display-completion-flag 'bury)
+	 (let ((orig (selected-window))
+	       (bw nil))
+	   (while (setq bw (get-buffer-window "*Completions*"))
+	     (select-window bw)
+	     (bury-buffer))
+	   (select-window orig)))
+	)
+  ;; Reset state.
+  (setq matlab-shell-window-exists-for-display-completion-flag nil))
 
 
 ;;; MATLAB mode Shell commands ================================================
@@ -4946,6 +5000,10 @@ This command requires an active MATLAB shell."
  		     (setq str (concat (substring str 0 (match-beginning 0))
  				       "\n"
  				       (substring str (match-end 0)))))
+		   ;; HACK FOR NOSHOW
+		   (while (string-match "\n" str)
+		     (setq str (replace-match ", " t t str)))
+		   (setq str (concat str "\n"))
  		   str))
  	(msbn nil)
  	(lastcmd)
@@ -5275,12 +5333,17 @@ To reference old errors, put the cursor just after the error text."
                      (match-beginning 2) (match-end 2)))
                 (el (buffer-substring-no-properties
                      (match-beginning 3) (match-end 3))))
-            (matlab-find-other-window-file-line-column ef el 0)))))))
+            (matlab-find-other-window-file-line-column ef el "0")))))))
 
 (defun matlab-shell-html-click (e)
   "Go to the error at the location of event E."
   (interactive "e")
   (mouse-set-point e)
+  (matlab-shell-html-go))
+
+(defun matlab-shell-html-go ()
+  "Go to the error at the location `point'."
+  (interactive)
   (let ((url (matlab-url-at (point))))
     (if url (matlab-find-other-window-via-url url))))
 
