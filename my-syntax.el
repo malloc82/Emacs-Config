@@ -118,13 +118,6 @@
 ;; =================================
 ;; python-mode configuration
 ;; =================================
-(load "~/.emacs.d/nxhtml/autostart.el")
-(setq mumamo-background-colors nil) 
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
-
-;; =================================
-;; python-mode configuration
-;; =================================
 
 (require 'python-mode)
 
@@ -139,7 +132,6 @@
             (message "loading python-mode ......... ")
             
             (load-library "my-python")))
-
 
 ;; =================================
 ;; latex configuration

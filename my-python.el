@@ -44,7 +44,6 @@
 (set-variable 'indent-tabs-mode nil) 
 ;;(highlight-beyond-fill-column)
 ;;(define-key python-mode-map "\C-m" 'newline-and-indent)
-(pabbrev-mode)
 (abbrev-mode)
 
 (set (make-variable-buffer-local 'beginning-of-defun-function)
@@ -67,3 +66,11 @@
 ;; next command history     M-n
 
 (define-key global-map '[C-c C-r]  'py-execution-region)
+
+;; ====================================
+;; Django setting
+;; ====================================
+
+(load "~/.emacs.d/nxhtml/autostart.el")
+(setq mumamo-background-colors nil) 
+(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))

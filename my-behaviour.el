@@ -1,3 +1,4 @@
+
 ;; ================================
 ;; Turn off debug for normal use
 ;; =================================
@@ -19,15 +20,6 @@
 ;; the visible part of the window, you can always jump 
 ;; to it using the following functions: forward-sexp 
 ;; or backward-sexp.
-
-
-;; ===========================
-;; pabbrev-mode
-;; ===========================
-;; (require 'pabbrev )
-(global-pabbrev-mode nil)
-;; (setq pabbrev-read-only-error nil)
-
 
 ;; ===========================
 ;; Compilation
