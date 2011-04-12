@@ -10,8 +10,8 @@
 (defun down-slightly () (interactive) (scroll-down 10))
 (global-set-key [mouse-4] 'down-slightly)
 (global-set-key [mouse-5] 'up-slightly)
-;; (global-set-key [M-down]  'up-slightly)
-;; (global-set-key [M-up]    'down-slightly)
+(global-set-key [C-M-down]  'up-slightly)
+(global-set-key [C-M-up]    'down-slightly)
 
 (defun up-one () (interactive) (scroll-up 1))
 (defun down-one () (interactive) (scroll-down 1))

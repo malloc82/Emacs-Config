@@ -93,18 +93,16 @@
                javascript-mode-hook)))
   (dolist (mode mlist)
     (add-hook mode
-              '(lambda ()
-                 (outline-minor-mode 1)
-                 (pabbrev-mode)))))
+              #'(lambda ()
+                  (outline-minor-mode 1)))))
 
 (add-hook 'cuda-mode-hook
-          '(lambda ()
-            (yas/minor-mode 1)))
+          #'(lambda ()
+              (yas/minor-mode 1)))
 
 (add-hook 'tramp-util-unload-hook
-          '(lambda ()
-            (message "loading tramp ......... ")
-            (global-pabbrev-mode nil)))
+          #'(lambda ()
+              (message "loading tramp ......... ")))
 
 ;; (add-hook 'org-mode-hook 
 ;;           (lambda () (setq truncate-lines nil)))
@@ -323,22 +321,20 @@
 ;;                  (lisp-mode-addon ,(cadr mode)))))
 
 (add-hook 'lisp-mode-hook
-          '(lambda ()
-             (lisp-mode-addon lisp-mode-map)))
+          #'(lambda ()
+              (lisp-mode-addon lisp-mode-map)))
 
 (add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
-             (lisp-mode-addon emacs-lisp-mode-map)))
+          #'(lambda ()
+              (lisp-mode-addon emacs-lisp-mode-map)))
 
 (add-hook 'scheme-mode-hook
-          '(lambda ()
-             (lisp-mode-addon scheme-mode-map)))
+          #'(lambda ()
+              (lisp-mode-addon scheme-mode-map)
+              (load-library "my-scheme")))
 
 ;; (add-hook 'inferior-scheme-mode-hook
 ;;           '(lambda ()
 ;;              (lisp-mode-addon inferior-scheme-mode-map)))
 
-(autoload 'caml-mode "ocaml" (interactive)
-  "Major mode for editing Caml code." t)
-(autoload 'camldebug "camldebug" (interactive) "Debug caml mode")
 

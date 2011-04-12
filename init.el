@@ -41,7 +41,6 @@
        (add-to-list 'load-path "~/lib/python2.7/site-packages/Pymacs"))
       )
 
-
 (setq turn-on-follow-mouse t)
 
 (dolist (config-file '("my-keys" "my-backup" "my-mouse" "my-dired.el"
@@ -50,7 +49,7 @@
                        "my-gud" "my-utils"
                        ;; "my-desktop"
                        ;; "my-mail"
-                       "my-slime" "my-scheme"))
+                       "my-slime"))
   (load-library config-file))
 
 ;; version control

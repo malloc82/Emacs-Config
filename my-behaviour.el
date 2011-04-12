@@ -1,3 +1,9 @@
+;; ================================
+;; Turn off debug for normal use
+;; =================================
+
+(setq debug-on-error nil)
+
 ;; ===========================
 ;; Paranthesis match
 ;; ===========================
@@ -19,7 +25,7 @@
 ;; pabbrev-mode
 ;; ===========================
 ;; (require 'pabbrev )
-;; (global-pabbrev-mode)
+(global-pabbrev-mode nil)
 ;; (setq pabbrev-read-only-error nil)
 
 
@@ -41,8 +47,7 @@
 ;; Frame setting
 ;; ===========================
 
-(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*TeX Help*",  "*terminal<1>*"))
-(setq special-display-regexps '("\*terminal\<1\>\*"))
+(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*TeX Help*"))
 
 (setq display-buffer-reuse-frames t)
 (setq pop-up-frames nil)
@@ -239,6 +244,22 @@
 (setq eshell-prompt-function
       (lambda ()
         (concat (format-time-string "%Y-%m-%d %H:%M " (current-time))
-                (eshell/pwd)
+                (file-name-nondirectory (eshell/pwd))
                 (if (= (user-uid) 0) " # " " $ "))))
 
+;; =======================
+;; Frame move settings
+;; =======================
+
+(require 'framemove)
+    (windmove-default-keybindings)
+    (setq framemove-hook-into-windmove t)
+
+;; =======================
+;; Auto-complete settings
+;; =======================
+
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
+(ac-config-default)
