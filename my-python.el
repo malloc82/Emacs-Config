@@ -8,7 +8,8 @@
 ;; =======================
 
 (require 'ipython)
-(setq py-python-command-args '( "-colors" "Linux"))
+;; check ~/.ipython/ipythonrc
+(setq py-python-command-args '("-colors" "Linux")) ;; Linux, LightBG, NoColor
 
 ;; ==========================
 ;; Pymacs, rope, ropemacs
@@ -74,3 +75,5 @@
 (load "~/.emacs.d/nxhtml/autostart.el")
 (setq mumamo-background-colors nil) 
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+
+(setq debug-on-error nil)

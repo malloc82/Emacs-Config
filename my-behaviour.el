@@ -1,10 +1,3 @@
-
-;; ================================
-;; Turn off debug for normal use
-;; =================================
-
-(setq debug-on-error nil)
-
 ;; ===========================
 ;; Paranthesis match
 ;; ===========================
@@ -255,3 +248,9 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
 (ac-config-default)
+
+;; ================================
+;; Turn off debug for normal use
+;; =================================
+
+(setq debug-on-error nil)
