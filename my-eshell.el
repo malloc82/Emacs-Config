@@ -22,3 +22,6 @@
           (find-file file)
           (goto-line line))
         (find-file (pop args)))))
+
+(defun eshell/tcm ()
+  (cd "~/repos/Thesis/Cuda/MRI_CPU"))

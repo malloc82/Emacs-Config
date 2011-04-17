@@ -53,14 +53,18 @@
 (defun dark-night (&optional cur-frame)
   (let ((bg-color "black")
         (fg-color "white")
-        (cur-color "yellow"))
+        (cur-color "yellow")
+        (region-color "blue4"))
+    ;; (set-background-color bg-color)
+    ;; (set-foreground-color fg-color)
+    ;; (set-cursor-color     cur-color)
     (set-face-attribute 'default   cur-frame :foreground fg-color :background bg-color)
     (set-face-attribute 'cursor    cur-frame :foreground fg-color :background cur-color)
     (set-face-attribute 'mode-line cur-frame :foreground "black" :background "grey70"
                         :box '(:line-width -1 :style released-button))
     (set-face-attribute 'mode-line-inactive cur-frame :foreground "grey80" :background "grey30"
                         :box '(:line-width -1 :style pressed-button))
-    (set-face-attribute 'region                 cur-frame :background "blue4") ;; or "LightBlue3"
+    (set-face-attribute 'region                 cur-frame :background region-color) ;; or "LightBlue3"
     (set-face-attribute 'fringe                 cur-frame :background "grey10")
     (set-face-attribute 'font-lock-comment-face cur-frame :foreground "chocolate1" :slant 'italic)
     (set-face-attribute 'font-lock-string-face  cur-frame :foreground "LightSalmon")
@@ -77,6 +81,15 @@
     (set-face-attribute 'dired-directory              cur-frame :foreground "SkyBlue2")
     (set-face-attribute 'minibuffer-prompt            cur-frame :foreground "cyan")
     (set-face-attribute 'secondary-selection          cur-frame :foreground "PaleVioletRed3")
+
+    ;; org-mode 
+    (set-face-attribute 'org-hide  cur-frame :foreground bg-color)
+    ;; icy-mode 
+    ;; (setq icicle-region-background region-color)
+    ;; (set-face-attribute 'icicle-special-candidate  cur-frame :background region-color)
+    ;; (set-face-attribute 'icicle-mode-line-help     cur-frame :foreground "blue4")
+    ;; (set-face-attribute 'icicle-multi-command-completion cur-frame :foreground "red4" :background "lightgreen"
+    ;;                     :weight 'bold :box '(:line-width -1 :style released-button))
     
     (setq term-default-bg-color bg-color)
     (setq term-default-fg-color fg-color)
@@ -89,15 +102,19 @@
 (defun gray-scale (&optional cur-frame)
   (let ((bg-color "gray20")
         (fg-color "white")
-        (cur-color "yellow"))
+        (cur-color "yellow")
+        (region-color "blue4"))
 
+    ;; (set-background-color bg-color)
+    ;; (set-foreground-color fg-color)
+    ;; (set-cursor-color     cur-color)
     (set-face-attribute 'default   cur-frame :foreground fg-color :background bg-color)
     (set-face-attribute 'cursor    cur-frame :foreground fg-color :background cur-color)
     (set-face-attribute 'mode-line cur-frame :foreground "black" :background "grey70"
                         :box '(:line-width -1 :style released-button))
     (set-face-attribute 'mode-line-inactive cur-frame :foreground "grey80" :background "grey30"
                         :box '(:line-width -1 :style pressed-button))
-    (set-face-attribute 'region                 cur-frame :background "blue4") ;; or "LightBlue3"
+    (set-face-attribute 'region                 cur-frame :background region-color) ;; or "LightBlue3"
     (set-face-attribute 'fringe                 cur-frame :background "grey15")
     (set-face-attribute 'font-lock-comment-face cur-frame :foreground "chocolate1" :slant 'italic)
     (set-face-attribute 'font-lock-string-face  cur-frame :foreground "LightSalmon")
@@ -115,6 +132,16 @@
     (set-face-attribute 'minibuffer-prompt            cur-frame :foreground "cyan")
     (set-face-attribute 'secondary-selection          cur-frame :foreground "PaleVioletRed3")
 
+    ;; org-mode 
+    (set-face-attribute 'org-hide  cur-frame :foreground bg-color)
+
+    ;; icy-mode 
+    ;; (setq icicle-region-background region-color)
+    ;; (set-face-attribute 'icicle-special-candidate  cur-frame :background region-color)
+    ;; (set-face-attribute 'icicle-mode-line-help     cur-frame :foreground "blue4")
+    ;; (set-face-attribute 'icicle-multi-command-completion cur-frame :foreground "red4" :background "lightgreen"
+    ;;                     :weight 'bold :box '(:line-width -1 :style released-button))
+
     (setq term-default-bg-color bg-color)
     (setq term-default-fg-color fg-color)
     `((bac:kground-color . ,bg-color)
@@ -125,17 +152,21 @@
   )
 
 (defun xcode (&optional cur-frame)
-  (let ((bg-color "white")
-        (fg-color "black")
-        (cur-color "DarkSlateGray4")
-        (ml-bgcolor "grey60"))
+  (let ((bg-color     "white")
+        (fg-color     "black")
+        (cur-color    "DarkSlateGray4")
+        (ml-bgcolor   "grey60")
+        (region-color "LightBlue2"))
+    ;; (set-background-color bg-color)
+    ;; (set-foreground-color fg-color)
+    ;; (set-cursor-color     cur-color)
     (set-face-attribute 'default   cur-frame :foreground fg-color :background bg-color)
     (set-face-attribute 'cursor    cur-frame :foreground fg-color :background cur-color)
     (set-face-attribute 'mode-line cur-frame :foreground "black" :background ml-bgcolor
                         :box '(:line-width -1 :style released-button))
     (set-face-attribute 'mode-line-inactive cur-frame :foreground "grey20" :background "grey90"
                         :box '(:line-width -1 :style pressed-button))
-    (set-face-attribute 'region      cur-frame :background "LightBlue2") ;; or "LightBlue3"
+    (set-face-attribute 'region      cur-frame :background region-color) ;; or "LightBlue3"
     (set-face-attribute 'fringe      cur-frame :background "grey95")
     (set-face-attribute 'header-line cur-frame :foreground "grey20" :background "grey90" :box nil)
     (set-face-attribute 'font-lock-comment-face cur-frame :foreground "ForestGreen" :slant 'italic)
@@ -158,7 +189,16 @@
     (set-face-attribute 'link           cur-frame :foreground "blue1" :underline t)
     (set-face-attribute 'link-visited   cur-frame :foreground "magenta4" :underline t)
     (set-face-attribute 'button         cur-frame :background "#f6f5ef" :weight 'bold)
-    
+
+    ;; org-mode 
+    (set-face-attribute 'org-hide  cur-frame :foreground bg-color)
+    ;; icy-mode 
+    ;; (setq icicle-region-background region-color)
+    ;; (set-face-attribute 'icicle-special-candidate        cur-frame :background region-color)
+    ;; (set-face-attribute 'icicle-mode-line-help           cur-frame :foreground "blue4")
+    ;; (set-face-attribute 'icicle-multi-command-completion cur-frame :foreground "red4" :background "lightgreen"
+    ;;                     :weight 'bold :box '(:line-width -1 :style released-button))
+
     (set-face-background 'mode-line ml-bgcolor)
     (setq term-default-bg-color bg-color)
     (setq term-default-fg-color fg-color)
@@ -171,15 +211,18 @@
 (defun radiance (&optional cur-frame)
   (let ((bg-color "#ffffff")
         (fg-color "#333333")
-        (cur-color "#aea79f"))
-
+        (cur-color "#aea79f")
+        (region-color "#f6f5ef"))
+    ;; (set-background-color bg-color)
+    ;; (set-foreground-color fg-color)
+    ;; (set-cursor-color     cur-color)
     (set-face-attribute 'default   cur-frame :foreground fg-color  :background bg-color)
     (set-face-attribute 'cursor    cur-frame :foreground fg-color  :background cur-color)
     (set-face-attribute 'mode-line cur-frame :foreground "#333333" :background "#f6f5ef"
                         :box '(:line-width -1 :style released-button))
     (set-face-attribute 'mode-line-inactive cur-frame :foreground "#333333" :background "#ffffff"
                         :box '(:line-width -1 :style pressed-button))
-    (set-face-attribute 'region      cur-frame :background "#f6f5ef") ;; or "LightBlue3"
+    (set-face-attribute 'region      cur-frame :background region-color) ;; or "LightBlue3"
     (set-face-attribute 'fringe      cur-frame :background "#f6f5ef")
     (set-face-attribute 'header-line cur-frame :foreground "#62124b" :background "#ffffff" :box nil)
     (set-face-attribute 'font-lock-comment-face cur-frame :foreground "#aea79f" :slant 'italic)
@@ -197,6 +240,15 @@
     (set-face-attribute 'minibuffer-prompt            cur-frame :foreground "#f47321" :weight 'bold)
     (set-face-attribute 'secondary-selection          cur-frame :foreground "PaleVioletRed3")
     
+    ;; org-mode 
+    (set-face-attribute 'org-hide  cur-frame :foreground bg-color)
+    ;; icy-mode 
+    ;; (setq icicle-region-background region-color)
+    ;; (set-face-attribute 'icicle-special-candidate  cur-frame :background region-color)
+    ;; (set-face-attribute 'icicle-mode-line-help     cur-frame :foreground "blue4")
+    ;; (set-face-attribute 'icicle-multi-command-completion cur-frame :foreground "red4" :background "lightgreen"
+    ;;                     :weight 'bold :box '(:line-width -1 :style released-button))
+
     (set-face-attribute 'isearch        cur-frame :foreground "#333333" :background "#fedfc7")
     (set-face-attribute 'lazy-highlight cur-frame :background "#f6f5ef")
     (set-face-attribute 'link           cur-frame :foreground "#0086b3" :underline t)
@@ -310,6 +362,7 @@
     (terminal-settings)
     (set-theme 'xcode))
     ;; (set-theme 'dark-night))
+    ;; (set-theme 'gray-scale))
 
 (require 'parenface)
 

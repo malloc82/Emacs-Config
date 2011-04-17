@@ -1,4 +1,5 @@
 
+(require 'org)
 ;; (add-to-list 'load-path "~/.emacs.d/org-mode")
 ;; (require 'org-install)
 (define-key global-map "\C-cl" 'org-store-link)

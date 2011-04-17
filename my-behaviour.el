@@ -1,3 +1,4 @@
+
 ;; ===========================
 ;; Paranthesis match
 ;; ===========================
@@ -57,6 +58,16 @@
       ((fboundp 'iswitchb-default-keybindings) ; Old-style activation
        (iswitchb-default-keybindings))
       (t nil))                                 ; Oh well.
+
+(defun iswitchb-local-keys ()
+      (mapc (lambda (K) 
+	      (let* ((key (car K)) (fun (cdr K)))
+    	        (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
+	    '(("<right>" . iswitchb-next-match)
+	      ("<left>"  . iswitchb-prev-match)
+	      ("<up>"    . ignore             )
+	      ("<down>"  . ignore             ))))
+(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 
 ;; keys for buffer creation and navigation
 (global-set-key [(control x) (control b)] 'iswitchb-buffer)
@@ -184,12 +195,13 @@
 ;; turn on word wrapping in text mode
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; replace highlighted text with what I type rather than just
-;; inserting at a point
-(delete-selection-mode t)
-
 ;; resize the mini-buffer when necessary
 (setq resize-minibuffer-mode t)
+
+;; replace highlighted text with what I type rather than just
+;; inserting at a point
+(require 'delsel)
+(delete-selection-mode 1)
 
 ;; highlight during searching
 (setq query-replace-highlight t)
@@ -248,6 +260,55 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
 (ac-config-default)
+
+;; ================================
+;; Etags setting
+;; =================================
+
+(require 'etags-select)
+;; (require 'etags-table)
+(setq etags-select-mode t)
+
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
+
+(defun jds-find-tags-file ()
+  "recursively searches each parent directory for a file named 'TAGS' and returns the
+path to that file or nil if a tags file is not found. Returns nil if the buffer is
+not visiting a file"
+  (progn
+      (defun find-tags-file-r (path)
+         "find the tags file from the parent directories"
+         (let* ((parent (file-name-directory path))
+                (possible-tags-file (concat parent "TAGS")))
+           (cond
+             ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
+             ((string= "/TAGS" possible-tags-file) (error "no tags file found"))
+             (t (find-tags-file-r (directory-file-name parent))))))
+
+    (if (buffer-file-name)
+        (catch 'found-it 
+          (find-tags-file-r (buffer-file-name)))
+        (error "buffer is not visiting a file"))))
+
+(defun jds-set-tags-file-path ()
+  "calls `jds-find-tags-file' to recursively search up the directory tree to find
+a file named 'TAGS'. If found, set 'tags-table-list' with that path as an argument
+otherwise raises an error."
+  (interactive)
+  (setq tags-table-list (cons (jds-find-tags-file) tags-table-list)))
+
+;; ;; delay search the TAGS file after open the source file
+;; (add-hook 'emacs-startup-hook 
+;; 	'(lambda () (jds-set-tags-file-path)))
+
+;; ================================
+;; Icicles
+;; =================================
+
+;; (add-to-list 'load-path "~/.emacs.d/icicles")
+;; (require 'icicles)
+;; (icy-mode 1)
 
 ;; ================================
 ;; Turn off debug for normal use

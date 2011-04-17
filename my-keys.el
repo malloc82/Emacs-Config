@@ -53,7 +53,7 @@
 
 (if window-system
     (progn
-      (require 'redo) 
+      (require 'redo+) 
       (global-set-key (kbd "C-'")     'redo)
       (global-set-key [ (control \')] 'redo)
       (global-set-key [ (control /)]  'undo)))

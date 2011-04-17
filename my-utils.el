@@ -77,6 +77,6 @@
   "Create tags file."
   (interactive
    (list (read-shell-command "Run ctags (like this): "
-                             (concat ctags-bin " --extra=+q --tag-relative=yes --append=yes -f ./TAGS -e -R ." nil))))
+                             (concat ctags-bin " --extra=+q --tag-relative=yes --append=no -f ./TAGS -e -R ." nil))))
   (shell-command (concat ctags-command " &"))
   )
