@@ -73,6 +73,11 @@
 (global-set-key [(control x) (control b)] 'iswitchb-buffer)
 (global-set-key [(control x) (f)] 'find-file)
 
+;; ============================
+;; Spell checker
+;; ============================
+
+(setq ispell-program-name "aspell")
 
 ;; ============================
 ;; Command frequency logging
