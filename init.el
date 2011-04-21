@@ -1,7 +1,7 @@
 ;; ~/.emacs.d/init.el
 
 ;; Emacs's environment 
-(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:."))
+(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core"))
 (if (string= system-type "darwin")
     (progn
       (setq ns-command-modifier 'meta)
@@ -103,7 +103,6 @@
 
 ;; (require 'crypt++)
 
-
 ;; -----new (load "planner")
 
 ;; -----new (load "~/.emacs-records")
@@ -119,7 +118,7 @@
 (define-key global-map [?\C-x ?n ?r] 'records-insert-record-region)
 (define-key global-map [?\C-x ?n ?b] 'records-insert-record-buffer)
 (define-key global-map [?\C-x ?n ?l] 'records-insert-link)
-     
+
 ;; Hook up to the calendar mode
 (add-hook 'calendar-load-hook
      	  (function
@@ -139,13 +138,13 @@
           (function (lambda ()
             (records-insert-template current-prefix-arg))))
  ;;;*** OPTIONAL ***;;;
-     
+
 ;; If you like abbrev mode
 (add-hook 'records-mode-hooks
           (function
            (lambda ()
             (abbrev-mode 1))))
-     
+
 ;; If you like to use auto filling and/or filladapt modes while editing text.
 ;; If you have these functions in the text-mode-hook, then you don't need
 ;; them here.
@@ -197,3 +196,5 @@
  '(paren-sexp-mode nil)
  '(show-paren-mode t)
  '(truncate-partial-width-windows nil))
+
+(eshell)

@@ -46,7 +46,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-
 ;; ===========================
 ;; Buffer Navigation
 ;; ============================
@@ -163,7 +162,6 @@
 ;;   (blink-cursor-mode -1))
 (blink-cursor-mode t)
 
-
 ;; ===========================
 ;; For Mac OS X
 ;; ============================
@@ -182,9 +180,19 @@
 ;; the bottom of a buffer
 (setq next-line-add-newlines nil)
 
+;; =================================
+;; Scrolling
+;; =================================
+
 ;; scroll just one line when hitting the bottom of the window
-(setq scroll-step 5)
-(setq scroll-conservatively 20)
+;; (setq redisplay-dont-pause t)
+;; (setq scroll-conservatively 20)
+
+(setq redisplay-dont-pause t
+      scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
 
 ;; format the title-bar to always include the buffer name
 (setq frame-title-format "emacs - %b")

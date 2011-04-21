@@ -325,6 +325,32 @@
               (lisp-mode-addon scheme-mode-map)
               (load-library "my-scheme")))
 
+(add-hook 'eshell-mode-hook
+          #'(lambda ()
+              (define-key eshell-mode-map (kbd "(") 'paredit-open-parenthesis)
+              (define-key eshell-mode-map (kbd ")") 'paredit-close-parenthesis)
+              (define-key eshell-mode-map (kbd "M-0") 'paredit-escape) ;; also try : \
+
+              (define-key eshell-mode-map (kbd "\"") 'paredit-doublequote)
+              (define-key eshell-mode-map (kbd "\\") 'paredit-backslash)
+              
+              (define-key eshell-mode-map (kbd "C-t") 'transpose-sexps)
+              (define-key eshell-mode-map (kbd "C-M-t") 'transpose-chars)
+              (define-key eshell-mode-map (kbd "C-M-k") 'paredit-kill)
+              ;; (define-key eshell-mode-map (kbd "C-'") 'paredit-splice-sexp)
+              (define-key eshell-mode-map (kbd "C-M-l") 'paredit-recentre-on-sexp)
+              (define-key eshell-mode-map (kbd "C-,") 'paredit-backward-slurp-sexp)
+              (define-key eshell-mode-map (kbd "C-.") 'paredit-forward-slurp-sexp)
+              (define-key eshell-mode-map (kbd "C-<") 'paredit-backward-barf-sexp)
+              (define-key eshell-mode-map (kbd "C->") 'paredit-forward-barf-sexp)
+              ;; (define-key eshell-mode-map (kbd "C-/") 'backward-up-list)
+              (define-key eshell-mode-map (kbd "C-=") 'down-list)
+              ;; this may seem strange, but i often use the C-<whatever> motion
+              ;; commands in sequence to reformat code and having to take a finger off of control
+              ;; to add a return is a pain
+              (define-key eshell-mode-map (kbd "C-<return>") 'paredit-newline)
+              ))
+
 ;; (add-hook 'inferior-scheme-mode-hook
 ;;           '(lambda ()
 ;;              (lisp-mode-addon inferior-scheme-mode-map)))

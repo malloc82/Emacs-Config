@@ -95,7 +95,7 @@
      ;; '(link ((t (:foreground "#0086b3" :underline t))))
      ;; '(link-visited ((t (:foreground "#800080" :underline t))))
      `(button ((t (:background ,bg-color :weight bold))))
-     `(org-hide ((t (:forground ,bg-color))))
+     `(org-hide ((t (:foreground ,bg-color))))
      ;; '(header-line ((t (:background "#ffffff" :foreground "#62124b" :box nil))))
      ;; '(hl-line ((t (:background "#f6f5ef"))))
      )
@@ -154,7 +154,7 @@
      ;; '(link ((t (:foreground "#0086b3" :underline t))))
      ;; '(link-visited ((t (:foreground "#800080" :underline t))))
      `(button ((t (:background ,bg-color :weight bold))))
-     `(org-hide ((t (:forground ,bg-color))))
+     `(org-hide ((t (:foreground ,bg-color))))
      ;; '(header-line ((t (:background "#ffffff" :foreground "#62124b" :box nil))))
      ;; '(hl-line ((t (:background "#f6f5ef"))))
      )
@@ -216,7 +216,7 @@
      '(link-visited ((t (:foreground "magenta4" :underline t))))
      `(button ((t (:background ,bg-color :weight bold))))
      '(header-line ((t (:background "grey90" :foreground "grey20" :box nil))))
-     `(org-hide ((t (:forground ,bg-color))))
+     `(org-hide ((t (:foreground ,bg-color))))
      ;; '(hl-line ((t (:background "#f6f5ef"))))
      )
 
@@ -275,7 +275,7 @@
      '(button ((t (:background "#f6f5ef" :weight bold))))
      '(header-line ((t (:background "#ffffff" :foreground "#62124b" :box nil))))
      ;; '(hl-line ((t (:background "#f6f5ef"))))
-     `(org-hide ((t (:forground ,bg-color))))
+     `(org-hide ((t (:foreground ,bg-color))))
      ) 
     (setq term-default-bg-color bg-color)
     (setq term-default-fg-color fg-color)
@@ -357,4 +357,18 @@
 (setq font-lock-maximum-decoration t)
 (setq query-replace-highlight t)
 
-(setq scroll-step 5)
+;; (setq scroll-step 5)
+
+(eval-when-compile (require 'cl))
+(defun toggle-transparency ()
+  (interactive)
+  (if (/= (frame-parameter (selected-frame) 'alpha) 100)
+      (set-frame-parameter (selected-frame) 'alpha '(100 100)))
+      (set-frame-parameter (selected-frame) 'alpha '(50 80)))
+
+;; (global-set-key (kbd "C-c t") 'toggle-transparency)
+
+(defun transparency (value)
+   "Sets the transparency of the frame window. 0=transparent/100=opaque"
+   (interactive "nTransparency Value 0 - 100 opaque:")
+   (set-frame-parameter (selected-frame) 'alpha value))
