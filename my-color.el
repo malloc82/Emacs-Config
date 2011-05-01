@@ -70,7 +70,7 @@
     (custom-set-faces
      `(default ,@default-settings)
      ;; :family "Monaco" :height 80 :width normal :weight normal))))
-     `(cursor ((t (:background ,cur-color :foreground ,cur-color))))
+     `(cursor ((t (:background ,cur-color :foreground ,fg-color))))
      '(region ((t (:background "blue4"))))
      '(mode-line ((t (:background "grey70" :foreground "black"
                                   :box (:line-width -1 :style released-button)))))
@@ -128,7 +128,7 @@
 
     (custom-set-faces
      `(default ,@default-settings) ;; :family "Monaco" :height 80  :width normal :weight normal))))
-     `(cursor  ((t (:background ,cur-color :foreground ,cur-color))))
+     `(cursor  ((t (:background ,cur-color :foreground ,fg-color))))
      '(region  ((t (:background "blue4"))))
      '(mode-line ((t (:background "grey70" :foreground "black"
                                   :box (:line-width -1 :style released-button)))))
@@ -189,7 +189,7 @@
 
     (custom-set-faces
      `(default ,@default-settings)
-     `(cursor ((t (:background ,cur-color :foreground ,cur-color))))
+     `(cursor ((t (:background ,cur-color :foreground ,fg-color))))
      '(region ((t (:background "LightBlue2"))))
      `(mode-line ((t (:background ,ml-bgcolor :foreground "black"
                                   :box (:line-width -1 :style released-button)))))
@@ -251,7 +251,7 @@
 
     (custom-set-faces
      `(default ,@default-settings)
-     `(cursor ((t (:background ,cur-color :foreground ,cur-color))))
+     `(cursor ((t (:background ,cur-color :foreground ,fg-color))))
      '(region ((t (:background "#f6f5ef" :foreground "#333333"))))
      '(region ((t (:background "#f6f5ef"))))
      '(mode-line ((t (:background "#f6f5ef" :foreground "#333333" :box (:line-width -1 :style released-button)))))
