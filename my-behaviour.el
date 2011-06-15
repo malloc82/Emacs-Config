@@ -354,3 +354,6 @@ otherwise raises an error."
 ;; =================================
 
 (setq debug-on-error nil)
+
+;; ;; used to change case sensitive for search including find-tag
+;; (set-default 'case-fold-search nil)
