@@ -33,7 +33,12 @@
 ;; Frame setting
 ;; ===========================
 
-(setq special-display-buffer-names '("*compilation*", "*ASCII*", "*Process List*", "*Buffer List*", "*TeX Help*"))
+(setq special-display-buffer-names '("*compilation*",
+                                     "*ASCII*",
+                                     "*Process List*",
+                                     "*Buffer List*",
+                                     "*TeX Help*",
+                                     "*Async Shell Command*"))
 
 (setq display-buffer-reuse-frames t)
 (setq pop-up-frames nil)
@@ -310,6 +315,8 @@
 
 (global-set-key "\M-?" 'etags-select-find-tag-at-point)
 (global-set-key "\M-." 'etags-select-find-tag)
+
+(setq tags-revert-without-query t)
 
 (defun jds-find-tags-file ()
   "recursively searches each parent directory for a file named 'TAGS' and returns the

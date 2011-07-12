@@ -81,10 +81,11 @@
   #'(lambda (ctags-command)
       "Create tags file."
       (interactive
-       (list (read-shell-command "Run ctags (like this): "
+       (list (read-shell-command (format "Run ctags (%s): " ctag-dir)
                                  (concat ctags-bin
-                                         (format " --extra=+q --tag-relative=yes --append=no -f ./TAGS -e %s" subdir) nil))))
-      (let ((current-path (file-name-directory (buffer-file-name))))
+                                         (format " --extra=+q --tag-relative=yes --append=no -f TAGS -e %s" subdir) nil))))
+      ;; (let ((current-path (file-name-directory (buffer-file-name))))
+      (let ((current-path (substring (pwd) 10)))
         (cd ctag-dir)
         (shell-command (concat ctags-command " &"))
         (cd current-path))
@@ -94,4 +95,5 @@
 (fset 'create-tags (mk-tag-func '(".")))
 (fset 'create-tags-mri (mk-tag-func '("src"
                                       "include"
-                                      "../common/include") "~/repos/Thesis/Cuda/MRI_CPU/"))
+                                      "../common/include"
+                                      "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/"))
