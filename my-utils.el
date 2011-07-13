@@ -70,30 +70,31 @@
   (mapc 'kill-buffer (buffer-list)))
 
 ;; (setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
-(setq ctags-bin "/opt/local/bin/ctags") ;; mac os x 
 
-(defun mk-tag-func (dirlist &optional rootdir)
+(defmacro mk-tag-func (dirlist &optional rootdir)
+  (setq ctags-bin "/opt/local/bin/ctags") ;; mac os x 
   (setq subdir "")
   (setq ctag-dir (if rootdir rootdir "."))
   (dolist (dir dirlist)
     (setq subdir (concat subdir (format " -R %s" dir))))
-  ;; (message "ctags-dir = %s" ctags-dir)
-  #'(lambda (ctags-command)
-      "Create tags file."
-      (interactive
-       (list (read-shell-command (format "Run ctags (%s): " ctag-dir)
-                                 (concat ctags-bin
-                                         (format " --extra=+q --tag-relative=yes --append=no -f TAGS -e %s" subdir) nil))))
-      ;; (let ((current-path (file-name-directory (buffer-file-name))))
-      (let ((current-path (substring (pwd) 10)))
-        (cd ctag-dir)
-        (shell-command (concat ctags-command " &"))
-        (cd current-path))
-      )
+  `(lambda ()
+     #'(lambda (ctags-command)
+         "Create tags file."
+         (interactive
+          (list (read-shell-command (format "Run ctags (%s): " ,ctag-dir)
+                                    (concat ,ctags-bin
+                                            (format " --extra=+q --tag-relative=yes --append=no -f TAGS -e %s" ,subdir) nil))))
+         ;; (let ((current-path (file-name-directory (buffer-file-name))))
+         (let ((current-path (substring (pwd) 10))) ;; 10 charactors for  "Directory "
+           (cd ,ctag-dir)
+           (shell-command (concat ctags-command " &"))
+           (cd current-path))
+         )
+     )
   )
 
-(fset 'create-tags (mk-tag-func '(".")))
-(fset 'create-tags-mri (mk-tag-func '("src"
-                                      "include"
-                                      "../common/include"
-                                      "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/"))
+(fset 'create-tags (funcall (mk-tag-func ("."))))
+(fset 'create-tags-mri (funcall (mk-tag-func ("src"
+                                              "include"
+                                              "../common/include"
+                                              "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/")))

@@ -348,8 +348,8 @@
 (if (not window-system)
     (terminal-settings)
     ;; (set-theme 'xcode))
-    ;; (set-theme 'dark-night))
-    (set-theme 'gray-scale))
+    (set-theme 'dark-night))
+    ;; (set-theme 'gray-scale))
 
 (require 'parenface)
 
