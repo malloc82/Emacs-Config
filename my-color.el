@@ -11,8 +11,14 @@
 (auto-fill-mode nil)
 
 (make-face 'font-lock-number-face)
-(set-face-foreground 'font-lock-number-face "DodgerBlue4")
 (setq font-lock-number-face 'font-lock-number-face)
+(dolist (mode number-mode-list)
+  (add-hook mode
+            '(lambda ()
+              (font-lock-add-keywords nil
+               '(("\\<\\([0-9]+\\([eE][+-]?[0-9]*\\)?\\|0[xX][0-9a-fA-F]+\\)\\>" .
+                  font-lock-number-face))))))
+;; (set-face-foreground 'font-lock-number-face "DodgerBlue4")
 
 (setq number-mode-list '(c-mode-hook
                          c++-mode-hook
@@ -21,12 +27,6 @@
                          python-mode-hook
                          cperl-mode-hook))
 
-(dolist (mode number-mode-list)
-  (add-hook mode
-            '(lambda ()
-              (font-lock-add-keywords nil
-               '(("\\<\\([0-9]+\\([eE][+-]?[0-9]*\\)?\\|0[xX][0-9a-fA-F]+\\)\\>" .
-                  font-lock-number-face))))))
 
 (defun terminal-settings ()
   (set-face-foreground 'font-lock-preprocessor-face "magenta")

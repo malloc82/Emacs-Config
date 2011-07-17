@@ -2,6 +2,9 @@
 
 ;; Emacs's environment 
 (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core"))
+
+(setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib64" (getenv "LD_LIBRARY_PATH")))
+
 (if (string= system-type "darwin")
     (progn
       (setq ns-command-modifier 'meta)
