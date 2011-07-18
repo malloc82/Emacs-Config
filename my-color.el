@@ -12,6 +12,12 @@
 
 (make-face 'font-lock-number-face)
 (setq font-lock-number-face 'font-lock-number-face)
+(setq number-mode-list '(c-mode-hook
+                         c++-mode-hook
+                         lisp-mode-hook
+                         emacs-lisp-mode-hook
+                         python-mode-hook
+                         cperl-mode-hook))
 (dolist (mode number-mode-list)
   (add-hook mode
             '(lambda ()
@@ -20,12 +26,6 @@
                   font-lock-number-face))))))
 ;; (set-face-foreground 'font-lock-number-face "DodgerBlue4")
 
-(setq number-mode-list '(c-mode-hook
-                         c++-mode-hook
-                         lisp-mode-hook
-                         emacs-lisp-mode-hook
-                         python-mode-hook
-                         cperl-mode-hook))
 
 
 (defun terminal-settings ()

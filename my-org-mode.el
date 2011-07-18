@@ -13,7 +13,7 @@
 
 (setq org-hide-leading-stars t)
 (setq org-odd-levels-only t)
-    
+(setq org-return-follows-link t)
 (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d)")
         (sequence "TASK(t)" "ACTIVE(a)" "PENDING(p)" "REVIEW(r)" "|" "DONE(d)")
