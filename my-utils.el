@@ -71,6 +71,7 @@
 
 ;; (setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
 
+
 (defmacro mk-tag-func (dirlist &optional rootdir)
   (setq ctags-bin "/opt/local/bin/ctags") ;; mac os x 
   (setq subdir "")
@@ -88,13 +89,63 @@
          (let ((current-path (substring (pwd) 10))) ;; 10 charactors for  "Directory "
            (cd ,ctag-dir)
            (shell-command (concat ctags-command " &"))
+           (visit-tag-table (concat rootdir "/TAGS"))
            (cd current-path))
          )
      )
   )
 
 (fset 'create-tags (funcall (mk-tag-func ("."))))
-(fset 'create-tags-mri (funcall (mk-tag-func ("src"
-                                              "include"
-                                              "../common/include"
-                                              "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/")))
+(fset 'create-tags-mri-old (funcall (mk-tag-func ("src"
+                                                  "include"
+                                                  "../common/include"
+                                                  "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/")))
+(fset 'create-tags-thesis (funcall (mk-tag-func ("src"
+                                                 "include"
+                                                 "testsrc") "/Users/zcai/repos/Master/Thesis")))
+
+
+(defun c-insert-debug ()
+  (interactive)
+  (let ((begin "#ifdef DEBUG\n")
+        (end   "\n#endif"))
+    (goto-char (line-beginning-position)) (insert begin)
+    (goto-char (line-end-position)) (insert end)
+    )
+  )
+
+(defun c-insert-debug-region ()
+  (interactive)
+  (let ((begin "#ifdef DEBUG\n")
+        (end   "#endif\n"))
+    (save-excursion
+      (goto-char (region-end))
+      (insert end)
+
+      (goto-char (region-beginning))
+      (insert begin))
+    )
+  )
+
+;; (defmacro create-project-cmd (project-name project-dir &optional subdir-list)
+;;   (let ((fsets nil))
+;;     (push `(fset (intern ,project-name) #'(lambda () (interactive) (dired ,project-dir))) fsets)
+;;     (dolist (dir subdir-list)
+;;       (push `(fset (intern (concat ,project-name "-" ,dir))
+;;                    #'(lambda () (interactive) (dired (concat ,project-dir "/" ,dir)))) fsets))
+;;     `(progn
+;;        ,@fsets)))
+
+(defmacro create-project-cmd (project-name project-dir &optional subdir-list)
+  (let ((fsets
+          (mapcar
+           #'(lambda (dir)
+               `(fset
+                 (intern (concat ,project-name "-" ,dir))
+                 #'(lambda ()
+                     (interactive) (dired (concat ,project-dir "/" ,dir)))))
+           subdir-list)))
+    (push `(fset (intern ,project-name) #'(lambda () (interactive) (dired ,project-dir))) fsets)
+    `(progn
+       ,@fsets)))
+(create-project-cmd "thesis" "/Users/zcai/repos/Master/Thesis/" ("data" "doc" "src" "include" "testsrc" "output"))
