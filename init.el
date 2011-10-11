@@ -71,6 +71,7 @@
 (require 'ascii)
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
+(setq multi-term-switch-after-close nil)
 
 (setq desktop-enable-save-on-exit nil)
 

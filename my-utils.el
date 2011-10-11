@@ -15,7 +15,6 @@
 ;;       (insert (format "%4d %c\n" i i))))
 ;;   (beginning-of-buffer))
 
-
 ;; insert functions
 (global-unset-key "\C-t")
 
@@ -29,7 +28,6 @@
       (c-indent-command)
       (end-of-line)
       (forward-char 1))))
-
 
 (defun insert-function-header () (interactive)
   (insert "  /**\n")
@@ -71,7 +69,6 @@
 
 ;; (setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
 
-
 (defmacro mk-tag-func (dirlist &optional rootdir)
   (setq ctags-bin "/opt/local/bin/ctags") ;; mac os x 
   (setq subdir "")
@@ -110,22 +107,17 @@
   (let ((begin "#ifdef DEBUG\n")
         (end   "\n#endif"))
     (goto-char (line-beginning-position)) (insert begin)
-    (goto-char (line-end-position)) (insert end)
-    )
-  )
+    (goto-char (line-end-position)) (insert end)))
 
 (defun c-insert-debug-region ()
   (interactive)
   (let ((begin "#ifdef DEBUG\n")
         (end   "#endif\n"))
     (save-excursion
-      (goto-char (region-end))
-      (insert end)
-
       (goto-char (region-beginning))
       (insert begin))
-    )
-  )
+      (goto-char (region-end))
+      (insert end)))
 
 ;; (defmacro create-project-cmd (project-name project-dir &optional subdir-list)
 ;;   (let ((fsets nil))
@@ -149,3 +141,4 @@
     `(progn
        ,@fsets)))
 (create-project-cmd "thesis" "/Users/zcai/repos/Master/Thesis/" ("data" "doc" "src" "include" "testsrc" "output"))
+(create-project-cmd "repos" "/Users/zcai/repos/" ("Programming" "Portfolio" "Resume"))
