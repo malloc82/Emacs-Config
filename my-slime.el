@@ -55,7 +55,7 @@
     (setf paren-priority 'close)
 
     (defmacro defslime-start (name lisp)
-      '(defun , name ()
+      `(defun ,name ()
          (interactive)
          (slime, lisp)))
 
