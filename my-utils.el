@@ -92,10 +92,7 @@
            (cd ,ctag-dir)
            (shell-command (concat ctags-command " &"))
            (visit-tags-table (concat ,rootdir "/TAGS"))
-           (cd current-path))
-         )
-     )
-  )
+           (cd current-path)))))
 
 (fset 'create-tags (funcall (mk-tag-func ("."))))
 (fset 'create-tags-mri-old (funcall (mk-tag-func ("src"
@@ -145,8 +142,8 @@
     (push `(fset (intern ,project-name) #'(lambda () (interactive) (dired ,project-dir))) fsets)
     `(progn
        ,@fsets)))
-(create-project-cmd "thesis" "/Users/zcai/repos/Master/Thesis/" ("data" "doc" "src" "include" "testsrc" "output"))
-(create-project-cmd "repos" "/Users/zcai/repos/" ("Programming" "Portfolio" "Resume"))
+(create-project-cmd "thesis" "~/repos/Master/Thesis/" ("data" "doc" "src" "include" "readtest" "output"))
+(create-project-cmd "repos" "~/repos/" ("Programming" "Portfolio" "Resume"))
 
 (defun load-current-buffer ()
   (interactive)
