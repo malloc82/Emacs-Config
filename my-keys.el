@@ -82,3 +82,5 @@
 ;;      (interactive)
 ;;            (scroll-down 1)) 
 ;;
+
+(global-set-key (kbd "C-c C-l") 'load-current-buffer)

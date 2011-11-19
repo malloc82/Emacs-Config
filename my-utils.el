@@ -104,7 +104,7 @@
                                                   "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/")))
 (fset 'create-tags-thesis (funcall (mk-tag-func ("src"
                                                  "include"
-                                                 "testsrc") "/Users/zcai/repos/Master/Thesis")))
+                                                 "readtest") "~/repos/Master/Thesis")))
 
 
 (defun c-insert-debug ()
@@ -147,3 +147,8 @@
        ,@fsets)))
 (create-project-cmd "thesis" "/Users/zcai/repos/Master/Thesis/" ("data" "doc" "src" "include" "testsrc" "output"))
 (create-project-cmd "repos" "/Users/zcai/repos/" ("Programming" "Portfolio" "Resume"))
+
+(defun load-current-buffer ()
+  (interactive)
+  (let ((curr-file (buffer-file-name (current-buffer))))
+    (load-file curr-file)))
