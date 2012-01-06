@@ -144,8 +144,46 @@
        ,@fsets)))
 (create-project-cmd "thesis" "~/repos/Master/Thesis/" ("data" "doc" "src" "include" "readtest" "output"))
 (create-project-cmd "repos" "~/repos/" ("Programming" "Portfolio" "Resume"))
+(create-project-cmd "rebus" "~/repos/Rebus/src/")
 
 (defun load-current-buffer ()
-  (interactive)
   (let ((curr-file (buffer-file-name (current-buffer))))
     (load-file curr-file)))
+
+(defun load-current-buffer-p ()
+  (interactive)
+  (when (y-or-n-p (message "Load current buffer? "))
+    (if (buffer-file-name) (save-buffer (current-buffer)))
+    (load-current-buffer)))
+
+(defun edit-profile (&optional profile)
+  (interactive)
+  (let ((profile (if profile profile
+                    (cond ((string= system-type "darwin")
+                           "~/.profile")
+                          ((string= system-type "gnu/linux")
+                           "~/.bash_profile")))))
+    (find-file profile)))
+
+(require 'ediff)
+(defun ediff-current-buffer-revision () 
+  "Run Ediff to diff current buffer's file against VC depot. 
+Uses `vc.el' or `rcs.el' depending on `ediff-version-control-package'.
+source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-in-emacs-23-2" 
+  (interactive) 
+  (let ((file (or (buffer-file-name) 
+                  (error "Current buffer is not visiting a file")))) 
+    (if (and (buffer-modified-p) 
+             (y-or-n-p (message "Buffer %s is modified. Save buffer? " 
+                                (buffer-name)))) 
+        (save-buffer (current-buffer))) 
+    (ediff-load-version-control) 
+    (funcall 
+     (intern (format "ediff-%S-internal" ediff-version-control-package)) 
+     "" "" nil)))
+
+(defun m-expand-prog-path (program)
+  "Returns full PROGRAM path"
+  (when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
+    (let ((path (shell-command-to-string (format "which %s" program))))
+      (unless (= (length path) 0) (substring path 0 -1)))))

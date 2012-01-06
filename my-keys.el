@@ -83,4 +83,5 @@
 ;;            (scroll-down 1)) 
 ;;
 
-(global-set-key (kbd "C-c C-l") 'load-current-buffer)
+(global-set-key (kbd "C-l") 'load-current-buffer-p)
+(global-set-key (kbd "C-x v =") 'ediff-current-buffer-revision)
