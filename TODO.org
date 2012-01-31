@@ -14,3 +14,10 @@
       if moving point in foo is what you wanted, or 
       (with-current-buffer foo (save-excursion (goto-char (point-min)))) 
       if you didn't want to move point in foo. 
+
+* TODO improve emacs workgroups-mode[0/3]
+  - [ ] add workgroups "save as" function.
+  - [ ] When a new workgroup is created the save function should ask for 
+        new files instead of over writing previous saved file
+  - [ ] add an option that allow workgroups to open files automatically 
+        if they can be found

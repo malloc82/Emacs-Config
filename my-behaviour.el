@@ -190,6 +190,15 @@
 (setq next-line-add-newlines nil)
 
 ;; =================================
+;; Workgroups
+;; =================================
+
+(require 'workgroups)
+(setq wg-prefix-key (kbd "C-c w"))
+(workgroups-mode 1)
+;; (wg-load "/path/to/saved/workgroups")
+
+;; =================================
 ;; Scrolling
 ;; =================================
 
@@ -293,8 +302,8 @@
 ;; =======================
 
 (require 'framemove)
-    (windmove-default-keybindings)
-    (setq framemove-hook-into-windmove t)
+(windmove-default-keybindings)
+(setq framemove-hook-into-windmove t)
 
 ;; =======================
 ;; Auto-complete settings

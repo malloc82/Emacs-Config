@@ -280,7 +280,7 @@
   
   (define-key mode-type (kbd "RET") 'paredit-newline)
   (define-key mode-type (kbd "<return>") 'paredit-newline)
-  (define-key mode-type (kbd "C-j") 'newline)
+  ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with 
   
   ;; nb: this assumes dvorak key layout
   ;; (define-key mode-type (kbd "C-h") 'backward-sexp) ;; use C-M-<left>
