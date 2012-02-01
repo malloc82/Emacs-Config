@@ -7,17 +7,17 @@
               ;; (require 'org-install)
               (define-key org-mode-map "\C-cl" 'org-store-link)
               (define-key org-mode-map "\C-ca" 'org-agenda)
-              ;; unset keys for switching buffers
-              (define-key org-mode-map (kbd "M-S-<right>") nil)
-              (define-key org-mode-map (kbd "M-S-<left>")  nil)
-              (define-key org-mode-map (kbd "M-S-<up>")    nil)
-              (define-key org-mode-map (kbd "M-S-<down>")  nil)
-              ;; new bindings for above functions
-              (define-key org-mode-map (kbd "M-S-l") 'org-shiftmetaright)
-              (define-key org-mode-map (kbd "M-S-h") 'org-shiftmetaleft)
-              (define-key org-mode-map (kbd "M-S-k") 'org-shiftmetaup)
-              (define-key org-mode-map (kbd "M-S-j") 'org-shiftmetadown)
 
+              ;; ;; unset keys for switching buffers
+              ;; (define-key org-mode-map (kbd "M-S-<right>") nil)
+              ;; (define-key org-mode-map (kbd "M-S-<left>")  nil)
+              ;; (define-key org-mode-map (kbd "M-S-<up>")    nil)
+              ;; (define-key org-mode-map (kbd "M-S-<down>")  nil)
+              ;; ;; new bindings for above functions
+              ;; (define-key org-mode-map (kbd "M-S-l") 'org-shiftmetaright)
+              ;; (define-key org-mode-map (kbd "M-S-h") 'org-shiftmetaleft)
+              ;; (define-key org-mode-map (kbd "M-S-k") 'org-shiftmetaup)
+              ;; (define-key org-mode-map (kbd "M-S-j") 'org-shiftmetadown)
               
               ;;(setq org-log-done t)
               (setq org-log-done 'time)

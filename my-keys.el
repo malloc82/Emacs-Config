@@ -15,8 +15,8 @@
 (global-set-key [f7] 'compile)
 (global-set-key [M-f7] 'compile)
 
-;; (define-key global-map '[M-f8]   'first-error) ;; C-x `
-;; (define-key global-map '[M-f9]   'next-error)  ;; C-x` or M-g n or M-g M-n
+;; (define-key global-map '[M-f8] 'first-error) ;; C-x `
+;; (define-key global-map '[M-f9] 'next-error)  ;; C-x` or M-g n or M-g M-n
 ;; (define-key global-map '[C-f9] 'previous-error) ;; M-g p or M-g M-p
 
 ;;(define-key global-map '[f12] 'bury-buffer)
@@ -37,15 +37,15 @@
 (global-set-key        [?\M-\[] 'previous-buffer)
 (global-set-key        [?\M-\]] 'next-buffer)
 
-(global-set-key [M-S-left] 'windmove-left)    ; move to left windnow
+(global-set-key [M-S-left]  'windmove-left)   ; move to left windnow
 (global-set-key [M-S-right] 'windmove-right)  ; move to right window
-(global-set-key [M-S-up] 'windmove-up)        ; move to upper window
-(global-set-key [M-S-down] 'windmove-down)    ; move to downer window
+(global-set-key [M-S-up]    'windmove-up)     ; move to upper window
+(global-set-key [M-S-down]  'windmove-down)   ; move to downer window
 
-(global-set-key [M-left] 'windmove-left)      ; move to left windnow
-(global-set-key [M-right] 'windmove-right)    ; move to right window
-(global-set-key [M-up] 'windmove-up)          ; move to upper window
-(global-set-key [M-down] 'windmove-down)      ; move to downer window
+(global-set-key [M-left]    'windmove-left)   ; move to left windnow
+(global-set-key [M-right]   'windmove-right)  ; move to right window
+(global-set-key [M-up]      'windmove-up)     ; move to upper window
+(global-set-key [M-down]    'windmove-down)   ; move to downer window
 
 ;; forward-word M-f
 ;; backward-word M-b
@@ -56,21 +56,16 @@
 ;; (global-set-key (kbd "C-c b")   'beginning-of-buffer)
 ;; (global-set-key (kbd "C-c e")   'end-of-buffer)
 
-(if window-system
-    (progn
-      (require 'redo+) 
-      (global-set-key (kbd "C-'")     'redo)
-      (global-set-key [ (control \')] 'redo)
-      (global-set-key [ (control /)]  'undo)))
+(when window-system
+  (require 'redo+) 
+  (global-set-key (kbd "C-'")     'redo)
+  (global-set-key [ (control \')] 'redo)
+  (global-set-key [ (control /)]  'undo))
 
 (global-set-key [C-tab]       'hide-subtree)
 (global-set-key (kbd "C-`")   'show-subtree)
 (global-set-key (kbd "C-c s") 'show-subtree)
 
-;; multi-term
-(global-set-key (kbd "C-c t") 'multi-term)
-(global-unset-key (kbd "C-z"))
-(global-set-key (kbd "C-c y") 'term-paste)
 ;; hi-lock-mode
 ;; C-x w l
 
@@ -89,6 +84,16 @@
 ;;
 
 (global-set-key (kbd "C-l") 'load-current-buffer-p)
-(global-set-key (kbd "C-x v =") 'ediff-current-buffer-revision)
 
+;; =================
+;; VC-mode
+;; =================
+(global-set-key (kbd "C-x v =") 'ediff-current-buffer-revision) ;; my-utils.el
+
+;; =================
+;; multi-term
+;; =================
+(global-set-key (kbd "C-c t") 'multi-term)
+(global-unset-key (kbd "C-z"))
+(global-set-key (kbd "C-c y") 'term-paste)
 
