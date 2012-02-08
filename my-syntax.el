@@ -301,6 +301,8 @@
   ;; commands in sequence to reformat code and having to take a finger off of control
   ;; to add a return is a pain
   (define-key mode-type (kbd "C-<return>") 'paredit-newline)
+  
+  (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
   )
 
 ;; (dolist (mode `((lisp-mode-hook    ,lisp-mode-map)
@@ -315,6 +317,10 @@
 (add-hook 'lisp-mode-hook
           #'(lambda ()
               (lisp-mode-addon lisp-mode-map)))
+
+(add-hook 'lisp-interaction-mode-hook
+          #'(lambda ()
+              (lisp-mode-addon lisp-interaction-mode-map)))
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()

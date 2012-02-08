@@ -289,12 +289,10 @@
                 (recenter -1)
                 (sit-for 0))))))))
 
-(defun eshell-add-scroll-to-bottom ()
-  (interactive)
-  (make-local-hook 'window-scroll-functions)
-  (add-hook 'window-scroll-functions 'eshell-scroll-to-bottom nil t))
-
-(add-hook 'eshell-mode-hook 'eshell-add-scroll-to-bottom)
+(add-hook 'eshell-mode-hook
+          #'(lambda ()
+              (interactive)
+              (add-hook 'window-scroll-functions 'eshell-scroll-to-bottom nil t)))
 
 
 ;; =======================
@@ -364,6 +362,26 @@ otherwise raises an error."
 ;; (add-to-list 'load-path "~/.emacs.d/icicles")
 ;; (require 'icicles)
 ;; (icy-mode 1)
+
+;; ================================
+;; Dired mode
+;; =================================
+
+;; (put 'dired-find-alternate-file 'disabled nil)
+
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")
+            ;; Set dired-x global variables here.  For example:
+            ;; (setq dired-guess-shell-gnutar "gtar")
+            ;; (setq dired-x-hands-off-my-keys nil)
+            ))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            ;; Set dired-x buffer-local variables here.  For example:
+            (dired-omit-mode 1)
+            (setq dired-omit-files
+                  (concat dired-omit-files "\\|^\\..+$"))))
 
 ;; ================================
 ;; Turn off debug for normal use
