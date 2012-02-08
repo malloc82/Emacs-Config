@@ -1,11 +1,14 @@
 ;; gas-mode.el --- mode for editing assembler code
 
 ;; Copyright (C) 2007 Heike C. Zimmerer
+;; Time-stamp: <2007-12-27 18:14:08 hcz>
 
 ;; Author: Heike C. Zimmerer <hcz@hczim.de>
 ;; Created: 20 Feb 2007
-;; Version: 1.08  2007-05-30 hcz
+;; Version: 1.10  2009-2-25 hcz
 ;; Keywords: languages
+
+
 
 ;; This file is written for GNU Emacs, and uses the same license
 ;; terms; however, it is an add-on and not part of it.
@@ -123,7 +126,8 @@
 ;;
 ;;    2007-12-05  Bug with Intel syntax in arguemnt field fixed
 ;;
-
+;;    2007-12-25  Indents fixed for C comments without closing '*/'
+;;                
 ;;; Code:
 
 (defgroup gas nil
@@ -1171,8 +1175,9 @@ i.e. we're within a /*C ...*/ comment but not within /# ... #/."
     (error "Not within C comment"))
   (save-excursion
     (let* ((beg (re-search-backward ".*/[*]"))
-           (end (re-search-forward "[*]/")))
-      (narrow-to-region beg end))))
+           (end (re-search-forward "[*]/" nil t)))
+      (when end
+        (narrow-to-region beg end)))))
 
 
 (defun gas-token-pattern (cur-check)
@@ -1208,7 +1213,6 @@ Valid TOKEN-SYMBOLS and RESULTING-TYPEs are the ones listed in
                  (regexp (pop pattern-list))
                  (subexps (pop pattern-list))
                  (limit-re (pop pattern-list))
-                 (curbol (save-excursion (beginning-of-line)(point)))
                  limit
                  (subtype nil))
             (setq limit (line-end-position))
@@ -1217,7 +1221,7 @@ Valid TOKEN-SYMBOLS and RESULTING-TYPEs are the ones listed in
                         (format "\\(\\(\"[^\n\"]*\"\\)\\|[^\n\"]\\)*?\\(%s\\)"
                                 limit-re)))
               (setq limit (match-beginning 3)))
-            (when (> limit (point))
+            (when (>= limit (point))
               (narrow-to-region (point) limit)
               (when (looking-at regexp)      ; match pattern
                 (cond
@@ -2048,8 +2052,13 @@ repeatedly until you are satisfied with the kind of comment."
           (insert "*/")
           (forward-line -1)
           (indent-to (+ curindent gas-C-indent))))
+       ((looking-back "[ \t]*#.*" (line-beginning-position))
+        (insert "/*   */ ")
+        (backward-char 5))
        (t
-        (move-to-column (gas-nth 'text-col 'asm-comment fields))
+        (let ((target-col (gas-nth 'text-col 'asm-comment fields)))
+          (when target-col
+            (move-to-column target-col)))
         (when (or (not subtype)
                   (and (<= (current-column) curcol)
                        (save-excursion
@@ -2096,7 +2105,7 @@ through (which is ignored otherwise)."
                  (beginning-of-line 2)))))
           ((save-excursion (beginning-of-line) (looking-at asm-comment-re))
            (let* ((fill-prefix (concat (match-string 1) " "))
-                  (re (format "[^%c]*\\%s[ \t]*[^ \t%c\n]\n?" gas-comment-char
+                  (re (format "[^%c\n]*\\%s[ \t]*[^ \t%c\n]\n?" gas-comment-char
                                (match-string 2) gas-comment-char))
                   (beg (save-excursion
                         (beginning-of-line) 

@@ -380,8 +380,10 @@ otherwise raises an error."
           (lambda ()
             ;; Set dired-x buffer-local variables here.  For example:
             (dired-omit-mode 1)
-            (setq dired-omit-files
-                  (concat dired-omit-files "\\|^\\..+$"))))
+            (setq dired-omit-files "^\\.?#\\|^\\.[^.].+$")
+            ;; (setq dired-omit-files
+            ;;       (concat dired-omit-files "\\|^\\..+$"))
+            ))
 
 ;; ================================
 ;; Turn off debug for normal use

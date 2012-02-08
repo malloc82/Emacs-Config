@@ -1,4 +1,4 @@
-;; pabbrev.el --- Predictive abbreviation expansion
+;;; pabbrev.el --- Predictive abbreviation expansion
 
 ;; Version: 2.0
 
@@ -60,7 +60,7 @@
 ;; previously.  By hitting [tab] at any point the user can complete the
 ;; word.  The [tab] key is normally bound to `indent-line'.
 ;; `pabbrev-mode' preserves access to this command (or whatever else
-;; [tab] was bound to), if there is not current expansion. 
+;; [tab] was bound to), if there is no current expansion. 
 ;;
 ;; Sometimes you do not want to select the most commonly occurring
 ;; word, but a less frequently occurring word.  You can access this
@@ -706,9 +706,9 @@ start and end positions")
 
 (defun pabbrev-mode-on()
   "Turn `pabbrev-mode' on."
-  (make-local-hook 'pre-command-hook)
+  ;; (make-local-hook 'pre-command-hook)
   (add-hook 'pre-command-hook 'pabbrev-pre-command-hook nil t)
-  (make-local-hook 'post-command-hook)
+  ;; (make-local-hook 'post-command-hook)
   (add-hook 'post-command-hook 'pabbrev-post-command-hook nil t))
 
 (defun pabbrev-mode-off()
@@ -1732,3 +1732,7 @@ to the dictionary."
 
 (provide 'pabbrev)
 ;;; pabbrev.el ends here
+
+;; Local Variables:
+;; no-byte-compile: t
+;; End:
