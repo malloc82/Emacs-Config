@@ -9,7 +9,7 @@
 
 (require 'ipython)
 ;; check ~/.ipython/ipythonrc
-(setq py-python-command-args '("-colors" "Linux")) ;; Linux, LightBG, NoColor
+(setq py-python-command-args '("--colors=Linux")) ;; Linux, LightBG, NoColor
 
 ;; ==========================
 ;; Pymacs, rope, ropemacs

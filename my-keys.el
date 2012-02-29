@@ -94,6 +94,7 @@
 ;; multi-term
 ;; =================
 (global-set-key (kbd "C-c t") 'multi-term)
+(global-set-key (kbd "C-c b") 'get-term)
 (global-unset-key (kbd "C-z"))
 (global-set-key (kbd "C-c y") 'term-paste)
 
