@@ -127,11 +127,13 @@
       (cons '("python" . python-mode)
             interpreter-mode-alist))
 
+
 (add-hook 'python-mode-hook
        	  '(lambda ()
-            (message "loading python-mode ......... ")
-            
-            (load-library "my-python")))
+            (unless (and (boundp '*my-python-loaded*) *my-python-loaded*)
+              (message "loading python-mode ......... ")
+              (load-library "my-python")
+              (setq *my-python-loaded* t))))
 
 ;; =================================
 ;; latex configuration
