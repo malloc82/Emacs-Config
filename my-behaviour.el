@@ -151,19 +151,8 @@
 ;;(set-default-font
 ;; "-Misc-Fixed-Medium-R-Normal--15-140-75-75-C-90-ISO8859-1")
 
-;; display the current time
-(display-time-mode t)
-
-;; Show column number at bottom of screen
-(column-number-mode t)
-
 ;; alias y to yes and n to no
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-;; highlight matches from searches
-(setq isearch-highlight t)
-;; highlight incremental search
-(setq search-highlight t)
 
 (setq-default transient-mark-mode t)
 
@@ -220,9 +209,12 @@
 ;; (menu-bar-mode (if window-system 1 -1))
 
 ;; turn off the toolbar
-(when (and  (>= emacs-major-version 21) window-system)
-    (tool-bar-mode 1))
+(when (and  (>= emacs-major-version 21)
+            window-system)
+  (message "---------------- here")
+  (setq tool-bar-mode nil))
 
+(message "---------------- too-bar-mode : %s" tool-bar-mode)
 ;; turn on word wrapping in text mode
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
@@ -386,7 +378,7 @@ otherwise raises an error."
             ))
 
 ;; ================================
-;; Turn off debug for normal use
+;; Multi-term settings
 ;; =================================
 
 (require 'multi-term)
@@ -416,3 +408,7 @@ otherwise raises an error."
 
 ;; ;; used to change case sensitive for search including find-tag
 ;; (set-default 'case-fold-search nil)
+
+;; (add-hook 'term-exec-hook 
+;;             (lambda () 
+;;               (set-buffer-process-coding-system 'binary 'binary)))

@@ -23,13 +23,12 @@
 
 (cond ((string= system-type "darwin")
        (eval-after-load "pymacs"
-         '(add-to-list 'pymacs-load-path "/Library/Python/2.6/site-packages/Pymacs"))
-       )
+         (progn
+           '(add-to-list 'pymacs-load-path "/Library/Python/2.7/site-packages/Pymacs")
+           '(add-to-list 'pymacs-load-path "~/.emacs.d/Pymacs"))))
       ((string= system-type "gnu/linux")
        (eval-after-load "pymacs"
-         '(add-to-list 'pymacs-load-path "~/lib/python2.7/site-packages/Pymacs"))
-       )
-      )
+         '(add-to-list 'pymacs-load-path "~/lib/python2.7/site-packages/Pymacs"))))
 
 (pymacs-load "ropemacs" "rope-")
 (setq ropemacs-enable-autoimport t)
@@ -55,7 +54,7 @@
 
 (message "pymacs path : %s" pymacs-load-path)
 
-(require 'pycomplete)
+(require 'pycomplete+)
 
 (define-key py-mode-map [M-f12] 'pyp)
 ;; (define-key py-mode-map "\C-c\C-c" 'py-execute-prog)

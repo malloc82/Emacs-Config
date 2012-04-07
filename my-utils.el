@@ -142,7 +142,7 @@
     (push `(fset (intern ,project-name) #'(lambda () (interactive) (dired ,project-dir))) fsets)
     `(progn
        ,@fsets)))
-(create-project-cmd "thesis" "~/repos/Master/Thesis/" ("data" "doc" "src" "include" "readtest" "output"))
+(create-project-cmd "thesis" "~/repos/Master/Thesis/" ("data" "doc" "src" "include" "readtest" "output" "simulation"))
 (create-project-cmd "repos" "~/repos/" ("Programming" "Portfolio" "Resume"))
 (create-project-cmd "rebus" "~/repos/Rebus/src/")
 

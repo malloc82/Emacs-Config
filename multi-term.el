@@ -244,6 +244,11 @@ If this is nil, setup to environment variable of `SHELL'."
   :type 'string
   :group 'multi-term)
 
+(defcustom multi-term-program-switches nil
+  "The command-line switches to pass to the term program."
+  :type 'string
+  :group 'multi-term)
+
 (defcustom multi-term-try-create t
   "Try to create a new term buffer when switch.
 
@@ -534,7 +539,10 @@ If option DEDICATED-WINDOW is `non-nil' will create dedicated `multi-term' windo
       (if special-shell
           (setq shell-name (read-from-minibuffer "Run program: " shell-name)))
       ;; Make term, details to see function `make-term' in `term.el'.
-      (make-term term-name shell-name))))
+      (if multi-term-program-switches
+          (make-term term-name shell-name nil multi-term-program-switches)
+          (make-term term-name shell-name)))))
+
 
 (defun multi-term-handle-close ()
   "Close current term buffer when `exit' from term buffer."

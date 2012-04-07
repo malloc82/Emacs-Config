@@ -29,7 +29,7 @@
 
 ;; goto line
 ;; default: M-g g
-(define-key global-map [?\C-l]  'goto-line)
+;; (define-key global-map [?\C-l]  'goto-line)
 
 (define-key global-map [?\M-\`] 'other-frame)
 (define-key global-map [?\M-\\] 'other-window)
@@ -37,16 +37,21 @@
 (global-set-key        [?\M-\[] 'previous-buffer)
 (global-set-key        [?\M-\]] 'next-buffer)
 
-(global-set-key [M-S-left]  'windmove-left)   ; move to left windnow
-(global-set-key [M-S-right] 'windmove-right)  ; move to right window
-(global-set-key [M-S-up]    'windmove-up)     ; move to upper window
-(global-set-key [M-S-down]  'windmove-down)   ; move to downer window
-
-(global-set-key [M-left]    'windmove-left)   ; move to left windnow
-(global-set-key [M-right]   'windmove-right)  ; move to right window
-(global-set-key [M-up]      'windmove-up)     ; move to upper window
-(global-set-key [M-down]    'windmove-down)   ; move to downer window
-
+(unless window-system
+    (progn
+      (global-set-key (kbd "C-c [") 'windmove-left)
+      (global-set-key (kbd "C-c ]") 'windmove-right)
+      (global-set-key (kbd "C-c +") 'windmove-up)
+      (global-set-key (kbd "C-c -") 'windmove-down)
+      (global-set-key (kbd "C-c (") 'backward-sexp)
+      (global-set-key (kbd "C-c )") 'forward-sexp)
+      (global-set-key (kbd "C-c u") 'backward-up-list)
+      (global-set-key (kbd "C-c d") 'down-list)
+      
+      (global-set-key (kbd "C-c j") 'forward-paragraph)
+      (global-set-key (kbd "C-c k") 'backward-paragraph)
+      )
+    )
 ;; forward-word M-f
 ;; backward-word M-b
 
@@ -58,8 +63,8 @@
 
 (when window-system
   (require 'redo+) 
-  (global-set-key (kbd "C-'")     'redo)
-  (global-set-key [ (control \')] 'redo)
+  (global-set-key (kbd "C-?")     'redo)
+  (global-set-key [ (control \?)] 'redo)
   (global-set-key [ (control /)]  'undo))
 
 (global-set-key [C-tab]       'hide-subtree)

@@ -1,8 +1,9 @@
 ;; ~/.emacs.d/init.el
 
 ;; Emacs's environment 
-(setenv "PATH" (concat "~/Installed/bin:/opt/local/bin:" (getenv "PATH") ":/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core"))
-(setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib64" (getenv "LD_LIBRARY_PATH")))
+(setenv "PATH" (concat "~/Installed/bin:" (getenv "PATH") ":/opt/local/bin:/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core"))
+(setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
+(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":~/.emacs.d/"))
 
 (if (string= system-type "darwin")
     (progn
@@ -45,16 +46,6 @@
 
 (setq turn-on-follow-mouse t)
 
-(dolist (config-file '("my-behaviour"
-                       "my-keys" "my-backup" "my-mouse" "my-dired.el"
-                       "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
-                       "my-syntax"  "my-color"
-                       "my-gud" "my-utils"
-                       ;; "my-desktop"
-                       ;; "my-mail"
-                       "my-slime"))
-  (load-library config-file))
-
 ;; version control
 ;; (require 'mercurial)
 (require 'emacs-lock)
@@ -75,6 +66,16 @@
 
 (setq desktop-enable-save-on-exit nil)
 
+(dolist (config-file '("my-behaviour"
+                       "my-keys" "my-backup" "my-mouse" "my-dired.el"
+                       "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
+                       "my-syntax"  "my-color"
+                       "my-gud" "my-utils"
+                       ;; "my-desktop"
+                       ;; "my-mail"
+                       "my-slime"))
+  (load-library config-file))
+
 ;; start emacs server: 
 ;; (server-force-delete)
 ;; (if (>= emacs-major-version 23)
@@ -82,11 +83,17 @@
 ;; (server-start)
 
 ;; Timer Part2
-(message "My init.el loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
-                           (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
-(if (string= system-type "darwin")
-    (growl "Emacs" (format "My init.el loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
-                                                       (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))))
+(message "My init.el loaded in %ds"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo)
+              (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
+
+(when (string= system-type "darwin")
+  (growl "Emacs"
+         (format "My init.el loaded in %ds"
+                 (destructuring-bind (hi lo ms) (current-time)
+                   (- (+ hi lo)
+                      (+ (first *emacs-load-start*) (second *emacs-load-start*)))))))
 
 (message "Emacs version = %ds" emacs-major-version)
 (message "Emacs is running on: %s" system-type)
@@ -99,9 +106,11 @@
  '(column-number-mode t)
  '(default-truncate-lines nil t)
  '(display-time-mode t)
+ '(isearch-highlight t)
  '(large-file-warning-threshold nil)
  '(paren-sexp-mode nil)
+ '(search-highlight t)
  '(show-paren-mode t)
+ '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil))
-
 (eshell)
