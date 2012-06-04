@@ -27,6 +27,13 @@
 ;; (set-face-foreground 'font-lock-number-face "DodgerBlue4")
 
 
+(defface esk-paren-face
+   '((((class color) (background dark))
+      (:foreground "grey50"))
+     (((class color) (background light))
+      (:foreground "grey55")))
+   "Face used to dim parentheses."
+   :group 'starter-kit-faces)
 
 (defun terminal-settings ()
   (set-face-foreground 'font-lock-preprocessor-face "magenta")

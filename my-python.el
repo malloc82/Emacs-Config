@@ -10,7 +10,7 @@
 (require 'ipython)
 ;; check ~/.ipython/ipythonrc
 (setq py-python-command-args '("--colors=Linux")) ;; Linux, LightBG, NoColor
-
+;; (setq ipython-completion-command-string "print(';'.join(get_ipython().Completer.complete('%s')[1])) #PYTHON-MODE SILENT\n")
 ;; ==========================
 ;; Pymacs, rope, ropemacs
 ;; ==========================

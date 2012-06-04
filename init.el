@@ -1,9 +1,10 @@
 ;; ~/.emacs.d/init.el
 
 ;; Emacs's environment 
-(setenv "PATH" (concat "~/Installed/bin:" (getenv "PATH") ":/opt/local/bin:/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core"))
+(setenv "PATH" (concat "~/Installed/bin:" (getenv "PATH") ":/opt/local/bin:/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core:~/.lein/bin/"))
 (setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
 (setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":~/.emacs.d/"))
+(setenv "SCIPY_PIL_IMAGE_VIEWER" "feh")
 
 (if (string= system-type "darwin")
     (progn
@@ -73,7 +74,7 @@
                        "my-gud" "my-utils"
                        ;; "my-desktop"
                        ;; "my-mail"
-                       "my-slime"))
+                       ))
   (load-library config-file))
 
 ;; start emacs server: 

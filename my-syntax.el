@@ -135,6 +135,7 @@
               (load-library "my-python")
               (setq *my-python-loaded* t))))
 
+
 ;; =================================
 ;; latex configuration
 ;; =================================
@@ -320,7 +321,9 @@
 
 (add-hook 'lisp-mode-hook
           #'(lambda ()
-              (lisp-mode-addon lisp-mode-map)))
+              (lisp-mode-addon lisp-mode-map)
+              (load-library "my-cl-slime.el")
+              (slime-mode 1)))
 
 (add-hook 'lisp-interaction-mode-hook
           #'(lambda ()
@@ -361,8 +364,37 @@
               (define-key eshell-mode-map (kbd "C-<return>") 'paredit-newline)
               ))
 
+(add-hook 'slime-mode-hook
+          #'(lambda ()
+              (lisp-mode-addon slime-mode-map)
+              (font-lock-add-keywords 'slime-mode '(("(\\|)" . 'esk-paren-face)))))
+
+(add-hook 'slime-repl-mode-hook
+          #'(lambda ()
+              (define-key slime-repl-mode-map (kbd "(") 'paredit-open-parenthesis)
+              (define-key slime-repl-mode-map (kbd ")") 'paredit-close-parenthesis)
+              (define-key slime-repl-mode-map (kbd "[") 'paredit-open-square)
+              (define-key slime-repl-mode-map (kbd "]") 'paredit-close-square)
+              (define-key slime-repl-mode-map (kbd "M-0") 'paredit-escape) ;; also try : \
+              
+              (define-key slime-repl-mode-map (kbd "\"") 'paredit-doublequote)
+              (define-key slime-repl-mode-map (kbd "\\") 'paredit-backslash)))
+
 ;; (add-hook 'inferior-scheme-mode-hook
 ;;           '(lambda ()
 ;;              (lisp-mode-addon inferior-scheme-mode-map)))
 
 
+;; =================================
+;; clojure-mode configuration
+;; =================================
+
+(require 'clojure-mode)
+
+(add-hook 'clojure-mode-hook
+          #'(lambda ()
+              (message "loading clojure-mode ......")
+              (setq inferior-lisp-program "/opt/local/bin/clj")
+              (lisp-mode-addon clojure-mode-map)
+              (load-library "my-clojure-setting")
+              (message "done")))
