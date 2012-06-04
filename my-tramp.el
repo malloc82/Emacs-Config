@@ -14,6 +14,8 @@
 ;; (add-to-list 'tramp-remote-process-environment
 ;;              (format "DISPLAY=%s" (getenv "DISPLAY")))
 
+(setq password-cache-expiry nil)
+
 (if (>= emacs-major-version 23)
     (progn 
       (message "Load config for emacs (23) %ds" emacs-major-version)
