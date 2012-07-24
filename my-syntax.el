@@ -388,13 +388,16 @@
 ;; =================================
 ;; clojure-mode configuration
 ;; =================================
+(defun load-clojure-settings ()
+  (require 'clojure-mode)
+  (add-hook 'clojure-mode-hook
+            #'(lambda ()
+                (message "loading clojure-mode ......")
+                (setq inferior-lisp-program "/opt/local/bin/clj")
+                (lisp-mode-addon clojure-mode-map)
+                (load-library "my-clojure-setting")
+                (message "done"))))
 
-(require 'clojure-mode)
-
-(add-hook 'clojure-mode-hook
-          #'(lambda ()
-              (message "loading clojure-mode ......")
-              (setq inferior-lisp-program "/opt/local/bin/clj")
-              (lisp-mode-addon clojure-mode-map)
-              (load-library "my-clojure-setting")
-              (message "done")))
+(when (and (boundp '*my-version*)
+           (equal   *my-version* "clojure-dev"))
+  (load-clojure-settings))

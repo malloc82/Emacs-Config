@@ -70,8 +70,9 @@
 (dolist (config-file '("my-behaviour"
                        "my-keys" "my-backup" "my-mouse" "my-dired.el"
                        "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
-                       "my-syntax"  "my-color"
+                       "my-syntax"  "my-color" 
                        "my-gud" "my-utils"
+                       "my-cl-slime" ;; "my-clojure-setting"
                        ;; "my-desktop"
                        ;; "my-mail"
                        ))

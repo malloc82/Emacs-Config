@@ -1,5 +1,15 @@
 
 ;; ===========================
+;; Alarm Bell Setting
+;; ===========================
+
+(setq visible-bell 1)
+;; (setq visible-bell nil)
+;;     (setq ring-bell-function `(lambda ()
+;;                                 (set-face-background 'default "DodgerBlue")
+;;                                 (set-face-background 'default "black")))
+
+;; ===========================
 ;; Paranthesis match
 ;; ===========================
 
