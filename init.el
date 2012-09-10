@@ -2,9 +2,11 @@
 
 ;; Emacs's environment 
 (setenv "PATH" (concat "~/Installed/bin:" (getenv "PATH") ":/opt/local/bin:/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core:~/.lein/bin/"))
-(setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
+;; (setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
 (setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":~/.emacs.d/"))
 (setenv "SCIPY_PIL_IMAGE_VIEWER" "feh")
+
+(setenv "PATH" (concat "/usr/local/opt/python/current/" (getenv "PATH")))
 
 (if (string= system-type "darwin")
     (progn
@@ -38,8 +40,9 @@
 
 (cond ((string= system-type "darwin")
        (add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
-       (require 'growl)
-       (growl "Emacs" "Loading init.el ... "))
+       ;; (require 'growl)
+       ;; (growl "Emacs" "Loading init.el ... ")
+       )
       
       ((string= system-type "gnu/linux")
        (add-to-list 'load-path "~/lib/python2.7/site-packages/Pymacs"))
@@ -90,12 +93,12 @@
            (- (+ hi lo)
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
-(when (string= system-type "darwin")
-  (growl "Emacs"
-         (format "My init.el loaded in %ds"
-                 (destructuring-bind (hi lo ms) (current-time)
-                   (- (+ hi lo)
-                      (+ (first *emacs-load-start*) (second *emacs-load-start*)))))))
+;; (when (string= system-type "darwin")
+;;   (growl "Emacs"
+;;          (format "My init.el loaded in %ds"
+;;                  (destructuring-bind (hi lo ms) (current-time)
+;;                    (- (+ hi lo)
+;;                       (+ (first *emacs-load-start*) (second *emacs-load-start*)))))))
 
 (message "Emacs version = %ds" emacs-major-version)
 (message "Emacs is running on: %s" system-type)

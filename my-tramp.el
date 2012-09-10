@@ -2,16 +2,18 @@
 ;; Tramp configuration
 ;; ===============================
 
+(add-to-list 'load-path "~/.emacs.d/tramp")
 (require 'tramp)
 (setq tramp-verbose 10)
 
 ;; remote path
 (add-to-list 'tramp-remote-path "/sbin/")
+(add-to-list 'tramp-remote-path "/usr/local/opt/python/current/bin")
 ;; (add-to-list 'tramp-remote-process-environment "JAVA_HOME=/opt/java")
 
 
 ;; Running remote programs that create local X11 windows
-;; (add-to-list 'tramp-remote-process-environment
+;; (add-to-list 'tramp-remote-process-envirmonment
 ;;              (format "DISPLAY=%s" (getenv "DISPLAY")))
 
 (setq password-cache-expiry nil)

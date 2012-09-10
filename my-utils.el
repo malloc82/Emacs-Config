@@ -187,3 +187,10 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
     (let ((path (shell-command-to-string (format "which %s" program))))
       (unless (= (length path) 0) (substring path 0 -1)))))
+
+(defun clean-tramp ()
+  (interactive)
+  (tramp-cleanup-all-connections)
+  (kill-matching-buffers "*tramp"))
+
+
