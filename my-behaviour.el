@@ -313,6 +313,15 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
 (ac-config-default)
+(global-auto-complete-mode t)
+(auto-complete-mode t)
+
+;; dirty fix for having AC everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+    auto-complete-mode (lambda ()
+                         (if (not (minibufferp (current-buffer)))
+                             (auto-complete-mode 1))))
+(real-global-auto-complete-mode t)
 
 ;; ================================
 ;; Etags setting

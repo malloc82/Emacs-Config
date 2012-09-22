@@ -30,14 +30,6 @@
 
       
       (require 'slime)
-
-      ;; enable ac-slime, auto-complete for common lisp
-      (add-to-list 'load-path "~/.emacs.d/ac-slime")
-      (require 'ac-slime)
-      (add-hook 'slime-mode-hook 'set-up-slime-ac)
-      (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-      (eval-after-load "auto-complete"
-        '(add-to-list 'ac-modes 'slime-repl-mode))
       
       ;; REPL does not load automatically, so need to load slime-repl or slime-fancy
       ;; (slime-setup '(slime-repl))
@@ -157,6 +149,22 @@
       ;; (setq slime-close-parens-at-point t)
       
       ))
+
+  ;; enable ac-slime, auto-complete for common lisp
+  (add-to-list 'load-path "~/.emacs.d/ac-slime")
+  (require 'ac-slime)
+  (add-hook 'slime-mode-hook 'set-up-slime-ac)
+
+  ;; create and add new words to the dictionary on the fly
+  (when (require 'auto-complete-config nil 'noerror)
+    (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-slime/ac-dict")
+    (setq ac-comphist-file  "~/.emacs.d/ac-comphist.dat")
+    (ac-config-default))
+  
+  ;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+  ;; (eval-after-load "auto-complete"
+  ;;   '(add-to-list 'ac-modes 'slime-repl-mode))
+
   (message "done"))
 
 (when (or (not (boundp '*my-version*))

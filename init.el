@@ -87,6 +87,14 @@
 ;;     (server-force-delete))
 ;; (server-start)
 
+(eshell)
+(when (boundp '*my-version*)
+  (cond ((equal *my-version* "clojure-dev") (load-clojure-settings))
+        ((equal *my-version* "lambda")      (load-library "my-cl-slime"))
+        ((equal *my-version* "thesis")      (load-library "thesis-settings"))
+        ((equal *my-version* "work")        (load-library "work-settings"))
+        (t (message "Unknown version ... skip."))))
+
 ;; Timer Part2
 (message "My init.el loaded in %ds"
          (destructuring-bind (hi lo ms) (current-time)
@@ -118,4 +126,3 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil))
-(eshell)
