@@ -1,12 +1,17 @@
 ;; ~/.emacs.d/init.el
 
-;; Emacs's environment 
-(setenv "PATH" (concat "~/Installed/bin:" (getenv "PATH") ":/opt/local/bin:/usr/texbin:/usr/local/cuda/bin:/usr/local/bin:~/Racket/bin:/opt/local/libexec/git-core:~/.lein/bin/"))
-;; (setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
-(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":~/.emacs.d/"))
-(setenv "SCIPY_PIL_IMAGE_VIEWER" "feh")
+;; ===========================
+;; Used for ~/.emacs
+;; ===========================
+;; Timer Part1
+(defvar *emacs-load-start* (current-time))
 
-(setenv "PATH" (concat "/usr/local/opt/python/current/" (getenv "PATH")))
+(setq current-path (getenv "PWD"))
+(cd "~/.emacs.d/")
+
+(add-to-list 'load-path "~/.emacs.d/")
+
+(load-library "my-env-settings")
 
 (if (string= system-type "darwin")
     (progn
@@ -17,17 +22,6 @@
 ;; ==========================================================
 
 ;; (require 'cl)
-
-;; Timer Part1
-(defvar *emacs-load-start* (current-time))
-
-;; ===========================
-;; Used for ~/.emacs
-;; ===========================
-(setq current-path (getenv "PWD"))
-(cd "~/.emacs.d/")
-
-(add-to-list 'load-path "~/.emacs.d/")
 
 (normal-top-level-add-subdirs-to-load-path)
 
@@ -95,6 +89,9 @@
         ((equal *my-version* "work")        (load-library "work-settings"))
         (t (message "Unknown version ... skip."))))
 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;; Timer Part2
 (message "My init.el loaded in %ds"
          (destructuring-bind (hi lo ms) (current-time)

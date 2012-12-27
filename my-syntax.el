@@ -26,6 +26,7 @@
          ("\\.i$"                      . c++-mode) ;; swig
          ("\\.inl$"                    . c++-mode) ;; template functions 
          ;; ("\\.cu$"                     . c-mode)
+         ("\\.go$"                     . go-mode)
          ("\\.d$"                      . d-mode) ;; dtrace
          ("\\.[Cc][Uu]$"               . c++-mode) ;;cuda-mode)
          ("\\.[Cc][Uu][Hh]$"           . c++-mode) ;;cuda-mode)
@@ -107,7 +108,19 @@
 ;; (add-hook 'org-mode-hook 
 ;;           (lambda () (setq truncate-lines nil)))
 
+;; Allow editing of binary .plist files.
+(add-to-list 'jka-compr-compression-info-list
+             ["\\.plist$"
+              "converting text XML to binary plist"
+              "plutil"
+              ("-convert" "binary1" "-o" "-" "-")
+              "converting binary plist to text XML"
+              "plutil"
+              ("-convert" "xml1" "-o" "-" "-")
+              nil nil "bplist"])
 
+;;It is necessary to perform an update!
+(jka-compr-update)
 ;; =================================
 ;; javascript-mode configuration
 ;; =================================
@@ -276,7 +289,31 @@
 (setq erlang-root-dir "/opt/local/lib/erlang/")
 (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
 (require 'erlang-start)
-    
+
+;; ========================================================
+;; Go Settings
+;; ========================================================
+
+(autoload 'go-mode "go-mode" "\
+Major mode for editing Go source text.
+
+This provides basic syntax highlighting for keywords, built-ins,
+functions, and some types.  It also provides indentation that is
+\(almost) identical to gofmt.
+
+\(fn)" t nil)
+
+(autoload 'gofmt "go-mode" "\
+Pipe the current buffer through the external tool `gofmt`.
+Replace the current buffer on success; display errors on failure.
+
+\(fn)" t nil)
+
+(autoload 'gofmt-before-save "go-mode" "\
+Add this to .emacs to run gofmt on the current buffer when saving:
+ (add-hook 'before-save-hook #'gofmt-before-save)
+
+\(fn)" t nil)
 
 ;; ===========================
 ;; Lisp Mode
@@ -385,6 +422,8 @@
               (define-key slime-repl-mode-map (kbd ")") 'paredit-close-parenthesis)
               (define-key slime-repl-mode-map (kbd "[") 'paredit-open-square)
               (define-key slime-repl-mode-map (kbd "]") 'paredit-close-square)
+              (define-key slime-repl-mode-map (kbd "{") 'paredit-open-curly)
+              (define-key slime-repl-mode-map (kbd "}") 'paredit-close-curly)
               (define-key slime-repl-mode-map (kbd "M-0") 'paredit-escape) ;; also try : \
               
               (define-key slime-repl-mode-map (kbd "\"") 'paredit-doublequote)

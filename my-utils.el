@@ -70,12 +70,13 @@
 ;; (setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
 
 (defmacro mk-tag-func (dirlist &optional rootdir)
-  (setq ctags-bin "~/Installed/bin/ctags")
-  ;; On OS X Lion, ctags built by macport generate erroneous file format
-  ;; e.g. installed of file name, it's a blank space / tab,
-  ;;      or it could be a temp file name.
-  ;; Not sure why this happens but if I build ctags with CC=gcc-4.2 everything
-  ;; works fine.
+  ;; (setq ctags-bin "~/Installed/bin/ctags")
+  ;; ;; On OS X Lion, ctags built by macport generate erroneous file format
+  ;; ;; e.g. installed of file name, it's a blank space / tab,
+  ;; ;;      or it could be a temp file name.
+  ;; ;; Not sure why this happens but if I build ctags with CC=gcc-4.2 everything
+  ;; ;; works fine.
+  (setq ctags-bin "/opt/local/bin/ctags")
   (setq subdir "")
   (setq ctag-dir (if rootdir rootdir "."))
   (dolist (dir dirlist)
