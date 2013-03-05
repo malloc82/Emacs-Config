@@ -20,7 +20,7 @@
               (setq org-return-follows-link t)
               (setq org-todo-keywords
                     '((sequence "TODO(t)" "|" "DONE(d)")
-                      (sequence "TASK(t)" "ACTIVE(a)" "PENDING(p)" "REVIEW(r)" "|" "DONE(d)")
+                      (sequence "TASK(s)" "ACTIVE(a)" "PENDING(p)" "REVIEW(r)" "|" "DONE(d)")
                       (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(d)")
                       (sequence "|" "CANCELLED(c)")))
 

@@ -9,7 +9,13 @@
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/")
 
-(add-to-list 'load-path "~/.emacs.d/")
+(setq load-path (append '("~/.emacs.d/" "~/.emacs.d/my-packages" "PACKAGE_DIRECTORY") load-path))
+
+(require 'package)
+(add-to-list 'package-archives 
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 (load-library "my-env-settings")
 
@@ -24,13 +30,12 @@
 ;; (require 'cl)
 
 (normal-top-level-add-subdirs-to-load-path)
-
-(dolist (path '("/usr/local/bin/"
-                "/opt/local/bin/"
-                "/usr/local/cuda/bin"
-                "/usr/texbin"
-                "~/racket/bin"))
-  (add-to-list 'exec-path path))
+(setq exec-path (append '("/usr/local/bin/"
+                          "/opt/local/bin/"
+                          "/usr/local/cuda/bin"
+                          "/usr/texbin"
+                          "~/racket/bin")
+                        exec-path))
 
 (cond ((string= system-type "darwin")
        (add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
@@ -109,17 +114,45 @@
 (message "Emacs is running on: %s" system-type)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(default-truncate-lines nil t)
  '(display-time-mode t)
  '(isearch-highlight t)
  '(large-file-warning-threshold nil)
+ '(org-agenda-files (quote ("~/Documents/TODOs/todo.org")))
  '(paren-sexp-mode nil)
+ '(py-shell-name "/usr/local/bin/ipython")
  '(search-highlight t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background "black" :foreground "white" :font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))))
+ '(button ((t (:background "black" :weight bold))))
+ '(cursor ((t (:background "yellow" :foreground "white"))))
+ '(dired-directory ((t (:foreground "Skyblue2"))))
+ '(font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
+ '(font-lock-comment-face ((t (:foreground "chocolate1" :slant italic))))
+ '(font-lock-constant-face ((t (:foreground "Aquamarine"))))
+ '(font-lock-function-name-face ((t (:foreground "DeepSkyBlue"))))
+ '(font-lock-keyword-face ((t (:foreground "Cyan1"))))
+ '(font-lock-number-face ((t (:foreground "LightSalmon"))) t)
+ '(font-lock-string-face ((t (:foreground "LightSalmon"))))
+ '(font-lock-type-face ((t (:foreground "PaleGreen"))))
+ '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
+ '(font-lock-warning-face ((t (:foreground "Pink" :weight bold))))
+ '(fringe ((t (:background "grey10"))))
+ '(minibuffer-prompt ((t (:foreground "cyan"))))
+ '(mode-line ((t (:background "grey70" :foreground "black" :box (:line-width -1 :style released-button)))))
+ '(mode-line-inactive ((t (:background "grey30" :foreground "grey80" :box (:line-width -1 :style pressed-button)))))
+ '(org-hide ((t (:foreground "black"))))
+ '(region ((t (:background "blue4"))))
+ '(secondary-selection ((t (:background "PaleVioletRed3")))))

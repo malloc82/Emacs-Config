@@ -25,7 +25,7 @@
        (eval-after-load "pymacs"
          (progn
            '(add-to-list 'pymacs-load-path "/Library/Python/2.7/site-packages/Pymacs")
-           '(add-to-list 'pymacs-load-path "~/.emacs.d/Pymacs"))))
+           '(add-to-list 'pymacs-load-path "~/.emacs.d/my-packages/Pymacs"))))
       ((string= system-type "gnu/linux")
        (eval-after-load "pymacs"
          '(add-to-list 'pymacs-load-path "~/lib/python2.7/site-packages/Pymacs"))))
@@ -56,11 +56,11 @@
 
 (require 'pycomplete+)
 
-(define-key py-mode-map [M-f12] 'pyp)
-;; (define-key py-mode-map "\C-c\C-c" 'py-execute-prog)
-(define-key py-mode-map "\C-c\C-c" 'py-execute-buffer)
-(define-key py-mode-map "\C-c\C-g" 'py-call-pdb)
-(define-key py-mode-map "\C-c\C-w" 'pychecker)
+(define-key python-mode-map [M-f12] 'pyp)
+;; (define-key python-mode-map "\C-c\C-c" 'py-execute-prog)
+(define-key python-mode-map "\C-c\C-c" 'py-execute-buffer)
+(define-key python-mode-map "\C-c\C-g" 'py-call-pdb)
+(define-key python-mode-map "\C-c\C-w" 'pychecker)
 
 ;; previous command history M-p
 ;; next command history     M-n
@@ -71,7 +71,7 @@
 ;; Django setting
 ;; ====================================
 
-(load "~/.emacs.d/nxhtml/autostart.el")
+(load "~/.emacs.d/my-packages/nxhtml/autostart.el")
 (setq mumamo-background-colors nil) 
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
 

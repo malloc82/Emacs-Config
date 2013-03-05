@@ -193,4 +193,8 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (tramp-cleanup-all-connections)
   (kill-matching-buffers "*tramp"))
 
-
+(defun kill-buffer-and-delete-frame ()
+  (interactive)
+  (kill-buffer-and-window)
+  (previous-buffer)
+  (delete-frame))
