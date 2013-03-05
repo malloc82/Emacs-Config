@@ -86,7 +86,9 @@
 ;;     (server-force-delete))
 ;; (server-start)
 
+(load-theme 'cyberpunk t)
 (eshell)
+
 (when (boundp '*my-version*)
   (cond ((equal *my-version* "clojure-dev") (load-clojure-settings))
         ((equal *my-version* "lambda")      (load-library "my-cl-slime"))
