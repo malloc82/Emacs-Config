@@ -166,7 +166,7 @@
 (require 'yasnippet-bundle)
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet/snippets")
+(yas/load-directory "~/.emacs.d/elpa/yasnippet-20130218.2229/snippets")
 
 
 ;; =================================
