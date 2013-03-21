@@ -1,6 +1,17 @@
+(require 'org)
+
+;; GTD settings
+(defun gtd (&optional gtd-file)
+  (interactive)
+  (if (null gtd-file)
+      (find-file "~/Dropbox/Documents/GTD/mygtd.org")
+      (find-file gtd-file)))
+
+(setq org-agenda-files '("~/Dropbox/Documents/GTD/"))
+
+;; regular org settings
 (setq org-replace-disputed-keys t)
 (setq org-support-shift-select t)
-;; (require 'org)
 (add-hook 'org-mode-hook
           #'(lambda ()
               ;; (add-to-list 'load-path "~/.emacs.d/org-mode")
@@ -43,7 +54,8 @@
                       ("REPORT"      . org-warning)
                       ("BUG"         . (:foreground "red" :weight bold))
                       ("KNOWNCAUSE"  . (:foreground "dodgerblue" :weight bold))
-                      ("CANCELLED"   . shadow)))
+                      ("CANCELLED"   . shadow)
+                      ("DEFERRED"    . (:foreground "red" :weight bold))))
 
               ;; Make windmove work in org-mode:
               (add-hook 'org-shiftup-final-hook    'windmove-up)

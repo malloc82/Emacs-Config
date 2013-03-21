@@ -285,7 +285,7 @@
 ;; Erlang Settings
 ;; ========================================================
 
-(setq load-path (append  '("/opt/local/lib/erlang/lib/tools-2.6.8/emacs") load-path))
+(setq load-path (append  '("/opt/local/lib/erlang/lib/tools-2.6.10/emacs") load-path))
 (setq erlang-root-dir "/opt/local/lib/erlang/")
 (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
 (require 'erlang-start)
