@@ -262,17 +262,17 @@ A numeric argument serves as a repeat count."
 ;; Modify menu-bar and tool-bar item of GNU Emacs
 (unless (featurep 'xemacs)
   ;; condition to undo
-  (mapc (lambda (map)
-	  (setcar (cdr (memq :enable (assq 'undo (cdr map))))
-		  '(and (not buffer-read-only)
-			(consp buffer-undo-list)
-			(or (not (or (eq last-buffer-undo-list
-					 buffer-undo-list)
-				     (eq last-buffer-undo-list
-					 (cdr buffer-undo-list))))
-			    (listp pending-undo-list)))))
-	(append (list menu-bar-edit-menu)
-		(if window-system (list tool-bar-map))))
+  ;; (mapc (lambda (map)
+  ;;     (setcar (cdr (memq :enable (assq 'undo (cdr map))))
+  ;;   	  '(and (not buffer-read-only)
+  ;;   		(consp buffer-undo-list)
+  ;;   		(or (not (or (eq last-buffer-undo-list
+  ;;   				 buffer-undo-list)
+  ;;   			     (eq last-buffer-undo-list
+  ;;   				 (cdr buffer-undo-list))))
+  ;;   		    (listp pending-undo-list)))))
+  ;;   (append (list menu-bar-edit-menu)
+  ;;   	(if window-system (list tool-bar-map))))
   ;; redo's menu-bar entry
   (define-key-after menu-bar-edit-menu [redo]
     '(menu-item "Redo" redo

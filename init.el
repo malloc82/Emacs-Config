@@ -103,7 +103,7 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;; Timer Part2
 (message "My init.el loaded in %ds"
-         (destructuring-bind (hi lo ms) (current-time)
+         (destructuring-bind (hi lo ms ps) (current-time)
            (- (+ hi lo)
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 

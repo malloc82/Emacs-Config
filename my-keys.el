@@ -64,7 +64,7 @@
 ;; (global-set-key (kbd "C-c e")   'end-of-buffer)
 
 (when window-system
-  (require 'redo+) 
+  (require 'redo+)
   (global-set-key (kbd "C-?")     'redo)
   (global-set-key [ (control \?)] 'redo)
   (global-set-key [ (control /)]  'undo))
