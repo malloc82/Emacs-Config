@@ -11,11 +11,13 @@
 
 (setq load-path (append '("~/.emacs.d/" "~/.emacs.d/my-packages" "PACKAGE_DIRECTORY") load-path))
 
-(require 'package)
-(add-to-list 'package-archives 
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
-(package-initialize)
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list 'package-archives 
+               '("marmalade" . "http://marmalade-repo.org/packages/")
+               '("melpa"     . "http://melpa.milkbox.net/packages/"))
+  (package-initialize))
 
 (load-library "my-env-settings")
 
@@ -79,6 +81,11 @@
                        ;; "my-mail"
                        ))
   (load-library config-file))
+
+
+;; for imaxima
+;; (setq exec-path (cons "/opt/local/bin" exec-path))
+;; (autoload 'imaxima "imaxima" "Image support for Maxima." t)
 
 ;; start emacs server: 
 ;; (server-force-delete)
