@@ -1,0 +1,12 @@
+*.elc
+*.swp
+%*%~
+.org-id-locations
+ac-comphist.dat
+bookmarks
+tramp
+auto-save-list/
+emacs_autosaves/
+emacs_backups/
+url/
+
