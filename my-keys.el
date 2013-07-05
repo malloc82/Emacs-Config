@@ -5,12 +5,16 @@
 ;; (global-set-key [(M-down)]   'scroll-up)        ; C-.
 ;; (global-set-key [(M-up)]     'scroll-down)      ; C-;
 
+(load-library "my-kb-macros")
+
 (line-number-mode 'default )
 
-(define-key global-map '[f2] 'delete-window)
-(define-key global-map '[f3] 'uncomment-region)
-(define-key global-map '[f4] 'comment-region)
-(define-key global-map '[f5] 'list-buffers)
+(define-key global-map '[f2]    'delete-window)
+(define-key global-map '[f3]    'uncomment-region)
+(define-key global-map '[f4]    'comment-region)
+(define-key global-map '[f5]    'list-buffers)
+(define-key global-map [?\M-\d] 'backward-kill-word)
+
 (global-set-key (kbd "<f6>") 'toggle-truncate-lines)
 
 (global-set-key [f7]   'compile)

@@ -398,6 +398,9 @@ otherwise raises an error."
             ;; Set dired-x buffer-local variables here.  For example:
             (dired-omit-mode 1)
             (setq dired-omit-files "^\\.?#\\|^\\.[^.].+$")
+            (setq dired-omit-extensions
+                  (append '(".dvi" ".aux" ".blg" ".toc" ".log")
+                          dired-omit-extensions))
             ;; (setq dired-omit-files
             ;;       (concat dired-omit-files "\\|^\\..+$"))
             ))
