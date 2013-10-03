@@ -159,7 +159,6 @@
             
 ;;             (setq LaTeX-math-mode t)))
 
-
 ;; =================================
 ;; yasnippet
 ;; =================================
@@ -285,7 +284,7 @@
 ;; Erlang Settings
 ;; ========================================================
 
-(setq load-path (append  '("/opt/local/lib/erlang/lib/tools-2.6.10/emacs") load-path))
+(setq load-path (append  '("/opt/local/lib/erlang/lib/tools-2.6.11/emacs") load-path))
 (setq erlang-root-dir "/opt/local/lib/erlang/")
 (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
 (require 'erlang-start)
@@ -314,6 +313,15 @@ Add this to .emacs to run gofmt on the current buffer when saving:
  (add-hook 'before-save-hook #'gofmt-before-save)
 
 \(fn)" t nil)
+
+;; ========================================================
+;; Magit Mode
+;; ========================================================
+
+(require 'delsel)
+(add-hook 'magit-mode-hook
+          '(lambda ()
+            (delete-selection-mode 1)))
 
 ;; ===========================
 ;; Lisp Mode

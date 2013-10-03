@@ -97,6 +97,7 @@
      '(font-lock-warning-face ((t (:foreground "Pink" :weight bold))))
      '(secondary-selection ((t (:background "PaleVioletRed3")))) ;; for gdb hightlighting
      '(dired-directory ((t (:foreground "Skyblue2"))))
+     '(highlight ((t (:background "gray20"))))  ;; face for highlight current light
      ;; '(isearch ((t (:background "#fedfc7" :foreground "#333333"))))
      ;; '(lazy-highlight ((t (:background "#f6f5ef"))))
      ;; '(link ((t (:foreground "#0086b3" :underline t))))
@@ -156,6 +157,7 @@
      '(font-lock-preprocessor-face ((t (:foreground "LightSteelBlue"))))
      '(secondary-selection ((t (:background "PaleVioletRed3")))) ;; for gdb hightlighting
      '(dired-directory ((t (:foreground "Skyblue2"))))
+     '(highlight ((t (:background "black"))))
      ;; '(isearch ((t (:background "#fedfc7" :foreground "#333333"))))
      ;; '(lazy-highlight ((t (:background "#f6f5ef"))))
      ;; '(link ((t (:foreground "#0086b3" :underline t))))

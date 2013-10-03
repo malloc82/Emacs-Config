@@ -148,6 +148,8 @@
        (setq TeX-view-program-selection
              (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open")))))
       )
+(setq load-path (append '("~/.emacs.d/auto-complete-auctex") load-path))
+(require 'auto-complete-auctex)
 ;;     )
 ;;   )
 
@@ -440,3 +442,13 @@ otherwise raises an error."
 ;; (add-hook 'term-exec-hook 
 ;;             (lambda () 
 ;;               (set-buffer-process-coding-system 'binary 'binary)))
+
+
+;; =================================
+;; Interractively Do Things (ido)
+;; =================================
+(require 'ido)
+(ido-mode t)
+
+(require 'smex)
+(smex-initialize)

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; ~/.emacs.d/init.el
 
 ;; ===========================
@@ -10,7 +11,6 @@
 (cd "~/.emacs.d/")
 
 (setq load-path (append '("~/.emacs.d/" "~/.emacs.d/my-packages" "PACKAGE_DIRECTORY") load-path))
-
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -31,14 +31,6 @@
 
 ;; (require 'cl)
 
-(normal-top-level-add-subdirs-to-load-path)
-(setq exec-path (append '("/usr/local/bin/"
-                          "/opt/local/bin/"
-                          "/usr/local/cuda/bin"
-                          "/usr/texbin"
-                          "~/racket/bin")
-                        exec-path))
-
 (cond ((string= system-type "darwin")
        (add-to-list 'load-path "/Library/Python/2.6/site-packages/Pymacs")
        ;; (require 'growl)
@@ -46,8 +38,7 @@
        )
       
       ((string= system-type "gnu/linux")
-       (add-to-list 'load-path "~/lib/python2.7/site-packages/Pymacs"))
-      )
+       (add-to-list 'load-path "~/lib/python2.7/site-packages/Pymacs")))
 
 (setq turn-on-follow-mouse t)
 
@@ -64,6 +55,7 @@
   (require 'shell-command)
   (shell-command-completion-mode))
 
+(global-hl-line-mode 1)
 (require 'ascii)
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
@@ -161,6 +153,7 @@
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
  '(font-lock-warning-face ((t (:foreground "Pink" :weight bold))))
  '(fringe ((t (:background "grey10"))))
+ '(highlight ((t (:background "gray20"))))
  '(minibuffer-prompt ((t (:foreground "cyan"))))
  '(mode-line ((t (:background "grey70" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:background "grey30" :foreground "grey80" :box (:line-width -1 :style pressed-button)))))
