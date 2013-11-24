@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads (clojure-test-mode) "clojure-test-mode" "clojure-test-mode.el"
-;;;;;;  (20864 34490 0 0))
+;;;### (autoloads (clojure-find-clojure-test clojure-test-mode) "clojure-test-mode"
+;;;;;;  "clojure-test-mode.el" (21071 22348 0 0))
 ;;; Generated autoloads from clojure-test-mode.el
 
 (autoload 'clojure-test-mode "clojure-test-mode" "\
@@ -14,16 +14,20 @@ A minor mode for running Clojure tests.
 
 \(fn &optional ARG)" t nil)
 
+(autoload 'clojure-find-clojure-test "clojure-test-mode" "\
+
+
+\(fn)" nil nil)
+
 (defun clojure-test-maybe-enable nil "\
-Enable clojure-test-mode if the current buffer contains a namespace
-with a \"test.\" bit on it." (let ((ns (clojure-find-package))) (when (and ns (string-match "test\\(\\.\\|$\\)" ns)) (save-window-excursion (clojure-test-mode t)))))
+Enable clojure-test-mode if the current buffer contains a \"clojure.test\" bit in it." (when (clojure-find-clojure-test) (save-window-excursion (clojure-test-mode t))))
 
 (add-hook 'clojure-mode-hook 'clojure-test-maybe-enable)
 
 ;;;***
 
-;;;### (autoloads nil nil ("clojure-test-mode-pkg.el") (20864 34490
-;;;;;;  238468 0))
+;;;### (autoloads nil nil ("clojure-test-mode-pkg.el") (21071 22348
+;;;;;;  339772 0))
 
 ;;;***
 

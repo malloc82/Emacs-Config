@@ -4,7 +4,7 @@
 
 ;; Author: Phil Hagelberg <technomancy@gmail.com>
 ;; URL: http://emacswiki.org/cgi-bin/wiki/ClojureTestMode
-;; Version: 20130326.1409
+;; Version: 20130618.1420
 ;; X-Original-Version: 2.1.0
 ;; Keywords: languages, lisp, test
 ;; Package-Requires: ((clojure-mode "1.7") (nrepl "0.1.7"))
@@ -296,6 +296,7 @@
         (overlay-put overlay 'face (if (equal event :fail)
                                        'clojure-test-failure-face
                                      'clojure-test-error-face))
+        (overlay-put overlay 'help-echo message)
         (overlay-put overlay 'message message)
         (overlay-put overlay 'actual pp-actual)))))
 
@@ -522,15 +523,26 @@ Clojure src file for the given test namespace.")
 
 (add-hook 'nrepl-connected-hook 'clojure-test-load-reporting)
 
+(defconst clojure-test-regex
+  (rx "clojure.test"))
+
+;;;###autoload
+(defun clojure-find-clojure-test ()
+  (let ((regexp clojure-test-regex))
+    (save-restriction
+      (save-excursion
+        (save-match-data
+          (goto-char (point-min))
+          (when (re-search-forward regexp nil t)
+            (match-string-no-properties 0)))))))
+
 ;;;###autoload
 (progn
   (defun clojure-test-maybe-enable ()
-    "Enable clojure-test-mode if the current buffer contains a namespace
-with a \"test.\" bit on it."
-    (let ((ns (clojure-find-package))) ; defined in clojure-mode.el
-      (when (and ns (string-match "test\\(\\.\\|$\\)" ns))
-        (save-window-excursion
-          (clojure-test-mode t)))))
+    "Enable clojure-test-mode if the current buffer contains a \"clojure.test\" bit in it."
+    (when (clojure-find-clojure-test)
+      (save-window-excursion
+        (clojure-test-mode t))))
 
   (add-hook 'clojure-mode-hook 'clojure-test-maybe-enable))
 
