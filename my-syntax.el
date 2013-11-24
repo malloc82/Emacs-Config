@@ -284,7 +284,10 @@
 ;; Erlang Settings
 ;; ========================================================
 
-(setq load-path (append  '("/opt/local/lib/erlang/lib/tools-2.6.11/emacs") load-path))
+(let ((path (m-expand-lib-path "emacs" "/opt/local/lib/erlang/lib/")))
+  (unless (null path)
+    (message "erlang emacs found: %s" path)
+    (push path load-path)))
 (setq erlang-root-dir "/opt/local/lib/erlang/")
 (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
 (require 'erlang-start)
@@ -328,6 +331,17 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 ;; ===========================
 
 (require 'paredit)
+(defun paredit-escape (char)
+  ;; I'm too lazy to figure out how to do this without a separate
+  ;; interactive function.
+  
+  ;;  This was removed in later version of paredit
+  (interactive "cEscaping character...")
+  (if (eq char 127)                     ; The backslash was a typo, so
+      t                                 ; the luser wants to delete it.
+      (insert char)                     ; (Is there a better way to
+      nil))                             ; express the rubout char?
+                                        ; ?\^? works, but ugh...)
 (defsubst lisp-mode-addon (mode-type)
   (define-key mode-type (kbd "(") 'paredit-open-parenthesis)
   (define-key mode-type (kbd ")") 'paredit-close-parenthesis)
@@ -445,16 +459,16 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 ;; =================================
 ;; clojure-mode configuration
 ;; =================================
-(defun load-clojure-settings ()
-  (require 'clojure-mode)
-  (add-hook 'clojure-mode-hook
-            #'(lambda ()
-                (message "loading clojure-mode ......")
-                (setq inferior-lisp-program "/opt/local/bin/clj")
-                (lisp-mode-addon clojure-mode-map)
-                (load-library "my-clojure-setting")
-                (message "done"))))
+;; (defun load-clojure-settings ()
+;;   (require 'clojure-mode)
+;;   (add-hook 'clojure-mode-hook
+;;             #'(lambda ()
+;;                 (message "loading clojure-mode ......")
+;;                 (setq inferior-lisp-program "/opt/local/bin/clj")
+;;                 (lisp-mode-addon clojure-mode-map)
+;;                 (load-library "my-clojure-setting")
+;;                 (message "done"))))
 
-(when (and (boundp '*my-version*)
-           (equal   *my-version* "clojure-dev"))
-  (load-clojure-settings))
+;; (when (and (boundp '*my-version*)
+;;            (equal   *my-version* "clojure-dev"))
+;;   (load-clojure-settings))

@@ -1,4 +1,5 @@
 
+
 ;; ===========================
 ;; Alarm Bell Setting
 ;; ===========================
@@ -66,32 +67,6 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
-;; ===========================
-;; Buffer Navigation
-;; ============================
-
-;; Iswitchb is much nicer for inter-buffer navigation.
-(cond ((fboundp 'iswitchb-mode)                ; GNU Emacs 21
-       (iswitchb-mode 1)
-       (setq iswitchb-default-method 'samewindow))
-      ((fboundp 'iswitchb-default-keybindings) ; Old-style activation
-       (iswitchb-default-keybindings))
-      (t nil))                                 ; Oh well.
-
-(defun iswitchb-local-keys ()
-      (mapc (lambda (K) 
-	      (let* ((key (car K)) (fun (cdr K)))
-    	        (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
-	    '(("<right>" . iswitchb-next-match)
-	      ("<left>"  . iswitchb-prev-match)
-	      ("<up>"    . ignore             )
-	      ("<down>"  . ignore             ))))
-(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-
-;; keys for buffer creation and navigation
-(global-set-key [(control x) (control b)] 'iswitchb-buffer)
-(global-set-key [(control x) (f)] 'find-file)
 
 ;; ============================
 ;; Spell checker
@@ -449,6 +424,18 @@ otherwise raises an error."
 ;; =================================
 (require 'ido)
 (ido-mode t)
+(setq ido-use-filename-at-point nil)
 
+;; ido bahavior for smex, modified keys in my-keys for smex
 (require 'smex)
 (smex-initialize)
+
+;; =================================
+;; Clojure nREPL
+;; =================================
+(add-hook 'nREPL/r-mode-hook
+          #'(lambda ()
+              (paredit-mode 1)))
+
+(setq-default fill-column 100)
+

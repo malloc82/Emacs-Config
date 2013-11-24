@@ -1,4 +1,5 @@
 
+
 ;; ==========================================================
 ;; Setup syntax, background, and foreground coloring
 ;; ==========================================================
@@ -301,13 +302,19 @@
     (radiance   . "radiance")))
 
 (defun darwin-setting (face-config)
-  (setq initial-frame-alist `((top   . 25)  (left   . 10)
-                              (width . 215)  (height . 62)
+  ;; (setq initial-frame-alist `((top   . 25)  (left   . 10)
+  ;;                             (width . 215)  (height . 62)
+  ;;                             (menu-bar-lines . 1) (tool-bar-lines . 1)
+  ;;                             ,@face-config
+  ;;                             (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
+  (setq initial-frame-alist `((top   . 0)  (left   . 0)
+                              (width . 116)  (height . 62)
                               (menu-bar-lines . 1) (tool-bar-lines . 1)
                               ,@face-config
                               (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
-  (setq default-frame-alist `((width . 95)  (height . 50)
-                              (menu-bar-lines . 1) (tool-bar-lines . 1)
+  (setq default-frame-alist `((top . 0) (left . 705)
+                              (width . 116)  (height . 62)
+                              (menu-bar-lines . 1) (tool-bar-lines . nil)
                               ,@face-config
                               (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
   (setq special-display-frame-alist `((width . 95) (height . 50)

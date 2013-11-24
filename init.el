@@ -63,11 +63,11 @@
 
 (setq desktop-enable-save-on-exit nil)
 
-(dolist (config-file '("my-behaviour"
+(dolist (config-file '("my-utils" "my-behaviour" 
                        "my-keys" "my-backup" "my-mouse" "my-dired.el"
                        "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
                        "my-syntax"  "my-color" 
-                       "my-gud" "my-utils"
+                       "my-gud" 
                        "my-cl-slime" ;; "my-clojure-setting"
                        ;; "my-desktop"
                        ;; "my-mail"
@@ -88,14 +88,14 @@
 ;; (load-theme 'cyberpunk t)
 (eshell)
 
-(if (file-exists-p "~/Dropbox/Documents/GTD/mygtd.org")
-    (gtd "~/Dropbox/Documents/GTD/mygtd.org")
-    (when (boundp '*my-version*)
-      (cond ((equal *my-version* "clojure-dev") (load-clojure-settings))
-            ((equal *my-version* "lambda")      (load-library "my-cl-slime"))
-            ((equal *my-version* "thesis")      (load-library "thesis-settings"))
-            ((equal *my-version* "work")        (load-library "work-settings"))
-            (t (message "Unknown version ... skip.")))))
+;; (if (file-exists-p "~/Dropbox/Documents/GTD/mygtd.org")
+;;     (gtd "~/Dropbox/Documents/GTD/mygtd.org")
+;;     (when (boundp '*my-version*)
+;;       (cond ((equal *my-version* "clojure-dev") (load-clojure-settings))
+;;             ((equal *my-version* "lambda")      (load-library "my-cl-slime"))
+;;             ((equal *my-version* "thesis")      (load-library "thesis-settings"))
+;;             ((equal *my-version* "work")        (load-library "work-settings"))
+;;             (t (message "Unknown version ... skip.")))))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")

@@ -10,10 +10,12 @@
 
 
 ;; Need to make sure the alignment is good for each inserted lines
-(defmacro make-latex-block (bname)
-  (let ((function-name  (format "begin-%s" bname))
-        (begin-block    (format "\\begin{%s}\n\n" bname))
-        (end-block      (format "\\end{%s}\n" bname)))
+(defmacro make-latex-block (bname &optional p1 p2)
+  (let* ((p1 (if (null p1) "" p1))
+         (p2 (if (null p2) "" p2))
+         (function-name  (format "begin-%s" bname))
+         (begin-block    (format "\\begin{%s}%s%s\n\n" bname p1 p2))
+         (end-block      (format "\\end{%s}\n" bname)))
     `(defun ,(intern function-name) ()
        (interactive)
        (insert ,begin-block)
@@ -24,6 +26,8 @@
 
 ;; LaTeX equations
 (make-latex-block "equation")
+(make-latex-block "eqnarray")
+(make-latex-block "eqnarray*")
 (make-latex-block "align")
 (make-latex-block "align*")
 (make-latex-block "dcases")
@@ -60,5 +64,9 @@
 (make-latex-block "easaylist")
 
 ;; LaTeX figures
-(make-latex-block "figure")
-(make-latex-block "minifigure")
+(make-latex-block "figure" "[!h]")
+(make-latex-block "minipage" "[b]"
+                  "{5in}")
+
+;; LaTeX tables
+(make-latex-block "tabular")
