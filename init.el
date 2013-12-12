@@ -69,6 +69,7 @@
                        "my-syntax"  "my-color" 
                        "my-gud" 
                        "my-cl-slime" ;; "my-clojure-setting"
+                       "my-latex-shortcuts"
                        ;; "my-desktop"
                        ;; "my-mail"
                        ))
