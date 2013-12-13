@@ -18,3 +18,6 @@
 ;; for asdf load path
 ;; (setenv "CL_SOURCE_REGISTRY" (concat "~/Courses/Paradigms of AI Programming:"
 ;;                                      "~/repos/ITA-Rebus"))
+
+;; for java
+(setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/jdk/Contents/Home")

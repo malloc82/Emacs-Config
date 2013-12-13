@@ -14,13 +14,16 @@
   (let* ((p1 (if (null p1) "" p1))
          (p2 (if (null p2) "" p2))
          (function-name  (format "begin-%s" bname))
-         (begin-block    (format "\\begin{%s}%s%s\n\n" bname p1 p2))
-         (end-block      (format "\\end{%s}\n" bname)))
+         (begin-block    (format "\\begin{%s}%s%s\n" bname p1 p2))
+         (end-block      (format "\\end{%s}" bname)))
     `(defun ,(intern function-name) ()
        (interactive)
-       (insert ,begin-block)
-       (insert ,end-block)
-       (forward-line -2))))
+       (indent-according-to-mode) (insert ,begin-block)
+       (indent-according-to-mode)
+       (save-excursion
+         (newline)
+         (insert ,end-block)
+         (indent-according-to-mode)))))
 
 (make-latex-block "document")
 
