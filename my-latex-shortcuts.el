@@ -73,3 +73,9 @@
 
 ;; LaTeX tables
 (make-latex-block "tabular")
+
+(require 'smartparens)
+(require 'smartparens-latex)
+(add-hook 'LaTeX-mode-hook
+          '(lambda ()
+            (smartparens-mode 1)))
