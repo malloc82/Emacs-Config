@@ -1,5 +1,64 @@
 ;; -*- lexical-binding: t -*-
 
+
+;; ============================
+;; AUCTeX Settings
+;; ============================
+
+;; (let ((tex-site-dir  nil))
+;;   (cond ((string= system-type "darwin")
+;;          (setq tex-site-dir
+;;                (concat invocation-directory "../Resources/site-lisp/tex-site.el")))
+;;         ((string= system-type "gnu/linux")
+;;          (when (string-match "\\.\\([[:digit:]]\\)*$" emacs-version)
+;;            (setq tex-site-dir
+;;                  (concat invocation-directory "../share/emacs/" (replace-match "" nil nil emacs-version) "/site-lisp/tex-site.el"))))
+;;         )
+;;   (when (and tex-site-dir (file-exists-p tex-site-dir))
+;;     (message "==> AUCTeX is installed, loading tex settings")
+;;     (message "==> tex-site.el: %s" tex-site-dir)
+
+
+;; (add-to-list 'load-path "~/.emacs.d/auctex/")
+(require 'tex-site)
+(setq LaTeX-command "latex -file-line-error")
+(setq LaTeX-math-menu-unicode t)
+
+(cond ((string= system-type "darwin")
+       (setq TeX-output-view-style
+             (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+       ;; (setq TeX-view-program-list
+       ;;       (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
+       (setq TeX-view-program-list
+             (quote (("Preview" "preivew %o")
+                     ("simpdftex" "simpdftex --maxpfb %o")
+                     ("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"))))
+       (setq TeX-view-program-selection
+             (quote ((output-dvi "simpdftex")
+                     ;; (output-pdf "Preview")
+                     (output-pdf "PDF Viewer")
+                     (output-html "xdg-open")))))
+      (t
+       (setq TeX-output-view-style
+             (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
+       (setq TeX-view-program-list
+             (quote (("kdvi" "kdvi  %o"))))
+       (setq TeX-view-program-selection
+             (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open")))))
+      )
+(setq load-path (append '("~/.emacs.d/auto-complete-auctex") load-path))
+(require 'auto-complete-auctex)
+;;     )
+;;   )
+
+
+
+;; (setq TeX-view-program-list '(("Preview" "preview %u") ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %q")))
+;; (setq TeX-view-program-selection (quote ((output-pdf "Preview") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-html "xdg-open"))))
+
+
+
+
 ;; ;; Example function:
 
 ;; (defun begin-align ()
@@ -76,6 +135,31 @@
 
 (require 'smartparens)
 (require 'smartparens-latex)
+
 (add-hook 'LaTeX-mode-hook
           '(lambda ()
             (smartparens-mode 1)))
+
+(add-hook 'LaTeX-mode-hook
+          '(lambda ()
+            (push
+             '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+               :help "Run latexmk on file")
+             TeX-command-list)))
+
+(add-hook 'TeX-mode-hook
+          '(lambda ()
+            (setq TeX-command-default "latexmk")))
+
+
+;; make latexmk available via C-c C-c
+;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background  
+;; (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+;; (setq TeX-view-program-list
+;;      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+
+;; (server-start); start emacs in server mode so that skim can talk to it

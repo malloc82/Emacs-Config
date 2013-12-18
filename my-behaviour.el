@@ -85,55 +85,6 @@
 ;; (command-frequency-autosave-mode 1)
 
 ;; ============================
-;; AUCTeX Settings
-;; ============================
-
-;; (let ((tex-site-dir  nil))
-;;   (cond ((string= system-type "darwin")
-;;          (setq tex-site-dir
-;;                (concat invocation-directory "../Resources/site-lisp/tex-site.el")))
-;;         ((string= system-type "gnu/linux")
-;;          (when (string-match "\\.\\([[:digit:]]\\)*$" emacs-version)
-;;            (setq tex-site-dir
-;;                  (concat invocation-directory "../share/emacs/" (replace-match "" nil nil emacs-version) "/site-lisp/tex-site.el"))))
-;;         )
-;;   (when (and tex-site-dir (file-exists-p tex-site-dir))
-;;     (message "==> AUCTeX is installed, loading tex settings")
-;;     (message "==> tex-site.el: %s" tex-site-dir)
-
-
-;; (add-to-list 'load-path "~/.emacs.d/auctex/")
-(require 'tex-site)
-(setq LaTeX-command "latex -file-line-error")
-(setq LaTeX-math-menu-unicode t)
-
-(cond ((string= system-type "darwin")
-       (setq TeX-output-view-style
-             (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-       (setq TeX-view-program-list
-             (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
-       (setq TeX-view-program-selection
-             (quote ((output-dvi "simpdftex") (output-pdf "Preview") (output-html "xdg-open")))))
-      
-      (t
-       (setq TeX-output-view-style
-             (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-       (setq TeX-view-program-list
-             (quote (("kdvi" "kdvi  %o"))))
-       (setq TeX-view-program-selection
-             (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open")))))
-      )
-(setq load-path (append '("~/.emacs.d/auto-complete-auctex") load-path))
-(require 'auto-complete-auctex)
-;;     )
-;;   )
-
-
-;; (setq TeX-view-program-list '(("Preview" "preview %u") ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %q")))
-;; (setq TeX-view-program-selection (quote ((output-pdf "Preview") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-html "xdg-open"))))
-
-
-;; ============================
 ;; Display
 ;; ============================
 
@@ -437,5 +388,5 @@ otherwise raises an error."
           #'(lambda ()
               (paredit-mode 1)))
 
-(setq-default fill-column 100)
+(setq-default fill-column 115)
 
