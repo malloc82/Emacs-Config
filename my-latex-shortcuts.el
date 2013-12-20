@@ -69,7 +69,7 @@
 
 
 ;; Need to make sure the alignment is good for each inserted lines
-(defmacro make-latex-block (bname &optional p1 p2)
+(defmacro insert-latex-block (bname &optional p1 p2)
   (let* ((p1 (if (null p1) "" p1))
          (p2 (if (null p2) "" p2))
          (function-name  (format "begin-%s" bname))
@@ -84,54 +84,70 @@
          (insert ,end-block)
          (indent-according-to-mode)))))
 
-(make-latex-block "document")
+(defmacro insert-latex-line (lname &optional p1 p2)
+  (let* ((p1 (if (null p1) "" p1))
+         (p2 (if (null p2) "" p2))
+         (cmd-name (format "%s" lname))
+         (cmd (format "%s[%s]{%s}" lname p1 p2)))
+    `(defun ,(intern cmd-name) ()
+       (interactive)
+       (indent-according-to-mode)
+       (insert ,cmd))))
+
+(insert-latex-block "document")
 
 ;; LaTeX equations
-(make-latex-block "equation")
-(make-latex-block "eqnarray")
-(make-latex-block "eqnarray*")
-(make-latex-block "align")
-(make-latex-block "align*")
-(make-latex-block "dcases")
-(make-latex-block "cases")
-(make-latex-block "cases*")
-(make-latex-block "rcases")
-(make-latex-block "rcases*")
+(insert-latex-block "equation")
+(insert-latex-block "eqnarray")
+(insert-latex-block "eqnarray*")
+(insert-latex-block "align")
+(insert-latex-block "align*")
+(insert-latex-block "dcases")
+(insert-latex-block "cases")
+(insert-latex-block "cases*")
+(insert-latex-block "rcases")
+(insert-latex-block "rcases*")
 
 ;; LaTeX matrices
-(make-latex-block "array")
-(make-latex-block "matrix")
+(insert-latex-block "array")
+(insert-latex-block "matrix")
 
-(make-latex-block "bmatrix")
-(make-latex-block "bmatrix*")
+(insert-latex-block "bmatrix")
+(insert-latex-block "bmatrix*")
 
-(make-latex-block "Bmatrix")
-(make-latex-block "Bmatrix*")
+(insert-latex-block "Bmatrix")
+(insert-latex-block "Bmatrix*")
 
-(make-latex-block "pmatrix")
-(make-latex-block "pmatrix*")
+(insert-latex-block "pmatrix")
+(insert-latex-block "pmatrix*")
 
-(make-latex-block "vmatrix")
-(make-latex-block "vmatrix*")
+(insert-latex-block "vmatrix")
+(insert-latex-block "vmatrix*")
 
-(make-latex-block "Vmatrix")
-(make-latex-block "Vmatrix*")
+(insert-latex-block "Vmatrix")
+(insert-latex-block "Vmatrix*")
 
-(make-latex-block "smallmatrix")
+(insert-latex-block "smallmatrix")
 
 ;; LaTeX list structures
-(make-latex-block "itemize")
-(make-latex-block "enumerate")
-(make-latex-block "description")
-(make-latex-block "easaylist")
+(insert-latex-block "itemize")
+(insert-latex-block "enumerate")
+(insert-latex-block "description")
+(insert-latex-block "easaylist")
 
 ;; LaTeX figures
-(make-latex-block "figure" "[!h]")
-(make-latex-block "minipage" "[b]"
-                  "{5in}")
+(insert-latex-block "figure" "[!h]")
+(insert-latex-block "minipage" "[b]" "{5in}")
+
+(insert-latex-block "center")
 
 ;; LaTeX tables
-(make-latex-block "tabular")
+(insert-latex-block "tabular")
+
+;; Code listing
+(insert-latex-block "lstlisting" "[language=<language>, caption={<commends>}]")
+
+(insert-latex-line "includegraphics" "width=5in")
 
 (require 'smartparens)
 (require 'smartparens-latex)
@@ -163,3 +179,4 @@
 ;;      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
 
 ;; (server-start); start emacs in server mode so that skim can talk to it
+
