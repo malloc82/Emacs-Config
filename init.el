@@ -55,7 +55,6 @@
   (require 'shell-command)
   (shell-command-completion-mode))
 
-(global-hl-line-mode 1)
 (require 'ascii)
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
@@ -66,7 +65,7 @@
 (dolist (config-file '("my-utils" "my-behaviour" 
                        "my-keys" "my-backup" "my-mouse" "my-dired.el"
                        "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
-                       "my-syntax"  "my-color" 
+                       "my-syntax" "my-color" 
                        "my-gud" 
                        "my-cl-slime" ;; "my-clojure-setting"
                        "my-latex"
@@ -74,7 +73,6 @@
                        ;; "my-mail"
                        ))
   (load-library config-file))
-
 
 ;; for imaxima
 ;; (setq exec-path (cons "/opt/local/bin" exec-path))
@@ -133,6 +131,7 @@
  '(search-highlight t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
+ '(global-hl-line-mode 1)
  '(truncate-partial-width-windows nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -301,6 +301,7 @@
     (xcode      . "xcode")
     (radiance   . "radiance")))
 
+;; On Macbook Air with 1440x900: height = 62, good for tool-bar-mode
 (defun darwin-setting (face-config)
   ;; (setq initial-frame-alist `((top   . 25)  (left   . 10)
   ;;                             (width . 215)  (height . 62)
@@ -308,17 +309,17 @@
   ;;                             ,@face-config
   ;;                             (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
   (setq initial-frame-alist `((top   . 0)  (left   . 706)
-                              (width . 116)  (height . 62)
-                              (menu-bar-lines . 1) (tool-bar-lines . 1)
+                              (width . 116)  (height . 64)
+                              (menu-bar-lines . nil) (tool-bar-lines . nil)
                               ,@face-config
                               (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
   (setq default-frame-alist `((top . 0) (left . 0)
                               (width . 116)  (height . 62)
-                              (menu-bar-lines . 1) (tool-bar-lines . 1)
+                              (menu-bar-lines . nil) (tool-bar-lines . nil)
                               ,@face-config
                               (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
   (setq special-display-frame-alist `((width . 95) (height . 50)
-                                      (menu-bar-lines . 1) (tool-bar-lines . 1)
+                                      (menu-bar-lines . nil) (tool-bar-lines . nil)
                                       ,@face-config
                                       (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
   )
@@ -326,17 +327,17 @@
 (defun linux-setting (face-config)
   (setq initial-frame-alist `((top   . 25)  (left   . 10)
                               (width . 95)  (height . 80)
-                              (menu-bar-lines . 1) (tool-bar-lines . 1)
+                              (menu-bar-lines . nil) (tool-bar-lines . nil)
                               ,@face-config
                               ))
   (setq special-display-frame-alist `((top   . 25)  (left   . 10)
                                       (width . 95)  (height . 70)
-                                      (menu-bar-lines . 1) (tool-bar-lines . 1)
+                                      (menu-bar-lines . nil) (tool-bar-lines . nil)
                                       ,@face-config
                                       ))
   (setq default-frame-alist `((top   . 50)  (left   . 120)
                               (width . 95)  (height . 80)
-                              (menu-bar-lines . 1) (tool-bar-lines . 1)
+                              (menu-bar-lines . nil) (tool-bar-lines . nil)
                               ,@face-config
                               ))
   )

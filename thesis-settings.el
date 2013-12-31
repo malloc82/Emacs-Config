@@ -11,6 +11,6 @@
                      "output"
                      "simulation"))
 
-(setq tool-bar-mode 1)
+;; (setq tool-bar-mode 1)
 (find-file *thesis-home*)
 
