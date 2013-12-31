@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t -*-
 
-
 ;; ============================
 ;; AUCTeX Settings
 ;; ============================
@@ -18,11 +17,19 @@
 ;;     (message "==> AUCTeX is installed, loading tex settings")
 ;;     (message "==> tex-site.el: %s" tex-site-dir)
 
-
 ;; (add-to-list 'load-path "~/.emacs.d/auctex/")
+
 (require 'tex-site)
 (setq LaTeX-command "latex -file-line-error")
 (setq LaTeX-math-menu-unicode t)
+
+
+;; make latexmk available via C-c C-c
+;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background  
 
 (cond ((string= system-type "darwin")
        (setq TeX-output-view-style
@@ -48,16 +55,18 @@
       )
 (setq load-path (append '("~/.emacs.d/auto-complete-auctex") load-path))
 (require 'auto-complete-auctex)
-;;     )
-;;   )
 
+(require 'smartparens)
+(require 'smartparens-latex)
 
-
-;; (setq TeX-view-program-list '(("Preview" "preview %u") ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %q")))
-;; (setq TeX-view-program-selection (quote ((output-pdf "Preview") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-html "xdg-open"))))
-
-
-
+(add-hook 'TeX-mode-hook
+          '(lambda ()
+            (smartparens-mode 1)
+            (push
+             '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+               :help "Run latexmk on file")
+             TeX-command-list)
+            (setq TeX-command-default "latexmk")))
 
 ;; ;; Example function:
 
@@ -66,7 +75,6 @@
 ;;   (insert "\\begin{align}\n\n")
 ;;   (insert "\\end{align}\n")
 ;;   (forward-line -2))
-
 
 ;; Need to make sure the alignment is good for each inserted lines
 (defmacro insert-latex-block (bname &optional p1 p2)
@@ -148,35 +156,3 @@
 (insert-latex-block "lstlisting" "[language=<language>, caption={<commends>}]")
 
 (insert-latex-line "includegraphics" "width=5in")
-
-(require 'smartparens)
-(require 'smartparens-latex)
-
-(add-hook 'LaTeX-mode-hook
-          '(lambda ()
-            (smartparens-mode 1)))
-
-(add-hook 'LaTeX-mode-hook
-          '(lambda ()
-            (push
-             '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
-               :help "Run latexmk on file")
-             TeX-command-list)))
-
-(add-hook 'TeX-mode-hook
-          '(lambda ()
-            (setq TeX-command-default "latexmk")))
-
-
-;; make latexmk available via C-c C-c
-;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
-
-;; use Skim as default pdf viewer
-;; Skim's displayline is used for forward search (from .tex to .pdf)
-;; option -b highlights the current line; option -g opens Skim in the background  
-;; (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
-;; (setq TeX-view-program-list
-;;      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
-
-;; (server-start); start emacs in server mode so that skim can talk to it
-
