@@ -61,6 +61,8 @@
 
 (add-hook 'TeX-mode-hook
           '(lambda ()
+            (setq compilation-auto-jump-to-first-error t)
+            (outline-minor-mode 1)
             (smartparens-mode 1)
             (push
              '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t

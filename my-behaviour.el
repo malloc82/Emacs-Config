@@ -38,7 +38,10 @@
 ;;     (compilation-next-error 1)))
 ;; (add-to-list 'compilation-finish-functions 'cc-goto-first-error) 
 
-(setq compilation-auto-jump-to-first-error 1)
+;; (setq compilation-auto-jump-to-first-error t)  ;; set per mode in my-syntax.el
+(add-hook 'package-menu-mode-hook
+          '(lambda ()
+            (setq compilation-auto-jump-to-first-error nil)))
 
 ;; ===========================
 ;; Frame setting

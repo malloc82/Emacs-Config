@@ -308,8 +308,8 @@
   ;;                             (menu-bar-lines . 1) (tool-bar-lines . 1)
   ;;                             ,@face-config
   ;;                             (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
-  (setq initial-frame-alist `((top   . 0)  (left   . 706)
-                              (width . 116)  (height . 64)
+  (setq initial-frame-alist `((top   . 0)  (left   . 704)
+                              (width . 119)  (height . 64)
                               (menu-bar-lines . 1) (tool-bar-lines . nil)
                               ,@face-config
                               (font . "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))

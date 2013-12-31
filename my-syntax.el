@@ -95,6 +95,7 @@
   (dolist (mode mlist)
     (add-hook mode
               #'(lambda ()
+                  (setq compilation-auto-jump-to-first-error t)
                   (outline-minor-mode 1)))))
 
 (add-hook 'cuda-mode-hook
@@ -165,7 +166,7 @@
 (require 'yasnippet-bundle)
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/elpa/yasnippet-20130218.2229/snippets")
+(yas/load-directory "~/.emacs.d/elpa/yasnippet-20131224.143/snippets")
 
 
 ;; =================================
