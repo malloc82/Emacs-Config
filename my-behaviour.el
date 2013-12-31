@@ -150,7 +150,7 @@
 
 ;; show a menu only when running within X (save real estate when
 ;; in console)
-;; (menu-bar-mode (if window-system 1 -1))
+;; (menu-bar-mode (if window-system 1 nil))
 
 ;; turn off the toolbar
 (when (and  (>= emacs-major-version 21)

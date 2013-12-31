@@ -131,6 +131,7 @@
  '(search-highlight t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
+ `(menu-bar-mode ,(if window-system 1 t))
  '(global-hl-line-mode 1)
  '(truncate-partial-width-windows nil))
 (custom-set-faces
