@@ -69,6 +69,7 @@
                        "my-gud" 
                        "my-cl-slime" ;; "my-clojure-setting"
                        "my-latex"
+                       "my-haskell"
                        ;; "my-desktop"
                        ;; "my-mail"
                        ))
@@ -123,16 +124,16 @@
  '(column-number-mode t)
  '(default-truncate-lines nil t)
  '(display-time-mode t)
+ '(global-hl-line-mode 1)
  '(isearch-highlight t)
  '(large-file-warning-threshold nil)
+ '(menu-bar-mode 1)
  '(org-agenda-files (quote ("~/Dropbox/Documents/GTD/mygtd.org" "~/Dropbox/Documents/GTD/research.org" "~/Dropbox/Documents/GTD/projects.org")))
  '(paren-sexp-mode nil)
  '(py-shell-name "/usr/local/bin/ipython")
  '(search-highlight t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
- `(menu-bar-mode ,(if window-system 1 t))
- '(global-hl-line-mode 1)
  '(truncate-partial-width-windows nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

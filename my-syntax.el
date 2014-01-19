@@ -11,7 +11,7 @@
 ;; (if (string= system-type "gnu/linux")
 (require 'apt-sources)
 (require 'cuda-mode)
-(require 'csharp-mode)
+;; (require 'csharp-mode) ;; not using it at the moment
 (require 'd-mode)
 (require 'scilab)
 ;; (require 'matlab)
@@ -50,7 +50,7 @@
          ("\\.mm$"                     . objc-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
          ("\\.[Ss]$"                   . gas-mode)
-         ("\\.[Cc][Ss]$"               . csharp-mode)
+         ;; ("\\.[Cc][Ss]$"               . csharp-mode)
          ("\\.[Ss][Hh]$"               . sh-mode)
          ("[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*$" . makefile-mode)
          ;; ("\\.js$"                     . js2-mode)
@@ -122,6 +122,7 @@
 
 ;;It is necessary to perform an update!
 (jka-compr-update)
+
 ;; =================================
 ;; javascript-mode configuration
 ;; =================================
@@ -141,14 +142,12 @@
       (cons '("python" . python-mode)
             interpreter-mode-alist))
 
-
 (add-hook 'python-mode-hook
        	  '(lambda ()
             (unless (and (boundp '*my-python-loaded*) *my-python-loaded*)
               (message "loading python-mode ......... ")
               (load-library "my-python")
               (setq *my-python-loaded* t))))
-
 
 ;; =================================
 ;; latex configuration
@@ -167,7 +166,6 @@
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/elpa/yasnippet-20131224.143/snippets")
-
 
 ;; =================================
 ;; Firefox: moz.el, javascript.el
@@ -189,7 +187,6 @@
   ;;(c-set-offset 'arglist-cont-nonempty c-lineup-arglist))
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-
 
 ;; ============================
 ;; Objective-C 
