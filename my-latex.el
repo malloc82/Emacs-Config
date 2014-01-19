@@ -64,11 +64,21 @@
             (setq compilation-auto-jump-to-first-error t)
             (outline-minor-mode 1)
             (smartparens-mode 1)
+            (setq TeX-command-default "latexmk")
             (push
-             '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
-               :help "Run latexmk on file")
+             '("latexmk"
+               "latexmk -pdf %s"
+               TeX-run-TeX nil t
+               :help
+               "Run latexmk on file")
              TeX-command-list)
-            (setq TeX-command-default "latexmk")))
+            (push
+             '("Skim"
+               "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"
+               TeX-run-discard-or-function t t
+               :help
+               "Run Skim")
+             TeX-command-list)))
 
 ;; ;; Example function:
 
