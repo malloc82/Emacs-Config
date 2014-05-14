@@ -66,8 +66,9 @@
                        "my-keys" "my-backup" "my-mouse" "my-dired.el"
                        "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
                        "my-syntax" "my-color" 
-                       "my-gud" 
-                       "my-cl-slime" ;; "my-clojure-setting"
+                       "my-gud"
+                       "my-cl-slime" 
+                       "my-clojure-setting"
                        "my-latex"
                        "my-haskell"
                        ;; "my-desktop"
@@ -86,7 +87,7 @@
 ;; (server-start)
 
 ;; (load-theme 'cyberpunk t)
-(eshell)
+;; (eshell)
 
 ;; (if (file-exists-p "~/Dropbox/Documents/GTD/mygtd.org")
 ;;     (gtd "~/Dropbox/Documents/GTD/mygtd.org")
@@ -129,7 +130,7 @@
  '(large-file-warning-threshold nil)
  '(menu-bar-mode 1)
  '(org-agenda-files (quote ("~/Dropbox/Documents/GTD/mygtd.org" "~/Dropbox/Documents/GTD/research.org" "~/Dropbox/Documents/GTD/projects.org")))
- '(paren-sexp-mode nil)
+ ;; '(paren-sexp-mode nil)
  '(py-shell-name "/usr/local/bin/ipython")
  '(search-highlight t)
  '(show-paren-mode t)
