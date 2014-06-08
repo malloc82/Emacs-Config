@@ -1,4 +1,4 @@
-;; ==========================
+; ==========================
 ;; Other syntax mode
 ;; ==========================
 
@@ -13,7 +13,7 @@
 (require 'cuda-mode)
 ;; (require 'csharp-mode) ;; not using it at the moment
 (require 'd-mode)
-(require 'scilab)
+;; (require 'scilab)
 ;; (require 'matlab)
 
 ;; ========================================================
@@ -285,10 +285,10 @@
 (let ((path (m-expand-lib-path "emacs" "/opt/local/lib/erlang/lib/")))
   (unless (null path)
     (message "erlang emacs found: %s" path)
-    (push path load-path)))
-(setq erlang-root-dir "/opt/local/lib/erlang/")
-(setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
-(require 'erlang-start)
+    (push path load-path)
+    (setq erlang-root-dir "/opt/local/lib/erlang/")
+    (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
+    (require 'erlang-start)))
 
 ;; ========================================================
 ;; Go Settings
@@ -452,21 +452,3 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 ;; (add-hook 'inferior-scheme-mode-hook
 ;;           '(lambda ()
 ;;              (lisp-mode-addon inferior-scheme-mode-map)))
-
-
-;; =================================
-;; clojure-mode configuration
-;; =================================
-;; (defun load-clojure-settings ()
-;;   (require 'clojure-mode)
-;;   (add-hook 'clojure-mode-hook
-;;             #'(lambda ()
-;;                 (message "loading clojure-mode ......")
-;;                 (setq inferior-lisp-program "/opt/local/bin/clj")
-;;                 (lisp-mode-addon clojure-mode-map)
-;;                 (load-library "my-clojure-setting")
-;;                 (message "done"))))
-
-;; (when (and (boundp '*my-version*)
-;;            (equal   *my-version* "clojure-dev"))
-;;   (load-clojure-settings))

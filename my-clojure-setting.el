@@ -1,15 +1,10 @@
-;; Load and configure SLIME
-
+;; Load and configure clojure-mode
+(require 'clojure-mode)
+(require 'paredit)
 (message "loading clojure settings ... ")
-;; (add-to-list 'load-path "~/Installed/Emacs/clojure-slime/")
-
-;; (require 'slime)
-;; (eval-after-load 'slime '(setq slime-protocol-version 'ignore))
-;; (slime-setup '(slime-repl))
 
 ;; ;; Load a major mode for editing Clojure code.
 ;; ;; (add-to-list 'load-path "/path/to/clojure-mode/checkout")
-;; ;; (require 'clojure-mode)
 ;; (require 'clojure-test-mode) ;; requires slime
 ;; (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))
 
@@ -53,10 +48,18 @@
   ;; (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
   )
 
+(add-hook 'clojure-mode-hook
+          #'(lambda ()
+              (enable-paredit-mode)
+              (add-clojure-paredit clojure-mode-map)))
+
+(add-hook 'cider-repl-mode-hook
+          #'(lambda ()
+              (enable-paredit-mode)
+              (add-clojure-paredit  cider-repl-mode-map)))
+
 (eval-after-load 'clojure-mode
   '(progn
-    (enable-paredit-mode)
-    (add-clojure-paredit clojure-mode-map)
     (font-lock-add-keywords
      'clojure-mode `(("(\\(fn\\>\\)"
                       (0 (progn (compose-region (match-beginning 1)
@@ -66,26 +69,6 @@
 
 (eval-after-load 'cider-repl-mode
   '(progn
-    (enable-paredit-mode)
-    (add-clojure-paredit  cider-repl-mode-map)
     (font-lock-add-keywords
      'cider-repl-mode `(("(\\|)" . 'esk-paren-face)))))
 
-;; (add-hook 'cider-repl-mode-hook
-;;           #'(lambda ()
-;;               (font-lock-add-keywords 'cider-repl-mode '(("(\\|)" . 'esk-paren-face)))))
-;; (add-hook 'clojure-mode-hook
-;;           #'(lambda ()
-;;               (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))))
-
-;; (add-hook 'clojure-mode-hook    #'enable-paredit-mode)
-;; (add-hook 'cider-repl-mode-hook #'enable-paredit-mode)
-
-;; (add-hook 'cider-repl-mode-hook
-;;           #'(lambda ()
-;;               (add-clojure-paredit  cider-repl-mode-map)))
-
-;; (add-hook 'clojure-mode-hook
-;;           #'(lambda ()
-;;               ;; (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))
-;;               (add-clojure-paredit clojure-mode-map)))

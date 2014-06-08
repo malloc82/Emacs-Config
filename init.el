@@ -70,7 +70,7 @@
                        "my-cl-slime" 
                        "my-clojure-setting"
                        "my-latex"
-                       "my-haskell"
+                       ;; "my-haskell"
                        ;; "my-desktop"
                        ;; "my-mail"
                        ))
@@ -101,18 +101,12 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
+
 ;; Timer Part2
 (message "My init.el loaded in %ds"
-         (destructuring-bind (hi lo ms ps) (current-time)
+         (destructuring-bind (hi lo ms &optional ps) (current-time)
            (- (+ hi lo)
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
-
-;; (when (string= system-type "darwin")
-;;   (growl "Emacs"
-;;          (format "My init.el loaded in %ds"
-;;                  (destructuring-bind (hi lo ms) (current-time)
-;;                    (- (+ hi lo)
-;;                       (+ (first *emacs-load-start*) (second *emacs-load-start*)))))))
 
 (message "Emacs version = %ds" emacs-major-version)
 (message "Emacs is running on: %s" system-type)
@@ -129,19 +123,18 @@
  '(isearch-highlight t)
  '(large-file-warning-threshold nil)
  '(menu-bar-mode 1)
- '(org-agenda-files (quote ("~/Dropbox/Documents/GTD/mygtd.org" "~/Dropbox/Documents/GTD/research.org" "~/Dropbox/Documents/GTD/projects.org")))
  ;; '(paren-sexp-mode nil)
- '(py-shell-name "/usr/local/bin/ipython")
+ ;; '(py-shell-name "/usr/local/bin/ipython")
  '(search-highlight t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background "black" :foreground "white" :font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))))
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "unknown" :family "Monaco"))))
  '(button ((t (:background "black" :weight bold))))
  '(cursor ((t (:background "yellow" :foreground "white"))))
  '(dired-directory ((t (:foreground "Skyblue2"))))
