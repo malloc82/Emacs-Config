@@ -14,9 +14,11 @@
 
 (when (>= emacs-major-version 24)
   (require 'package)
-  (add-to-list 'package-archives 
-               '("marmalade" . "http://marmalade-repo.org/packages/")
-               '("melpa"     . "http://melpa.milkbox.net/packages/"))
+  (setq package-archives
+        (append '(("gnu"       . "http://elpa.gnu.org/packages/")
+                  ("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("melpa"     . "http://melpa.milkbox.net/packages/"))
+                package-archives))
   (package-initialize))
 
 (load-library "my-env-settings")
@@ -80,27 +82,7 @@
 ;; (setq exec-path (cons "/opt/local/bin" exec-path))
 ;; (autoload 'imaxima "imaxima" "Image support for Maxima." t)
 
-;; start emacs server: 
-;; (server-force-delete)
-;; (if (>= emacs-major-version 23)
-;;     (server-force-delete))
-;; (server-start)
-
 ;; (load-theme 'cyberpunk t)
-;; (eshell)
-
-;; (if (file-exists-p "~/Dropbox/Documents/GTD/mygtd.org")
-;;     (gtd "~/Dropbox/Documents/GTD/mygtd.org")
-;;     (when (boundp '*my-version*)
-;;       (cond ((equal *my-version* "clojure-dev") (load-clojure-settings))
-;;             ((equal *my-version* "lambda")      (load-library "my-cl-slime"))
-;;             ((equal *my-version* "thesis")      (load-library "thesis-settings"))
-;;             ((equal *my-version* "work")        (load-library "work-settings"))
-;;             (t (message "Unknown version ... skip.")))))
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; Timer Part2
 (message "My init.el loaded in %ds"
