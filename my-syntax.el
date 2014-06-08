@@ -4,16 +4,16 @@
 
 ;; (setq initial-major-mode 'org-mode)
 ;; (require 'cc-mode)
-(require 'vhdl-mode)
-(require 'verilog-mode)
-(require 'cperl-mode)
-(require 'gas-mode)
+;; (require 'vhdl-mode)
+;; (require 'verilog-mode)
+;; (require 'cperl-mode)
+;; (require 'gas-mode)
 ;; (if (string= system-type "gnu/linux")
-(require 'apt-sources)
-(require 'cuda-mode)
+;; (require 'apt-sources)
+;; (require 'cuda-mode)
 ;; (require 'csharp-mode) ;; not using it at the moment
-(require 'd-mode)
-(require 'scilab)
+;; (require 'd-mode)
+;; (require 'scilab)
 ;; (require 'matlab)
 
 ;; ========================================================
@@ -282,13 +282,13 @@
 ;; Erlang Settings
 ;; ========================================================
 
-(let ((path (m-expand-lib-path "emacs" "/opt/local/lib/erlang/lib/")))
-  (unless (null path)
-    (message "erlang emacs found: %s" path)
-    (push path load-path)))
-(setq erlang-root-dir "/opt/local/lib/erlang/")
-(setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
-(require 'erlang-start)
+;; (let ((path (m-expand-lib-path "emacs" "/opt/local/lib/erlang/lib/")))
+;;   (unless (null path)
+;;     (message "erlang emacs found: %s" path)
+;;     (push path load-path)))
+;; (setq erlang-root-dir "/opt/local/lib/erlang/")
+;; (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
+;; (require 'erlang-start)
 
 ;; ========================================================
 ;; Go Settings

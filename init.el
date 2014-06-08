@@ -65,12 +65,12 @@
 (dolist (config-file '("my-utils" "my-behaviour" 
                        "my-keys" "my-backup" "my-mouse" "my-dired.el"
                        "my-eshell" "my-abbrev" "my-tramp" "my-org-mode"
-                       "my-syntax" "my-color" 
+                       "my-syntax" ;; "my-color" 
                        "my-gud"
                        "my-cl-slime" 
                        "my-clojure-setting"
                        "my-latex"
-                       "my-haskell"
+                       ;; "my-haskell"
                        ;; "my-desktop"
                        ;; "my-mail"
                        ))
@@ -136,30 +136,3 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background "black" :foreground "white" :font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))))
- '(button ((t (:background "black" :weight bold))))
- '(cursor ((t (:background "yellow" :foreground "white"))))
- '(dired-directory ((t (:foreground "Skyblue2"))))
- '(font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
- '(font-lock-comment-face ((t (:foreground "chocolate1" :slant italic))))
- '(font-lock-constant-face ((t (:foreground "Aquamarine"))))
- '(font-lock-function-name-face ((t (:foreground "DeepSkyBlue"))))
- '(font-lock-keyword-face ((t (:foreground "Cyan1"))))
- '(font-lock-number-face ((t (:foreground "LightSalmon"))) t)
- '(font-lock-string-face ((t (:foreground "LightSalmon"))))
- '(font-lock-type-face ((t (:foreground "PaleGreen"))))
- '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
- '(font-lock-warning-face ((t (:foreground "Pink" :weight bold))))
- '(fringe ((t (:background "grey10"))))
- '(highlight ((t (:background "gray20"))))
- '(minibuffer-prompt ((t (:foreground "cyan"))))
- '(mode-line ((t (:background "grey70" :foreground "black" :box (:line-width -1 :style released-button)))))
- '(mode-line-inactive ((t (:background "grey30" :foreground "grey80" :box (:line-width -1 :style pressed-button)))))
- '(org-hide ((t (:foreground "black"))))
- '(region ((t (:background "blue4"))))
- '(secondary-selection ((t (:background "PaleVioletRed3")))))
