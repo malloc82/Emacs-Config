@@ -1,4 +1,4 @@
-[![Build Status](http://img.shields.io/travis-ci/magit/magit.png)](https://travis-ci.org/magit/magit)
+[![Build Status](https://travis-ci.org/magit/magit.svg?branch=master)](https://travis-ci.org/magit/magit)
 [![Gittip](http://img.shields.io/gittip/magit.png)](https://www.gittip.com/magit)
 
 It's Magit!  An Emacs mode for Git
@@ -16,8 +16,7 @@ Magit supports GNU Emacs 23.2 or later; 24.1 or later is recommended.
 Magit supports Git 1.7.2.5 or later; 1.8.2 or later is recommended.
 The minimal versions are those available in Debian oldstable.
 
-Table of Contents
-=================
+### Table of Contents
 
 * [Getting Started](#getting-started)
 * [Getting Help](#getting-help)
@@ -268,8 +267,7 @@ dependencies and install them manually.
 * `git-rebase-mode` which is part of the [git-modes][git-modes]
   repository and available as a separate package from Melpa.
 
-Optional Dependencies
----------------------
+### Optional Dependencies
 
 The following libraries build on third-party tools or git subcommands
 that are not installed by the Git base-package on some distributions:
@@ -279,8 +277,7 @@ that are not installed by the Git base-package on some distributions:
 * `magit-topgit.el` requires [`topgit`][topgit].
 * `magit-wip.el` requires [`git-wip`][git-wip].
 
-Dependencies of Tests
----------------------
+### Dependencies of Tests
 
 To run tests the following libraries are also required:
 
