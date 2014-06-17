@@ -20,9 +20,13 @@
 ;; (add-to-list 'load-path "~/.emacs.d/auctex/")
 
 (require 'tex-site)
+(require 'auto-complete-auctex)
+(require 'smartparens)
+(require 'smartparens-latex)
+(outline-minor-mode 1)
+(setq LaTeX-math-mode t)
 (setq LaTeX-command "latex -file-line-error")
 (setq LaTeX-math-menu-unicode t)
-
 
 ;; make latexmk available via C-c C-c
 ;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
@@ -54,31 +58,25 @@
              (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open")))))
       )
 (setq load-path (append '("~/.emacs.d/auto-complete-auctex") load-path))
-(require 'auto-complete-auctex)
 
-(require 'smartparens)
-(require 'smartparens-latex)
-
-(add-hook 'TeX-mode-hook
-          '(lambda ()
-            (setq compilation-auto-jump-to-first-error t)
-            (outline-minor-mode 1)
-            (smartparens-mode 1)
-            (setq TeX-command-default "latexmk")
-            (push
-             '("latexmk"
-               "latexmk -pdf %s"
-               TeX-run-TeX nil t
-               :help
-               "Run latexmk on file")
-             TeX-command-list)
-            (push
-             '("Skim"
-               "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"
-               TeX-run-discard-or-function t t
-               :help
-               "Run Skim")
-             TeX-command-list)))
+(setq compilation-auto-jump-to-first-error t)
+(outline-minor-mode 1)
+(smartparens-mode 1)
+(setq TeX-command-default "latexmk")
+(push
+ '("latexmk"
+   "latexmk -pdf %s"
+   TeX-run-TeX nil t
+   :help
+   "Run latexmk on file")
+ TeX-command-list)
+(push
+ '("Skim"
+   "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"
+   TeX-run-discard-or-function t t
+   :help
+   "Run Skim")
+ TeX-command-list)
 
 ;; ;; Example function:
 

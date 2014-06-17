@@ -69,7 +69,6 @@
                        "my-gud"
                        "my-cl-slime" 
                        "my-clojure-setting"
-                       "my-latex"
                        "my-haskell"
                        ;; "my-desktop"
                        ;; "my-mail"

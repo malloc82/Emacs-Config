@@ -46,6 +46,7 @@
          ;; ("\\.m$"                      . objc-mode)
          ("\\.sci$"                    . scilab-mode)
          ("\\.sce$"                    . scilab-mode)
+         ("\\.vhd$"                    . vhdl-mode)
          ("\\.m$"                      . matlab-mode)
          ("\\.mm$"                     . objc-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
@@ -153,11 +154,12 @@
 ;; latex configuration
 ;; =================================
 
-;; (add-hook 'LaTeX-mode-hook
-;;           '(lambda ()
-;;             (outline-minor-mode 1)
-            
-;;             (setq LaTeX-math-mode t)))
+(add-hook 'LaTeX-mode-hook
+          '(lambda ()
+            (unless (and (boundp '*my-latex-loaded*) *my-latex-loaded*)
+              (message "loading my latex settings ......... ")
+              (load-library "my-latex")
+              (setq *my-python-loaded* t))))
 
 ;; =================================
 ;; yasnippet
@@ -165,7 +167,7 @@
 (require 'yasnippet-bundle)
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/elpa/yasnippet-20131224.143/snippets")
+(yas/load-directory "~/.emacs.d/elpa/yasnippet-20140514.1649/snippets")
 
 ;; =================================
 ;; Firefox: moz.el, javascript.el
@@ -205,14 +207,8 @@
               (progn
                 (objc-mode)
                 )
-            (if (file-exists-p dot-cpp-file)
-                (c++-mode)
-              )
-            )
-          )
-        )
-    )
-  )
+              (if (file-exists-p dot-cpp-file)
+                  (c++-mode)))))))
  
 (add-hook 'find-file-hook 'bh-choose-header-mode)
 
@@ -235,10 +231,7 @@
       )
     (if has-proj-file
         (compile "xcodebuild -configuration Debug")
-      (compile "make")
-      )
-    )
-  )
+      (compile "make"))))
 
 ;; ===========================
 ;; Perl
@@ -285,10 +278,10 @@
 (let ((path (m-expand-lib-path "emacs" "/opt/local/lib/erlang/lib/")))
   (unless (null path)
     (message "erlang emacs found: %s" path)
-    (push path load-path)))
-(setq erlang-root-dir "/opt/local/lib/erlang/")
-(setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
-(require 'erlang-start)
+    (push path load-path)
+    (setq erlang-root-dir "/opt/local/lib/erlang/")
+    (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
+    (require 'erlang-start)))
 
 ;; ========================================================
 ;; Go Settings
@@ -340,7 +333,8 @@ Add this to .emacs to run gofmt on the current buffer when saving:
       (insert char)                     ; (Is there a better way to
       nil))                             ; express the rubout char?
                                         ; ?\^? works, but ugh...)
-(defsubst lisp-mode-addon (mode-type)
+
+(defsubst add-lisp-paredit (mode-type)
   (define-key mode-type (kbd "(") 'paredit-open-parenthesis)
   (define-key mode-type (kbd ")") 'paredit-close-parenthesis)
   (define-key mode-type (kbd "[") 'paredit-open-square)
@@ -384,25 +378,25 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 ;;                 ))
 ;;     (add-hook (car mode)
 ;;               `(lambda ()
-;;                  (lisp-mode-addon ,(cadr mode)))))
+;;                  (add-lisp-paredit ,(cadr mode)))))
 
 (add-hook 'lisp-mode-hook
           #'(lambda ()
-              (lisp-mode-addon lisp-mode-map)
+              (add-lisp-paredit lisp-mode-map)
               (load-library "my-cl-slime.el")
               (slime-mode 1)))
 
 (add-hook 'lisp-interaction-mode-hook
           #'(lambda ()
-              (lisp-mode-addon lisp-interaction-mode-map)))
+              (add-lisp-paredit lisp-interaction-mode-map)))
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()
-              (lisp-mode-addon emacs-lisp-mode-map)))
+              (add-lisp-paredit emacs-lisp-mode-map)))
 
 (add-hook 'scheme-mode-hook
           #'(lambda ()
-              (lisp-mode-addon scheme-mode-map)
+              (add-lisp-paredit scheme-mode-map)
               (load-library "my-scheme")))
 
 (add-hook 'eshell-mode-hook
@@ -433,7 +427,7 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 
 (add-hook 'slime-mode-hook
           #'(lambda ()
-              (lisp-mode-addon slime-mode-map)
+              (add-lisp-paredit slime-mode-map)
               (font-lock-add-keywords 'slime-mode '(("(\\|)" . 'esk-paren-face)))))
 
 (add-hook 'slime-repl-mode-hook
@@ -451,22 +445,4 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 
 ;; (add-hook 'inferior-scheme-mode-hook
 ;;           '(lambda ()
-;;              (lisp-mode-addon inferior-scheme-mode-map)))
-
-
-;; =================================
-;; clojure-mode configuration
-;; =================================
-;; (defun load-clojure-settings ()
-;;   (require 'clojure-mode)
-;;   (add-hook 'clojure-mode-hook
-;;             #'(lambda ()
-;;                 (message "loading clojure-mode ......")
-;;                 (setq inferior-lisp-program "/opt/local/bin/clj")
-;;                 (lisp-mode-addon clojure-mode-map)
-;;                 (load-library "my-clojure-setting")
-;;                 (message "done"))))
-
-;; (when (and (boundp '*my-version*)
-;;            (equal   *my-version* "clojure-dev"))
-;;   (load-clojure-settings))
+;;              (add-lisp-paredit inferior-scheme-mode-map)))
