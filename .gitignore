@@ -2,11 +2,14 @@
 *.swp
 %*%~
 .org-id-locations
+.smex-items
 ac-comphist.dat
 bookmarks
 tramp
+places
 auto-save-list/
 emacs_autosaves/
 emacs_backups/
 url/
+backups/
 

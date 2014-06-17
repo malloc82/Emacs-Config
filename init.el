@@ -104,19 +104,17 @@
  '(global-hl-line-mode 1)
  '(isearch-highlight t)
  '(large-file-warning-threshold nil)
- '(menu-bar-mode 1)
- ;; '(paren-sexp-mode nil)
- ;; '(py-shell-name "/usr/local/bin/ipython")
+ '(menu-bar-mode nil)
  '(search-highlight t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(truncate-partial-width-windows nil))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "unknown" :family "Monaco"))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background "black" :foreground "white" :family "ProggyCleanTT" :height 136 :width normal :weight normal :foundry "unknown" :slant normal))))
  '(button ((t (:background "black" :weight bold))))
  '(cursor ((t (:background "yellow" :foreground "white"))))
  '(dired-directory ((t (:foreground "Skyblue2"))))
@@ -138,3 +136,4 @@
  '(org-hide ((t (:foreground "black"))))
  '(region ((t (:background "blue4"))))
  '(secondary-selection ((t (:background "PaleVioletRed3")))))
+(put 'upcase-region 'disabled nil)

@@ -16,7 +16,7 @@
 ;;   (beginning-of-buffer))
 
 ;; insert functions
-(global-unset-key "\C-t")
+;; (global-unset-key "\C-t")
 
 ;; indent the entire buffer
 (defun c-indent-buffer ()
@@ -36,7 +36,9 @@
   (insert "   * @return: \n")
   (insert "   */\n"))
 
-(global-set-key "\C-t\C-g" 'insert-function-header)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (global-set-key "\C-t\C-g" 'insert-function-header) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun insert-file-header () (interactive)
   (insert "/**************************************/\n")
@@ -54,8 +56,10 @@
   (insert "    /*=================> TESTING */\n")
   (insert "    /*=================> END */\n"))
 
-(global-set-key "\C-t\C-d" 'insert-debug)
-(global-set-key "\C-t\C-t" 'insert-test)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (global-set-key "\C-t\C-d" 'insert-debug) ;;
+;; (global-set-key "\C-t\C-t" 'insert-test)  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (require 'setnu)
 
@@ -206,3 +210,9 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (kill-buffer-and-window)
   (previous-buffer)
   (delete-frame))
+
+(defun align-to-equals (begin end)
+  "Align region to equal signs"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))
+

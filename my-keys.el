@@ -104,10 +104,10 @@
 ;; =================
 ;; multi-term
 ;; =================
-(global-set-key (kbd "C-c t") 'multi-term)
-(global-set-key (kbd "C-c b") 'get-term)
+(global-set-key   (kbd "C-c t") 'multi-term)
+(global-set-key   (kbd "C-c b") 'get-term)
 (global-unset-key (kbd "C-z"))
-(global-set-key (kbd "C-c y") 'term-paste)
+(global-set-key   (kbd "C-c y") 'term-paste)
 
 ;; =================
 ;; smex
@@ -116,3 +116,10 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+;; =============================
+;; alignment
+;; =============================
+(global-set-key (kbd "C-c a =")
+  (lambda () (interactive) 
+    (align-regexp (region-beginning) (region-end) "\\(\\s-*\\)=" 1 1 nil)))
