@@ -10,13 +10,13 @@
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/")
 
-(setq load-path (append '("~/.emacs.d/" "~/.emacs.d/my-packages" "PACKAGE_DIRECTORY") load-path))
+(setq load-path (append '("~/.emacs.d/" "~/.emacs.d/vendor/" "PACKAGE_DIRECTORY") load-path))
 
 (when (>= emacs-major-version 24)
   (require 'package)
-  (add-to-list 'package-archives 
-               '("marmalade" . "http://marmalade-repo.org/packages/")
-               '("melpa"     . "http://melpa.milkbox.net/packages/"))
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("marmalade" . "http://marmalade-repo.org/packages/")
+                           ("melpa" . "http://melpa.milkbox.net/packages/")))
   (package-initialize))
 
 (load-library "my-env-settings")
@@ -97,9 +97,6 @@
 ;;             ((equal *my-version* "work")        (load-library "work-settings"))
 ;;             (t (message "Unknown version ... skip.")))))
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;; Timer Part2
 (message "My init.el loaded in %ds"
          (destructuring-bind (hi lo ms ps) (current-time)

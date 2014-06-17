@@ -53,10 +53,30 @@
   ;; (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
   )
 
+(require 'auto-complete-config)
+(setq ac-delay 0.0)
+(setq ac-quick-help-delay 0.5)
+(ac-config-default)
+
+(require 'ac-nrepl)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-to-list 'ac-modes 'cider-mode)
+(add-to-list 'ac-modes 'cider-repl-mode)
+
+(add-hook 'clojure-mode-hook
+          #'(lambda ()
+              (enable-paredit-mode)
+              (add-clojure-paredit clojure-mode-map)))
+
+(add-hook 'cider-repl-mode-hook
+          #'(lambda ()
+              (cider-turn-on-eldoc-mode)
+              (enable-paredit-mode)
+              (add-clojure-paredit  cider-repl-mode-map)))
+
 (eval-after-load 'clojure-mode
   '(progn
-    (enable-paredit-mode)
-    (add-clojure-paredit clojure-mode-map)
     (font-lock-add-keywords
      'clojure-mode `(("(\\(fn\\>\\)"
                       (0 (progn (compose-region (match-beginning 1)
@@ -66,26 +86,9 @@
 
 (eval-after-load 'cider-repl-mode
   '(progn
-    (enable-paredit-mode)
-    (add-clojure-paredit  cider-repl-mode-map)
     (font-lock-add-keywords
      'cider-repl-mode `(("(\\|)" . 'esk-paren-face)))))
 
-;; (add-hook 'cider-repl-mode-hook
-;;           #'(lambda ()
-;;               (font-lock-add-keywords 'cider-repl-mode '(("(\\|)" . 'esk-paren-face)))))
-;; (add-hook 'clojure-mode-hook
-;;           #'(lambda ()
-;;               (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))))
-
-;; (add-hook 'clojure-mode-hook    #'enable-paredit-mode)
-;; (add-hook 'cider-repl-mode-hook #'enable-paredit-mode)
-
-;; (add-hook 'cider-repl-mode-hook
-;;           #'(lambda ()
-;;               (add-clojure-paredit  cider-repl-mode-map)))
-
-;; (add-hook 'clojure-mode-hook
-;;           #'(lambda ()
-;;               ;; (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))
-;;               (add-clojure-paredit clojure-mode-map)))
+(setq cider-repl-use-clojure-font-lock t)
+(setq nrepl-hide-special-buffers t)
+(setq cider-popup-stacktraces nil)
