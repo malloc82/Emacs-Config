@@ -1,3 +1,5 @@
+.DS_Store
+.smex-items
 *.elc
 *.swp
 %*%~
@@ -9,4 +11,7 @@ auto-save-list/
 emacs_autosaves/
 emacs_backups/
 url/
+backups/
+places
+.python-environments/
 
