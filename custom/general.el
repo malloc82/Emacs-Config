@@ -1,4 +1,5 @@
 ;; -*- mode: Lisp -*-
+(message "here")
 
 (setq debug-on-error nil)
 (setq visible-bell 1)
@@ -8,11 +9,6 @@
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
-(isearch-highlight t)
-(search-highlight t)
-(default-truncate-lines nil t)
-(setq truncate-partial-width-windows nil)
-
 
 (require 'linum+)
 (global-linum-mode t)

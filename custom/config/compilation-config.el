@@ -16,7 +16,6 @@
                 objc-mode-hook
                 cuda-mode-hook
                 ;; lisp-mode-hook
-                ;; emacs-lisp-mode-hook
                 python-mode-hook
                 cperl-mode-hook
                 matlab-mode-hook
@@ -29,5 +28,15 @@
             #'(lambda ()
                 (setq compilation-auto-jump-to-first-error t))))
 
-(dolist (mode '(package-menu-mode-hook))
+(dolist (mode '(package-menu-mode-hook
+                emacs-lisp-mode-hook))
   (add-hook mode #'(lambda () (setq compilation-auto-jump-to-first-error nil))))
+
+(defun byte-compile-current-buffer ()
+  "`byte-compile' current buffer if it's emacs-lisp-mode and compiled file exists."
+  (interactive)
+  (when (and (eq major-mode 'emacs-lisp-mode)
+             (file-exists-p (byte-compile-dest-file buffer-file-name)))
+    (byte-compile-file buffer-file-name)))
+
+(add-hook 'after-save-hook 'byte-compile-current-buffer)
