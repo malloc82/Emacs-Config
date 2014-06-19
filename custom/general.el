@@ -74,7 +74,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom/configurations/")
 (dolist (config-file '("backup"
-                       "auto-completion-config"
+                       "ac-config"
                        "compilation-config"
                        "dired-config"
                        ;; "eshell-config"
