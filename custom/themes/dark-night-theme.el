@@ -9,7 +9,7 @@
  '(link ((t (:foreground "blue1" :underline t))))
  '(link-visited ((t (:foreground "magenta4" :underline t))))
  '(header-line ((t (:background "grey90" :foreground "grey20" :box nil))))
- '(default ((t (:background "black" :foreground "white" :font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))))
+ '(default ((t (:background "black" :foreground "white"))))
  '(cursor ((t (:background "yellow" :foreground "white"))))
  '(region ((t (:background "blue4"))))
  '(mode-line ((t (:background "grey70" :foreground "black" :box (:line-width -1 :style released-button)))))
@@ -33,3 +33,4 @@
  '(org-hide ((t (:foreground "black")))))
 
 (provide-theme 'dark-night)
+

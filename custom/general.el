@@ -8,6 +8,11 @@
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
+(isearch-highlight t)
+(search-highlight t)
+(default-truncate-lines nil t)
+(setq truncate-partial-width-windows nil)
+
 
 (require 'linum+)
 (global-linum-mode t)
@@ -47,6 +52,7 @@
 
 (require 'mic-paren) 
 (setq show-paren-style 'parenthesis) ;; Showing matching parentheses in GNU Emacs
+(show-paren-mode t)
 
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill) ;; turn on word wrapping in text mode
 
