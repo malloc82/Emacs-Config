@@ -19,4 +19,7 @@
 ;;                                      "~/repos/ITA-Rebus"))
 
 ;; for java
-(setenv "JAVA_HOME" "/usr/java/default")
+(cond ((string= system-type "gnu/linux")
+       (setenv "JAVA_HOME" "/usr/java/default"))
+      ((string= system-type "darwin")
+       (setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/jdk/Contents/Home")))
