@@ -48,16 +48,12 @@
   ;; (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
   )
 
-(require 'auto-complete-config)
-(setq ac-delay 0.0)
-(setq ac-quick-help-delay 0.5)
-(ac-config-default)
-
-(require 'ac-nrepl)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-to-list 'ac-modes 'cider-mode)
-(add-to-list 'ac-modes 'cider-repl-mode)
+;; (require 'ac-nrepl)
+;; ;; **BAD** cause clojure mode very sluggish to use 
+;; (add-hook 'cider-mode-hook 'ac-nrepl-setup)
+;; (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'cider-repl-mode))
 
 (add-hook 'clojure-mode-hook
           #'(lambda ()
