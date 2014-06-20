@@ -93,11 +93,6 @@
                 (ocaml-mode-hook . "ocaml-lang")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
-(require 'auto-complete-config)
-;; (setq ac-delay 0.0)
-;; (setq ac-quick-help-delay 0.5)
-(ac-config-default)
-
 ;; =================================
 ;; Firefox: moz.el, javascript.el
 ;; =================================

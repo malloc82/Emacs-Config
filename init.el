@@ -34,8 +34,8 @@
     (cd current-path))
 
 ;; Feature setup
-(dolist (config-file '("general"
-                       "functions"
+(dolist (config-file '("functions"
+                       "general"
                        "faces"
                        "lang"))
   (load-library config-file))

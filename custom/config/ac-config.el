@@ -2,7 +2,11 @@
 ;; Auto completion settings
 
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20140618.2217/dict")
+(let ((path (m-expand-file-path "dict" "~/.emacs.d/elpa/auto-complete*")))
+  (when path
+    (add-to-list 'ac-dictionary-directories path)))
+(setq ac-delay 0.0)
+(setq ac-quick-help-delay 0.5)
 (ac-config-default)
 (global-auto-complete-mode t)
 (auto-complete-mode t)
