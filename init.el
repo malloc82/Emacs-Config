@@ -36,6 +36,7 @@
 ;; Feature setup
 (dolist (config-file '("general"
                        "functions"
+                       "faces"
                        "lang"))
   (load-library config-file))
 
