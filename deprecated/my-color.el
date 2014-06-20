@@ -325,18 +325,18 @@
   )
 
 (defun linux-setting (face-config)
-  (setq initial-frame-alist `((top   . 25)  (left   . 10)
-                              (width . 95)  (height . 80)
+  (setq initial-frame-alist `((top   . 0)  (left   . 1635)
+                              (width . 150)  (height . 75)
                               (menu-bar-lines . 1) (tool-bar-lines . nil)
                               ,@face-config
                               ))
-  (setq special-display-frame-alist `((top   . 25)  (left   . 10)
-                                      (width . 95)  (height . 70)
+  (setq special-display-frame-alist `((top   . 25)  (left   . 50)
+                                      (width . 100)  (height . 80)
                                       (menu-bar-lines . 1) (tool-bar-lines . nil)
                                       ,@face-config
                                       ))
-  (setq default-frame-alist `((top   . 50)  (left   . 120)
-                              (width . 95)  (height . 80)
+  (setq default-frame-alist `((top   . 50)  (left   . 950)
+                              (width . 130)  (height . 80)
                               (menu-bar-lines . 1) (tool-bar-lines . nil)
                               ,@face-config
                               ))

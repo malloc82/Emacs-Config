@@ -10,8 +10,7 @@
 (when window-system (set-exec-path-from-shell-PATH))
 
 ;; (setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
-(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH")
-                             ":~/.emacs.d/"))
+(setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":~/.emacs.d/"))
 
 (setenv "SCIPY_PIL_IMAGE_VIEWER" "feh")
 
@@ -20,4 +19,4 @@
 ;;                                      "~/repos/ITA-Rebus"))
 
 ;; for java
-(setenv "JAVA_HOME" "/Library/Java/JavaVirtualMachines/jdk/Contents/Home")
+(setenv "JAVA_HOME" "/usr/java/default")

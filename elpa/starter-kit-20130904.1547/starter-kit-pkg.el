@@ -4,4 +4,4 @@
     (find-file-in-project "3.0")
     (smex "1.1.2")
     (ido-ubiquitous "0.3")
-    (magit "0.8.1")))
+    (magit "1.2.1")))
