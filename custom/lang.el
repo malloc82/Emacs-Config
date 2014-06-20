@@ -62,7 +62,9 @@
 (require 'yasnippet-bundle)
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/elpa/yasnippet-20140514.1649/snippets")
+(let ((path (m-expand-file-path "snippets" "~/.emacs.d/elpa/yasnippet-*")))
+  (when path
+    (yas/load-directory path)))
 ;; ============================================================================
 
 ;; (setq c-default-style '((c-mode    . "stroustrup") 

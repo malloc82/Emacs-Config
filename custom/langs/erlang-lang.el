@@ -1,7 +1,7 @@
 ;; -*- mode: emacs-lisp -*-
 ;; Erlang settings
 
-(let ((path (m-expand-lib-path "emacs" "/opt/local/lib/erlang/lib/")))
+(let ((path (m-expand-file-path "emacs" "/opt/local/lib/erlang/lib/")))
   (unless (null path)
     (message "erlang emacs found: %s" path)
     (push path load-path)

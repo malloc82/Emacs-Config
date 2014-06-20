@@ -192,13 +192,12 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
     (let ((path (shell-command-to-string (format "which %s" program))))
       (unless (= (length path) 0) (substring path 0 -1)))))
 
-(defun m-expand-lib-path (lib-name search-path)
+(defun m-expand-file-path (filename search-path)
   "Returns full path of a library"
-  (when (and (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
-             (file-exists-p search-path))
-    (let ((path (shell-command-to-string (format "find %s -iname \"%s\"" search-path  lib-name))))
+  (when (and (or (eq system-type 'gnu/linux) (eq system-type 'darwin)))
+    (let ((path (shell-command-to-string
+                 (format "find %s -iname \"%s\" 2>/dev/null" search-path  filename))))
       (unless (= (length path) 0) (substring path 0 -1)))))
-
 
 (defun clean-tramp ()
   (interactive)
