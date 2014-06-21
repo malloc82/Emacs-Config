@@ -11,6 +11,7 @@
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
 
 (require 'linum+)
+(setq linum-format "%3d")
 (global-linum-mode t)
 (column-number-mode t)
 

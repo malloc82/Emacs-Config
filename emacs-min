@@ -1,9 +1,5 @@
 ;; -*- mode: Lisp -*-
-
-;; Timer
-(defvar *emacs-load-start* (current-time))
-
-;; Basic setup
+;; 
 
 (if (string= system-type "darwin")
     (progn
@@ -33,26 +29,3 @@
 (if (eq current-path nil)
     (cd "~/.")
     (cd current-path))
-
-;; Feature setup
-(dolist (config-file '("general"
-                       "functions"
-                       "lang"))
-  (load-library config-file))
-
-(message "Emacs config loaded in %ds"
-         (destructuring-bind (hi lo ms &optional ps) (current-time)
-           (- (+ hi lo)
-              (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
