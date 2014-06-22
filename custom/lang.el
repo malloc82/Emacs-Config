@@ -86,11 +86,11 @@
   (load-library lang-setting))
 
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
-(dolist (hook '((LaTeX-mode-hook . "latex-settings")
-                ;; (python-mode-hook . "python-lang")
+(dolist (hook '((LaTeX-mode-hook   . "latex-settings")
+                (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")
-                (erlang-mode-hook . "erlang-lang")
-                (ocaml-mode-hook . "ocaml-lang")))
+                (erlang-mode-hook  . "erlang-lang")
+                (ocaml-mode-hook   . "ocaml-lang")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
 ;; =================================

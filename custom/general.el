@@ -1,6 +1,4 @@
 ;; -*- mode: Lisp -*-
-(message "here")
-
 (setq debug-on-error nil)
 (setq visible-bell 1)
 (blink-cursor-mode t)
