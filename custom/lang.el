@@ -74,7 +74,7 @@
 ;;                         (awk-mode  . "awk")
 ;;                         (other     . "gnu")))
 
-(add-to-list 'load-path "~/.emacs.d/custom/languages/")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/langs"))
 (dolist (lang-setting '("c_c++-lang"
                         "objc-lang"
                         "lisp-lang"

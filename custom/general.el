@@ -73,7 +73,7 @@
 ;; ============================================
 
 
-(add-to-list 'load-path "~/.emacs.d/custom/configurations/")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/config"))
 (dolist (config-file '("backup"
                        "ac-config"
                        "compilation-config"

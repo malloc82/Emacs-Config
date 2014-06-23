@@ -11,22 +11,25 @@
       (setq ns-alternate-modifier 'none)))
 
 (setq current-path (getenv "PWD"))
-(cd "~/.emacs.d/custom")
+(cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path 
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/custom/themes/")
-(setq load-path (append '("~/.emacs.d/"
-                          "~/.emacs.d/custom/"
-                          "~/.emacs.d/vendor/"
-                          "PACKAGE_DIRECTORY") load-path))
+(dolist (path `(,(expand-file-name "~/.emacs.d")
+                ,(expand-file-name "~/.emacs.d/custom")
+                ,(expand-file-name "~/.emacs.d/vendor")
+                "PACKAGE_DIRECTORY"))
+  (add-to-list 'load-path path))
 
 (load-library "env")
 
 (when (>= emacs-major-version 24)
+  (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
   (require 'package)
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.milkbox.net/packages/")))
+  (dolist (repo '(("gnu"       . "http://elpa.gnu.org/packages/")
+                  ("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("melpa"     . "http://melpa.milkbox.net/packages/")))
+    (add-to-list 'package-archives repo))
   (package-initialize))
+
 (load-library "keys")
 
 (if (eq current-path nil)
