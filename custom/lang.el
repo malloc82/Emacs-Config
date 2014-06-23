@@ -90,7 +90,8 @@
                 (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")
                 (erlang-mode-hook  . "erlang-lang")
-                (ocaml-mode-hook   . "ocaml-lang")))
+                (ocaml-mode-hook   . "ocaml-lang")
+                (org-mode-hook     . "org-mode-config")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
 ;; =================================

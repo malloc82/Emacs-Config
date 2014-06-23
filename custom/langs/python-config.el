@@ -12,6 +12,12 @@
 (ac-config-default)
 ;; =============================
 
+(outline-minor-mode 1)
+
+(set-variable 'py-indent-offset 4)
+(set-variable 'py-smart-indentation nil)
+(set-variable 'indent-tabs-mode nil) 
+
 (setq python-shell-interpreter "/usr/local/bin/ipython"
       python-shell-interpreter-args "--colors=Linux" ;; Linux, LightBG, NoColor
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
