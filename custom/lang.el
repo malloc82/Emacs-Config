@@ -62,7 +62,7 @@
 (require 'yasnippet-bundle)
 (require 'yasnippet)
 (yas/initialize)
-(let ((path (m-expand-file-path "snippets" "~/.emacs.d/elpa/yasnippet-*")))
+(let ((path (find-expand-file-path "~/.emacs.d/elpa/yasnippet-*" "snippets")))
   (when path
     (yas/load-directory path)))
 ;; ============================================================================

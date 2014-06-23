@@ -19,7 +19,7 @@
   ;; (defvar *lisp-bin-path* "/opt/local/bin/sbcl")
 
   (let ((slime-dir "~/Installed/Emacs/slime/")
-        (lisp-bin-path (m-expand-prog-path "sbcl")))
+        (lisp-bin-path (find-expand-file-path nil "sbcl")))
     
     (when (and (file-directory-p slime-dir)
                (not (null lisp-bin-path)))
