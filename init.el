@@ -56,7 +56,7 @@
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
  '(custom-enabled-themes (quote (dark-night)))
- '(custom-safe-themes (quote ("e16dde57bd700fad0930fac2e83b24a6f452cbeba4e0084dab8954ff9b2782e8" "8b231ba3e5f61c2bb1bc3a2d84cbd16ea17ca13395653566d4dfbb11feaf8567" default)))
+ '(custom-safe-themes (quote ("0449a71c940c57f767774e30d7bf28b64456f431510d8cde29e86657a2602df6" "c74707525c9c07ecd2856e7bd3c5ed43897062229633b565edbef92c0b5e2583")))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
  '(tool-bar-mode nil))

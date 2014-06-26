@@ -9,7 +9,7 @@
  '(link ((t (:foreground "blue1" :underline t))))
  '(link-visited ((t (:foreground "magenta4" :underline t))))
  '(header-line ((t (:background "grey90" :foreground "grey20" :box nil))))
- '(default ((t (:background "black" :foreground "white"))))
+ '(default ((t (:background "black" :foreground "gray"))))
  '(cursor ((t (:background "yellow" :foreground "white"))))
  '(region ((t (:background "blue4"))))
  '(mode-line ((t (:background "grey70" :foreground "black" :box (:line-width -1 :style released-button)))))

@@ -9,7 +9,7 @@
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
 
 (require 'linum+)
-(setq linum-format "%3d")
+(setq linum-format "%4d")
 (global-linum-mode t)
 (column-number-mode t)
 
