@@ -1,8 +1,8 @@
-(deftheme dark-night
-  "Created 2014-06-19.")
+(deftheme dark-night-gray
+  "Created 2014-06-26.")
 
 (custom-theme-set-faces
- 'dark-night
+ 'dark-night-gray
  '(font-lock-preprocessor-face ((t (:foreground "LightSteelBlue"))))
  '(isearch ((t (:background "magenta3" :foreground "lightskyblue1"))))
  '(lazy-highlight ((t (:background "paleturquoise"))))
@@ -32,5 +32,5 @@
  '(button ((t (:background "black" :weight bold))))
  '(org-hide ((t (:foreground "black")))))
 
-(provide-theme 'dark-night)
+(provide-theme 'dark-night-gray)
 

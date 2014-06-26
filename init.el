@@ -55,8 +55,8 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
- '(custom-enabled-themes (quote (dark-night)))
- '(custom-safe-themes (quote ("0449a71c940c57f767774e30d7bf28b64456f431510d8cde29e86657a2602df6" "c74707525c9c07ecd2856e7bd3c5ed43897062229633b565edbef92c0b5e2583")))
+ '(custom-enabled-themes (quote (dark-night-white)))
+ '(custom-safe-themes (quote ("f7f192d710a6fabdc937b2ca2b2d4f4360f9f2c1550b8ccd7660f6f026381286" default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
