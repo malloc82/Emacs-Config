@@ -60,9 +60,11 @@
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
-(cond ((string= system-type "gnu/linux")
-       (custom-set-faces
-        '(default ((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal))))))
-      ((string= system-type "darwin")
-       (custom-set-faces
-        '(default ((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))))))
+
+(cond
+  ((eq system-type 'gnu/linux)
+   (custom-set-faces
+    '(default ((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal))))))
+  ((eq system-type 'darwin)
+   (custom-set-faces
+    '(default ((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))))))

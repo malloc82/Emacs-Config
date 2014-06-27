@@ -81,7 +81,8 @@
                        ;; "eshell-config"
                        "etags-config"
                        "frame-settings"
-                       "terminal-config"))
+                       "terminal-config"
+                       "tramp-config"))
   (load-library config-file))
 
 
