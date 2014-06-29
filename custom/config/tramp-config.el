@@ -20,7 +20,7 @@
 (if (>= emacs-major-version 23)
     (progn 
       (message "Load tramp config for Emacs %d.%d" emacs-major-version emacs-minor-version)
-      (setq tramp-default-method "ssh")
+      (setq tramp-default-method "rsync")
       (setq tramp-encoding-shell "/bin/bash"))
     (progn   ;; else, for emacs 22
       (message "Load old tramp config for Emacs %d.%d" emacs-major-version emacs-minor-version)
