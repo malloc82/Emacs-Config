@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (auctex-latexmk-setup) "auctex-latexmk" "auctex-latexmk.el"
-;;;;;;  (21410 36803 0 0))
+;;;;;;  (21424 62770 0 0))
 ;;; Generated autoloads from auctex-latexmk.el
 
 (autoload 'auctex-latexmk-setup "auctex-latexmk" "\
@@ -14,8 +14,8 @@ Add LatexMk command to TeX-command-list.
 
 ;;;***
 
-;;;### (autoloads nil nil ("auctex-latexmk-pkg.el") (21410 36803
-;;;;;;  681259 0))
+;;;### (autoloads nil nil ("auctex-latexmk-pkg.el") (21424 62770
+;;;;;;  37076 0))
 
 ;;;***
 

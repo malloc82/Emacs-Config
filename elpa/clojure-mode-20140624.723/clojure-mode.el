@@ -8,7 +8,7 @@
 ;;       Phil Hagelberg <technomancy@gmail.com>
 ;;       Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://github.com/clojure-emacs/clojure-mode
-;; Version: 20140617.508
+;; Version: 20140624.723
 ;; X-Original-Version: 3.0.0-cvs
 ;; Keywords: languages, lisp
 
@@ -147,8 +147,8 @@ For example, \[ is allowed in :db/id[:db.part/user]."
     (define-key map (kbd "C-:") 'clojure-toggle-keyword-string)
     (easy-menu-define clojure-mode-menu map "Clojure Mode menu"
       '("Clojure"
-        ["Eval Function Definition" lisp-eval-defun]
-        ["Eval Last Sexp" lisp-eval-last-sexp]
+        ["Eval Top-Level Expression" lisp-eval-defun]
+        ["Eval Last Expression" lisp-eval-last-sexp]
         ["Eval Region" lisp-eval-region]
         "--"
         ["Run Inferior Lisp" clojure-display-inferior-lisp-buffer]
@@ -156,7 +156,12 @@ For example, \[ is allowed in :db/id[:db.part/user]."
         ["Load File" clojure-load-file]
         "--"
         ["Toggle between string & keyword" clojure-toggle-keyword-string]
-        ["Jump Between Test and Code" clojure-jump-between-tests-and-code]))
+        ["Mark string" clojure-mark-string]
+        ["Insert ns form at point" clojure-insert-ns-form-at-point]
+        ["Insert ns form at beginning" clojure-insert-ns-form]
+        ["Update ns form" clojure-update-ns]
+        "--"
+        ["Version" clojure-mode-display-version]))
     map)
   "Keymap for Clojure mode.  Inherits from `lisp-mode-shared-map'.")
 
