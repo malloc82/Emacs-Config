@@ -1,4 +1,4 @@
-;; -*- mode: Lisp -*- 
+;; -*- mode: Lisp -*-
 ;; Terminal inside emacs
 
 (require 'multi-term)
@@ -23,7 +23,6 @@
 ;; ;; used to change case sensitive for search including find-tag
 ;; (set-default 'case-fold-search nil)
 
-;; (add-hook 'term-exec-hook 
-;;             (lambda () 
+;; (add-hook 'term-exec-hook
+;;             (lambda ()
 ;;               (set-buffer-process-coding-system 'binary 'binary)))
-

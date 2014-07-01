@@ -25,7 +25,7 @@ not visiting a file"
              (t (find-tags-file-r (directory-file-name parent))))))
 
     (if (buffer-file-name)
-        (catch 'found-it 
+        (catch 'found-it
           (find-tags-file-r (buffer-file-name)))
         (error "buffer is not visiting a file"))))
 
@@ -37,5 +37,5 @@ otherwise raises an error."
   (setq tags-table-list (cons (jds-find-tags-file) tags-table-list)))
 
 ;; ;; delay search the TAGS file after open the source file
-;; (add-hook 'emacs-startup-hook 
+;; (add-hook 'emacs-startup-hook
 ;; 	'(lambda () (jds-set-tags-file-path)))

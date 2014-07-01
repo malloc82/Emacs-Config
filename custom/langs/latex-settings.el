@@ -34,7 +34,7 @@
 
 ;; use Skim as default pdf viewer
 ;; Skim's displayline is used for forward search (from .tex to .pdf)
-;; option -b highlights the current line; option -g opens Skim in the background  
+;; option -b highlights the current line; option -g opens Skim in the background
 
 (cond ((string= system-type "darwin")
        (setq TeX-output-view-style

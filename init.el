@@ -11,7 +11,7 @@
       (setq ns-alternate-modifier 'none)))
 
 (setq current-path (getenv "PWD"))
-(cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path 
+(cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path
 
 (dolist (path `(,(expand-file-name "~/.emacs.d")
                 ,(expand-file-name "~/.emacs.d/custom")

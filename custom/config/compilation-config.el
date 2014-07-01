@@ -1,13 +1,13 @@
-;; -*- mode: Lisp -*- 
-;; Compilation settings 
+;; -*- mode: Lisp -*-
+;; Compilation settings
 
 (setq compilation-scroll-output t)
 
 ;; (defun cc-goto-first-error (buffer exit-condition)
-;;   (with-current-buffer buffer 
-;;     (goto-char (point-min)) 
+;;   (with-current-buffer buffer
+;;     (goto-char (point-min))
 ;;     (compilation-next-error 1)))
-;; (add-to-list 'compilation-finish-functions 'cc-goto-first-error) 
+;; (add-to-list 'compilation-finish-functions 'cc-goto-first-error)
 
 ;; (setq compilation-auto-jump-to-first-error nil)
 

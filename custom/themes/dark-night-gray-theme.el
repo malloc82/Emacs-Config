@@ -33,4 +33,3 @@
  '(org-hide ((t (:foreground "black")))))
 
 (provide-theme 'dark-night-gray)
-

@@ -21,7 +21,7 @@
        '(
          ("\\.[Hh]$"                   . c++-mode)
          ("\\.i$"                      . c++-mode) ;; swig
-         ("\\.inl$"                    . c++-mode) ;; template functions 
+         ("\\.inl$"                    . c++-mode) ;; template functions
          ;; ("\\.cu$"                     . c-mode)
          ("\\.go$"                     . go-mode)
          ("\\.d$"                      . d-mode)   ;; dtrace
@@ -67,7 +67,7 @@
     (yas/load-directory path)))
 ;; ============================================================================
 
-;; (setq c-default-style '((c-mode    . "stroustrup") 
+;; (setq c-default-style '((c-mode    . "stroustrup")
 ;;                         (c++-mode  . "stroustrup")
 ;;                         (objc-mode . "stroustrup")
 ;;                         (java-mode . "java")

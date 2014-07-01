@@ -19,7 +19,7 @@
 
 (setq x-select-enable-clipboard t)       ;; can access clipboard
 (setq ispell-program-name "aspell") ;; spell checker
-(setq-default transient-mark-mode t)  ;; transient-mark-mode 
+(setq-default transient-mark-mode t)  ;; transient-mark-mode
 (setq scroll-preserve-screen-position 1) ;; Pgup/dn will return exactly to the starting point.
 (setq next-line-add-newlines nil)
 
@@ -45,7 +45,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode +1)) ;; tool bar / menu bar
 
-(require 'mic-paren) 
+(require 'mic-paren)
 (setq show-paren-style 'parenthesis) ;; Showing matching parentheses in GNU Emacs
 (show-paren-mode t)
 
@@ -91,12 +91,12 @@
 ;; -------- (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 
 
-;; (add-hook 'first-change-hook 
-;;           #'(lambda nil 
-;;               ;; set for all 'regular' buffers 
-;;               (unless (string-match "\\`[ *].*[*]\\'" 
-;;                                     (buffer-name)) 
-;;                 (setq buffer-offer-save t)))) 
+;; (add-hook 'first-change-hook
+;;           #'(lambda nil
+;;               ;; set for all 'regular' buffers
+;;               (unless (string-match "\\`[ *].*[*]\\'"
+;;                                     (buffer-name))
+;;                 (setq buffer-offer-save t))))
 
 
 ;; ================================

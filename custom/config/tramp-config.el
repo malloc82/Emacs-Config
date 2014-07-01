@@ -18,7 +18,7 @@
 (setq password-cache-expiry nil)
 
 (if (>= emacs-major-version 23)
-    (progn 
+    (progn
       (message "Load tramp config for Emacs %d.%d" emacs-major-version emacs-minor-version)
       (setq tramp-default-method "rsync")
       (setq tramp-encoding-shell "/bin/bash"))
@@ -29,13 +29,12 @@
           (setq tramp-default-user "zcai")
           (setq tramp-default-method "ssh")
           (add-to-list 'tramp-methods
-           '("ssh" 
-             (tramp-connection-function tramp-open-connection-rsh) 
-             (tramp-login-program "ssh") 
-             (tramp-copy-program nil) 
-             (tramp-remote-sh "/bin/bash") 
-             (tramp-login-args ("-e" "none")) 
-             (tramp-copy-args nil) 
-             (tramp-copy-keep-date-arg nil) 
+           '("ssh"
+             (tramp-connection-function tramp-open-connection-rsh)
+             (tramp-login-program "ssh")
+             (tramp-copy-program nil)
+             (tramp-remote-sh "/bin/bash")
+             (tramp-login-args ("-e" "none"))
+             (tramp-copy-args nil)
+             (tramp-copy-keep-date-arg nil)
              (tramp-password-end-of-line nil)))))))
-

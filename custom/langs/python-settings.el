@@ -34,14 +34,14 @@
 (setq ropemacs-enable-autoimport t)
 
 ;; ===========================
-;; python-mode extension 
+;; python-mode extension
 ;; ===========================
 
 (outline-minor-mode 1)
 
 (set-variable 'py-indent-offset 4)
 (set-variable 'py-smart-indentation nil)
-(set-variable 'indent-tabs-mode nil) 
+(set-variable 'indent-tabs-mode nil)
 ;;(highlight-beyond-fill-column)
 ;;(define-key python-mode-map "\C-m" 'newline-and-indent)
 (abbrev-mode)
@@ -49,7 +49,7 @@
 (set (make-variable-buffer-local 'beginning-of-defun-function)
      'py-beginning-of-def-or-class)
 (setq outline-regexp "def\\|class ")
-(load "py-mode-ext")  
+(load "py-mode-ext")
 (load "pyp")
 
 (message "pymacs path : %s" pymacs-load-path)
@@ -72,7 +72,7 @@
 ;; ====================================
 
 (load "~/.emacs.d/my-packages/nxhtml/autostart.el")
-(setq mumamo-background-colors nil) 
+(setq mumamo-background-colors nil)
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
 
 (setq debug-on-error nil)

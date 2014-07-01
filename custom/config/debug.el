@@ -25,7 +25,7 @@
 
 
 ;; =================================
-;; GDB configuration 
+;; GDB configuration
 ;; =================================
 
 ;; (require 'gud)

@@ -8,7 +8,7 @@
 (defun paredit-escape (char)
   ;; I'm too lazy to figure out how to do this without a separate
   ;; interactive function.
-  
+
   ;;  This was removed in later version of paredit
   (interactive "cEscaping character...")
   (if (eq char 127)                     ; The backslash was a typo, so
@@ -26,11 +26,11 @@
 
   (define-key mode-type (kbd "\"") 'paredit-doublequote)
   (define-key mode-type (kbd "\\") 'paredit-backslash)
-  
+
   (define-key mode-type (kbd "RET") 'paredit-newline)
   (define-key mode-type (kbd "<return>") 'paredit-newline)
-  ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with 
-  
+  ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with
+
   ;; nb: this assumes dvorak key layout
   ;; (define-key mode-type (kbd "C-h") 'backward-sexp) ;; use C-M-<left>
   ;; (define-key mode-type (kbd "C-n") 'forward-sexp)  ;; use C-M-<right>
@@ -50,7 +50,7 @@
   ;; commands in sequence to reformat code and having to take a finger off of control
   ;; to add a return is a pain
   (define-key mode-type (kbd "C-<return>") 'paredit-newline)
-  
+
   (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
   )
 
@@ -91,7 +91,7 @@
 
               (define-key eshell-mode-map (kbd "\"") 'paredit-doublequote)
               (define-key eshell-mode-map (kbd "\\") 'paredit-backslash)
-              
+
               (define-key eshell-mode-map (kbd "C-t") 'transpose-sexps)
               (define-key eshell-mode-map (kbd "C-M-t") 'transpose-chars)
               (define-key eshell-mode-map (kbd "C-M-k") 'paredit-kill)
@@ -123,7 +123,7 @@
               (define-key slime-repl-mode-map (kbd "{") 'paredit-open-curly)
               (define-key slime-repl-mode-map (kbd "}") 'paredit-close-curly)
               (define-key slime-repl-mode-map (kbd "M-0") 'paredit-escape) ;; also try : \
-              
+
               (define-key slime-repl-mode-map (kbd "\"") 'paredit-doublequote)
               (define-key slime-repl-mode-map (kbd "\\") 'paredit-backslash)))
 

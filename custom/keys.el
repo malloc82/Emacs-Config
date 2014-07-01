@@ -60,7 +60,7 @@
       (global-set-key (kbd "C-c )") 'forward-sexp)
       (global-set-key (kbd "C-c u") 'backward-up-list)
       (global-set-key (kbd "C-c d") 'down-list)
-      
+
       (global-set-key (kbd "C-c j") 'forward-paragraph)
       (global-set-key (kbd "C-c k") 'backward-paragraph)))
 
@@ -97,7 +97,7 @@
 
 ;;(defun scroll-down-one-line ()
 ;;      (interactive)
-;;            (scroll-down 1)) 
+;;            (scroll-down 1))
 ;;
 
 (global-set-key (kbd "C-l") 'load-current-buffer-p)
@@ -122,7 +122,7 @@
 ;; ========================================================================
 ;; smex
 ;; ------------------------------------------------------------------------
-(global-set-key (kbd "M-x") 'smex) ;; ?? 
+(global-set-key (kbd "M-x") 'smex) ;; ??
 (global-set-key (kbd "M-X") 'smex-major-mode-commands) ;; ??
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; ??
@@ -133,6 +133,6 @@
 ;; alignment
 ;; ----------------------------------------------------------------------------
 (global-set-key (kbd "C-c a =")
-  (lambda () (interactive) 
+  (lambda () (interactive)
     (align-regexp (region-beginning) (region-end) "\\(\\s-*\\)=" 1 1 nil)))
 ;; ============================================================================

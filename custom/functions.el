@@ -170,20 +170,20 @@
     (find-file profile)))
 
 (require 'ediff)
-(defun ediff-current-buffer-revision () 
-  "Run Ediff to diff current buffer's file against VC depot. 
+(defun ediff-current-buffer-revision ()
+  "Run Ediff to diff current buffer's file against VC depot.
 Uses `vc.el' or `rcs.el' depending on `ediff-version-control-package'.
-source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-in-emacs-23-2" 
-  (interactive) 
-  (let ((file (or (buffer-file-name) 
-                  (error "Current buffer is not visiting a file")))) 
-    (if (and (buffer-modified-p) 
-             (y-or-n-p (message "Buffer %s is modified. Save buffer? " 
-                                (buffer-name)))) 
-        (save-buffer (current-buffer))) 
-    (ediff-load-version-control) 
-    (funcall 
-     (intern (format "ediff-%S-internal" ediff-version-control-package)) 
+source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-in-emacs-23-2"
+  (interactive)
+  (let ((file (or (buffer-file-name)
+                  (error "Current buffer is not visiting a file"))))
+    (if (and (buffer-modified-p)
+             (y-or-n-p (message "Buffer %s is modified. Save buffer? "
+                                (buffer-name))))
+        (save-buffer (current-buffer)))
+    (ediff-load-version-control)
+    (funcall
+     (intern (format "ediff-%S-internal" ediff-version-control-package))
      "" "" nil)))
 
 (defun find-expand-file-path (search-path filename)
@@ -213,4 +213,3 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   "Align region to equal signs"
    (interactive "r")
    (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))
-

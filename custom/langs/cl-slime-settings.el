@@ -20,21 +20,21 @@
 
   (let ((slime-dir "~/Installed/Emacs/slime/")
         (lisp-bin-path (find-expand-file-path nil "sbcl")))
-    
+
     (when (and (file-directory-p slime-dir)
                (not (null lisp-bin-path)))
       (message "==> Slime is installed, loading slime-mode settings")
       (message "==> Slime path: %s" slime-dir)
-      
+
       (add-to-list  'load-path  slime-dir)
 
-      
+
       (require 'slime)
-      
+
       ;; REPL does not load automatically, so need to load slime-repl or slime-fancy
       ;; (slime-setup '(slime-repl))
       (slime-setup '(slime-fancy slime-asdf))
-      
+
       (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
       (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
       ;; Optionally, specify the lisp program you are using. Default is "lisp"
@@ -49,12 +49,12 @@
             slime-repl-return-behaviour :send-only-if-after-complete
             slime-autodoc-use-multiline-p t
             slime-highlight-compiler-notes t
-            slime-fuzzy-completion-in-place nil) 
-      
+            slime-fuzzy-completion-in-place nil)
+
       (require 'mic-paren)
 
       (paren-activate)
-      
+
       (setf paren-priority 'close)
 
       (defmacro defslime-start (name lisp)
@@ -95,7 +95,7 @@
 
       (autoload 'install-bridge "bridge" "Install a process bridge." t)
 
-      (setq bridge-hook 
+      (setq bridge-hook
             '(lambda ()
               ;; Example options
               (setq bridge-source-insert nil) ;Don't insert in source buffer
@@ -147,7 +147,7 @@
               (concat "/ssh:zcai@localhost:" file-name)))
 
       ;; (setq slime-close-parens-at-point t)
-      
+
       ))
 
   ;; enable ac-slime, auto-complete for common lisp
@@ -160,7 +160,7 @@
     (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-slime/ac-dict")
     (setq ac-comphist-file  "~/.emacs.d/ac-comphist.dat")
     (ac-config-default))
-  
+
   ;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
   ;; (eval-after-load "auto-complete"
   ;;   '(add-to-list 'ac-modes 'slime-repl-mode))

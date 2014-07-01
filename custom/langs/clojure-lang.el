@@ -20,14 +20,14 @@
   (define-key mode-type (kbd "\"") 'paredit-doublequote)
   (define-key mode-type (kbd "\\") 'paredit-backslash)
 
-  ;; ;; Can't have these for clojure mode 
+  ;; ;; Can't have these for clojure mode
   ;; (define-key mode-type (kbd "RET") 'paredit-newline)
   ;; (define-key mode-type (kbd "<return>") 'paredit-newline)
-  ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with 
+  ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with
   (define-key mode-type (kbd "M-<backspace>") 'delete-backward-char)
   (define-key mode-type (kbd "C-M-<right>")   'forward-sexp)
   (define-key mode-type (kbd "C-M-<left>")    'backward-sexp)
-  ;; (define-key mode-type (kbd "C-<return>") 'paredit-newline)  
+  ;; (define-key mode-type (kbd "C-<return>") 'paredit-newline)
 
   ;; ;; nb: this assumes dvorak key layout
   ;; ;; (define-key mode-type (kbd "C-k") 'kill-sexp)
@@ -44,12 +44,12 @@
   ;; (define-key mode-type (kbd "C-=") 'down-list)
   ;; ;; this may seem strange, but i often use the C-<whatever> motion
   ;; ;; commands in sequence to reformat code and having to take a finger off of control
-  ;; ;; to add a return is a pain  
+  ;; ;; to add a return is a pain
   ;; (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
   )
 
 ;; (require 'ac-nrepl)
-;; ;; **BAD** cause clojure mode very sluggish to use 
+;; ;; **BAD** cause clojure mode very sluggish to use
 ;; (add-hook 'cider-mode-hook 'ac-nrepl-setup)
 ;; (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 ;; (eval-after-load "auto-complete"
