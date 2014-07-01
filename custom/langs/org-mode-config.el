@@ -22,3 +22,4 @@
 (define-key org-mode-map (kbd "S-<up>")    'windmove-up)
 (define-key org-mode-map (kbd "S-<down>")  'windmove-down)
 
+(setq show-trailing-whitespace t)

@@ -27,6 +27,7 @@
 (setq LaTeX-math-mode t)
 (setq LaTeX-command "latex -file-line-error")
 (setq LaTeX-math-menu-unicode t)
+(setq show-trailing-whitespace t)
 
 ;; make latexmk available via C-c C-c
 ;; Note: SyncTeX is setup via ~/.latexmkrc (see below)

@@ -80,8 +80,6 @@
                         "lisp-lang"
                         "clojure-lang"
                         "perl-lang"
-                        "go-lang"
-                        "matlab-lang"
                         "web"))
   (load-library lang-setting))
 
@@ -91,7 +89,9 @@
                 (haskell-mode-hook . "haskell-lang")
                 (erlang-mode-hook  . "erlang-lang")
                 (ocaml-mode-hook   . "ocaml-lang")
-                (org-mode-hook     . "org-mode-config")))
+                (org-mode-hook     . "org-mode-config")
+                (matlab-mode-hook  . "matlab-lang")
+                (go-mode-hook      . "go-lang")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
 ;; =================================

@@ -8,3 +8,5 @@
     (setq erlang-root-dir "/opt/local/lib/erlang/")
     (setq exec-path (append '("/opt/local/lib/erlang/bin") exec-path))
     (require 'erlang-start)))
+
+(setq show-trailing-whitespace t)

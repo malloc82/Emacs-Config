@@ -40,3 +40,5 @@
     (if has-proj-file
         (compile "xcodebuild -configuration Debug")
       (compile "make"))))
+
+(setq show-trailing-whitespace t)

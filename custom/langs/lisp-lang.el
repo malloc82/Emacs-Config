@@ -65,6 +65,7 @@
 
 (add-hook 'lisp-mode-hook
           #'(lambda ()
+              (setq show-trailing-whitespace t)
               (add-lisp-paredit lisp-mode-map)
               (load-library "cl-slime-settings.el")
               (slime-mode 1)))

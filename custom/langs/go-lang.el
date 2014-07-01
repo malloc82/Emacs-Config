@@ -22,4 +22,4 @@ Add this to .emacs to run gofmt on the current buffer when saving:
 
 \(fn)" t nil)
 
-
+(setq show-trailing-whitespace t)

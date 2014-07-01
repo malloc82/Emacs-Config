@@ -14,4 +14,4 @@
 
 ;;It is necessary to perform an update!
 (jka-compr-update)
-
+(setq show-trailing-whitespaces t)

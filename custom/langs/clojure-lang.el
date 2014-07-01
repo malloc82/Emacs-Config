@@ -57,6 +57,7 @@
 
 (add-hook 'clojure-mode-hook
           #'(lambda ()
+              (setq show-trailing-whitespace t)
               (enable-paredit-mode)
               (add-clojure-paredit clojure-mode-map)))
 
