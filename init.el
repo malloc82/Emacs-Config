@@ -56,7 +56,7 @@
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
  '(custom-enabled-themes (quote (dark-night-white)))
- '(custom-safe-themes (quote ("f7f192d710a6fabdc937b2ca2b2d4f4360f9f2c1550b8ccd7660f6f026381286" default)))
+ '(custom-safe-themes (quote ("0b92b1fa0eac7a74667f75c44858533b6f3dfddcaeaa5c3dc702f05f55b430c1" "f7f192d710a6fabdc937b2ca2b2d4f4360f9f2c1550b8ccd7660f6f026381286" default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -68,3 +68,9 @@
   ((eq system-type 'darwin)
    (custom-set-faces
     '(default ((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal)))))
