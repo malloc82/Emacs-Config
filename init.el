@@ -5,10 +5,9 @@
 
 ;; Basic setup
 
-(if (string= system-type "darwin")
-    (progn
-      (setq ns-command-modifier 'meta)
-      (setq ns-alternate-modifier 'none)))
+(when (string= system-type "darwin")
+  (setq ns-command-modifier 'meta)
+  (setq ns-alternate-modifier 'none))
 
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path

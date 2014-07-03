@@ -8,15 +8,12 @@ else
 	ERR := $(error os is not supported)
 endif
 
-# ifeq ($(OS), linux)
-# endif
-
 CONFIG_DIR := ~/.emacs.d/
 FONT_DIR   := /usr/share/fonts/truetype/custom
 install-linux-fonts:
 	if [ "$(OS)" == "linux" ]; then \
 		sudo mkdir -p $(FONT_DIR); \
-		sudo find custom/fonts/ -type f -iname "*.ttf" -exec cp {} $(FONT_DIR) \;; \
+		sudo find custom/fonts/ -type f -iname "*.ttf" -exec cp -t $(FONT_DIR) '{}' + ; \
 		sudo fc-cache -f -v; \
 	fi
 byte-compile-directory:
