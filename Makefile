@@ -1,4 +1,5 @@
-OS := $(shell uname -s 2>/dev/null | tr [:upper:] [:lower:])
+SHELL := /bin/bash
+OS    := $(shell uname -s 2>/dev/null | tr [:upper:] [:lower:])
 ifeq ($(OS), linux)
 	EMACS := /usr/local/bin/emacs-24.3
 else ifeq ($(OS), darwin)
@@ -7,12 +8,21 @@ else
 	ERR := $(error os is not supported)
 endif
 
-DIR   := ~/.emacs.d/
+# ifeq ($(OS), linux)
+# endif
 
+CONFIG_DIR := ~/.emacs.d/
+FONT_DIR   := /usr/share/fonts/truetype/custom
+install-linux-fonts:
+	if [ "$(OS)" == "linux" ]; then \
+		sudo mkdir -p $(FONT_DIR); \
+		sudo find custom/fonts/ -type f -iname "*.ttf" -exec cp {} $(FONT_DIR) \;; \
+		sudo fc-cache -f -v; \
+	fi
 byte-compile-directory:
-	$(EMACS) --batch --eval '(byte-recompile-directory "$(DIR)" 0)'
+	$(EMACS) --batch --eval '(byte-recompile-directory "$(CONFIG_DIR)" 0)'
 clean:
-	find $(DIR) -type f -iname "*.elc" -exec rm {} +
+	find $(CONFIG_DIR) -type f -iname "*.elc" -exec rm {} +
 test:
 	@echo $(OS)
 	@echo $(EMACS)
@@ -21,4 +31,3 @@ err: ; $(ERR)
 
 # install:
 # 	cp init.el ~/.emacs
-
