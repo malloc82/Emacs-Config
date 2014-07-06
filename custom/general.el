@@ -1,4 +1,5 @@
 ;; -*- mode: Lisp -*-
+(setq confirm-kill-emacs 'yes-or-no-p)
 (setq debug-on-error nil)
 (setq visible-bell 1)
 (blink-cursor-mode t)
@@ -7,6 +8,9 @@
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
+(setq undo-limit 100000) ;; Increase number of undo
+(when (or (eq system-type 'darwin) (eq system-type 'gnu/linux))
+  (setq shell-file-name "/bin/bash"))
 
 (require 'linum+)
 (setq linum-format "%4d")

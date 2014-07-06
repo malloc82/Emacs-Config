@@ -5,7 +5,7 @@
 (require 'verilog-mode)
 (require 'cperl-mode)
 (require 'gas-mode)
-(require 'cuda-mode)
+;; (require 'cuda-mode)
 (when (string= system-type "gnu/linux")
   (require 'apt-sources))
 ;; (require 'csharp-mode) ;; not using it at the moment
