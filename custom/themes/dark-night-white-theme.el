@@ -6,7 +6,7 @@
  '(font-lock-preprocessor-face ((t (:foreground "LightSteelBlue"))))
  '(isearch ((t (:background "magenta3" :foreground "lightskyblue1"))))
  '(lazy-highlight ((t (:background "paleturquoise"))))
- '(link ((t (:foreground "blue1" :underline t))))
+ '(link ((t (:foreground "CadetBlue3" :underline t))))
  '(link-visited ((t (:foreground "magenta4" :underline t))))
  '(header-line ((t (:background "grey90" :foreground "grey20" :box nil))))
  '(default ((t (:background "black" :foreground "white"))))

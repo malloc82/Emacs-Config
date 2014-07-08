@@ -5,15 +5,14 @@
 
 ;; Basic setup
 
-(when (string= system-type "darwin")
+(when (eq system-type 'darwin)
   (setq ns-command-modifier 'meta)
   (setq ns-alternate-modifier 'none))
 
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path
 
-(dolist (path `(,(expand-file-name "~/.emacs.d")
-                ,(expand-file-name "~/.emacs.d/custom")
+(dolist (path `(,(expand-file-name "~/.emacs.d/custom")
                 ,(expand-file-name "~/.emacs.d/vendor")
                 "PACKAGE_DIRECTORY"))
   (add-to-list 'load-path path))
@@ -55,7 +54,7 @@
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
  '(custom-enabled-themes (quote (dark-night-white)))
- '(custom-safe-themes (quote ("0b92b1fa0eac7a74667f75c44858533b6f3dfddcaeaa5c3dc702f05f55b430c1" "8af501792712f057e3327bc9015ade564947e7f7788b6bd816bd2333082e26d9" default)))
+ '(custom-safe-themes (quote ("3711410aeaeac6ada8e98bbb6ec3cd18cee95c62fb4e255e514a80eb651d6a04" "a3e0f7f15fb6dfa0981a6eafe38bac711db1a7bdfa7f32b9bfb911eb7625217c" default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
  '(tool-bar-mode nil))

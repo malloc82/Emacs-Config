@@ -1,4 +1,5 @@
 ;; -*- mode: Lisp -*-
+(setq confirm-kill-emacs 'yes-or-no-p)
 (setq debug-on-error nil)
 (setq visible-bell 1)
 (blink-cursor-mode t)
@@ -9,6 +10,9 @@
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
 (put 'narrow-to-region 'disable nil)  ;; focus on a region
 (put 'erase-buffer 'disabled nil)
+(setq undo-limit 100000) ;; Increase number of undo
+(when (or (eq system-type 'darwin) (eq system-type 'gnu/linux))
+  (setq shell-file-name "/bin/bash"))
 
 (require 'linum+)
 (setq linum-format "%4d")
