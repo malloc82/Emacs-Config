@@ -23,6 +23,7 @@
 ;; ;; used to change case sensitive for search including find-tag
 ;; (set-default 'case-fold-search nil)
 
-;; (add-hook 'term-exec-hook
-;;             (lambda ()
-;;               (set-buffer-process-coding-system 'binary 'binary)))
+(add-hook 'term-exec-hook
+          #'(lambda ()
+              ;; (set-buffer-process-coding-system 'binary 'binary)
+              (yas-minor-mode -1)))

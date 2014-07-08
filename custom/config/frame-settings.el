@@ -17,3 +17,8 @@
 (setq display-buffer-reuse-frames t)
 (setq pop-up-frames nil)
 (setq pop-up-windows nil)
+
+(add-to-list
+ 'display-buffer-alist
+ '("\\*compilation\\*" . (display-buffer-reuse-window
+                          . ((reusable-frames . t)))))

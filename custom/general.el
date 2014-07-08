@@ -7,6 +7,8 @@
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
 (setq resize-minibuffer-mode t) ;; resize the mini-buffer when necessary
+(put 'narrow-to-region 'disable nil)  ;; focus on a region
+(put 'erase-buffer 'disabled nil)
 
 (require 'linum+)
 (setq linum-format "%4d")
@@ -81,6 +83,7 @@
                        ;; "eshell-config"
                        "etags-config"
                        "frame-settings"
+                       "shell-mode-config"
                        "terminal-config"
                        "tramp-config"))
   (load-library config-file))
