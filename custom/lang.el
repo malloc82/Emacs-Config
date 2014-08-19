@@ -10,8 +10,8 @@
   (require 'apt-sources))
 ;; (require 'csharp-mode) ;; not using it at the moment
 ;; (require 'd-mode)
-;; (require 'scilab)
-;; (require 'matlab)
+(require 'scilab)
+(require 'matlab)
 
 ;; ===========================================================================================
 ;; Set up which modes to use for which file extensions
