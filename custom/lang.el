@@ -87,7 +87,8 @@
                 (ocaml-mode-hook   . "ocaml-lang")
                 (org-mode-hook     . "org-mode-config")
                 (matlab-mode-hook  . "matlab-lang")
-                (go-mode-hook      . "go-lang")))
+                (go-mode-hook      . "go-lang")
+                (vhdl-mode-hook    . "vhdl-settings")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
 ;; =================================
