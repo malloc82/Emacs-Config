@@ -78,6 +78,14 @@
 ;; (wg-load "/path/to/saved/workgroups")
 ;; ============================================
 
+;; ==================================================================
+;; Ediff split behavior
+;; ------------------------------------------------------------------
+(setq ediff-split-window-function (if (> (frame-width) 150)
+                                      'split-window-horizontally
+                                      'split-window-vertically))
+;; ==================================================================
+
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/config"))
 (dolist (config-file '("backup"
