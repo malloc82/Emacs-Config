@@ -3720,8 +3720,9 @@ tracked in the current repository are reverted if
                 (save-excursion
                   (goto-char (magit-section-end section))
                   (when (re-search-backward
-                         magit-process-error-message-re nil
-                         (magit-section-content-beginning section))
+                         magit-process-error-message-re
+                         (magit-section-content-beginning section)
+                         t)
                     (match-string 1)))))
          "Git failed")
      (let ((key (and (buffer-live-p command-buf)
@@ -5267,7 +5268,8 @@ Works with local or remote branches.
        ((and is-current is-master)
         (message "Cannot delete master branch while it's checked out."))
        (is-current
-        (if (y-or-n-p "Cannot delete current branch.  Switch to master first? ")
+        (if (and (magit-ref-exists-p "refs/heads/master")
+                 (y-or-n-p "Cannot delete current branch.  Switch to master first? "))
             (progn
               (magit-checkout "master")
               (magit-run-git args))
