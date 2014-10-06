@@ -209,7 +209,7 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (previous-buffer)
   (delete-frame))
 
-(defun align-to-equals (begin end)
+(defun align-to-= (begin end)
   "Align region to equal signs"
    (interactive "r")
    (align-regexp begin end "\\(\\s-*\\)=" 1 1 ))
@@ -218,3 +218,23 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   "Align region to coma"
    (interactive "r")
    (align-regexp begin end ",\\(\\s-*\\)" 1 1 t))
+
+(defun align-to-=> (begin end)
+  "Align region to => (for vhdl)"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\)=>" 1 1 ))
+
+(defun align-to-<= (begin end)
+  "Align region to <= (for vhdl)"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\)<=" 1 1 ))
+
+(defun align-to-: (begin end)
+  "Align region to :"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\):" 1 1 ))
+
+(defun vhdl-align-to--- (begin end)
+    "Align region to --"
+   (interactive "r")
+   (align-regexp begin end "\\(\\s-*\\)--" 1 1 ))
