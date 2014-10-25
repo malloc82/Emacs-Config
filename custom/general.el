@@ -18,7 +18,7 @@
 (setq linum-format "%4d")
 (global-linum-mode t)
 (column-number-mode t)
-
+(setq hl-line-mode t)
 ;; (require 'which-function)
 (which-function-mode t)
 (setq which-func-unknown "unknown")

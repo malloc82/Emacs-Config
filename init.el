@@ -54,20 +54,19 @@
  '(ansi-color-names-vector
    ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
- '(custom-enabled-themes (quote (dark-night-white)))
- '(ido-first-match ((t (:foreground "light green"))))
- '(custom-safe-themes
-   (quote
-    ("3711410aeaeac6ada8e98bbb6ec3cd18cee95c62fb4e255e514a80eb651d6a04" "a3e0f7f15fb6dfa0981a6eafe38bac711db1a7bdfa7f32b9bfb911eb7625217c" default)))
+ '(custom-enabled-themes (if window-system
+                             (quote (dark-night-white))
+                             nil))
+ '(custom-safe-themes (quote ("3711410aeaeac6ada8e98bbb6ec3cd18cee95c62fb4e255e514a80eb651d6a04" "a3e0f7f15fb6dfa0981a6eafe38bac711db1a7bdfa7f32b9bfb911eb7625217c" default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
-(cond
-  ((eq system-type 'gnu/linux)
-   (custom-set-faces
-    '(default ((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal))))))
-  ((eq system-type 'darwin)
-   (custom-set-faces
-    '(default ((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))))))
+(custom-set-faces
+ `(default ,(cond
+             ((eq system-type 'gnu/linux)
+              '((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal))))
+             ((eq system-type 'darwin)
+              '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))))))
+ '(ido-first-match ((t (:foreground "light green")))))
 
