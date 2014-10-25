@@ -1,10 +1,10 @@
 ;;; auctex-latexmk-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads (auctex-latexmk-setup) "auctex-latexmk" "auctex-latexmk.el"
-;;;;;;  (21516 31950 0 0))
+;;;### (autoloads nil "auctex-latexmk" "auctex-latexmk.el" (21579
+;;;;;;  49118 262026 3000))
 ;;; Generated autoloads from auctex-latexmk.el
 
 (autoload 'auctex-latexmk-setup "auctex-latexmk" "\
@@ -14,16 +14,9 @@ Add LatexMk command to TeX-command-list.
 
 ;;;***
 
-;;;### (autoloads nil nil ("auctex-latexmk-pkg.el") (21516 31950
-;;;;;;  987852 0))
-
-;;;***
-
-(provide 'auctex-latexmk-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; auctex-latexmk-autoloads.el ends here
