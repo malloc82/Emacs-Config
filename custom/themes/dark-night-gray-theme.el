@@ -30,6 +30,7 @@
  '(dired-directory ((t (:foreground "Skyblue2"))))
  '(highlight ((t (:background "gray20"))))
  '(button ((t (:background "black" :weight bold))))
- '(org-hide ((t (:foreground "black")))))
+ '(org-hide ((t (:foreground "black"))))
+ '(ido-first-match ((t (:foreground "light green")))))
 
 (provide-theme 'dark-night-gray)

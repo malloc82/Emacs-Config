@@ -10,6 +10,8 @@ endif
 
 CONFIG_DIR := ~/.emacs.d/
 FONT_DIR   := /usr/share/fonts/truetype/custom
+
+
 install-linux-fonts:
 	if [ "$(OS)" == "linux" ]; then \
 		sudo mkdir -p $(FONT_DIR); \
