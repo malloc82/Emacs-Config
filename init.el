@@ -22,10 +22,13 @@
 (when (>= emacs-major-version 24)
   (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
   (require 'package)
-  (dolist (repo '(("gnu"       . "http://elpa.gnu.org/packages/")
-                  ("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("melpa"     . "http://melpa.milkbox.net/packages/")))
+  (dolist (repo '(("gnu"          . "http://elpa.gnu.org/packages/")
+                  ("marmalade"    . "http://marmalade-repo.org/packages/")
+                  ;; ("melpa"        . "http://melpa.milkbox.net/packages/") ;; snapshots
+                  ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
     (add-to-list 'package-archives repo))
+  (setq package-pinned-archives '((clojure-mode . "melpa-stable")
+                                  (cider        . "melpa-stable")))
   (package-initialize))
 
 (load-library "keys")

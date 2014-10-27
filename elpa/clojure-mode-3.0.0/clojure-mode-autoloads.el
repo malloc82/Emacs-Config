@@ -1,10 +1,10 @@
 ;;; clojure-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads (clojure-mode) "clojure-mode" "clojure-mode.el"
-;;;;;;  (21475 19884 0 0))
+;;;### (autoloads nil "clojure-mode" "clojure-mode.el" (21581 35513
+;;;;;;  664289 295000))
 ;;; Generated autoloads from clojure-mode.el
 
 (autoload 'clojure-mode "clojure-mode" "\
@@ -18,16 +18,14 @@ Major mode for editing Clojure code.
 
 ;;;***
 
-;;;### (autoloads nil nil ("clojure-mode-pkg.el") (21475 19884 253870
-;;;;;;  0))
+;;;### (autoloads nil nil ("clojure-mode-pkg.el") (21581 35513 672550
+;;;;;;  475000))
 
 ;;;***
 
-(provide 'clojure-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; clojure-mode-autoloads.el ends here
