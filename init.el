@@ -68,7 +68,8 @@
      default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(scroll-bar-mode t))
 
 (custom-set-faces
  `(default ,(cond
