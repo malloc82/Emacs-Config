@@ -4373,8 +4373,9 @@ can be used to override this."
               (and (yes-or-no-p
                     (format "There is no Git repository in %s.  Create one? "
                             dir))
-                   (magit-init dir)
-                   (setq topdir (magit-get-top-dir dir))))
+                   (progn
+                     (magit-init dir)
+                     (setq topdir (magit-get-top-dir dir)))))
       (let ((default-directory topdir))
         (magit-mode-setup magit-status-buffer-name
                           (or switch-function
@@ -4703,7 +4704,7 @@ As determined by the directory passed to `magit-status'."
   (and buffer-file-name
        (let ((topdir (magit-get-top-dir magit-default-directory)))
          (and topdir
-              (string-prefix-p topdir buffer-file-name)
+              (equal (file-remote-p topdir) (file-remote-p buffer-file-name))
               ;; ^ Avoid needlessly connecting to unrelated tramp remotes.
               (string= topdir (magit-get-top-dir
                                (file-name-directory buffer-file-name)))))))
@@ -6342,7 +6343,7 @@ Other key binding:
 
 (defconst magit-log-oneline-re
   (concat "^"
-          "\\(?4:\\(?:[-_/|\\*o.] *\\)+ *\\)?"     ; graph
+          "\\(?4:\\(?: *[-_/|\\*o.] *\\)+ *\\)?"   ; graph
           "\\(?:"
           "\\(?1:[0-9a-fA-F]+\\) "                 ; sha1
           "\\(?:\\(?3:([^()]+)\\) \\)?"            ; refs
@@ -7671,8 +7672,7 @@ blame to center around the line point is on."
      (list revision filename
            (and (equal filename
                        (ignore-errors
-                         (magit-file-relative-name
-                          (file-name-directory (buffer-file-name)))))
+                         (magit-file-relative-name (buffer-file-name))))
                 (line-number-at-pos)))))
   (let ((default-directory (magit-get-top-dir)))
     (apply #'call-process magit-git-executable nil 0 nil "gui" "blame"
