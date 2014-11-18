@@ -232,7 +232,7 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
 (defun align-to-<= (begin end)
   "Align region to <= (for vhdl)"
   (interactive "r")
-  (align-regexp begin end "\\(\\s-*\\)<=\\(\\s-*\\)" 2 1 t))
+  (align-regexp begin end "\\(\\s-*\\)<=" 1 1 ))
 
 (defun align-to-: (begin end)
   "Align region to :"

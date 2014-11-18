@@ -38,7 +38,8 @@
             (dired-omit-mode 1)
             (setq dired-omit-files "^\\.?#\\|^\\.[^.].+$")
             (setq dired-omit-extensions
-                  (append '(".dvi" ".aux" ".blg" ".toc" ".log")
+                  (append '(".dvi" ".aux" ".blg" ".toc" ".log"
+                            ".fdb_latexmk" ".synctex.gz" ".fls" ".out" ".pdf")
                           dired-omit-extensions))
             ;; (setq dired-omit-files
             ;;       (concat dired-omit-files "\\|^\\..+$"))

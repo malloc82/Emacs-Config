@@ -3,7 +3,7 @@
 (setq debug-on-error nil)
 (setq visible-bell 1)
 (blink-cursor-mode t)
-(setq-default fill-column 115)
+(setq-default fill-column 120)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
@@ -15,7 +15,7 @@
   (setq shell-file-name "/bin/bash"))
 
 (require 'linum+)
-(setq linum-format "%4d")
+(setq linum-format (if window-system "%4d" "%4d \u2502 "))
 (global-linum-mode t)
 (column-number-mode t)
 ;; (require 'which-function)

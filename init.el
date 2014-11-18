@@ -58,9 +58,7 @@
  '(ansi-color-names-vector
    ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
- '(custom-enabled-themes (if window-system
-                             (quote (dark-night-white))
-                             nil))
+ '(custom-enabled-themes '(dark-night-white))
  '(custom-safe-themes
    (quote
     ("ff4e5b66bfb81f97e3a0e98ad501d7a061c5a5b90ff8d8222ad7a45caffce804" ;; dark-night-gray
