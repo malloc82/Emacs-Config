@@ -1,3 +1,33 @@
+2014-11-27  Reto Zimmermann  <reto@gnu.org>
+
+	* vhdl-mode.el: Version 3.36.1 released.
+	(vhdl-compiler-alist): Anchor all error regexps.
+	(vhdl-compile-use-local-error-regexp): Change default to nil.
+
+2014-11-26  Reto Zimmermann  <reto@gnu.org>
+
+	* vhdl-mode.el
+	(vhdl-compiler-alist): Anchor some error regexps.
+
+2014-11-18  Reto Zimmermann  <reto@gnu.org>
+
+	* vhdl-mode.el
+	(vhdl-aput, vhdl-adelete, vhdl-aget): Simplify code.
+
+2014-04-02  Reto Zimmermann  <reto@gnu.org>
+
+	* vhdl-mode.el
+	(vhdl-import-project): Also set `vhdl-compiler'.
+
+2014-03-28  Reto Zimmermann  <reto@gnu.org>
+
+	* vhdl-mode.el
+	(vhdl-compile-init): Not initialize regexps for Emacs 22+.
+	(vhdl-error-regexp-emacs-alist): Remove regexps from all compilers
+	except `vhdl-compiler'.
+	(vhdl-template-replace-header-keywords): Fix bug for "<title string>".
+	(vhdl-aput, vhdl-adelete, vhdl-aget): Rename functions from assoc.el.
+
 2014-03-11  Reto Zimmermann  <reto@gnu.org>
 
 	* vhdl-mode.el: Version 3.35.1 released.
