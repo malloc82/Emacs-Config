@@ -661,7 +661,7 @@ completion.
 Magit will look into these directories for Git repositories and
 offer them as choices for `magit-status'."
   :group 'magit
-  :type '(repeat string))
+  :type '(repeat directory))
 
 (defcustom magit-repo-dirs-depth 3
   "The maximum depth to look for Git repos.
@@ -4383,6 +4383,8 @@ can be used to override this."
                           #'magit-status-mode
                           #'magit-refresh-status)))))
 
+(defalias 'magit-status-internal 'magit-status) ; forward compatibility
+
 (defun magit-refresh-status ()
   (magit-git-exit-code "update-index" "--refresh")
   (magit-with-section (section status 'status nil t)
@@ -6080,7 +6082,7 @@ With prefix argument, changes in staging area are kept.
 \('git stash save [--keep-index] DESCRIPTION')"
   (interactive (list (read-string "Stash description: " nil
                                   'magit-read-stash-history)))
-  (magit-run-git "stash" "save" magit-custom-options "--" description))
+  (magit-run-git-async "stash" "save" magit-custom-options "--" description))
 
 ;;;###autoload
 (defun magit-stash-snapshot ()
@@ -6225,7 +6227,9 @@ to test.  This command lets Git choose a different one."
 ;;;###autoload
 (defun magit-log (&optional range)
   (interactive)
-  (unless range (setq range "HEAD"))
+  (cond ((not range) (setq range "HEAD"))
+        ;; Forward compatibility kludge.
+        ((listp range) (setq range (car range))))
   (magit-mode-setup magit-log-buffer-name nil
                     #'magit-log-mode
                     #'magit-refresh-log-buffer

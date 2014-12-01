@@ -65,6 +65,10 @@
           #'(lambda ()
               (cider-turn-on-eldoc-mode)
               (enable-paredit-mode)
+              (add-to-list 'paredit-space-for-delimiter-predicates
+                           'clojure-space-for-delimiter-p
+                           'clojure-no-space-after-tag)
+              (rainbow-delimiters-mode)
               (add-clojure-paredit  cider-repl-mode-map)))
 
 (eval-after-load 'clojure-mode
@@ -79,7 +83,16 @@
 (eval-after-load 'cider-repl-mode
   '(progn
     (font-lock-add-keywords
-     'cider-repl-mode `(("(\\|)" . 'esk-paren-face)))))
+     'cider-repl-mode `(("(\\(fn\\>\\)"
+                         (0 (progn (compose-region (match-beginning 1)
+                                                   (match-end 1) "ƒ")
+                                   nil)))
+                        ("(\\|)" . 'esk-paren-face)))))
+
+;; (eval-after-load 'cider-repl-mode
+;;   '(progn
+;;     (font-lock-add-keywords
+;;      'cider-repl-mode `(("(\\|)" . 'esk-paren-face)))))
 
 (setq cider-repl-use-clojure-font-lock t)
 (setq nrepl-hide-special-buffers t)
