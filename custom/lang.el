@@ -12,6 +12,7 @@
 ;; (require 'd-mode)
 (require 'scilab)
 (require 'matlab)
+(require 'haskell-mode)
 
 ;; ===========================================================================================
 ;; Set up which modes to use for which file extensions
