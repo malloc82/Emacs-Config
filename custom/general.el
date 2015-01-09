@@ -62,6 +62,12 @@
 (require 'ido)
 (ido-mode t)
 (setq ido-use-filename-at-point nil)
+;; Preventing auto-searches unless called explicitly
+(setq ido-auto-merge-work-directories-length -1)
+(define-key ido-file-dir-completion-map (kbd "C-c C-s")
+      (lambda()
+        (interactive)
+        (ido-initiate-auto-merge (current-buffer))))
 
 ;; ido bahavior for smex, modified keys in my-keys for smex
 (require 'smex)
