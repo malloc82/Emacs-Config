@@ -89,7 +89,8 @@
                 (org-mode-hook     . "org-mode-config")
                 (matlab-mode-hook  . "matlab-lang")
                 (go-mode-hook      . "go-lang")
-                (vhdl-mode-hook    . "vhdl-settings")))
+                (vhdl-mode-hook    . "vhdl-settings")
+                (verilog-mode-hook . "verilog-settings")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
 ;; =================================
