@@ -5,15 +5,15 @@
 ;; Authors:     Reto Zimmermann <reto@gnu.org>
 ;;		Rodney J. Whitby <software.vhdl-mode@rwhitby.net>
 ;; Maintainer:	Reto Zimmermann <reto@gnu.org>
-;; Version:     3.36.1
-;; RCS:		$Id: vhdl-mode.el,v 33.99 2014/11/27 14:47:15 reto Exp reto $
+;; Version:     3.37.1
+;; RCS:		$Id: vhdl-mode.el,v 33.100 2015/01/15 14:10:45 reto Exp reto $
 ;; Keywords:	languages vhdl
 ;; WWW:		http://www.iis.ee.ethz.ch/~zimmi/emacs/vhdl-mode.html
 
-(defconst vhdl-version "3.36.1"
+(defconst vhdl-version "3.37.1"
   "VHDL Mode version number.")
 
-(defconst vhdl-time-stamp "2014-11-27"
+(defconst vhdl-time-stamp "2015-01-15"
   "VHDL Mode time stamp for last update.")
 
 ;; This file is part of GNU Emacs.
@@ -56,7 +56,7 @@
 ;;   - Block commenting
 ;;   - Code fixing/alignment/beautification
 ;;   - Postscript printing
-;;   - VHDL'87/'93/'02 and VHDL-AMS supported
+;;   - VHDL'87/'93/'02/'08 and VHDL-AMS supported
 ;;   - Comprehensive menu
 ;;   - Fully customizable
 ;;   - Works under GNU Emacs (recommended) and XEmacs
@@ -721,6 +721,7 @@ A project setup file can be obtained by exporting a project (see menu).
 Basic standard:
   VHDL'87      : IEEE Std 1076-1987
   VHDL'93/02   : IEEE Std 1076-1993/2002
+  VHDL'08      : IEEE Std 1076-2008
 Additional standards:
   VHDL-AMS     : IEEE Std 1076.1 (analog-mixed-signal)
   Math packages: IEEE Std 1076.2 (`math_real', `math_complex')
@@ -729,7 +730,8 @@ NOTE: Activate the new setting in a VHDL buffer by using the menu entry
       \"Activate Options\"."
   :type '(list (choice :tag "Basic standard"
 		       (const :tag "VHDL'87" 87)
-		       (const :tag "VHDL'93/02" 93))
+		       (const :tag "VHDL'93/02" 93)
+		       (const :tag "VHDL'08" 08))
 	       (set :tag "Additional standards" :indent 2
 		    (const :tag "VHDL-AMS" ams)
 		    (const :tag "Math packages" math)))
@@ -944,6 +946,11 @@ If nil, only a list of actual parameters is entered."
 
 (defcustom vhdl-conditions-in-parenthesis nil
   "*Non-nil means place parenthesis around condition expressions."
+  :type 'boolean
+  :group 'vhdl-template)
+
+(defcustom vhdl-sensitivity-list-all t
+  "*Non-nil means use 'all' keyword in sensitivity list."
   :type 'boolean
   :group 'vhdl-template)
 
@@ -1731,7 +1738,7 @@ NOTE: Activate the new setting in a VHDL buffer by re-fontifying it (menu
 			  'vhdl-words-init 'vhdl-font-lock-init))
   :group 'vhdl-highlight)
 
-(defcustom vhdl-directive-keywords '("pragma" "synopsys")
+(defcustom vhdl-directive-keywords '("psl" "pragma" "synopsys")
   "*List of compiler directive keywords recognized for highlighting.
 
 NOTE: Activate the new setting in a VHDL buffer by re-fontifying it (menu
@@ -2006,6 +2013,8 @@ reported and the syntactic symbol is ignored.")
     (package		   . 0)
     (architecture	   . 0)
     (package-body	   . 0)
+    (context		   . 0)
+    (directive		   . 0)
     )
   "Default settings for offsets of syntactic elements.
 Do not change this constant!  See the variable `vhdl-offsets-alist' for
@@ -2070,7 +2079,8 @@ Here is the current list of valid syntactic element symbols:
  configuration          -- inside a configuration declaration
  package                -- inside a package declaration
  architecture           -- inside an architecture body
- package-body           -- inside a package body")
+ package-body           -- inside a package body
+ context                -- inside a context declaration")
 
 (defvar vhdl-comment-only-line-offset 0
   "*Extra offset for line which contains only the start of a comment.
@@ -2695,6 +2705,7 @@ elements > `vhdl-menu-max-size'."
   (define-key vhdl-template-map "Cd"	'vhdl-template-configuration-decl)
   (define-key vhdl-template-map "Cs"	'vhdl-template-configuration-spec)
   (define-key vhdl-template-map "co"	'vhdl-template-constant)
+  (define-key vhdl-template-map "ct"	'vhdl-template-context)
   (define-key vhdl-template-map "di"	'vhdl-template-disconnect)
   (define-key vhdl-template-map "el"	'vhdl-template-else)
   (define-key vhdl-template-map "ei"	'vhdl-template-elsif)
@@ -2995,7 +3006,7 @@ STRING are replaced by `-' and substrings are converted to lower case."
   (modify-syntax-entry ?\* "."    vhdl-mode-syntax-table)
   (modify-syntax-entry ?\+ "."    vhdl-mode-syntax-table)
   (modify-syntax-entry ?\. "."    vhdl-mode-syntax-table)
-  (modify-syntax-entry ?\/ "."    vhdl-mode-syntax-table)
+;  (modify-syntax-entry ?\/ "."    vhdl-mode-syntax-table)
   (modify-syntax-entry ?\: "."    vhdl-mode-syntax-table)
   (modify-syntax-entry ?\; "."    vhdl-mode-syntax-table)
   (modify-syntax-entry ?\< "."    vhdl-mode-syntax-table)
@@ -3008,11 +3019,13 @@ STRING are replaced by `-' and substrings are converted to lower case."
   ;; define underscore
   (when vhdl-underscore-is-part-of-word
     (modify-syntax-entry ?\_ "w"   vhdl-mode-syntax-table))
-  ;; a single hyphen is punctuation, but a double hyphen starts a comment
-  (modify-syntax-entry ?\- ". 12" vhdl-mode-syntax-table)
-  ;; and \n and \^M end a comment
-  (modify-syntax-entry ?\n ">"    vhdl-mode-syntax-table)
-  (modify-syntax-entry ?\^M ">"   vhdl-mode-syntax-table)
+  ;; single-line comments
+  (modify-syntax-entry ?\- ". 12b" vhdl-mode-syntax-table)
+  ;; multi-line comments
+  (modify-syntax-entry ?\/ ". 14b" vhdl-mode-syntax-table)
+  (modify-syntax-entry ?*  ". 23" vhdl-mode-syntax-table)
+  (modify-syntax-entry ?\n "> b"  vhdl-mode-syntax-table)
+  (modify-syntax-entry ?\^M "> b"   vhdl-mode-syntax-table)
   ;; define parentheses to match
   (modify-syntax-entry ?\( "()"   vhdl-mode-syntax-table)
   (modify-syntax-entry ?\) ")("   vhdl-mode-syntax-table)
@@ -3074,6 +3087,7 @@ STRING are replaced by `-' and substrings are converted to lower case."
 		 ("configuration" . vhdl-template-configuration-hook)
 		 ("cons"	   . vhdl-template-constant-hook)
 		 ("constant"	   . vhdl-template-constant-hook)
+		 ("context"	   . vhdl-template-context-hook)
 		 ("disconnect"	   . vhdl-template-disconnect-hook)
 		 ("downto"	   . vhdl-template-default-hook)
 		 ("else"	   . vhdl-template-else-hook)
@@ -3222,6 +3236,7 @@ STRING are replaced by `-' and substrings are converted to lower case."
       ("configuration declaration"	   vhdl-template-configuration-decl)
       ("configuration specification" 	   vhdl-template-configuration-spec)
       ("constant declaration"		   vhdl-template-constant)
+      ("context declaration"		   vhdl-template-context)
       ("disconnection specification"	   vhdl-template-disconnect)
       ("entity declaration"		   vhdl-template-entity)
       ("exit statement"			   vhdl-template-exit)
@@ -3409,6 +3424,7 @@ STRING are replaced by `-' and substrings are converted to lower case."
 	 ["Configuration (Decl)"	vhdl-template-configuration-decl t]
 	 ["Configuration (Spec)"	vhdl-template-configuration-spec t]
 	 ["Constant"		vhdl-template-constant t]
+	 ["Context"		vhdl-template-context t]
 	 ["Disconnect"		vhdl-template-disconnect t]
 	 ["Else"		vhdl-template-else t]
 	 ["Elsif"		vhdl-template-elsif t]
@@ -3750,6 +3766,11 @@ STRING are replaced by `-' and substrings are converted to lower case."
 				       (list '93 (cadr vhdl-standard)))
 	       (vhdl-activate-customizations))
 	:style radio :selected (eq '93 (car vhdl-standard))]
+       ["VHDL'08"
+	(progn (customize-set-variable 'vhdl-standard
+				       (list '08 (cadr vhdl-standard)))
+	       (vhdl-activate-customizations))
+	:style radio :selected (eq '08 (car vhdl-standard))]
        "--"
        ["VHDL-AMS"
 	(progn (customize-set-variable
@@ -3872,6 +3893,10 @@ STRING are replaced by `-' and substrings are converted to lower case."
        (customize-set-variable 'vhdl-conditions-in-parenthesis
 			       (not vhdl-conditions-in-parenthesis))
        :style toggle :selected vhdl-conditions-in-parenthesis]
+      ["Sensitivity List uses 'all'"
+       (customize-set-variable 'vhdl-sensitivity-list-all
+			       (not vhdl-sensitivity-list-all))
+       :style toggle :selected vhdl-sensitivity-list-all]
       ["Zero String..." (customize-option 'vhdl-zero-string) t]
       ["One String..." (customize-option 'vhdl-one-string) t]
       ("File Header"
@@ -4265,6 +4290,9 @@ STRING are replaced by `-' and substrings are converted to lower case."
      2)
     ("Entity"
      "^\\s-*\\(entity\\)\\s-+\\(\\(\\w\\|\\s_\\)+\\)"
+     2)
+    ("Context"
+     "^\\s-*\\(context\\)\\s-+\\(\\(\\w\\|\\s_\\)+\\)"
      2)
     )
   "Imenu generic expression for VHDL Mode.  See `imenu-generic-expression'.")
@@ -4718,7 +4746,7 @@ Usage:
 
   VHDL STANDARDS:
     The VHDL standards to be used are specified in option `vhdl-standard'.
-    Available standards are: VHDL'87/'93(02), VHDL-AMS, and Math Packages.
+    Available standards are: VHDL'87/'93(02)/'08, VHDL-AMS, and Math Packages.
 
 
   KEYWORD CASE:
@@ -5040,6 +5068,12 @@ Key bindings:
     )
   "List of VHDL'02 keywords.")
 
+(defconst vhdl-08-keywords
+  '(
+    "context" "force" "property" "release" "sequence"
+    )
+  "List of VHDL'08 keywords.")
+
 (defconst vhdl-ams-keywords
   '(
     "across" "break" "limit" "nature" "noise" "procedural" "quantity"
@@ -5080,6 +5114,12 @@ Key bindings:
     "std_ulogic" "std_ulogic_vector"
     )
   "List of VHDL'02 standardized types.")
+
+(defconst vhdl-08-types
+  '(
+    "boolean_vector" "integer_vector" "real_vector" "time_vector"
+    )
+  "List of VHDL'08 standardized types.")
 
 (defconst vhdl-ams-types
   ;; standards: IEEE Std 1076.1-2007, IEEE Std 1076.1.1-2004
@@ -5156,6 +5196,12 @@ Key bindings:
     )
   "List of VHDL'02 standardized attributes.")
 
+(defconst vhdl-08-attributes
+  '(
+    "instance_name" "path_name"
+    )
+  "List of VHDL'08 standardized attributes.")
+
 (defconst vhdl-ams-attributes
   '(
     "across" "through"
@@ -5227,6 +5273,15 @@ Key bindings:
     )
   "List of VHDL'02 standardized functions.")
 
+(defconst vhdl-08-functions
+  '(
+    "finish" "flush" "justify" "maximum" "minimum"
+    "resolution_limit" "rising_edge" "stop" "swrite"
+    "tee" "to_binarystring" "to_bstring" "to_hexstring" "to_hstring"
+    "to_octalstring" "to_ostring" "to_string"
+    )
+  "List of VHDL'08 standardized functions.")
+
 (defconst vhdl-ams-functions
   '(
     ;; package `standard'
@@ -5255,6 +5310,13 @@ Key bindings:
     )
   "List of VHDL'02 standardized packages and libraries.")
 
+(defconst vhdl-08-packages
+  '(
+    "env" "numeric_std_signed" "numeric_std_unsigned"
+    "ieee_bit_context" "ieee_std_context"  ;; contexts
+    )
+  "List of VHDL'08 standardized packages and libraries.")
+
 (defconst vhdl-ams-packages
   '(
     "fundamental_constants" "material_constants" "energy_systems"
@@ -5268,6 +5330,18 @@ Key bindings:
     "math_real" "math_complex"
     )
   "List of Math Packages standardized packages and libraries.")
+
+(defconst vhdl-08-directives
+  '(
+    "author" "author_info" "begin" "begin_protected" "comment"
+    "data_block" "data_keyname" "data_keyowner" "data_method"
+    "decrypt_license" "digest_block" "digest_key_method" "digest_keyname"
+    "digest_keyowner" "digest_method"
+    "encoding" "encrypt_agent" "encrypt_agent_info" "end" "end_protected"
+    "key_block" "key_keyname" "key_keyowner" "key_method"
+    "runtime_license" "viewport"
+    )
+  "List of VHDL'08 standardized tool directives.")
 
 (defvar vhdl-keywords nil
   "List of VHDL keywords.")
@@ -5288,6 +5362,9 @@ Key bindings:
   "List of VHDL standardized functions.")
 
 (defvar vhdl-packages nil
+  "List of VHDL standardized packages and libraries.")
+
+(defvar vhdl-directives nil
   "List of VHDL standardized packages and libraries.")
 
 (defvar vhdl-reserved-words nil
@@ -5335,17 +5412,20 @@ Key bindings:
 	(vhdl-upcase-list
 	 (and vhdl-highlight-case-sensitive vhdl-upper-case-keywords)
 	 (append vhdl-02-keywords
+		 (when (vhdl-standard-p '08) vhdl-08-keywords)
 		 (when (vhdl-standard-p 'ams) vhdl-ams-keywords))))
   (setq vhdl-types
 	(vhdl-upcase-list
 	 (and vhdl-highlight-case-sensitive vhdl-upper-case-types)
 	 (append vhdl-02-types
+		 (when (vhdl-standard-p '08) vhdl-08-types)
 		 (when (vhdl-standard-p 'ams) vhdl-ams-types)
 		 (when (vhdl-standard-p 'math) vhdl-math-types))))
   (setq vhdl-attributes
 	(vhdl-upcase-list
 	 (and vhdl-highlight-case-sensitive vhdl-upper-case-attributes)
 	 (append vhdl-02-attributes
+		 (when (vhdl-standard-p '08) vhdl-08-attributes)
 		 (when (vhdl-standard-p 'ams) vhdl-ams-attributes))))
   (setq vhdl-enum-values
 	(vhdl-upcase-list
@@ -5360,12 +5440,16 @@ Key bindings:
 		 '(""))))
   (setq vhdl-functions
 	(append vhdl-02-functions
+		(when (vhdl-standard-p '08) vhdl-08-functions)
 		(when (vhdl-standard-p 'ams) vhdl-ams-functions)
 		(when (vhdl-standard-p 'math) vhdl-math-functions)))
   (setq vhdl-packages
 	(append vhdl-02-packages
+		(when (vhdl-standard-p '08) vhdl-08-packages)
 		(when (vhdl-standard-p 'ams) vhdl-ams-packages)
 		(when (vhdl-standard-p 'math) vhdl-math-packages)))
+  (setq vhdl-directives
+	(append (when (vhdl-standard-p '08) vhdl-08-directives)))
   (setq vhdl-reserved-words
 	(append (when vhdl-highlight-forbidden-words vhdl-forbidden-words)
 		(when vhdl-highlight-verilog-keywords vhdl-verilog-keywords)
@@ -5410,7 +5494,8 @@ Key bindings:
 	 (list vhdl-upper-case-enum-values) vhdl-enum-values
 	 (list vhdl-upper-case-constants) vhdl-constants
 	 (list nil) vhdl-functions
-	 (list nil) vhdl-packages)))
+	 (list nil) vhdl-packages
+	 (list nil) vhdl-directives)))
 
 ;; initialize reserved words for VHDL Mode
 (vhdl-words-init)
@@ -5652,9 +5737,24 @@ the offset is simply returned."
 
 ;; Syntactic support functions:
 
-(defun vhdl-in-comment-p ()
-  "Check if point is in a comment."
-  (eq (vhdl-in-literal) 'comment))
+(defun vhdl-in-comment-p (&optional pos)
+  "Check if point is in a comment (include multi-line comments)."
+  (let ((parse (lambda (p)
+		 (let ((c (char-after p)))
+		   (or (and c (eq (char-syntax c) ?<))
+		       (nth 4 (parse-partial-sexp
+			       (save-excursion
+				 (beginning-of-defun)
+				 (point)) p)))))))
+    (save-excursion
+      (goto-char (or pos (point)))
+      (or (funcall parse (point))
+	  ;; `parse-partial-sexp's notion of comments doesn't span lines
+	  (progn
+	    (back-to-indentation)
+	    (unless (eolp)
+	      (forward-char)
+	      (funcall parse (point))))))))
 
 (defun vhdl-in-string-p ()
   "Check if point is in a string."
@@ -5679,6 +5779,9 @@ the offset is simply returned."
        ((nth 3 state) 'string)
        ((nth 4 state) 'comment)
        ((vhdl-beginning-of-macro) 'pound)
+       ((vhdl-beginning-of-directive) 'directive)
+       ;; for multi-line comments
+       ((and (vhdl-standard-p '08) (vhdl-in-comment-p)) 'comment)
        (t nil)))))
 
 (defun vhdl-in-extended-identifier-p ()
@@ -5729,7 +5832,7 @@ negative, skip forward otherwise."
       (goto-char lim )
       (while (< (point) here)
 	(setq match
-	      (and (re-search-forward "--\\|[\"']"
+	      (and (re-search-forward "--\\|[\"']\\|`"
 				      here 'move)
 		   (buffer-substring (match-beginning 0) (match-end 0))))
 	(setq state
@@ -5739,6 +5842,9 @@ negative, skip forward otherwise."
 	       ;; looking at the opening of a VHDL style comment
 	       ((string= "--" match)
 		(if (<= here (progn (end-of-line) (point))) 'comment))
+	       ;; looking at a directive
+	       ((string= "`" match)
+		(if (<= here (progn (end-of-line) (point))) 'directive))
 	       ;; looking at the opening of a double quote string
 	       ((string= "\"" match)
 		(if (not (save-restriction
@@ -5783,7 +5889,7 @@ negative, skip forward otherwise."
       (setq here (point))
       (vhdl-forward-comment hugenum)
       ;; skip preprocessor directives
-      (when (and (eq (char-after) ?#)
+      (when (and (or (eq (char-after) ?#) (eq (char-after) ?`))
 		 (= (vhdl-point 'boi) (point)))
 	(while (and (eq (char-before (vhdl-point 'eol)) ?\\)
 		    (= (forward-line 1) 0)))
@@ -5816,6 +5922,19 @@ negative, skip forward otherwise."
     (back-to-indentation)
     (if (and (<= (point) here)
 	     (eq (char-after) ?#))
+	t
+      (goto-char here)
+      nil)))
+
+(defun vhdl-beginning-of-directive (&optional lim)
+  "Go to the beginning of a directive (nicked from `cc-engine')."
+  (let ((here (point)))
+    (beginning-of-line)
+    (while (eq (char-before (1- (point))) ?\\)
+      (forward-line -1))
+    (back-to-indentation)
+    (if (and (<= (point) here)
+	     (eq (char-after) ?`))
 	t
       (goto-char here)
       nil)))
@@ -5876,7 +5995,7 @@ that point, else nil."
 ;; Core syntactic evaluation functions:
 
 (defconst vhdl-libunit-re
-  "\\b\\(architecture\\|configuration\\|entity\\|package\\)\\b[^_]")
+  "\\b\\(architecture\\|configuration\\|context\\|entity\\|package\\)\\b[^_]")
 
 (defun vhdl-libunit-p ()
   (and
@@ -5894,7 +6013,7 @@ that point, else nil."
    ))
 
 (defconst vhdl-defun-re
-  "\\b\\(architecture\\|block\\|configuration\\|entity\\|package\\|process\\|procedural\\|procedure\\|function\\)\\b[^_]")
+  "\\b\\(architecture\\|block\\|configuration\\|context\\|entity\\|package\\|process\\|procedural\\|procedure\\|function\\)\\b[^_]")
 
 (defun vhdl-defun-p ()
   (save-excursion
@@ -5903,7 +6022,7 @@ that point, else nil."
 	(save-excursion
 	  (backward-sexp)
 	  (not (looking-at "end\\s-+\\w")))
-      ;; "architecture", "configuration", "entity",
+      ;; "architecture", "configuration", "context", "entity",
       ;; "package", "procedure", "function":
       t)))
 
@@ -5917,7 +6036,7 @@ corresponding \"begin\" keyword, else return nil."
 	 (if (looking-at "block\\|process\\|procedural")
 	     ;; "block", "process". "procedural:
 	     (buffer-substring (match-beginning 0) (match-end 0))
-	   ;; "architecture", "configuration", "entity", "package",
+	   ;; "architecture", "configuration", "context", "entity", "package",
 	   ;; "procedure", "function":
 	   "is"))))
 
@@ -5938,7 +6057,7 @@ vhdl-begin-fwd-re, and are not inside a literal, and that we are not in
 the middle of an identifier that just happens to contain a \"begin\"
 keyword."
   (cond
-   ;; "[architecture|case|configuration|entity|package|
+   ;; "[architecture|case|configuration|context|entity|package|
    ;;   procedure|function] ... is":
    ((and (looking-at "i")
 	 (save-excursion
@@ -5951,7 +6070,7 @@ keyword."
 	   (let (foundp)
 	     (while (and (not foundp)
 			 (re-search-backward
-			  ";\\|\\b\\(architecture\\|case\\|configuration\\|entity\\|package\\|procedure\\|return\\|is\\|begin\\|process\\|procedural\\|block\\)\\b[^_]"
+			  ";\\|\\b\\(architecture\\|case\\|configuration\\|context\\|entity\\|package\\|procedure\\|return\\|is\\|begin\\|process\\|procedural\\|block\\)\\b[^_]"
 			  lim 'move))
 	       (if (or (= (preceding-char) ?_)
 		       (vhdl-in-literal))
@@ -6146,7 +6265,7 @@ of an identifier that just happens to contain an \"end\" keyword."
 	      (vector "for" (vhdl-first-word pos) nil nil))
 	     ;; "end [id]":
 	     (t
-	      (vector "begin\\|architecture\\|configuration\\|entity\\|package\\|procedure\\|function"
+	      (vector "begin\\|architecture\\|configuration\\|context\\|entity\\|package\\|procedure\\|function"
 		      (vhdl-first-word pos)
 		      ;; return an alist of (statement . keyword) mappings
 		      '(
@@ -6156,6 +6275,8 @@ of an identifier that just happens to contain an \"end\" keyword."
 			("architecture"	  . "is")
 			;; "configuration ... is ... end [id]":
 			("configuration"  . "is")
+			;; "context ... is ... end [id]":
+			("context"	  . "is")
 			;; "entity ... is ... end [id]":
 			("entity"	  . "is")
 			;; "package ... is ... end [id]":
@@ -6770,7 +6891,8 @@ keyword at PLACEHOLDER, then return the library unit type."
 	  (cond
 	   ((looking-at "e") 'entity)
 	   ((looking-at "a") 'architecture)
-	   ((looking-at "c") 'configuration)
+	   ((looking-at "conf") 'configuration)
+	   ((looking-at "cont") 'context)
 	   ((looking-at "p")
 	    (save-excursion
 	      (goto-char bod)
@@ -7046,7 +7168,7 @@ is not moved."
 		   (goto-char (1+ containing-sexp))
 		   (skip-chars-forward " \t")
 		   (not (eolp))
-		   (not (looking-at "--")))
+		   (not (looking-at "--\\|`")))
 		 (save-excursion
 		   (vhdl-beginning-of-statement-1 containing-sexp)
 		   (skip-chars-backward " \t(")
@@ -7195,8 +7317,10 @@ is not moved."
 	;; now we need to look at any modifiers
 	(goto-char indent-point)
 	(skip-chars-forward " \t")
-	(if (looking-at "--")
+	(if (or (looking-at "--") (looking-at "/\\*"))
 	    (vhdl-add-syntax 'comment))
+	(if (looking-at "`")
+	    (vhdl-add-syntax 'directive))
 	(if (eq literal 'pound)
 	    (vhdl-add-syntax 'cpp-macro))
 	;; return the syntax
@@ -7270,8 +7394,12 @@ only-lines."
 	(vhdl-comment-indent)
       ;; otherwise, indent as specified by vhdl-comment-only-line-offset
       (if (not (bolp))
-	  (or (car-safe vhdl-comment-only-line-offset)
-	      vhdl-comment-only-line-offset)
+	  ;; inside multi-line comment
+	  (if (looking-at "\\*")
+	      1
+	    ;; otherwise
+	    (or (car-safe vhdl-comment-only-line-offset)
+		vhdl-comment-only-line-offset))
 	(or (cdr-safe vhdl-comment-only-line-offset)
 	    (car-safe vhdl-comment-only-line-offset)
 	    -1000			;jam it against the left side
@@ -7511,7 +7639,7 @@ ENDPOS is encountered."
     (mapc
      (function
       (lambda (elt)
-	(if (memq (car elt) '(entity configuration package
+	(if (memq (car elt) '(entity configuration context package
 				     package-body architecture))
 	    nil
 	  (setq expurgated (append expurgated (list elt))))))
@@ -7841,7 +7969,7 @@ the token in MATCH."
     (vhdl-prepare-search-2
      (save-excursion
        ;; search for declarative part
-       (when (and (re-search-backward "^\\(architecture\\|begin\\|configuration\\|end\\|entity\\|package\\)\\>" nil t)
+       (when (and (re-search-backward "^\\(architecture\\|begin\\|configuration\\|context\\|end\\|entity\\|package\\)\\>" nil t)
 		  (not (member (upcase (match-string 1)) '("BEGIN" "END"))))
 	 (setq beg (point))
 	 (re-search-forward "^\\(begin\\|end\\)\\>" nil t)
@@ -9201,6 +9329,27 @@ a configuration declaration if not within a design unit."
 	  (insert ";")
 	  (vhdl-comment-insert-inline))))))
 
+(defun vhdl-template-context ()
+  "Insert a context declaration."
+  (interactive)
+  (let ((margin (current-indentation))
+	(start (point))
+	entity-exists string name position)
+    (vhdl-insert-keyword "CONTEXT ")
+    (when (setq name (vhdl-template-field "name" nil t start (point)))
+      (vhdl-insert-keyword " IS\n")
+      (when (memq vhdl-insert-empty-lines '(unit all)) (insert "\n"))
+      (indent-to (+ margin vhdl-basic-offset))
+      (setq position (point))
+      (insert "\n")
+      (when (memq vhdl-insert-empty-lines '(unit all)) (insert "\n"))
+      (indent-to margin)
+      (vhdl-insert-keyword "END ")
+      (unless (vhdl-standard-p '87)
+	(vhdl-insert-keyword "CONTEXT "))
+      (insert name ";")
+      (goto-char position))))
+
 (defun vhdl-template-default ()
   "Insert nothing."
   (interactive)
@@ -9861,8 +10010,10 @@ otherwise."
       (forward-char 1))
     (insert "(")
     (if (not seq)
-	(unless (setq input-signals
-		      (vhdl-template-field "[sensitivity list]" ")" t))
+	(unless (or (and (vhdl-standard-p '08) vhdl-sensitivity-list-all
+			 (progn (insert "all)") (setq input-signals "all")))
+		    (setq input-signals
+			  (vhdl-template-field "[sensitivity list]" ")" t)))
 	  (setq input-signals "")
 	  (delete-char -2))
       (setq clock (or (and (not (equal "" vhdl-clock-name))
@@ -10596,7 +10747,8 @@ specification, if not already there."
        (while (search-forward "<standard>" end t)
 	 (replace-match
 	  (concat "VHDL" (cond ((vhdl-standard-p '87) "'87")
-			       ((vhdl-standard-p '93) "'93/02"))
+			       ((vhdl-standard-p '93) "'93/02")
+			       ((vhdl-standard-p '08) "'08"))
 		  (when (vhdl-standard-p 'ams) ", VHDL-AMS")
 		  (when (vhdl-standard-p 'math) ", Math Packages")) t t))
        (goto-char beg)
@@ -11134,7 +11286,7 @@ else insert tab (used for word completion in VHDL minibuffer)."
      (save-excursion
        (beginning-of-line)
        ;; search backward for block beginning or end
-       (while (or (while (and (setq pos (re-search-backward "^\\s-*\\(\\(end\\)\\|\\(\\(impure\\|pure\\)[ \t\n\r\f]+\\)?\\(function\\|procedure\\)\\|\\(for\\)\\|\\(architecture\\|component\\|configuration\\|entity\\|package\\(\\s-+body\\)?\\|type[ \t\n\r\f]+\\w+[ \t\n\r\f]+is[ \t\n\r\f]+\\(record\\|protected\\(\\s-+body\\)?\\)\\|units\\)\\|\\(\\w+[ \t\n\r\f]*:[ \t\n\r\f]*\\)?\\(postponed[ \t\n\r\f]+\\)?\\(block\\|case\\|for\\|if\\|procedural\\|process\\|while\\|loop\\)\\)\\>" nil t))
+       (while (or (while (and (setq pos (re-search-backward "^\\s-*\\(\\(end\\)\\|\\(\\(impure\\|pure\\)[ \t\n\r\f]+\\)?\\(function\\|procedure\\)\\|\\(for\\)\\|\\(architecture\\|component\\|configuration\\|context\\|entity\\|package\\(\\s-+body\\)?\\|type[ \t\n\r\f]+\\w+[ \t\n\r\f]+is[ \t\n\r\f]+\\(record\\|protected\\(\\s-+body\\)?\\)\\|units\\)\\|\\(\\w+[ \t\n\r\f]*:[ \t\n\r\f]*\\)?\\(postponed[ \t\n\r\f]+\\)?\\(block\\|case\\|for\\|if\\|procedural\\|process\\|while\\|loop\\)\\)\\>" nil t))
 			      ;; not consider subprogram declarations
 			      (or (and (match-string 5)
 				       (save-match-data
@@ -11165,7 +11317,7 @@ else insert tab (used for word completion in VHDL minibuffer)."
      (save-excursion
        (end-of-line)
        ;; search forward for block beginning or end
-       (while (or (while (and (setq pos (re-search-forward "^\\s-*\\(\\(end\\)\\|\\(\\(impure\\|pure\\)[ \t\n\r\f]+\\)?\\(function\\|procedure\\)\\|\\(for\\)\\|\\(architecture\\|component\\|configuration\\|entity\\|package\\(\\s-+body\\)?\\|type[ \t\n\r\f]+\\w+[ \t\n\r\f]+is[ \t\n\r\f]+\\(record\\|protected\\(\\s-+body\\)?\\)\\|units\\)\\|\\(\\w+[ \t\n\r\f]*:[ \t\n\r\f]*\\)?\\(postponed[ \t\n\r\f]+\\)?\\(block\\|case\\|for\\|if\\|procedural\\|process\\|while\\|loop\\)\\)\\>" nil t))
+       (while (or (while (and (setq pos (re-search-forward "^\\s-*\\(\\(end\\)\\|\\(\\(impure\\|pure\\)[ \t\n\r\f]+\\)?\\(function\\|procedure\\)\\|\\(for\\)\\|\\(architecture\\|component\\|configuration\\|context\\|entity\\|package\\(\\s-+body\\)?\\|type[ \t\n\r\f]+\\w+[ \t\n\r\f]+is[ \t\n\r\f]+\\(record\\|protected\\(\\s-+body\\)?\\)\\|units\\)\\|\\(\\w+[ \t\n\r\f]*:[ \t\n\r\f]*\\)?\\(postponed[ \t\n\r\f]+\\)?\\(block\\|case\\|for\\|if\\|procedural\\|process\\|while\\|loop\\)\\)\\>" nil t))
 			      ;; not consider subprogram declarations
 			      (or (and (match-string 5)
 				       (save-match-data
@@ -11266,6 +11418,8 @@ but not if inside a comment or quote."
   (vhdl-hooked-abbrev 'vhdl-template-configuration))
 (defun vhdl-template-constant-hook ()
   (vhdl-hooked-abbrev 'vhdl-template-constant))
+(defun vhdl-template-context-hook ()
+  (vhdl-hooked-abbrev 'vhdl-template-context))
 (defun vhdl-template-disconnect-hook ()
   (vhdl-hooked-abbrev 'vhdl-template-disconnect))
 (defun vhdl-template-display-comment-hook ()
@@ -13257,7 +13411,8 @@ This does highlighting of keywords and standard identifiers.")
    (list
     (concat
      "^\\s-*\\("
-     "architecture\\|configuration\\|entity\\|package\\(\\s-+body\\)?\\|"
+     "architecture\\|configuration\\|context\\|entity\\|package"
+     "\\(\\s-+body\\)?\\|"
      "\\(\\(impure\\|pure\\)\\s-+\\)?function\\|procedure\\|component"
      "\\)\\s-+\\(\\w+\\)")
     5 'font-lock-function-name-face)
@@ -13299,9 +13454,9 @@ This does highlighting of keywords and standard identifiers.")
    (list
     (concat
      "^\\s-*end\\s-+\\(\\("
-     "architecture\\|block\\|case\\|component\\|configuration\\|entity\\|"
-     "for\\|function\\|generate\\|if\\|loop\\|package\\(\\s-+body\\)?\\|"
-     "procedure\\|\\(postponed\\s-+\\)?process\\|"
+     "architecture\\|block\\|case\\|component\\|configuration\\|context\\|"
+     "entity\\|for\\|function\\|generate\\|if\\|loop\\|package"
+     "\\(\\s-+body\\)?\\|procedure\\|\\(postponed\\s-+\\)?process\\|"
      (when (vhdl-standard-p 'ams) "procedural\\|")
      "units"
      "\\)\\s-+\\)?\\(\\w*\\)")
@@ -13333,10 +13488,10 @@ This does highlighting of keywords and standard identifiers.")
    ;; highlight names in use clauses
    (list
     (concat
-     "\\<use\\s-+\\(\\(entity\\|configuration\\)\\s-+\\)?"
+     "\\<\\(context\\|use\\)\\s-+\\(\\(entity\\|configuration\\)\\s-+\\)?"
      "\\(\\w+\\)\\(\\.\\(\\w+\\)\\)?\\((\\(\\w+\\))\\)?")
-    '(3 font-lock-function-name-face) '(5 font-lock-function-name-face nil t)
-    '(7 font-lock-function-name-face nil t))
+    '(4 font-lock-function-name-face) '(6 font-lock-function-name-face nil t)
+    '(8 font-lock-function-name-face nil t))
 
    ;; highlight attribute name in attribute declarations/specifications
    (list
@@ -13383,6 +13538,12 @@ This does highlighting of keywords and standard identifiers.")
 	 '(vhdl-font-lock-match-item
 	   (progn (goto-char (match-end 1)) (match-beginning 2))
 	   nil (1 font-lock-variable-name-face)))
+
+   ;; highlight tool directives
+   (list
+    (concat
+     "^\\s-*\\(`\\w+\\)")
+    1 'font-lock-preprocessor-face)
    )
   "For consideration as a value of `vhdl-font-lock-keywords'.
 This does context sensitive highlighting of names and labels.")
@@ -13729,7 +13890,7 @@ hierarchy otherwise.")
   "Return position of end of current unit."
   (let ((pos (point)))
     (save-excursion
-      (while (and (re-search-forward "^[ \t]*\\(architecture\\|configuration\\|entity\\|package\\)\\>" nil 1)
+      (while (and (re-search-forward "^[ \t]*\\(architecture\\|configuration\\|context\\|entity\\|package\\)\\>" nil 1)
 		  (save-excursion
 		    (goto-char (match-beginning 0))
 		    (vhdl-backward-syntactic-ws)
@@ -13750,7 +13911,7 @@ hierarchy otherwise.")
   "Scan the context clause that precedes a design unit."
   (let (lib-alist)
     (save-excursion
-      (when (re-search-backward "^[ \t]*\\(architecture\\|configuration\\|entity\\|package\\)\\>" nil t)
+      (when (re-search-backward "^[ \t]*\\(architecture\\|configuration\\|context\\|entity\\|package\\)\\>" nil t)
 	(while (and (re-search-backward "^[ \t]*\\(end\\|use\\)\\>" nil t)
 		    (equal "USE" (upcase (match-string 1))))
 	  (when (looking-at "^[ \t]*use[ \t\n\r\f]*\\(\\w+\\)\\.\\(\\w+\\)\\.\\w+")
@@ -17530,6 +17691,7 @@ specified by a target."
        'vhdl-argument-list-indent
        'vhdl-association-list-with-formals
        'vhdl-conditions-in-parenthesis
+       'vhdl-sensitivity-list-all
        'vhdl-zero-string
        'vhdl-one-string
        'vhdl-file-header
@@ -17634,6 +17796,17 @@ specified by a target."
 
 (defconst vhdl-doc-release-notes nil
   "\
+Release Notes for VHDL Mode 3.37
+================================
+
+- Added support for VHDL'08:
+  - New keywords, types, functions, attributes, operators, packages
+  - Context declaration
+  - Block comments
+  - Directives
+  - 'all' keyword in sensitivity list
+
+
 Release Notes for VHDL Mode 3.34
 ================================
 
@@ -17694,6 +17867,13 @@ User Options
   "\
 Reserved words in VHDL
 ----------------------
+
+VHDL'08 (IEEE Std 1076-2008):
+  `vhdl-08-keywords'      : keywords
+  `vhdl-08-types'         : standardized types
+  `vhdl-08-attributes'    : standardized attributes
+  `vhdl-08-functions'     : standardized functions
+  `vhdl-08-packages'      : standardized packages and libraries
 
 VHDL'93/02 (IEEE Std 1076-1993/2002):
   `vhdl-02-keywords'      : keywords

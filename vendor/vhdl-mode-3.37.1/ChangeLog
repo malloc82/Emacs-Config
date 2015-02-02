@@ -1,3 +1,14 @@
+2015-01-15  Reto Zimmermann  <reto@gnu.org>
+
+	* vhdl-mode.el: Version 3.37.1 released.
+	(top): VHDL'08 support (reserved words, context declaration, block
+	comments, directives, 'all' keyword in sensitivity list.
+	(vhdl-mode-syntax-table-init): Support VHDL'08 block comments.
+	(vhdl-in-comment-p): Block comment recognition, indentation.
+	(vhdl-beginning-of-directive): Support directives.
+	(vhdl-08-*): Highlight VHDL'08 standardized keywords, directives.
+	(vhdl-sensitivity-list-all): Use 'all' keyword in sensitivity list (08).
+
 2014-11-27  Reto Zimmermann  <reto@gnu.org>
 
 	* vhdl-mode.el: Version 3.36.1 released.
