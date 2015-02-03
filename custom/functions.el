@@ -214,6 +214,11 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (interactive "r")
   (align-regexp begin end ",\\(\\s-*\\)" 1 1 t))
 
+(defun align-to-dot-r (begin end)
+  "Align region to ("
+  (interactive "r")
+  (align-regexp begin end "\\(\\s-*\\)\\." 1 1 t))
+
 (defun align-to-bars (begin end)
   "Align region to :"
   (interactive "r")
@@ -243,3 +248,9 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   "Align region to --"
   (interactive "r")
   (align-regexp begin end "\\(\\s-*\\)--" 1 1 ))
+
+(defun align-to-left-paren (begin end)
+  "Align region to ("
+  (interactive "r")
+  (align-regexp begin end "\\(\\s-*\\)(" 1 1 t))
+
