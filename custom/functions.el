@@ -254,3 +254,7 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (interactive "r")
   (align-regexp begin end "\\(\\s-*\\)(" 1 1 t))
 
+(defun align-to-& (begin end)
+  "Align region to coma"
+  (interactive "r")
+  (align-regexp begin end "\\(\\s-*\\)&" 1 1 t))
