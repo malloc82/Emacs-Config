@@ -1,3 +1,91 @@
+2015-04-11  Tassilo Horn  <tsdh@gnu.org>
+
+	Release 11.88.4
+
+2015-04-11  Tassilo Horn  <tsdh@gnu.org>
+
+	Merge branch 'master' into elpa
+
+2015-04-02  Mosè Giordano  <mose@gnu.org>
+
+	Document indentation of "\[...\]".
+
+	* doc/auctex.texi (Indenting): Document indentation of "\[...\]".
+
+	* doc/changes.texi: Mention it.
+
+2015-03-30  Mosè Giordano  <mose@gnu.org>
+
+	[Fix #20227] Fix indentation of \[...\] math mode.
+
+	* latex.el (LaTeX-begin-regexp): Add "\[".
+	(LaTeX-indent-calculate): Remove indentation of "\[...\]" from here, it
+	is automatically done in `LaTeX-indent-level-count' now that
+	`LaTeX-begin-regexp' has "\[".	(Bug#20227)
+
+2015-03-28  Mosè Giordano  <mose@gnu.org>
+
+	Remove duplicate lines.
+
+2015-03-28  Mosè Giordano  <mose@gnu.org>
+
+	Fix parsing of new auto types in style files.
+
+	* style/acro.el:
+
+	* style/acronym.el:
+
+	* style/caption.el:
+
+	* style/color.el:
+
+	* style/enumitem.el:
+
+	* style/geometry.el:
+
+	* style/minted.el:
+
+	* style/pst-plot.el:
+
+	* style/pstricks.el:
+
+	* style/siunitx.el: Update copyright years and add
+	`TeX-auto-parse' to `TeX-update-style-hook'.
+
+2015-03-28  Arash Esbati  <esbati@gmx.de>
+
+	New style colortbl.el.
+
+	* Makefile.in (STYLESRC): Add new style.
+
+	* style/colortbl.el: New file.
+
+2015-03-28  Arash Esbati  <esbati@gmx.de>
+
+	Ask for a `Width' in minibuffer and not a `Length'.
+
+	* style/ltxtable.el ("ltxtable"): Ask for a `Width' and not for a
+	`Length' in minibuffer.
+
+2015-03-28  Arash Esbati  <esbati@gmx.de>
+
+	Add three missing LaTeX lengths.
+
+	* latex.el (LaTeX-common-initialization): Add standard LaTeX lengths
+	`arraycolsep', `arrayrulewidth' and `doublerulesep'.
+
+2015-03-23  Tassilo Horn  <tsdh@gnu.org>
+
+	docfix
+
+2015-03-23  Tassilo Horn  <tsdh@gnu.org>
+
+	Apply styles in reverse order
+
+	* tex.el (TeX-run-style-hooks): Apply style hooks in reverse order. 
+	With that, a local style can modify a private or a global style, and a
+	private style can modify a global one.
+
 2015-03-22  Tassilo Horn  <tsdh@gnu.org>
 
 	Merge from upstream master; release 11.88.3
