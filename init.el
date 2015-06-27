@@ -1,3 +1,4 @@
+
 ;; -*- mode: Lisp -*-
 
 ;; Timer
@@ -59,6 +60,7 @@
    ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
  '(custom-enabled-themes '(dark-night-white))
+ ;; hash string is generated using : openssl sha256 <filename>
  '(custom-safe-themes
    (quote
     ("0cd5946c51bf9a44212db12dc802cd616c37ab7ec6e70dcf4da06ce9ac19360e" ;; dark-night-gray
