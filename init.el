@@ -63,6 +63,7 @@
    (quote
     ("ff4e5b66bfb81f97e3a0e98ad501d7a061c5a5b90ff8d8222ad7a45caffce804" ;; dark-night-gray
      "ef0774fb229c8c032c66d22d8be085ca0a68818c20a3f817481ecb21717b64a6" ;; dark-night-white
+     "7b5de2d40599b7382a61ce165ef8672ef473d1cae1b6afb7457eb5000110522b" ;; radiance
      default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
