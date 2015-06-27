@@ -11,7 +11,7 @@
  '(header-line ((t (:background "#ffffff" :foreground "#62124b" :box nil))))
  '(default ((t (:background "#ffffff" :foreground "#333333"))))
  '(cursor ((t (:background "#aea79f" :foreground "#333333"))))
- '(region ((t (:background "#f6f5ef"))))
+ '(region ((t (:background "#ffee9c"))))  ;; "LightGoldenrod1"
  '(mode-line ((t (:background "#f6f5ef" :foreground "#333333" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:background "#ffffff" :foreground "#333333" :box (:line-width -1 :style pressed-button)))))
  '(fringe ((t (:background "#f6f5ef"))))
@@ -28,9 +28,10 @@
  '(font-lock-warning-face ((t (:foreground "#e80000" :weight bold))))
  '(secondary-selection ((t (:background "PaleVioletRed3")))) ;; for gdb hightlighting
  '(dired-directory ((t (:foreground "#3b99fc"))))
- '(highlight ((t (:background "gray80"))))
+ '(highlight ((t (:background "gray88"))))
  '(button ((t (:background "#f6f5ef" :weight bold))))
  '(org-hide ((t (:foreground "#ffffff"))))
- '(ido-first-match ((t (:foreground "dark green")))))
+ '(ido-first-match ((t (:foreground "dark green"))))
+ '(wg-mode-line-face ((t (:foreground "dark cyan")))))
 
 (provide-theme 'radiance)
