@@ -61,8 +61,8 @@
  '(custom-enabled-themes '(dark-night-white))
  '(custom-safe-themes
    (quote
-    ("ff4e5b66bfb81f97e3a0e98ad501d7a061c5a5b90ff8d8222ad7a45caffce804" ;; dark-night-gray
-     "ef0774fb229c8c032c66d22d8be085ca0a68818c20a3f817481ecb21717b64a6" ;; dark-night-white
+    ("0cd5946c51bf9a44212db12dc802cd616c37ab7ec6e70dcf4da06ce9ac19360e" ;; dark-night-gray
+     "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      default)))
  '(fci-rule-color "#383838")
