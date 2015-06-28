@@ -75,14 +75,14 @@ Semantic, and Ansi-Color faces are included.")
    `(success ((,class (:foreground ,cham-3))))
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground ,plum-2))))
-   `(font-lock-comment-face ((,class (:slant italic :foreground ,alum-5))))
-   `(font-lock-constant-face ((,class (:foreground "dark cyan")))) ;; ,blue-3 :weight bold
-   `(font-lock-function-name-face ((,class (:foreground "Blue1")))) ;; ,red-3
-   `(font-lock-keyword-face ((,class (:foreground "Purple")))) ;; cham-4
-   `(font-lock-string-face ((,class (:foreground "dark red")))) ;; ,plum-3
-   `(font-lock-number-face ((,class (:foreground "VioletRed3")))) ;; ,plum-3
-   `(font-lock-type-face ((,class (:foreground "ForestGreen"))))   ;; ,blue-1
-   `(font-lock-variable-name-face ((,class (:foreground ,orange-4)))) ;; ,orange-4
+   `(font-lock-comment-face ((,class (:slant italic :foreground "gray60")))) ;; ,alum-5
+   `(font-lock-constant-face ((,class (:foreground "dark cyan"))))           ;; ,blue-3 :weight bold
+   `(font-lock-function-name-face ((,class (:foreground "Blue1"))))          ;; ,red-3
+   `(font-lock-keyword-face ((,class (:foreground "Purple"))))               ;; ,cham-4
+   `(font-lock-string-face ((,class (:foreground "dark red"))))              ;; ,plum-3
+   `(font-lock-number-face ((,class (:foreground "VioletRed3"))))            ;; ,plum-3
+   `(font-lock-type-face ((,class (:foreground "ForestGreen"))))             ;; ,blue-1
+   `(font-lock-variable-name-face ((,class (:foreground ,orange-4))))        ;; ,orange-4
    ;; Button and link faces
    `(link ((,class (:underline t :foreground ,blue-3))))
    `(link-visited ((,class (:underline t :foreground ,blue-2))))
