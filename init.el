@@ -66,7 +66,7 @@
     ("0cd5946c51bf9a44212db12dc802cd616c37ab7ec6e70dcf4da06ce9ac19360e" ;; dark-night-gray
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
-     "e28ec55c9ead39237a4ef650be9df8dd24949520e1df920c413759cb3b91e069" ;; tango-custom
+     "930e1119afec56cb4e5b6480cd0270c19f13ac3bd221490be1b434fffe0c816d" ;; tango-custom
      default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
@@ -76,7 +76,8 @@
 (custom-set-faces
  `(default ,(cond
              ((eq system-type 'gnu/linux)
-              '((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal))))
+              ;; '((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal)))
+              '((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 99 :width normal))))
              ((eq system-type 'darwin)
               '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))))))
 
