@@ -1,4 +1,4 @@
-(define-package "cider" "0.9.0" "Clojure Interactive Development Environment that Rocks"
+(define-package "cider" "0.9.1" "Clojure Interactive Development Environment that Rocks"
   '((clojure-mode "4.0.0")
     (dash "2.4.1")
     (pkg-info "0.4")

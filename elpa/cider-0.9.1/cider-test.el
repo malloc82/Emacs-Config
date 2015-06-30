@@ -246,7 +246,7 @@ With the actual value, the outermost '(not ...)' s-expression is removed."
   (mapc (lambda (b) (when (get-buffer b) (kill-buffer b)))
         cider-test-ediff-buffers))
 
-(add-hook 'ediff-cleanup-hook 'cider-test-ediff-cleanup)
+(add-hook 'ediff-cleanup-hook #'cider-test-ediff-cleanup)
 
 
 ;;; Report rendering
@@ -257,7 +257,7 @@ With the actual value, the outermost '(not ...)' s-expression is removed."
     ("pass"  'cider-test-success-face)
     ("fail"  'cider-test-failure-face)
     ("error" 'cider-test-error-face)
-    (t       'default)))
+    (_       'default)))
 
 (defun cider-test-render-summary (buffer summary)
   "Emit into BUFFER the report SUMMARY statistics."
@@ -344,21 +344,25 @@ With the actual value, the outermost '(not ...)' s-expression is removed."
 (defun cider-test-highlight-problem (buffer test)
   "Highlight the BUFFER test definition for the non-passing TEST."
   (with-current-buffer buffer
-    (nrepl-dbind-response test (type line message expected actual)
-      (save-excursion
-        (goto-char (point-min))
-        (forward-line (1- line))
-        (forward-whitespace 1)
-        (forward-char)
-        (let ((beg (point)))
-          (forward-sexp)
-          (let ((overlay (make-overlay beg (point))))
-            (overlay-put overlay 'font-lock-face (cider-test-type-face type))
-            (overlay-put overlay 'type type)
-            (overlay-put overlay 'help-echo message)
-            (overlay-put overlay 'message message)
-            (overlay-put overlay 'expected expected)
-            (overlay-put overlay 'actual actual)))))))
+    (nrepl-dbind-response test (type file line message expected actual)
+      ;; we have to watch out for vars without proper location metadata
+      ;; right now everything evaluated interactively lacks this data
+      ;; TODO: Figure out what to do when the metadata is missing
+      (when (and file line (not (cider--tooling-file-p file)))
+        (save-excursion
+         (goto-char (point-min))
+         (forward-line (1- line))
+         (forward-whitespace 1)
+         (forward-char)
+         (let ((beg (point)))
+           (forward-sexp)
+           (let ((overlay (make-overlay beg (point))))
+             (overlay-put overlay 'font-lock-face (cider-test-type-face type))
+             (overlay-put overlay 'type type)
+             (overlay-put overlay 'help-echo message)
+             (overlay-put overlay 'message message)
+             (overlay-put overlay 'expected expected)
+             (overlay-put overlay 'actual actual))))))))
 
 (defun cider-test-highlight-problems (ns results)
   "Highlight all non-passing tests in the NS test RESULTS."
