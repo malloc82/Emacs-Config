@@ -15,7 +15,7 @@ FONT_DIR   := /usr/share/fonts/truetype/custom
 install-linux-fonts:
 	if [ "$(OS)" == "linux" ]; then \
 		sudo mkdir -p $(FONT_DIR); \
-		sudo find ~/.emacs.d/fonts/ -type f -iname "*.ttf" -exec cp -t $(FONT_DIR) '{}' + ; \
+		sudo find ~/.emacs.d/fonts/ -type f -iname "*.ttf" -or -iname "*.otf" -exec cp -t $(FONT_DIR) '{}' + ; \
 		sudo fc-cache -f -v; \
 	fi
 setup:
