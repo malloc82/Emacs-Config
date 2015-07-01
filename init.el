@@ -65,7 +65,7 @@
     ("f438219aac026969a99238eb090232cf735fd316291adeacc1c999c88e945276" ;; dark-night-gray
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
-     "0e306e9f7fe0c2a6e180371d7b550b1edb29b1b8015797eb632ea1a972cc90a2" ;; tango-custom
+     "48def9696ea5b66a606abcb84f8313f2e7edf329f39c9598136dbe7e7d71d383" ;; tango-custom
      default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
