@@ -53,7 +53,7 @@ Semantic, and Ansi-Color faces are included.")
    ;; Highlighting faces
    `(fringe ((,class (:background "gray85"))))   ;; alum-2
    `(highlight ((,class (:background "gray87")))) ;; alum-3
-   `(region ((,class (:background "LightSkyBlue1" :distant-foreground "white")))) ;; alum-3
+   `(region ((,class (:background "#a4cdff" :distant-foreground "#808080")))) ;; alum-3
    `(secondary-selection ((,class (:background ,blue-0 :distant-foreground "black"))))
    `(isearch ((,class (:foreground "#ffffff" :background ,orange-3))))
    `(lazy-highlight ((,class (:background ,choc-1))))

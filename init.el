@@ -1,4 +1,3 @@
-
 ;; -*- mode: Lisp -*-
 
 ;; Timer
@@ -66,7 +65,7 @@
     ("f438219aac026969a99238eb090232cf735fd316291adeacc1c999c88e945276" ;; dark-night-gray
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
-     "930e1119afec56cb4e5b6480cd0270c19f13ac3bd221490be1b434fffe0c816d" ;; tango-custom
+     "0e306e9f7fe0c2a6e180371d7b550b1edb29b1b8015797eb632ea1a972cc90a2" ;; tango-custom
      default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
