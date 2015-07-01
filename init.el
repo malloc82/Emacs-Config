@@ -63,7 +63,7 @@
  ;; hash string is generated using : openssl sha256 <filename>
  '(custom-safe-themes
    (quote
-    ("0cd5946c51bf9a44212db12dc802cd616c37ab7ec6e70dcf4da06ce9ac19360e" ;; dark-night-gray
+    ("f438219aac026969a99238eb090232cf735fd316291adeacc1c999c88e945276" ;; dark-night-gray
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      "930e1119afec56cb4e5b6480cd0270c19f13ac3bd221490be1b434fffe0c816d" ;; tango-custom
