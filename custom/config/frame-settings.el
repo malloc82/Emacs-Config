@@ -12,9 +12,11 @@
 (setq special-display-regexps '("\\*magit-diff:[^*]+\\*"))
 (setq special-display-function
       (lambda (buffer &optional args)
-        (split-window)
+        (when (one-window-p)
+          (split-window nil nil t)
+          (get-buffer-window buffer 0))
         ;; (switch-to-buffer buffer)
-        (get-buffer-window buffer 0)))
+        ))
 (setq display-buffer-reuse-frames t)
 (setq pop-up-frames nil)
 (setq pop-up-windows nil)
