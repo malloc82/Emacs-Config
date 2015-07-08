@@ -9,6 +9,7 @@
 ;;                                      "*Async Shell Command*"))
 
 (setq special-display-buffer-names '("*compilation*"))
+(setq special-display-regexps '("\\*magit-diff:[^*]+\\*"))
 (setq special-display-function
       (lambda (buffer &optional args)
         (split-window)
