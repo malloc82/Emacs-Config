@@ -1,10 +1,9 @@
-;;; use-package-autoloads.el --- automatically extracted autoloads
+;;; bind-key-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("use-package.el") (21916 54113 223307
-;;;;;;  685000))
+;;;### (autoloads nil nil ("bind-key.el") (21916 54112 395755 593000))
 
 ;;;***
 
@@ -13,4 +12,4 @@
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; use-package-autoloads.el ends here
+;;; bind-key-autoloads.el ends here
