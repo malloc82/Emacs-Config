@@ -8,8 +8,8 @@
 ;;                                      "*TeX Help*"
 ;;                                      "*Async Shell Command*"))
 
-(setq special-display-buffer-names '("*compilation*"))
-(setq special-display-regexps '("\\*magit-diff:[^*]+\\*"))
+(setq special-display-buffer-names '("*compilation*" "*Compile-Log*"))
+(setq special-display-regexps '("\\*magit-diff:[^*]*\\*" "\\*cider-repl[^*]*\\*"))
 (setq special-display-function
       (lambda (buffer &optional args)
         (when (one-window-p)

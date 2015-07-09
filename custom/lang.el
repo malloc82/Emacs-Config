@@ -93,6 +93,28 @@
                 (verilog-mode-hook . "verilog-settings")))
   (add-hook (car hook) `(lambda () (load-library ,(cdr hook)))))
 
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(require 'rainbow-delimiters)
+(set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                    :foreground 'unspecified
+                    :inherit 'error)
+
+(defun noprompt/forward-transpose-sexps ()
+  (interactive)
+  (paredit-forward)
+  (transpose-sexps 1)
+  (paredit-backward))
+
+(defun noprompt/backward-transpose-sexps ()
+  (interactive)
+  (transpose-sexps 1)
+  (paredit-backward)
+  (paredit-backward))
+
+;; (key-chord-define-global "tk" 'noprompt/forward-transpose-sexps)
+;; (key-chord-define-global "tj" 'noprompt/backward-transpose-sexps)
+
 ;; =================================
 ;; Firefox: moz.el, javascript.el
 ;; =================================
