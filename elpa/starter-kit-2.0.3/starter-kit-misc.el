@@ -56,9 +56,9 @@
       whitespace-style '(face trailing lines-tail tabs)
       whitespace-line-column 80
       ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory (concat user-emacs-directory "oddmuse")
-      save-place-file (concat user-emacs-directory "places")
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+      oddmuse-directory "~/.emacs.d/oddmuse"
+      save-place-file "~/.emacs.d/places"
+      backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups")))
       diff-switches "-u")
 
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
@@ -78,46 +78,23 @@
 (show-paren-mode 1)
 
 ;; ido-mode is like magic pixie dust!
-(ido-mode t)
-(ido-ubiquitous-mode)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 10)
-
-(require 'ffap)
-(defvar ffap-c-commment-regexp "^/\\*+"
-  "Matches an opening C-style comment, like \"/***\".")
-
-(defadvice ffap-file-at-point (after avoid-c-comments activate)
-  "Don't return paths like \"/******\" unless they actually exist.
-
-This fixes the bug where ido would try to suggest a C-style
-comment as a filename."
-  (ignore-errors
-    (when (and ad-return-value
-               (string-match-p ffap-c-commment-regexp
-                               ad-return-value)
-               (not (ffap-file-exists-string ad-return-value)))
-      (setq ad-return-value nil))))
+;; (ido-mode t)
+;; (ido-ubiquitous t)
+;; (setq ido-enable-prefix nil
+;;       ido-enable-flex-matching t
+;;       ido-auto-merge-work-directories-length nil
+;;       ido-create-new-buffer 'always
+;;       ido-use-filename-at-point 'guess
+;;       ido-use-virtual-buffers t
+;;       ido-handle-duplicate-virtual-buffers 2
+;;       ido-max-prospects 10)
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-;; (when (executable-find ispell-program-name)
-;;       (add-hook 'text-mode-hook 'turn-on-flyspell))
-
-(eval-after-load "ispell"
-  '(when (executable-find ispell-program-name)
-   (add-hook 'text-mode-hook 'turn-on-flyspell)))
-
-
+(add-hook 'text-mode-hook 'turn-on-flyspell)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'auto-tail-revert-mode 'tail-mode)
@@ -125,13 +102,11 @@ comment as a filename."
 (random t) ;; Seed the random-number generator
 
 ;; Hippie expand: at times perhaps too hip
-(eval-after-load 'hippie-exp
-  '(progn
-     (dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
-       (delete f hippie-expand-try-functions-list))
+(dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+  (delete f hippie-expand-try-functions-list))
 
-     ;; Add this back in at the end of the list.
-     (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)))
+;; Add this back in at the end of the list.
+(add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)
 
 (eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
@@ -144,10 +119,10 @@ comment as a filename."
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green4")
-     (set-face-foreground 'magit-diff-del "red3")))
+;; (eval-after-load 'magit
+;;   '(progn
+;;      (set-face-foreground 'magit-diff-add "green4")
+;;      (set-face-foreground 'magit-diff-del "red3")))
 
 ;; Get around the emacswiki spam protection
 (eval-after-load 'oddmuse

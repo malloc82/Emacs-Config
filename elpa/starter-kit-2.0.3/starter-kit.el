@@ -51,25 +51,16 @@
         esk-user-config (concat user-emacs-directory user-login-name ".el")
         esk-user-dir (concat user-emacs-directory user-login-name))
 
+  (add-to-list 'load-path esk-user-dir)
+
   (setq smex-save-file (concat user-emacs-directory ".smex-items"))
   (smex-initialize)
   (global-set-key (kbd "M-x") 'smex)
 
-  (defun esk-eval-after-init (form)
-    "Add `(lambda () FORM)' to `after-init-hook'.
-
-    If Emacs has already finished initialization, also eval FORM immediately."
-    (let ((func (list 'lambda nil form)))
-      (add-hook 'after-init-hook func)
-      (when after-init-time
-        (eval form))))
-
-  (esk-eval-after-init
-   '(progn
-      (when (file-exists-p esk-system-config) (load esk-system-config))
-      (when (file-exists-p esk-user-config) (load esk-user-config))
-      (when (file-exists-p esk-user-dir)
-        (mapc 'load (directory-files esk-user-dir t "^[^#].*el$"))))))
+  (when (file-exists-p esk-system-config) (load esk-system-config))
+  (when (file-exists-p esk-user-config) (load esk-user-config))
+  (when (file-exists-p esk-user-dir)
+    (mapc 'load (directory-files esk-user-dir nil "^[^#].*el$"))))
 
 (provide 'starter-kit)
 ;;; starter-kit.el ends here

@@ -1,9 +1,9 @@
 ;;; starter-kit-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "starter-kit" "starter-kit.el" (21186 46515
+;;;### (autoloads nil "starter-kit" "starter-kit.el" (21918 40543
 ;;;;;;  0 0))
 ;;; Generated autoloads from starter-kit.el
 
@@ -13,31 +13,30 @@
 
 (setq esk-system-config (concat user-emacs-directory system-name ".el") esk-user-config (concat user-emacs-directory user-login-name ".el") esk-user-dir (concat user-emacs-directory user-login-name))
 
+(add-to-list 'load-path esk-user-dir)
+
 (setq smex-save-file (concat user-emacs-directory ".smex-items"))
 
 (smex-initialize)
 
 (global-set-key (kbd "M-x") 'smex)
 
-(defun esk-eval-after-init (form) "\
-Add `(lambda () FORM)' to `after-init-hook'.
+(when (file-exists-p esk-system-config) (load esk-system-config))
 
-    If Emacs has already finished initialization, also eval FORM immediately." (let ((func (list (quote lambda) nil form))) (add-hook (quote after-init-hook) func) (when after-init-time (eval form))))
+(when (file-exists-p esk-user-config) (load esk-user-config))
 
-(esk-eval-after-init '(progn (when (file-exists-p esk-system-config) (load esk-system-config)) (when (file-exists-p esk-user-config) (load esk-user-config)) (when (file-exists-p esk-user-dir) (mapc 'load (directory-files esk-user-dir t "^[^#].*el$")))))
+(when (file-exists-p esk-user-dir) (mapc 'load (directory-files esk-user-dir nil "^[^#].*el$")))
 
 ;;;***
 
 ;;;### (autoloads nil nil ("starter-kit-defuns.el" "starter-kit-misc.el"
-;;;;;;  "starter-kit-pkg.el") (21186 46515 683399 0))
+;;;;;;  "starter-kit-pkg.el") (21918 40543 367840 0))
 
 ;;;***
 
-(provide 'starter-kit-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; starter-kit-autoloads.el ends here
