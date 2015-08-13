@@ -51,7 +51,7 @@ Semantic, and Ansi-Color faces are included.")
    `(default ((,class (:foreground ,alum-6 :background ,alum-1))))
    `(cursor ((t (:background ,blue-3))))
    ;; Highlighting faces
-   `(fringe ((,class (:background "gray85"))))   ;; alum-2
+   `(fringe ((,class (:background "gray80"))))   ;; alum-2
    `(highlight ((,class (:background "gray87")))) ;; alum-3
    `(region ((,class (:background "#a4cdff" :distant-foreground "#808080")))) ;; alum-3
    `(secondary-selection ((,class (:background ,blue-0 :distant-foreground "black"))))
