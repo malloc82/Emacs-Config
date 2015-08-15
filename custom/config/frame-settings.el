@@ -9,8 +9,7 @@
 ;;                                      "*Async Shell Command*"))
 
 (setq special-display-buffer-names '("*compilation*" "*Compile-Log*"))
-(setq special-display-regexps '("\\*magit-diff:[^*]*\\*"
-                                "\\*magit:[^*]*\\*"
+(setq special-display-regexps '("\\*magit[^*:]*:[^*]*\\*"
                                 "\\*cider-repl[^*]*\\*"))
 (setq special-display-function
       (lambda (buffer &optional args)
