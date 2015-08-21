@@ -1,4 +1,4 @@
-;;; tango-dark-theme.el --- Tango-based custom theme for faces
+;;; tango-dark-custom-theme.el --- Tango-based custom theme for faces
 
 ;; Copyright (C) 2010-2015 Free Software Foundation, Inc.
 
@@ -27,7 +27,7 @@
 
 ;;; Code:
 
-(deftheme tango-dark
+(deftheme tango-dark-custom
   "Face colors using the Tango palette (dark background).
 Basic, Font Lock, Isearch, Gnus, Message, Ediff, Flyspell,
 Semantic, and Ansi-Color faces are included.")
@@ -48,7 +48,7 @@ Semantic, and Ansi-Color faces are included.")
       (red-0 "#ff4b4b")  (alum-5.5 "#41423f") (alum-7 "#212526"))
 
   (custom-theme-set-faces
-   'tango-dark
+   'tango-dark-custom
    ;; Ensure sufficient contrast on low-color terminals.
    `(default ((((class color) (min-colors 4096))
 	       (:foreground ,alum-1 :background ,alum-6))
@@ -59,7 +59,8 @@ Semantic, and Ansi-Color faces are included.")
    `(cursor ((,class (:background ,butter-1))))
    ;; Highlighting faces
    `(fringe ((,class (:background ,alum-7))))
-   `(highlight ((,class (:foreground ,alum-6 :background ,butter-2))))
+   ;; `(highlight ((,class (:foreground ,alum-6 :background ,butter-2))))
+   `(highlight ((,class (:background "gray30"))))
    `(region ((,class (:background ,alum-5))))
    `(secondary-selection ((,class (:background ,blue-3))))
    `(isearch ((,class (:foreground ,alum-1 :background ,orange-3))))
@@ -88,6 +89,7 @@ Semantic, and Ansi-Color faces are included.")
    `(font-lock-function-name-face ((,class (:foreground ,butter-1))))
    `(font-lock-keyword-face ((,class (:foreground ,cham-0))))
    `(font-lock-string-face ((,class (:foreground ,choc-1))))
+   `(font-lock-number-face ((,class (:foreground "VioletRed3"))))
    `(font-lock-type-face ((,class (:foreground ,blue-0))))
    `(font-lock-variable-name-face ((,class (:foreground ,orange-1))))
    ;; Button and link faces
@@ -153,14 +155,14 @@ Semantic, and Ansi-Color faces are included.")
    `(semantic-unmatched-syntax-face ((,class (:underline ,red-1)))))
 
   (custom-theme-set-variables
-   'tango-dark
+   'tango-dark-custom
    `(ansi-color-names-vector [,alum-7 ,red-0 ,cham-0 ,butter-1
 			      ,blue-1 ,plum-1 ,blue-0 ,alum-1])))
 
-(provide-theme 'tango-dark)
+(provide-theme 'tango-dark-custom)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:
 
-;;; tango-dark-theme.el ends here
+;;; tango-dark-custom-theme.el ends here

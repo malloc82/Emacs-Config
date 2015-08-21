@@ -58,14 +58,15 @@
  '(ansi-color-names-vector
    ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
- '(custom-enabled-themes '(tango-custom))
+ '(custom-enabled-themes '(dark-night-gray))
  ;; hash string is generated using : openssl sha256 <filename>
  '(custom-safe-themes
    (quote
-    ("f438219aac026969a99238eb090232cf735fd316291adeacc1c999c88e945276" ;; dark-night-gray
+    ("3d84fcec5756a3d6f67d7f9675dc041731b087189ccafcdbfd8d3ba0c30b480a" ;; dark-night-gray
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      "d4b1adc34bc0c74bf19daaf499b7350bafc291e43f35e86e50191cd72fcf2edc" ;; tango-custom
+     "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
      default)))
  '(fci-rule-color "#383838")
  '(show-paren-mode t)
