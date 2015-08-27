@@ -13,7 +13,7 @@
   '(link-visited ((t (:foreground "magenta4" :underline t))))
   '(header-line ((t (:background "grey90" :foreground "grey20" :box nil))))
   '(cursor ((t (:background "yellow" :foreground "white"))))
-  '(region ((t (:background "dim gray" :distant-foreground "black"))))
+  '(region ((t (:background "dark slate gray" :distant-foreground "gray14"))))
   '(mode-line ((t (:background "grey70" :foreground "black" :box (:line-width -1 :style released-button)))))
   '(mode-line-inactive ((t (:background "grey30" :foreground "grey80" :box (:line-width -1 :style pressed-button)))))
   '(wg-mode-line-face ((t (:foreground "dark cyan"))))
