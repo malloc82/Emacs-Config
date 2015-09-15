@@ -61,7 +61,7 @@ Semantic, and Ansi-Color faces are included.")
    `(fringe ((,class (:background ,alum-7))))
    ;; `(highlight ((,class (:foreground ,alum-6 :background ,butter-2))))
    `(highlight ((,class (:background "gray30"))))
-   `(region ((,class (:background ,alum-5))))
+   `(region ((,class (:background "dark slate gray"))))  ;; ,alum-5
    `(secondary-selection ((,class (:background ,blue-3))))
    `(isearch ((,class (:foreground ,alum-1 :background ,orange-3))))
    `(lazy-highlight ((,class (:background ,choc-3))))
