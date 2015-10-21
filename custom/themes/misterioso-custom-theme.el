@@ -21,13 +21,13 @@
 
 ;;; Code:
 
-(deftheme misterioso
+(deftheme misterioso-custom
   "Predominantly blue/cyan faces on a dark cyan background.")
 
 (let ((class '((class color) (min-colors 89))))
 
   (custom-theme-set-faces
-   'misterioso
+   'misterioso-custom
    ;; Ensure sufficient contrast on 256-color xterms.
    `(default ((((class color) (min-colors 4096))
 	       (:background "#2d3743" :foreground "#e1e1e0"))
@@ -97,15 +97,15 @@
    `(message-separator ((,class (:foreground "#23d7d7"))))))
 
 (custom-theme-set-variables
- 'misterioso
+ 'misterioso-custom
  '(ansi-color-names-vector ["#2d3743" "#ff4242" "#74af68" "#dbdb95"
 			    "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"]))
 
-(provide-theme 'misterioso)
+(provide-theme 'misterioso-custom)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:
 
 ;;; misterioso-theme.el  ends here
-q
+
