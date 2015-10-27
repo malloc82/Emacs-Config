@@ -78,7 +78,8 @@
  `(default ,(cond
              ((eq system-type 'gnu/linux)
               ;; '((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal)))
-              '((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 99 :width normal))))
+              ;; '((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 99 :width normal)))
+              '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 117 :width normal))))
              ((eq system-type 'darwin)
               '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))))))
 
