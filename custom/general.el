@@ -103,6 +103,9 @@
                                       'split-window-vertically))
 ;; ==================================================================
 
+(require 'hl-line+)
+(setq global-hl-line-highlight t)
+;; check out hl-line-overlay-priority
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/config"))
 (dolist (config-file '("backup"

@@ -8,7 +8,7 @@
 ;;                                      "*TeX Help*"
 ;;                                      "*Async Shell Command*"))
 
-(setq special-display-buffer-names '("*compilation*" "*Compile-Log*"))
+(setq special-display-buffer-names '("*compilation*" "*Compile-Log*" "*cider-error*"))
 (setq special-display-regexps '("\\*magit[^*:]*:[^*]*\\*"
                                 "\\*cider-repl[^*]*\\*"))
 (setq special-display-function
