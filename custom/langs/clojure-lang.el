@@ -59,7 +59,8 @@
           #'(lambda ()
               (setq show-trailing-whitespace t)
               (enable-paredit-mode)
-              (add-clojure-paredit clojure-mode-map)))
+              (add-clojure-paredit clojure-mode-map)
+              (eldoc-mode)))
 
 (add-hook 'cider-repl-mode-hook
           #'(lambda ()

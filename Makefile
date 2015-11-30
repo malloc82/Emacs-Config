@@ -31,3 +31,4 @@ err: ; $(ERR)
 
 # install:
 # 	cp init.el ~/.emacs
+
