@@ -24,16 +24,17 @@
   ;; (define-key mode-type (kbd "RET") 'paredit-newline)
   ;; (define-key mode-type (kbd "<return>") 'paredit-newline)
   ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with
-  (define-key mode-type (kbd "M-<backspace>") 'delete-backward-char)
-  (define-key mode-type (kbd "C-M-<right>")   'forward-sexp)
-  (define-key mode-type (kbd "C-M-<left>")    'backward-sexp)
+  (define-key mode-type (kbd "C-M-<backspace>")  'delete-backward-char)
+  (define-key mode-type (kbd "M-<backspace>>")   'paredit-backward-kill-word)
+  (define-key mode-type (kbd "C-M-<right>")      'forward-sexp)
+  (define-key mode-type (kbd "C-M-<left>")       'backward-sexp)
   ;; (define-key mode-type (kbd "C-<return>") 'paredit-newline)
 
   ;; ;; nb: this assumes dvorak key layout
-  ;; ;; (define-key mode-type (kbd "C-k") 'kill-sexp)
+  ;; (define-key mode-type (kbd "C-k") 'kill-sexp)
   ;; (define-key mode-type (kbd "C-t") 'transpose-sexps)
   ;; (define-key mode-type (kbd "C-M-t") 'transpose-chars)
-  ;; (define-key mode-type (kbd "C-M-k") 'paredit-kill)
+  (define-key mode-type (kbd "C-M-k") 'paredit-kill)
   ;; ;; (define-key mode-type (kbd "C-'") 'paredit-splice-sexp)
   ;; (define-key mode-type (kbd "C-M-l") 'paredit-recentre-on-sexp)
   ;; (define-key mode-type (kbd "C-,") 'paredit-backward-slurp-sexp)
@@ -58,13 +59,14 @@
 (add-hook 'clojure-mode-hook
           #'(lambda ()
               (setq show-trailing-whitespace t)
+              (eldoc-mode)
               (enable-paredit-mode)
-              (add-clojure-paredit clojure-mode-map)
-              (eldoc-mode)))
+              (add-clojure-paredit clojure-mode-map)))
 
 (add-hook 'cider-repl-mode-hook
           #'(lambda ()
-              (cider-turn-on-eldoc-mode)
+              (eldoc-mode)
+              ;; (cider-turn-on-eldoc-mode)
               (enable-paredit-mode)
               (add-to-list 'paredit-space-for-delimiter-predicates
                            'clojure-space-for-delimiter-p

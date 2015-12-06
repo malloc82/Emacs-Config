@@ -29,7 +29,8 @@
                 (setq compilation-auto-jump-to-first-error t))))
 
 (dolist (mode '(package-menu-mode-hook
-                emacs-lisp-mode-hook))
+                emacs-lisp-mode-hook
+                dired-mode-hook))
   (add-hook mode #'(lambda () (setq compilation-auto-jump-to-first-error nil))))
 
 (defun byte-compile-current-buffer ()
