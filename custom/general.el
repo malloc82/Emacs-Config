@@ -1,7 +1,12 @@
 ;; -*- mode: Lisp -*-
 (setq confirm-kill-emacs 'yes-or-no-p)
 (setq debug-on-error nil)
-(setq visible-bell 1)
+;; (setq visible-bell 1)
+(setq visible-bell nil)
+(setq ring-bell-function
+      (lambda ()
+        (invert-face 'mode-line)
+        (run-with-timer 0.1 nil 'invert-face 'mode-line)))
 (blink-cursor-mode t)
 (setq-default fill-column 120)
 (defalias 'yes-or-no-p 'y-or-n-p)
