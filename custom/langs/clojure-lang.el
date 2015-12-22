@@ -11,10 +11,10 @@
 (defsubst add-clojure-paredit (mode-type)
   ;; (define-key mode-type (kbd "(") 'paredit-open-parenthesis)
   ;; (define-key mode-type (kbd ")") 'paredit-close-parenthesis)
-  ;; (define-key mode-type (kbd "[") 'paredit-open-square)
-  ;; (define-key mode-type (kbd "]") 'paredit-close-square)
-  ;; (define-key mode-type (kbd "{") 'paredit-open-curly)
-  ;; (define-key mode-type (kbd "}") 'paredit-close-curly)
+  (define-key mode-type (kbd "[") 'paredit-open-square)
+  (define-key mode-type (kbd "]") 'paredit-close-square)
+  (define-key mode-type (kbd "{") 'paredit-open-curly)
+  (define-key mode-type (kbd "}") 'paredit-close-curly)
   (define-key mode-type (kbd "M-0") 'paredit-escape) ;; also try : \
 
   (define-key mode-type (kbd "\"") 'paredit-doublequote)
