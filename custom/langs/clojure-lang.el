@@ -24,7 +24,7 @@
   ;; (define-key mode-type (kbd "RET") 'paredit-newline)
   ;; (define-key mode-type (kbd "<return>") 'paredit-newline)
   ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with
-  (define-key mode-type (kbd "C-M-<backspace>")  'delete-backward-char)
+  (define-key mode-type (kbd "C-<backspace>")  'delete-backward-char)
   (define-key mode-type (kbd "M-<backspace>>")   'paredit-backward-kill-word)
   (define-key mode-type (kbd "C-M-<right>")      'forward-sexp)
   (define-key mode-type (kbd "C-M-<left>")       'backward-sexp)
