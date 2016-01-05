@@ -1,10 +1,10 @@
 ;;; clojure-mode-extra-font-locking.el --- Extra font-locking for Clojure mode
 
-;; Copyright © 2014-2015 Bozhidar Batsov
+;; Copyright © 2014-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://github.com/clojure-emacs/clojure-mode
-;; Package-Version: 5.0.1
+;; Package-Version: 5.1.0
 ;; Version: 3.0.0
 ;; Keywords: languages, lisp
 ;; Package-Requires: ((clojure-mode "3.0"))

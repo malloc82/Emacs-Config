@@ -10,8 +10,8 @@
 ;;         Steve Purcell <steve@sanityinc.com>
 ;; Maintainer: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://www.github.com/clojure-emacs/cider
-;; Version: 0.10.0
-;; Package-Requires: ((emacs "24.3") (clojure-mode "5.0.0") (pkg-info "0.4") (queue "0.1.1") (spinner "1.4") (seq "1.9"))
+;; Version: 0.10.1
+;; Package-Requires: ((emacs "24.3") (clojure-mode "5.1.0") (pkg-info "0.4") (queue "0.1.1") (spinner "1.4") (seq "1.9"))
 ;; Keywords: languages, clojure, cider
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -78,7 +78,7 @@
 
 (require 'seq)
 
-(defconst cider-version "0.10.0"
+(defconst cider-version "0.10.1"
   "Fallback version used when it cannot be extracted automatically.
 Normally it won't be used, unless `pkg-info' fails to extract the
 version from the CIDER package or library.")
@@ -528,10 +528,6 @@ buffer."
   (cider--check-middleware-compatibility)
   (cider--debug-init-connection)
   (cider--subscribe-repl-to-server-out)
-  (cider-nrepl-request:eval
-   "(try (require 'cider.nrepl.print-method)
-         (catch Throwable _ nil))"
-   #'ignore)
   (when cider-auto-mode
     (cider-enable-on-existing-clojure-buffers))
   (run-hooks 'cider-connected-hook))

@@ -615,6 +615,7 @@ and kill the process buffer."
              (substring message 0 -1)))
   (when (equal (process-status process) 'closed)
     (when-let ((client-buffer (process-buffer process)))
+      (nrepl--clear-client-sessions client-buffer)
       (with-current-buffer client-buffer
         (run-hooks 'nrepl-disconnected-hook)
         (when (buffer-live-p nrepl-server-buffer)
@@ -800,6 +801,12 @@ values of *1, *2, etc."
         (setq nrepl-ops ops)
         (setq nrepl-versions versions)))))
 
+(defun nrepl--clear-client-sessions (conn-buffer)
+  "Clear client nREPL sessions in CONN-BUFFER."
+  (with-current-buffer conn-buffer
+    (setq nrepl-session nil)
+    (setq nrepl-tooling-session nil)))
+
 (define-obsolete-function-alias 'nrepl-close 'cider--close-connection-buffer "0.10.0")
 
 ;;; Client: Response Handling
@@ -824,7 +831,8 @@ It is safe to call this function multiple times on the same ID."
 
 (defun nrepl-make-response-handler (buffer value-handler stdout-handler
                                            stderr-handler done-handler
-                                           &optional eval-error-handler)
+                                           &optional eval-error-handler
+                                           pprint-out-handler)
   "Make a response handler for connection BUFFER.
 A handler is a function that takes one argument - response received from
 the server process.  The response is an alist that contains at least 'id'
@@ -855,8 +863,8 @@ server responses."
              (when stdout-handler
                (funcall stdout-handler buffer out)))
             (pprint-out
-             (when stdout-handler
-               (funcall stdout-handler buffer pprint-out)))
+             (cond (pprint-out-handler (funcall pprint-out-handler buffer pprint-out))
+                   (stdout-handler (funcall stdout-handler buffer pprint-out))))
             (err
              (when stderr-handler
                (funcall stderr-handler buffer err)))
