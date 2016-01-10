@@ -1,3 +1,8 @@
+;; -*- lexical-binding: t -*-
+(setq lexical-binding t)
+
+(load-library "tags")
+
 ;; ===========================
 ;; Other Custom Functions
 ;; ===========================
@@ -70,44 +75,6 @@
 (defun close-all-buffers ()
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
-
-;; (setq ctags-bin "/home/optivus/rcai/bin/ctags") ;; <- your ctags path here
-
-(defmacro mk-tag-func (dirlist &optional rootdir)
-  ;; (setq ctags-bin "~/Installed/bin/ctags")
-  ;; ;; On OS X Lion, ctags built by macport generate erroneous file format
-  ;; ;; e.g. installed of file name, it's a blank space / tab,
-  ;; ;;      or it could be a temp file name.
-  ;; ;; Not sure why this happens but if I build ctags with CC=gcc-4.2 everything
-  ;; ;; works fine.
-  (setq ctags-bin "/opt/local/bin/ctags")
-  (setq subdir "")
-  (setq ctag-dir (if rootdir rootdir "."))
-  (dolist (dir dirlist)
-    (setq subdir (concat subdir (format " -R %s" dir))))
-  `(lambda ()
-     #'(lambda (ctags-command)
-         "Create tags file."
-         (interactive
-          (list (read-shell-command (format "Run ctags (%s): " ,ctag-dir)
-                                    (concat ,ctags-bin
-                                            (format " --extra=+q --tag-relative=yes --append=no -f TAGS -e %s" ,subdir) nil))))
-         ;; (let ((current-path (file-name-directory (buffer-file-name))))
-         (let ((current-path (substring (pwd) 10))) ;; 10 charactors for  "Directory "
-           (cd ,ctag-dir)
-           (shell-command (concat ctags-command " &"))
-           (visit-tags-table (concat ,rootdir "/TAGS"))
-           (cd current-path)))))
-
-(fset 'create-tags (funcall (mk-tag-func ("."))))
-(fset 'create-tags-mri-old (funcall (mk-tag-func ("src"
-                                                  "include"
-                                                  "../common/include"
-                                                  "../common/src") "~/repos/Thesis/Cuda/MRI_CPU/")))
-(fset 'create-tags-thesis (funcall (mk-tag-func ("src"
-                                                 "include"
-                                                 "readtest") "~/repos/Master/Thesis")))
-
 
 (defun c-insert-debug ()
   (interactive)
