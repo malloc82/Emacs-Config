@@ -1,6 +1,5 @@
-;;; javap-mode.el --- Javap major mode
-;; Version: 20120223.1408
-;;; X-Original-Version: 9
+;;; javap.el --- Javap major mode
+;;; Version: 8
 ;;; URL: http://github.com/hiredman/javap-mode
 
 ;; Copyright (C) 2011 Kevin Downey
@@ -70,16 +69,16 @@
       ))
   "Default expressions to highlight in javap mode.")
 
-(defvar javap-mode-syntax-table′ (make-syntax-table)
+(defvar javap-mode-syntax-table2 (make-syntax-table)
   "Syntax table for use in javap-mode.")
 
  ;;;###autoload
 (define-derived-mode javap-mode fundamental-mode "javap"
   "A major mode for viewing javap files."
-  :syntax-table javap-mode-syntax-table′
-  (modify-syntax-entry ?_ "w" javap-mode-syntax-table′)
-  (modify-syntax-entry ?# "<" javap-mode-syntax-table′)
-  (modify-syntax-entry ?\n ">" javap-mode-syntax-table′)
+  :syntax-table javap-mode-syntax-table2
+  (modify-syntax-entry ?_ "w" javap-mode-syntax-table2)
+  (modify-syntax-entry ?# "<" javap-mode-syntax-table2)
+  (modify-syntax-entry ?\n ">" javap-mode-syntax-table2)
   (set (make-local-variable 'comment-start) "#")
   (set (make-local-variable 'comment-start-skip) "#")
   (set (make-local-variable 'font-lock-defaults) '(javap-font-lock-keywords)))
@@ -117,4 +116,4 @@
 
 (provide 'javap-mode)
 
-;;; javap-mode.el ends here
+;;; javap.el ends here
