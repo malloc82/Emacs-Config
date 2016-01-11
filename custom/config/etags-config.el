@@ -1,4 +1,6 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Lisp; lexical-binding: t -*-
+(setq lexical-binding t)
+
 ;; Etags setting
 
 (require 'etags-select)
@@ -39,3 +41,53 @@ otherwise raises an error."
 ;; ;; delay search the TAGS file after open the source file
 ;; (add-hook 'emacs-startup-hook
 ;; 	'(lambda () (jds-set-tags-file-path)))
+
+;; settings to run ctags to generate tag table
+
+(defvar ctags-bin "/opt/local/bin/ctags")
+(defvar ctags-project-folder nil)
+(defvar ctags-tag-file nil)
+(defvar ctags-sources nil)
+(defvar ctags-command nil)
+
+(defun ctags-new (cmd)
+  "Create tags file."
+  (interactive
+   (let* (;; (bin (read-file-name "ctags path: "
+          ;;                      (file-name-directory ctags-bin)
+          ;;                      "ctags"))
+          (folder (expand-file-name
+                   (file-name-as-directory
+                    (read-directory-name "Project folder: "))))
+          (files    (read-string "Source files: " nil 'minibuffer-history))
+          (language (read-string "Language: " nil 'minibuffer-history "Lisp")))
+     ;; (setq ctags-bin bin)
+     (setq ctags-project-folder folder)
+     (setq ctags-tag-file (concat folder ".tags"))
+     (setq ctags-sources (mapconcat (lambda (s) (concat folder s)) (split-string files) " "))
+     (list (read-shell-command "Run ctags command: "
+                               (format "%s --extra=+q --tag-relative=yes --language-force=%s --append=no -f %s -e -R %s"
+                                       ctags-bin language ctags-tag-file ctags-sources) nil))))
+  (setq ctags-command cmd)
+  (let ((cmd-tokens (split-string ctags-command)))
+    (when (equal (apply #'call-process
+                        (first cmd-tokens) nil (format "*new ctags: %s*" ctags-project-folder) nil
+                        (rest cmd-tokens))
+                 0)
+      (visit-tags-table ctags-tag-file))))
+
+(defun ctags-update ()
+  (interactive)
+  (let ((proc-name  "Update ctags")
+        (buf-name   (format "*update ctags: %s" ctags-project-folder)))
+   (cond
+     ((null ctags-project-folder) (start-process proc-name buf-name
+                                                 "echo" "Error: cannot update ctags, project folder is not defined."))
+     ((null ctags-command) (start-process proc-name buf-name
+                                          "echo" "Error: cannot update ctags, ctags command is not defined."))
+     (t (let ((cmd-tokens (split-string ctags-command)))
+          (when (equal (apply #'call-process (first cmd-tokens) nil buf-name nil
+                              (rest cmd-tokens))
+                       0)
+            (visit-tags-table ctags-tag-file)))))))
+

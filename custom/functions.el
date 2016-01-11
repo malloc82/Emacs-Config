@@ -1,8 +1,6 @@
 ;; -*- lexical-binding: t -*-
 (setq lexical-binding t)
 
-(load-library "tags")
-
 ;; ===========================
 ;; Other Custom Functions
 ;; ===========================
