@@ -79,9 +79,9 @@
   (global-set-key [ (control \?)] 'redo)
   (global-set-key [ (control /)]  'undo))
 
-(global-set-key [C-tab]       'hide-subtree)
-(global-set-key (kbd "C-`")   'show-subtree)
-(global-set-key (kbd "C-c s") 'show-subtree)
+(global-set-key [C-tab]     'hide-subtree)
+(global-set-key [C-M-tab]   'show-subtree)
+(global-set-key (kbd "C-`") 'show-subtree)
 
 ;; hi-lock-mode
 ;; C-x w l
@@ -112,10 +112,10 @@
 ;; ================================================
 ;; multi-terme
 ;; ------------------------------------------------
-(global-set-key (kbd "C-c t") 'multi-term)
-(global-set-key (kbd "C-c b") 'get-term)
-(global-unset-key (kbd "C-z"))
-(global-set-key (kbd "C-c y") 'term-paste)
+;; (global-set-key (kbd "C-c t") 'multi-term)
+;; (global-set-key (kbd "C-c b") 'get-term)
+;; (global-unset-key (kbd "C-z"))
+;; (global-set-key (kbd "C-c y") 'term-paste)
 ;; ================================================
 
 
@@ -140,5 +140,5 @@
 ;; ============================================================================
 ;; Magit
 ;; ----------------------------------------------------------------------------
-(global-set-key (kbd "C-c C-s") 'magit-status)
+(global-set-key (kbd "C-c m") 'magit-status)
 
