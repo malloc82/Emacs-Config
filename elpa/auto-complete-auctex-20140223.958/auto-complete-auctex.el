@@ -3,8 +3,8 @@
 ;; Copyright (C) 2012 Christopher Monsanto
      
 ;; Author: Christopher Monsanto <chris@monsan.to>
-;; Version: 20140223.958
-;; X-Original-Version: 1.0
+;; Version: 1.0
+;; Package-Version: 20140223.958
 ;; Package-Requires: ((yasnippet "0.6.1") (auto-complete "1.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
