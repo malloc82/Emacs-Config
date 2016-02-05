@@ -7,7 +7,7 @@
        "Same as `ac-prefix-symbol' but ignore a number prefix."
        (let ((start (ac-prefix-symbol)))
          (when (and start
-                    (not (string-match "^\\([0-9]+\\([eE][+-]?[0-9]*\\)?\\|0[xX][0-9a-fA-F]+\\|[+-]?[0-9]+\\(.[0-9]*\\)?\\)"
+                    (not (string-match "\\([0-9]+\\([eE][+-]?[0-9]*\\)?\\|0[xX][0-9a-fA-F]+\\|[+-]?[0-9]+\\(.[0-9]*\\)?\\)"
                                        ;; "^\\(?:0[xX][0-9A-Fa-f]+\\|[0-9]+\\)$"
                                      (buffer-substring-no-properties start (point)))))
            start)))))
