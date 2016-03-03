@@ -12,7 +12,9 @@
 (define-key global-map '[f3]    'uncomment-region)
 (define-key global-map '[f4]    'comment-region)
 (define-key global-map '[f5]    'list-buffers)
-(define-key global-map [?\M-\d] 'backward-kill-word)
+;; (define-key global-map [?\M-\d] 'backward-kill-word)
+
+(global-set-key (kbd "M-DEL") 'backward-kill-word)
 
 (global-set-key (kbd "<f6>") 'toggle-truncate-lines)
 
