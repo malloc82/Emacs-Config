@@ -1,5 +1,10 @@
 ;; -*- mode: emacs-lisp -*-
 
+(elpy-enable)
+
+;; =============================
+;; Jedi setup
+;; -----------------------------
 (jedi:setup)
 (jedi:ac-setup)
 (setq jedi:complete-on-dot t)
@@ -12,13 +17,23 @@
 (ac-config-default)
 ;; =============================
 
+
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+
 (outline-minor-mode 1)
 
 (set-variable 'py-indent-offset 4)
 (set-variable 'py-smart-indentation nil)
-(set-variable 'indent-tabs-mode nil) 
+(set-variable 'indent-tabs-mode nil)
 
-(setq python-shell-interpreter "/usr/local/bin/ipython"
+(elpy-use-ipython)
+(setq python-shell-interpreter "/usr/local/bin/ipython3"
       python-shell-interpreter-args "--colors=Linux" ;; Linux, LightBG, NoColor
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "

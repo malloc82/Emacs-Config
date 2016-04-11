@@ -80,8 +80,22 @@
                         "web"))
   (load-library lang-setting))
 
+
+;; python packages
+(defvar python-packages
+  '(ein
+    elpy
+    flycheck
+    py-autopep8))
+
+(mapc #'(lambda (package)
+          (unless (package-installed-p package)
+            (package-install package)))
+      python-packages)
+
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
 (dolist (hook '((LaTeX-mode-hook   . "latex-settings")
+                ;; (python-mode-hook  . "python-config")
                 (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")
                 (erlang-mode-hook  . "erlang-lang")
