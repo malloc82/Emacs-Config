@@ -4,7 +4,7 @@
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("websocket-functional-test.el" "websocket-pkg.el"
-;;;;;;  "websocket.el") (22283 19871 0 0))
+;;;;;;  "websocket.el") (22313 2726 0 0))
 
 ;;;***
 
