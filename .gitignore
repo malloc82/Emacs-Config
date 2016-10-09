@@ -17,3 +17,7 @@ backups/
 places
 .python-environments/
 elpa/archives/
+
+ido.last
+network-security.data
+request/
