@@ -33,7 +33,7 @@
 (set-variable 'indent-tabs-mode nil)
 
 (elpy-use-ipython)
-(setq python-shell-interpreter "/usr/local/bin/ipython3"
+(setq python-shell-interpreter "/usr/local/bin/ipython"
       python-shell-interpreter-args "--colors=Linux" ;; Linux, LightBG, NoColor
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
