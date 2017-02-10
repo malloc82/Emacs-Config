@@ -1,7 +1,5 @@
 ;; -*- mode: emacs-lisp -*-
 
-(elpy-enable)
-
 ;; =============================
 ;; Jedi setup
 ;; -----------------------------
@@ -12,12 +10,13 @@
 ;; =============================
 ;; Auto Completion
 ;; -----------------------------
-(setq py-load-pymacs-p t)
-(require 'auto-complete-config)
-(ac-config-default)
+;; (setq py-load-pymacs-p t)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
 ;; =============================
 
-
+(elpy-enable)
+(elpy-mode 1)
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
@@ -32,9 +31,9 @@
 (set-variable 'py-smart-indentation nil)
 (set-variable 'indent-tabs-mode nil)
 
-(elpy-use-ipython)
-(setq python-shell-interpreter "/usr/local/bin/ipython"
-      python-shell-interpreter-args "--colors=Linux" ;; Linux, LightBG, NoColor
+;; (elpy-use-ipython "/usr/local/bin/ipython")
+(setq python-shell-interpreter (concat (getenv "HOME") "/anaconda3/bin/ipython") ;; "/Users/zcai/anaconda3/bin/ipython"
+      python-shell-interpreter-args "--colors=Linux --simple-prompt -i" ;; Linux, LightBG, NoColor
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"

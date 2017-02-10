@@ -1,5 +1,8 @@
 ;; Emacs's environment
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 (normal-top-level-add-subdirs-to-load-path)
 
 (defun set-exec-path-from-shell-PATH ()

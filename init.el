@@ -17,8 +17,6 @@
                 "PACKAGE_DIRECTORY"))
   (add-to-list 'load-path path))
 
-(load-library "env")
-
 (when (>= emacs-major-version 24)
   (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
   (require 'package)
@@ -31,6 +29,7 @@
                                   (cider        . "melpa-stable")))
   (package-initialize))
 
+(load-library "env")
 (load-library "keys")
 
 (if (eq current-path nil)
@@ -54,7 +53,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(global-hl-line-mode t)
  '(ansi-color-names-vector
    ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(column-number-mode t)
@@ -70,14 +68,19 @@
      "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
      default)))
  '(fci-rule-color "#383838")
- '(show-paren-mode t)
- '(tool-bar-mode nil)
- '(scroll-bar-mode t)
  '(package-selected-packages
    (quote
-    (ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist))))
+    (exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist)))
+ '(global-hl-line-mode t)
+ '(scroll-bar-mode t)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  `(default ,(cond
              ((eq system-type 'gnu/linux)
               ;; '((t (:family "ProggyCleanTT" :foundry "unknown" :slant normal :weight normal :height 136 :width normal)))
@@ -86,5 +89,5 @@
              ((eq system-type 'darwin)
               (if (<= emacs-major-version 24)
                   '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
-                  '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1"))))))))
+                '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1"))))))))
 
