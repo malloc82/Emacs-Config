@@ -8,7 +8,7 @@
         (invert-face 'mode-line)
         (run-with-timer 0.1 nil 'invert-face 'mode-line)))
 (blink-cursor-mode t)
-(setq-default fill-column 120)
+;; (setq-default fill-column 120)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
