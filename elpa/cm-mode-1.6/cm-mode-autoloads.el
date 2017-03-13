@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "cm-mode" "cm-mode.el" (22685 17248 0 0))
+;;;### (autoloads nil "cm-mode" "cm-mode.el" (22726 13237 0 0))
 ;;; Generated autoloads from cm-mode.el
 
 (autoload 'cm-mode "cm-mode" "\
