@@ -95,7 +95,6 @@
 
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
 (dolist (hook '((LaTeX-mode-hook   . "latex-settings")
-                ;; (python-mode-hook  . "python-config")
                 (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")
                 (erlang-mode-hook  . "erlang-lang")
