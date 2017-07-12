@@ -35,8 +35,23 @@
                                   (jedi         . "melpa-stable")
                                   (go-mode      . "melpa-stable")
                                   (magit        . "melpa-stable")
-                                  (pabbrev      . "gnu")))
+                                  (pabbrev      . "gnu")
+                                  (elpy         . "https://jorgenschaefer.github.io/packages/")))
   (package-initialize))
+
+(use-package smex :ensure t)
+(use-package company
+  :ensure t
+  :bind (("C-c /". company-complete))
+  :config (global-company-mode))
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc"))
 
 (load-library "env")
 (load-library "keys")
@@ -77,10 +92,10 @@
      "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
      default)))
  '(fci-rule-color "#383838")
+ '(global-hl-line-mode t)
  '(package-selected-packages
    (quote
-    (cm-mode idle-highlight-mode ido-ubiquitous smex paredit exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist ein websocket)))
- '(global-hl-line-mode t)
+    (company-irony company-irony-c-headers company-jedi cm-mode idle-highlight-mode ido-ubiquitous smex paredit exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist ein websocket)))
  '(scroll-bar-mode t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -99,4 +114,3 @@
               (if (<= emacs-major-version 24)
                   '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
                 '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1"))))))))
-

@@ -29,7 +29,7 @@
          ("\\.[Cc][Uu]$"               . c++-mode) ;;cuda-mode)
          ("\\.[Cc][Uu][Hh]$"           . c++-mode) ;;cuda-mode)
          ("\\.dps$"                    . pascal-mode)
-         ("\\.py$"                     . python-mode)
+         ;; ("\\.py$"                     . python-mode)
          ("\\.Xdefaults$"              . xrdb-mode)
          ("\\.Xenvironment$"           . xrdb-mode)
          ("\\.Xresources$"             . xrdb-mode)
@@ -63,7 +63,6 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 ;; ============================================================================
-
 ;; (setq c-default-style '((c-mode    . "stroustrup")
 ;;                         (c++-mode  . "stroustrup")
 ;;                         (objc-mode . "stroustrup")
@@ -71,12 +70,19 @@
 ;;                         (awk-mode  . "awk")
 ;;                         (other     . "gnu")))
 
+;; ==========================================
+;; Python Config (elpy)
+;; ==========================================
+
+;; (elpy-enable)
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/langs"))
 (dolist (lang-setting '("c_c++-lang"
                         "objc-lang"
                         "lisp-lang"
                         "clojure-lang"
                         "perl-lang"
+                        "python-config"
                         "web"))
   (load-library lang-setting))
 
@@ -95,7 +101,7 @@
 
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
 (dolist (hook '((LaTeX-mode-hook   . "latex-settings")
-                (python-mode-hook  . "python-config")
+                ;; (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")
                 (erlang-mode-hook  . "erlang-lang")
                 (ocaml-mode-hook   . "ocaml-lang")
