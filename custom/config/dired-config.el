@@ -44,3 +44,7 @@
             ;; (setq dired-omit-files
             ;;       (concat dired-omit-files "\\|^\\..+$"))
             ))
+
+(when (eq system-type 'darwin)
+    (setq insert-directory-program "/opt/local/bin/gls"))
+(setq dired-listing-switches "-plsha --color=auto --group-directories-first")
