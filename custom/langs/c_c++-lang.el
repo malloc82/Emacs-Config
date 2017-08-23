@@ -17,6 +17,8 @@
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
+(add-hook 'irony-mode-hook #'(lambda () (setq show-trailing-whitespace t)))
+
 ;; ============================================================
 ;;  indentation
 ;; ------------------------------------------------------------

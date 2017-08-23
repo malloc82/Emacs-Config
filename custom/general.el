@@ -32,6 +32,7 @@
 (setq-default transient-mark-mode t)  ;; transient-mark-mode
 (setq scroll-preserve-screen-position 1) ;; Pgup/dn will return exactly to the starting point.
 (setq next-line-add-newlines nil)
+(setq show-trailing-whitespace t)
 
 (require 'delsel)
 (delete-selection-mode t)
