@@ -2,6 +2,7 @@
 .smex-items
 *.elc
 *.swp
+*~
 %*%~
 .org-id-locations
 .smex-items

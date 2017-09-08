@@ -100,6 +100,8 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
+
+;; Proggycleantt supported font size: 9(90), 12 (121), 16 (158)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
