@@ -115,4 +115,6 @@
              ((eq system-type 'darwin)
               (if (<= emacs-major-version 24)
                   '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman")))
-                '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1"))))))))
+                '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+                ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
+                )))))
