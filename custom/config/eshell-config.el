@@ -1,10 +1,31 @@
 
+(setenv "PATH" (concat (getenv "PATH") ":/opt/local/libexec/git-core"))
+
+(defun find_git_branch ()
+  (let ((_branch_ (substring (shell-command-to-string "git rev-parse --abbrev-ref HEAD 2> /dev/null") 0 -1)))
+    (message "branch = %s" _branch_)
+    (if (> (length _branch_) 0)
+        (if (eq _branch_ "HEAD")
+            (let ((_commit_ (substring (shell-command-to-string "git log -n1 --pretty='%h' 2> /dev/null") 0 -1))
+                  (_tag_    (substring (shell-command-to-string (format "git describe --exact-match --tags %s 2> /dev/null" _commit_)) 0 -1)))
+              (if (> (length _tag_) 0)
+                  (format "(detatched: %s)" _tag_)
+                (format "(detatched: %s") _commit_))
+          (format "(%s)" _branch_))
+      "")))
+
+(defun find_git_dirty ()
+  (let ((_status_ (substring (shell-command-to-string "git status --porcelain 2> /dev/null") 0 -1)))
+    (if (> (length _status_) 0) "*" "")))
+
 
 (setq eshell-prompt-function
       (lambda ()
         (concat (propertize (format-time-string "%Y-%m-%d %H:%M " (current-time)) 'face `(:foreground "teal"))
                 ;; (file-name-nondirectory (eshell/pwd))
                 (propertize (abbreviate-file-name (eshell/pwd)) 'face `(:foreground "green"))
+                (propertize (format " %s" (find_git_branch)) 'face `(:foreground "yellow"))
+                (propertize (find_git_dirty) 'face `(:foreground "red"))
                 (propertize (if (= (user-uid) 0) "\n#" "\n$") 'face `(:foreground "purple"))
                 (propertize " " 'face `(:foreground "white")))))
 
@@ -55,8 +76,6 @@
 
 (defun eshell/ed-eshell () (find-file "~/.emacs.d/custom/config/eshell-config.el"))
 
-(setenv "PATH" (concat (getenv "PATH") ":/opt/local/libexec/git-core"))
-
 (defun eshell/emacs (&rest args)
   "Open a file in emacs. Some habits die hard."
   (if (null args)
@@ -94,13 +113,13 @@
      ((eq display-type 'x)
       (eshell-do-eval
        (eshell-parse-command
-	(format "rxvt -e %s &" cmd)))
+        (format "rxvt -e %s &" cmd)))
       nil)
      (t
       (apply 'eshell-exec-visual (cons "ssh" args))))))
 
-(defun eshell/git (&rest args)
-  (apply 'eshell-exec-visual (cons "git" args)))
+;; (defun eshell/git (&rest args)
+;;   (apply 'eshell-exec-visual (cons "git" args)))
 
 ;; (defun eshell/hg (&rest args)
 ;;   (apply 'eshell-exec-visual (cons "hg" args)))
