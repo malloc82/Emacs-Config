@@ -116,10 +116,10 @@
               (add-lisp-paredit scheme-mode-map)
               (load-library "my-scheme")))
 
-(add-hook 'eshell-mode-hook
-          #'(lambda ()
-              (paredit-mode)
-              (add-lisp-paredit scheme-mode-map)))
+;; (add-hook 'eshell-mode-hook
+;;           #'(lambda ()
+;;               (paredit-mode)
+;;               (add-lisp-paredit scheme-mode-map)))
 
 (add-hook 'slime-mode-hook
           #'(lambda ()

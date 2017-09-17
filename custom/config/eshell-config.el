@@ -1,8 +1,29 @@
+
+
 (setq eshell-prompt-function
       (lambda ()
-        (concat (format-time-string "%Y-%m-%d %H:%M " (current-time))
-                (file-name-nondirectory (eshell/pwd))
-                (if (= (user-uid) 0) " # " " $ "))))
+        (concat (propertize (format-time-string "%Y-%m-%d %H:%M " (current-time)) 'face `(:foreground "teal"))
+                ;; (file-name-nondirectory (eshell/pwd))
+                (propertize (abbreviate-file-name (eshell/pwd)) 'face `(:foreground "green"))
+                (propertize (if (= (user-uid) 0) "\n#" "\n$") 'face `(:foreground "purple"))
+                (propertize " " 'face `(:foreground "white")))))
+
+;; return value of eshell-prompt-function must match eshell-prompt-regexp
+(setq eshell-prompt-regexp "^[^#$]*[#$] ")
+
+;; ======================================================================================
+;; Eshell Prompt: https://www.emacswiki.org/emacs/EshellPrompt
+
+(require 'helm-eshell)
+
+(add-hook 'eshell-mode-hook
+          #'(lambda ()
+              (paredit-mode)
+              (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
+
+;; for shell-mode
+(define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)
+;; ======================================================================================
 
 ;; scroll to bottom for eshell
 
@@ -18,6 +39,7 @@
                 (recenter -1)
                 (sit-for 0))))))))
 
+
 (add-hook 'eshell-mode-hook
           #'(lambda ()
               (interactive)
@@ -29,12 +51,9 @@
 ;; (setenv "GIT_PAGER" "less -FRSX")
 ;; (setenv "GIT_PAGER" "")
 
-(defun eshell/ld-eshell () (load-file "~/.emacs.d/my-eshell.el"))
+(defun eshell/ld-eshell () (load-file "~/.emacs.d/custom/config/eshell-config.el"))
 
-(defun eshell/ed-eshell () (find-file "~/.emacs.d/my-eshell.el"))
-
-(defun eshell/tcm ()
-  (cd "~/repos/Thesis/Cuda/MRI_CPU"))
+(defun eshell/ed-eshell () (find-file "~/.emacs.d/custom/config/eshell-config.el"))
 
 (setenv "PATH" (concat (getenv "PATH") ":/opt/local/libexec/git-core"))
 
@@ -85,3 +104,8 @@
 
 ;; (defun eshell/hg (&rest args)
 ;;   (apply 'eshell-exec-visual (cons "hg" args)))
+
+;; ======================================================================================
+;; Eshell Completion: https://www.emacswiki.org/emacs/EshellCompletion
+
+;; ======================================================================================

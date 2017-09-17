@@ -118,7 +118,7 @@
                        "ac-config"
                        "compilation-config"
                        "dired-config"
-                       ;; "eshell-config"
+                       "eshell-config"
                        "etags-config"
                        "frame-settings"
                        "shell-mode-config"
