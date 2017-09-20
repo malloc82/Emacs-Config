@@ -1,23 +1,23 @@
 
-(setenv "PATH" (concat (getenv "PATH") ":/opt/local/libexec/git-core"))
+;; (setenv "PATH" (concat (getenv "PATH") ":/opt/local/libexec/git-core"))
 
 (defun find_git_branch ()
-  (let ((_branch_ (substring (shell-command-to-string "git rev-parse --abbrev-ref HEAD 2> /dev/null") 0 -1)))
-    (message "branch = %s" _branch_)
+  (let ((_branch_ (shell-command-to-string "git rev-parse --abbrev-ref HEAD 2> /dev/null")))
+    (message "branch = |%s|" _branch_)
+    (message "branch length = %d" (length _branch_))
     (if (> (length _branch_) 0)
         (if (eq _branch_ "HEAD")
             (let ((_commit_ (substring (shell-command-to-string "git log -n1 --pretty='%h' 2> /dev/null") 0 -1))
-                  (_tag_    (substring (shell-command-to-string (format "git describe --exact-match --tags %s 2> /dev/null" _commit_)) 0 -1)))
+                  (_tag_    (shell-command-to-string (format "git describe --exact-match --tags %s 2> /dev/null" _commit_))))
               (if (> (length _tag_) 0)
-                  (format "(detatched: %s)" _tag_)
-                (format "(detatched: %s") _commit_))
-          (format "(%s)" _branch_))
+                  (format "(detatched: %s)" (substring _tag_ 0 -1))
+                (format "(detatched: %s" _commit_)))
+          (format "(%s)" (substring _branch_ 0 -1)))
       "")))
 
 (defun find_git_dirty ()
-  (let ((_status_ (substring (shell-command-to-string "git status --porcelain 2> /dev/null") 0 -1)))
+  (let ((_status_ (shell-command-to-string "git status --porcelain 2> /dev/null")))
     (if (> (length _status_) 0) "*" "")))
-
 
 (setq eshell-prompt-function
       (lambda ()
