@@ -2,18 +2,27 @@
 ;; (setq initial-major-mode 'org-mode)
 ;; (require 'cc-mode)
 ;; (require 'vhdl-mode)
-(require 'verilog-mode)
+;; (require 'verilog-mode)
+;; (autoload 'verilog-mode "verilog-mode" "Major mode for verilog, from http://www.veripool.org" t nil)
 (require 'cperl-mode)
-(require 'gas-mode)
+;; (require 'gas-mode)
+(autoload 'gas-mode "gas-mode" "Major mode for editing assembly code" t nil)
 ;; (require 'cuda-mode)
-(when (string= system-type "gnu/linux")
-  (require 'apt-sources))
+;; (when (string= system-type "gnu/linux")
+;;   (require 'apt-sources))
+(autoload 'apt-sources "apt-sources" "Major mode for editing debian's apt config file" t nil)
+
 ;; (require 'csharp-mode) ;; not using it at the moment
 ;; (require 'd-mode)
-(require 'scilab)
-(require 'matlab)
-(require 'haskell-mode)
 
+;; (require 'scilab)
+(autoload 'scilab "scilab-mode" "Major mode for SciLab" t nil)
+;; (require 'matlab)
+;; (autoload 'matlab "matlab-mode" "Major mode for matlab files" t nil)
+;; (require 'haskell-mode)
+;; (autoload 'haskell-mode "haskell-mode" "Major mode for haskell" t nil)
+;; (require 'vimrc-mode)
+(autoload 'vimrc-mode "vimrc-mode" "Major mode for vimrc files" t nil)
 ;; ===========================================================================================
 ;; Set up which modes to use for which file extensions
 ;; -------------------------------------------------------------------------------------------
@@ -54,6 +63,7 @@
          ("[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]\\(\\..+\\|_.+\\)*$" . makefile-mode)
          ;; ("\\.js$"                     . js2-mode)
          ;; ("\\.js\\'"                   . javascript-mode)
+         ("\\.vim\\(rc\\)?\\'"         . vimrc-mode)
          ) auto-mode-alist))
 ;; ===========================================================================================
 
@@ -143,3 +153,17 @@
 ;; (add-hook 'javascript-mode-hook 'javascript-custom-setup)
 ;; (defun javascript-custom-setup ()
 ;;   (moz-minor-mode 1))
+
+;; (define-generic-mode 'vimrc-generic-mode
+;;     '()
+;;     '()
+;;     '(("^[\t ]*:?\\(!\\|ab\\|map\\|unmap\\)[^\r\n\"]*\"[^\r\n\"]*\\(\"[^\r\n\"]*\"[^\r\n\"]*\\)*$"
+;;        (0 font-lock-warning-face))
+;;       ("\\(^\\|[\t ]\\)\\(\".*\\)$"
+;;       (2 font-lock-comment-face))
+;;       ("\"\\([^\n\r\"\\]\\|\\.\\)*\""
+;;        (0 font-lock-string-face)))
+;;     '("/vimrc\\'" "\\.vim\\(rc\\)?\\'")
+;;     '((lambda ()
+;;         (modify-syntax-entry ?\" ".")))
+;;     "Generic mode for Vim configuration files.")

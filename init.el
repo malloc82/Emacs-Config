@@ -53,18 +53,26 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc"))
 
-(load-library "env")
+;; (message "Emacs ELPA loaded in %ds"
+;;          (destructuring-bind (hi lo ms &optional ps) (current-time)
+;;            (- (+ hi lo)
+;;               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
+
+
 (load-library "keys")
+(load-library "env") ;; takes 1s to loade
 
 (if (eq current-path nil)
     (cd "~/.")
     (cd current-path))
 
+
 ;; Feature setup
 (dolist (config-file '("functions"
-                       "general"
+                       "general" ;; takes 2s to load
                        "faces"
-                       "lang"))
+                       "lang" ;; takes 1s to load
+                       ))
   (load-library config-file))
 
 (message "Emacs config loaded in %ds"
