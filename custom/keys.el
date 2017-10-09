@@ -147,3 +147,7 @@
 ;; ----------------------------------------------------------------------------
 (global-set-key (kbd "C-c g") 'magit-status)
 
+;; keyboard macro yank, can be repeated with C-u
+(fset 'kbd-yank
+      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("" 0 "%d")) arg)))
+(global-set-key (kbd "C-c C-y") 'kbd-yank)
