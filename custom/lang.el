@@ -23,6 +23,7 @@
 ;; (autoload 'haskell-mode "haskell-mode" "Major mode for haskell" t nil)
 ;; (require 'vimrc-mode)
 (autoload 'vimrc-mode "vimrc-mode" "Major mode for vimrc files" t nil)
+(autoload 'vivado-mode "vivado-mode" "Major mode for Xilinx XDC files" t nil)
 ;; ===========================================================================================
 ;; Set up which modes to use for which file extensions
 ;; -------------------------------------------------------------------------------------------
@@ -64,6 +65,7 @@
          ;; ("\\.js$"                     . js2-mode)
          ;; ("\\.js\\'"                   . javascript-mode)
          ("\\.vim\\(rc\\)?\\'"         . vimrc-mode)
+         ("\\.[Xx][Dd][Cc]$"           . vivado-mode)
          ) auto-mode-alist))
 ;; ===========================================================================================
 

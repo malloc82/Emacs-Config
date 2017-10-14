@@ -9,10 +9,9 @@
 
 (line-number-mode 'default )
 
-;; (define-key global-map '[f3]    'uncomment-region)
-;; (define-key global-map '[f4]    'comment-region)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "M-c")   'comment-or-uncomment-region)
 
 (define-key global-map '[f5]    'list-buffers)
 ;; (define-key global-map [?\M-\d] 'backward-kill-word)
