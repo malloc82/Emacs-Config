@@ -106,7 +106,7 @@
     (cmake-mode company-irony company-irony-c-headers company-jedi cm-mode idle-highlight-mode ido-ubiquitous smex paredit exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist ein websocket fzf)))
  '(scroll-bar-mode t)
  '(show-paren-mode t)
- '(ns-antialias-text nil) ;; for proggy font on mac
+ ;; '(ns-antialias-text nil) ;; for proggy font on mac
  '(tool-bar-mode nil))
 
 
@@ -124,7 +124,7 @@
               )
              ((eq system-type 'darwin)
               ;; '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))) ;; emacs-24
-              '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
-              ;; '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+              ;; '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
+              '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
               ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
               ))))
