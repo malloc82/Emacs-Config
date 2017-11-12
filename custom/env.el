@@ -12,6 +12,8 @@
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA_HOME" "CLASSPATH"))
   (exec-path-from-shell-initialize))
 
+(setenv "PATH" (concat "~/anaconda3/bin:" (getenv "PATH")))
+
 ;; (setenv "LD_LIBRARY_PATH" (concat "/usr/local/lib/:/opt/local/lib/" (getenv "LD_LIBRARY_PATH")))
 (setenv "PYTHONPATH" (concat (getenv "PYTHONPATH") ":~/.emacs.d/"))
 
