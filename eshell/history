@@ -1,0 +1,128 @@
+br
+(setq br (find_git_branch))
+(setq br (find_git_branch))
+ld-eshell
+ld-eshell
+ld-eshell 
+git status
+ls
+git status
+git diff custom/config/cmp.v 
+emacs init.el 
+git diff init.el 
+git checkout init.el 
+git status
+ls elpa/
+ls eshell-alias
+ls eshell 
+du -hs
+ld-eshell 
+cd .emacs.d/
+ls
+cd custom/config/
+ls
+ls eshell-config.*
+ld-eshell 
+pwd
+cd dev/BaylorComputerEngineering/digital-logic-lab-05
+ls
+git status
+git diff
+git status
+git add * 
+git status
+git commit -m "Update readme"
+git log
+git push 
+gil
+git status
+ls
+chmod +x pull.sh
+ls
+ln -s ../../scripts/clone.sh .
+ln -s ../../scripts/pull.sh .
+ls
+ln -s ../../scripts/update.sh .
+./clone 
+./clone.sh 
+ls
+cat pull.sh 
+cat update.sh 
+./update.sh 
+ls
+ln -s ../../scripts/clone.sh .
+ls
+./clone.sh 
+cd DL2017F_LAB08_S2-cmanesh-Calvin_Manesh/
+ls
+git add remote update git@github.com:BaylorComputerEngineering/digital-logic-lab-08.git
+git remote add update git@github.com:BaylorComputerEngineering/digital-logic-lab-08.git
+git pull update master
+ls
+git push -u origin master
+ln -s ../../scripts/clone.sh 
+ln -s ../../scripts/clone.sh .
+./clone.sh 
+ls
+cd DL2017F_LAB09_S3-JasonFuertes-Jason_Fuertes/
+ls
+cd ..
+cd DL2017F_LAB09_S3-Ali-Ozymy-Ali_Ozymy/
+ls
+cd ..
+cd DL2017F_LAB09_S3-JasonFuertes-Jason_Fuertes/
+ls
+git remote add update git@github.com:BaylorComputerEngineering/digital-logic-lab-09.git
+git pull update master
+git push -u origin master
+./clone.sh 
+ls
+./clone.sh 
+./clone.sh 
+ls
+cd ../..
+cd LAB06/S3_Wed/
+ls
+ls
+./clone.sh 
+ln -s ../../scripts/pull.sh .
+./pull.sh 
+ls
+ln -s ../../scripts/pull.sh 
+ln -s ../../scripts/pull.sh .
+./pull.sh 
+cd ../
+cd ../LAB10/
+ls
+cd S2_Thu/
+ls
+ln -s ../../scripts/clone.sh .
+ln -s ../../scripts/pull.sh .
+./clone.sh 
+ls
+ls
+cd DL2017F_LAB10_S2-gaoxiangluke-Xiang_Gao/
+git pull
+ls
+ls
+ln -s ../../scripts/clone.sh .
+ln -s ../../scripts/pull.sh .
+./clone.sh 
+ls -s ../../scripts/update.sh .
+ls -l
+ln -s ../../scripts/update.sh .
+./update.sh 
+ls
+ln -s ../../scripts/push.sh .
+ls
+./push.sh 
+./push.sh 
+ls
+ln -s ../../scripts/clone.sh 
+ln -s ../../scripts/clone.sh .
+./clone.sh 
+git status
+wc -l CAN-TH1-151029-083426.dat
+wc CAN-TH1-151029-083426.dat
+cd /ssh:caiz@tardis-student1.ecs.baylor.edu:
+run-python /usr/bin/ipython

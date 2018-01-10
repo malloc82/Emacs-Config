@@ -23,7 +23,12 @@
 
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-
+(setq py-autopep8-options '("--max-line-length=100"
+                            "--ignore E221"
+                            "--ignore E203"))
+;; also need to update ~/.config/flake8, so that these errors won't be marked
+;; [flake8]
+;; ignore = E501, E203, E221
 
 (outline-minor-mode 1)
 
