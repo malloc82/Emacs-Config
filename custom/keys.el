@@ -150,3 +150,10 @@
 (fset 'kbd-yank
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("" 0 "%d")) arg)))
 (global-set-key (kbd "C-c C-y") 'kbd-yank)
+
+
+;; highlight-symbol
+;; (global-set-key (kbd "<f10>") 'highlight-symbol-at-point) ;; default
+(global-set-key (kbd "C-<f11>") 'highlight-symbol-next)
+(global-set-key (kbd "C-<f12>") 'highlight-symbol-prev)
+

@@ -5,9 +5,26 @@
 
 ;; Basic setup
 
-(when (eq system-type 'darwin)
-  (setq ns-command-modifier 'meta)
-  (setq ns-alternate-modifier 'none))
+(cond ((eq system-type 'darwin)
+       (setq mac-command-modifier 'meta) ; make cmd key do Meta
+       (setq mac-option-modifier 'super) ; make opt key do Super
+       ;; (setq mac-control-modifier 'control) ; make Control key do Control
+       (setq ns-function-modifier 'hyper) ; make Fn key do Hyper
+       )
+      ((eq system-type 'windows)
+       (setq w32-pass-lwindow-to-system nil)
+       (setq w32-lwindow-modifier 'super) ; Left Windows key
+
+       (setq w32-pass-rwindow-to-system nil)
+       (setq w32-rwindow-modifier 'super) ; Right Windows key
+
+       (setq w32-pass-apps-to-system nil)
+       (setq w32-apps-modifier 'hyper) ; Menu/App key
+       ))
+
+;; (when (eq system-type 'darwin)
+;;   (setq ns-command-modifier 'meta)
+;;   (setq ns-alternate-modifier 'none))
 
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path
@@ -104,7 +121,7 @@
  '(global-hl-line-mode t)
  '(package-selected-packages
    (quote
-    (vlf cmake-mode company-irony company-irony-c-headers company-jedi cm-mode idle-highlight-mode ido-ubiquitous smex paredit exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist ein websocket fzf)))
+    (company-emacs-eclim ac-emacs-eclim eclim vlf cmake-mode company-irony company-irony-c-headers company-jedi cm-mode idle-highlight-mode ido-ubiquitous smex paredit exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist ein websocket fzf)))
  '(scroll-bar-mode t)
  '(show-paren-mode t)
  ;; '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
