@@ -157,3 +157,8 @@
 ;; (command-frequency-table-load)
 ;; (command-frequency-mode 1)
 ;; (command-frequency-autosave-mode 1)
+
+;; Minimap setting
+(setq minimap-hide-scroll-bar t)
+(setq minimap-window-location 'right)
+(setq minimap-recenter-type 'middle)
