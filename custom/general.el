@@ -21,8 +21,16 @@
 
 (require 'linum+)
 (setq linum-format (if window-system "%4d" "%4d \u2502 "))
+
 (global-linum-mode t)
 (column-number-mode t)
+(global-hl-line-mode t)
+(show-paren-mode t)
+
+(when window-system
+  (scroll-bar-mode t)
+  (tool-bar-mode nil))
+
 ;; (require 'which-function)
 (which-function-mode t)
 (setq which-func-unknown "unknown")

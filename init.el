@@ -3,8 +3,7 @@
 ;; Timer
 (defvar *emacs-load-start* (current-time))
 
-;; Basic setup
-
+;; Meta key setup
 (cond ((eq system-type 'darwin)
        (setq mac-command-modifier 'meta) ; make cmd key do Meta
        (setq mac-option-modifier 'super) ; make opt key do Super
@@ -42,7 +41,8 @@
                   ;; ("melpa"        . "https://melpa.org/packages/") ;; snapshots
                   ("melpa-stable" . "https://stable.melpa.org/packages/")))
     (add-to-list 'package-archives repo))
-  (setq package-pinned-archives '((smex         . "melpa-stable")
+  (setq package-pinned-archives '((use-package  . "melpa-stable")
+                                  (smex         . "melpa-stable")
                                   (company      . "melpa-stable")
                                   (paredit      . "melpa-stable")
                                   (clojure-mode . "melpa-stable")
@@ -54,21 +54,23 @@
                                   (magit        . "melpa-stable")
                                   (pabbrev      . "gnu")
                                   (elpy         . "https://jorgenschaefer.github.io/packages/")))
-  (package-initialize))
+  (package-initialize)
 
-(use-package smex :ensure t)
-(use-package company
-  :ensure t
-  :bind (("C-c /". company-complete))
-  :config (global-company-mode))
+  (load "selected-packages")
 
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc"))
+  (use-package smex :ensure t)
+  (use-package company
+    :ensure t
+    :bind (("C-c /". company-complete))
+    :config (global-company-mode))
+
+  (use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "pandoc")))
 
 ;; (message "Emacs ELPA loaded in %ds"
 ;;          (destructuring-bind (hi lo ms &optional ps) (current-time)
@@ -76,53 +78,21 @@
 ;;               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
 
-(load-library "keys")
-(load-library "env") ;; takes 1s to loade
+(load "env") ;; takes 1s to loade
+(load "keys")
 
 (if (eq current-path nil)
     (cd "~/.")
-    (cd current-path))
+  (cd current-path))
 
-
-;; Feature setup
-(dolist (config-file '("functions"
-                       "general" ;; takes 2s to load
-                       "faces"
-                       "lang" ;; takes 1s to load
-                       ))
-  (load-library config-file))
+(load "functions")
+(load "general")  ;; takes 2s to load
+(load "faces")
+(load "lang") ;; takes 1s to load
 
 (message "Emacs config loaded in %ds"
          (destructuring-bind (hi lo ms &optional ps) (current-time)
            (- (+ hi lo)
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
- '(column-number-mode t)
- '(custom-enabled-themes (quote (dark-night-gray)))
- '(custom-safe-themes
-   (quote
-    ("88e7e16a25bc0986f6c769961c21fa92d318ebbfe4d52f1913486cfbcc8bde77" "cf72e0a50f17c83cdb5eac7d61e6a90ec3a7572095c612abddf1e5f4dd81d6cc" "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" "d4b1adc34bc0c74bf19daaf499b7350bafc291e43f35e86e50191cd72fcf2edc" "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" default)))
- '(fci-rule-color "#383838")
- '(global-hl-line-mode t)
- '(package-selected-packages
-   (quote
-    (cmake-mode edn minimap neotree multiple-cursors company-emacs-eclim ac-emacs-eclim eclim vlf company-irony company-irony-c-headers company-jedi cm-mode idle-highlight-mode ido-ubiquitous smex paredit exec-path-from-shell anaconda-mode ac-slime slime yasnippet magit clojure-mode cider auctex ac-c-headers auto-complete-auctex framemove haskell-tab-indent haskell-snippets julia-mode highlight-symbol ghc etags-table ac-etags clojure-snippets jedi ascii auctex-latexmk ac-cider autopair py-autopep8 flycheck elpy clojure-cheatsheet clojure-mode-extra-font-locking workgroups warm-night-theme visible-mark virtualenv use-package undo-tree starter-kit ssh smartparens shell-command scion s rust-mode redo+ rainbow-delimiters quack python-mode parenface pabbrev osx-plist multi-term mic-paren matlab-mode markdown-mode key-chord javap-mode javap javadoc-lookup highlight go-mode ghci-completion frame-fns frame-cmds flymake etags-select elisp-slime-nav cyberpunk-theme command-frequency clues-theme clojurescript-mode base16-theme alchemist ein websocket fzf)))
- '(scroll-bar-mode t)
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-
-
-;; Proggycleantt supported font size: 9(90), 12 (121), 16 (158)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))))
+(load "custom-vars-and-face")
