@@ -96,3 +96,6 @@
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
 (load "custom-vars-and-face")
+
+;; END init.el
+

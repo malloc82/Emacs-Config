@@ -8,11 +8,12 @@
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      "d4b1adc34bc0c74bf19daaf499b7350bafc291e43f35e86e50191cd72fcf2edc" ;; tango-custom
      "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
-     "1affe85e8ae2667fb571fc8331e1e12840746dae5c46112d5abb0c3a973f5f5a" ;; base16-default, for running things in terminal
+     "5973b028c7b67e82d5e6d5cf715c8721e6699e376650fbc7170416541ce0cc4a" ;; base16-default, for running things in terminal
      default))
  (if window-system
     '(custom-enabled-themes '(dark-night-gray))
-  '(custom-enabled-themes '(base16-default)))
+   '(custom-enabled-themes '(base16-default)))
+ '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
  '(fci-rule-color "#383838"))
 
 (custom-set-faces
@@ -28,7 +29,7 @@
               )
              ((eq system-type 'darwin)
               ;; '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))) ;; emacs-24
-              ;; '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
-              '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+              '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
+              ;; '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
               ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
               ))))

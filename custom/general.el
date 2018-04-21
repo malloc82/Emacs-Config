@@ -25,11 +25,12 @@
 (global-linum-mode t)
 (column-number-mode t)
 (global-hl-line-mode t)
-(show-paren-mode t)
 
-(when window-system
-  (scroll-bar-mode t)
-  (tool-bar-mode nil))
+(when (and (>= emacs-major-version 21)
+           window-system)
+  (tool-bar-mode -1)
+  (menu-bar-mode +1)
+  (scroll-bar-mode t)) ;; tool bar / menu bar
 
 ;; (require 'which-function)
 (which-function-mode t)
@@ -58,11 +59,6 @@
       scroll-step 1
       scroll-conservatively 10000
       scroll-preserve-screen-position 1)  ;; scrolling
-
-(when (and (>= emacs-major-version 21)
-           window-system)
-  (tool-bar-mode -1)
-  (menu-bar-mode +1)) ;; tool bar / menu bar
 
 (require 'mic-paren)
 (setq show-paren-style 'parenthesis) ;; Showing matching parentheses in GNU Emacs
