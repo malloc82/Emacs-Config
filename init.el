@@ -25,6 +25,7 @@
 ;;   (setq ns-command-modifier 'meta)
 ;;   (setq ns-alternate-modifier 'none))
 
+(setq custom-file "~/.emacs.d/custom-init.el")
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path
 
@@ -33,44 +34,7 @@
                 "PACKAGE_DIRECTORY"))
   (add-to-list 'load-path path))
 
-(when (>= emacs-major-version 24)
-  (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
-  (require 'package)
-  (dolist (repo '(("gnu"          . "http://elpa.gnu.org/packages/")
-                  ("marmalade"    . "http://marmalade-repo.org/packages/")
-                  ;; ("melpa"        . "https://melpa.org/packages/") ;; snapshots
-                  ("melpa-stable" . "https://stable.melpa.org/packages/")))
-    (add-to-list 'package-archives repo))
-  (setq package-pinned-archives '((use-package  . "melpa-stable")
-                                  (smex         . "melpa-stable")
-                                  (company      . "melpa-stable")
-                                  (paredit      . "melpa-stable")
-                                  (clojure-mode . "melpa-stable")
-                                  (cider        . "melpa-stable")
-                                  (use-package  . "melpa-stable")
-                                  (python-mode  . "melpa-stable")
-                                  (jedi         . "melpa-stable")
-                                  (go-mode      . "melpa-stable")
-                                  (magit        . "melpa-stable")
-                                  (pabbrev      . "gnu")
-                                  (elpy         . "https://jorgenschaefer.github.io/packages/")))
-  (package-initialize)
-
-  (load "selected-packages")
-
-  (use-package smex :ensure t)
-  (use-package company
-    :ensure t
-    :bind (("C-c /". company-complete))
-    :config (global-company-mode))
-
-  (use-package markdown-mode
-    :ensure t
-    :commands (markdown-mode gfm-mode)
-    :mode (("README\\.md\\'" . gfm-mode)
-           ("\\.md\\'" . markdown-mode)
-           ("\\.markdown\\'" . markdown-mode))
-    :init (setq markdown-command "pandoc")))
+(when (>= emacs-major-version 24) (load "packages-settings"))
 
 ;; (message "Emacs ELPA loaded in %ds"
 ;;          (destructuring-bind (hi lo ms &optional ps) (current-time)
@@ -97,5 +61,6 @@
 
 (load "custom-vars-and-face")
 
+;;
 ;; END init.el
-
+;;

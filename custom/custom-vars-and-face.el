@@ -1,3 +1,6 @@
+
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
+
 (custom-set-variables
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(custom-safe-themes
@@ -11,7 +14,7 @@
      "5973b028c7b67e82d5e6d5cf715c8721e6699e376650fbc7170416541ce0cc4a" ;; base16-default, for running things in terminal
      default))
  (if window-system
-    '(custom-enabled-themes '(dark-night-gray))
+     '(custom-enabled-themes '(dark-night-gray))
    '(custom-enabled-themes '(base16-default)))
  '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
  '(fci-rule-color "#383838"))

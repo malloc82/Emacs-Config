@@ -4,6 +4,8 @@
                 "PACKAGE_DIRECTORY"))
   (add-to-list 'load-path path))
 
+(setq custom-file "~/.emacs.d/custom-lite.el")
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq confirm-kill-emacs 'yes-or-no-p)
 (global-linum-mode t)
