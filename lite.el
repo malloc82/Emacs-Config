@@ -16,6 +16,10 @@
 ;; (require 'package) ;; lag a little bit
 (package-initialize)
 
+(use-package magit
+  :ensure t
+  :init (bind-key "C-c g" 'magit-status))
+
 (require 'linum+)
 (setq linum-format (if window-system "%4d" "%4d \u2502 "))
 
@@ -51,7 +55,6 @@
 (global-set-key (kbd "M-c")   'comment-or-uncomment-region)
 
 (load "lisp-lang")
-
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
 
 (custom-set-variables
