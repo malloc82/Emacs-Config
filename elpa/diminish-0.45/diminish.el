@@ -3,10 +3,11 @@
 ;; Copyright (C) 1998 Free Software Foundation, Inc.
 
 ;; Author: Will Mengarini <seldon@eskimo.com>
-;; URL: <http://www.eskimo.com/~seldon>
+;; Maintainer: Martin Yrjölä <martin.yrjola@gmail.com>
+;; URL: <https://github.com/myrjola/diminish.el>
+;; Package-Version: 0.45
 ;; Created: Th 19 Feb 98
-;; Version: 20091203.1012
-;; X-Original-Version: 0.44, Sa 23 Jan 99
+;; Version: 0.45
 ;; Keywords: extensions, diminish, minor, codeprose
 
 ;; This file is part of GNU Emacs.
@@ -178,14 +179,14 @@ to TO-WHAT if it's > 1 char long & doesn't already begin with a space."
                       "To what mode-line display: "
                       nil nil nil 'diminish-history-names)))
   (let ((minor (assq mode minor-mode-alist)))
-    (or minor (error "%S is not currently registered as a minor mode" mode))
-    (callf or to-what "")
-    (when (> (length to-what) 1)
-      (or (= (string-to-char to-what) ?\ )
-          (callf2 concat " " to-what)))
-    (or (assq mode diminished-mode-alist)
-        (push (copy-sequence minor) diminished-mode-alist))
-    (setcdr minor (list to-what))))
+    (when minor
+        (progn (callf or to-what "")
+               (when (> (length to-what) 1)
+                 (or (= (string-to-char to-what) ?\ )
+                     (callf2 concat " " to-what)))
+               (or (assq mode diminished-mode-alist)
+                   (push (copy-sequence minor) diminished-mode-alist))
+               (setcdr minor (list to-what))))))
 
 ;; But an image comes to me, vivid in its unreality, of a loon alone on his
 ;; forest lake, shrieking his soul out into a canopy of stars.  Alone this
@@ -209,7 +210,7 @@ to TO-WHAT if it's > 1 char long & doesn't already begin with a space."
 Do nothing if the arg is a minor mode that hasn't been diminished.
 
 Interactively, enter (with completion) the name of any diminished mode (a
-mode that was formerly a minor mode on which you invoked M-x diminish).
+mode that was formerly a minor mode on which you invoked \\[diminish]).
 To restore all diminished modes to minor status, answer `diminished-modes'.
 The response to the prompt shouldn't be quoted.  However, in Lisp code,
 the arg must be quoted as a symbol, as in (diminish-undo 'diminished-modes)."

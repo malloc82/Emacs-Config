@@ -29,18 +29,18 @@
                 (propertize (if (= (user-uid) 0) "\n#" "\n$") 'face `(:foreground "purple"))
                 (propertize " " 'face `(:foreground "white")))))
 
+
 ;; return value of eshell-prompt-function must match eshell-prompt-regexp
 (setq eshell-prompt-regexp "^[^#$]*[#$] ")
 
 ;; ======================================================================================
 ;; Eshell Prompt: https://www.emacswiki.org/emacs/EshellPrompt
 
-(require 'helm-eshell)
-
 (add-hook 'eshell-mode-hook
           #'(lambda ()
               (paredit-mode)
               (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
+
 
 ;; for shell-mode
 (define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)

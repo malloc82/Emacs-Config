@@ -1,10 +1,16 @@
 ;; -*- mode: Lisp -*-
 
 ;; Timer
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (defvar *emacs-load-start* (current-time))
 
-;; Basic setup
-
+;; Meta key setup
 (cond ((eq system-type 'darwin)
        (setq mac-command-modifier 'meta) ; make cmd key do Meta
        (setq mac-option-modifier 'super) ; make opt key do Super
@@ -26,6 +32,7 @@
 ;;   (setq ns-command-modifier 'meta)
 ;;   (setq ns-alternate-modifier 'none))
 
+(setq custom-file "~/.emacs.d/custom-init.el")
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path
 
@@ -34,41 +41,7 @@
                 "PACKAGE_DIRECTORY"))
   (add-to-list 'load-path path))
 
-(when (>= emacs-major-version 24)
-  (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
-  (require 'package)
-  (dolist (repo '(("gnu"          . "http://elpa.gnu.org/packages/")
-                  ("marmalade"    . "http://marmalade-repo.org/packages/")
-                  ;; ("melpa"        . "https://melpa.org/packages/") ;; snapshots
-                  ("melpa-stable" . "https://stable.melpa.org/packages/")))
-    (add-to-list 'package-archives repo))
-  (setq package-pinned-archives '((smex         . "melpa-stable")
-                                  (company      . "melpa-stable")
-                                  (paredit      . "melpa-stable")
-                                  (clojure-mode . "melpa-stable")
-                                  (cider        . "melpa-stable")
-                                  (use-package  . "melpa-stable")
-                                  (python-mode  . "melpa-stable")
-                                  (jedi         . "melpa-stable")
-                                  (go-mode      . "melpa-stable")
-                                  (magit        . "melpa-stable")
-                                  (pabbrev      . "gnu")
-                                  (elpy         . "https://jorgenschaefer.github.io/packages/")))
-  (package-initialize))
-
-(use-package smex :ensure t)
-(use-package company
-  :ensure t
-  :bind (("C-c /". company-complete))
-  :config (global-company-mode))
-
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc"))
+(when (>= emacs-major-version 24) (load "packages-settings"))
 
 ;; (message "Emacs ELPA loaded in %ds"
 ;;          (destructuring-bind (hi lo ms &optional ps) (current-time)
@@ -76,72 +49,25 @@
 ;;               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
 
-(load-library "keys")
-(load-library "env") ;; takes 1s to loade
+(load "env") ;; takes 1s to loade
+(load "keys")
 
 (if (eq current-path nil)
     (cd "~/.")
-    (cd current-path))
+  (cd current-path))
 
-
-;; Feature setup
-(dolist (config-file '("functions"
-                       "general" ;; takes 2s to load
-                       "faces"
-                       "lang" ;; takes 1s to load
-                       ))
-  (load-library config-file))
+(load "functions")
+(load "general")  ;; takes 2s to load
+(load "faces")
+(load "lang") ;; takes 1s to load
 
 (message "Emacs config loaded in %ds"
          (destructuring-bind (hi lo ms &optional ps) (current-time)
            (- (+ hi lo)
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
-(load-library "selected-packages")
+(load "custom-vars-and-face")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
- '(column-number-mode t)
- '(custom-enabled-themes '(dark-night-gray))
- ;; hash string is generated using : openssl sha256 <filename>
- '(custom-safe-themes
-   (quote
-    ("88e7e16a25bc0986f6c769961c21fa92d318ebbfe4d52f1913486cfbcc8bde77" ;; misterioso-custom
-     "cf72e0a50f17c83cdb5eac7d61e6a90ec3a7572095c612abddf1e5f4dd81d6cc" ;; dark-night-gray no italic comment
-     ;; "2e4033c81d9465003246dfcac05220adaf303910d92cbb330c9cbd3e76f14c4f" ;; dark-night-gray
-     "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
-     "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
-     "d4b1adc34bc0c74bf19daaf499b7350bafc291e43f35e86e50191cd72fcf2edc" ;; tango-custom
-     "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
-     default)))
- '(fci-rule-color "#383838")
- '(global-hl-line-mode t)
- '(scroll-bar-mode t)
- '(show-paren-mode t)
- ;; '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
- '(tool-bar-mode nil))
-
-
-;; Proggycleantt supported font size: 9(90), 12 (121), 16 (158)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- `(default ,(cond
-             ((eq system-type 'gnu/linux)
-              '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
-              ;; '((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 99 :width normal)))
-              ;; '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 117 :width normal)))
-              )
-             ((eq system-type 'darwin)
-              ;; '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))) ;; emacs-24
-              ;; '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
-              '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
-              ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
-              ))))
+;;
+;; END init.el
+;;
