@@ -3,7 +3,7 @@
 ;; Copyright (C) 2009, 2012 Eric Ludlam
 ;;
 ;; Author: Eric Ludlam <eludlam@mathworks.com>
-;; X-RCS: $Id: cedet-matlab.el,v 1.2 2013/04/02 00:47:42 zappo Exp $
+;; X-RCS: $Id$
 ;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -23,6 +23,8 @@
 ;;; Commentary:
 ;;
 ;; Setup miscelaneous CEDET tools to work with MATLAB.
+
+(defvar srecode-map-load-path) ;; quite compiler warning
 
 ;;; Code:
 ;;;###autoload
@@ -50,11 +52,10 @@
       (error (require 'srecode/map)))
 
     (add-to-list 'srecode-map-load-path tmpdir)
-    (srecode-map-update-map t)
-    )
-
-  
-  )
+    (if (fboundp 'srecode-map-update-map)
+        (srecode-map-update-map t)
+      (error "srecode-map-update-map not found"))
+    ))
 
 
 (provide 'cedet-matlab)

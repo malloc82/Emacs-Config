@@ -2,9 +2,11 @@
 ;;
 ;;; Code:
 
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads (matlab-cedet-setup) "cedet-matlab" "cedet-matlab.el"
-;;;;;;  (21412 24717 716811 205000))
+;;;### (autoloads nil "cedet-matlab" "cedet-matlab.el" (0 0 0 0))
 ;;; Generated autoloads from cedet-matlab.el
 
 (autoload 'matlab-cedet-setup "cedet-matlab" "\
@@ -14,19 +16,20 @@ Update various paths to get SRecode to identify our macros.
 
 ;;;***
 
-;;;### (autoloads (company-matlab-shell) "company-matlab-shell" "company-matlab-shell.el"
-;;;;;;  (21412 24717 749809 893000))
+;;;### (autoloads nil "company-matlab-shell" "company-matlab-shell.el"
+;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from company-matlab-shell.el
 
 (autoload 'company-matlab-shell "company-matlab-shell" "\
-A `company-mode' completion back-end for Matlab-Shell.
+A `company-mode' completion backend for `matlab-shell'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-matlab-shell" '("company-matlab-shell-")))
+
 ;;;***
 
-;;;### (autoloads (enable-visual-studio-bookmarks) "linemark" "linemark.el"
-;;;;;;  (21412 24717 786808 419000))
+;;;### (autoloads nil "linemark" "linemark.el" (0 0 0 0))
 ;;; Generated autoloads from linemark.el
 
 (autoload 'enable-visual-studio-bookmarks "linemark" "\
@@ -39,10 +42,11 @@ Bind the viss bookmark functions to F2 related keys.
 
 \(fn)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "linemark" '("viss-bookmark-" "linemark-")))
+
 ;;;***
 
-;;;### (autoloads (matlab-shell matlab-mode) "matlab" "matlab.el"
-;;;;;;  (21412 24717 737810 371000))
+;;;### (autoloads nil "matlab" "matlab.el" (0 0 0 0))
 ;;; Generated autoloads from matlab.el
 
 (add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
@@ -73,7 +77,7 @@ Convenient template insertion commands:
  \\[tempo-template-matlab-switch] - Insert a SWITCH END statement.
  \\[matlab-insert-next-case] - Insert the next CASE condition in a SWITCH.
  \\[matlab-insert-end-block] - Insert a matched END statement.  With optional ARG, reindent.
- \\[matlab-stringify-region] - Convert plaintext in region to a string with correctly quoted chars.
+ \\[matlab-stringify-region] - Convert plain text in region to a string with correctly quoted chars.
 
 Variables:
   `matlab-indent-level'		Level to indent blocks.
@@ -111,10 +115,19 @@ a console application.
 
 \(fn)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "matlab" '("matlab-" "gud-matlab-")))
+
 ;;;***
 
-;;;### (autoloads (mlint-minor-mode) "mlint" "mlint.el" (21412 24717
-;;;;;;  776808 817000))
+;;;### (autoloads nil "matlab-publish" "matlab-publish.el" (0 0 0
+;;;;;;  0))
+;;; Generated autoloads from matlab-publish.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "matlab-publish" '("matlab-")))
+
+;;;***
+
+;;;### (autoloads nil "mlint" "mlint.el" (0 0 0 0))
 ;;; Generated autoloads from mlint.el
 
 (autoload 'mlint-minor-mode "mlint" "\
@@ -124,10 +137,12 @@ With prefix ARG, turn mlint minor mode on iff ARG is positive.
 
 \(fn &optional ARG)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "mlint" '("mlint-" "initialize-instance" "linemark-")))
+
 ;;;***
 
-;;;### (autoloads (semantic-default-matlab-setup) "semantic-matlab"
-;;;;;;  "semantic-matlab.el" (21412 24717 781808 618000))
+;;;### (autoloads nil "semantic-matlab" "semantic-matlab.el" (0 0
+;;;;;;  0 0))
 ;;; Generated autoloads from semantic-matlab.el
 
 (autoload 'semantic-default-matlab-setup "semantic-matlab" "\
@@ -135,26 +150,55 @@ Set up a buffer for parsing of MATLAB files.
 
 \(fn)" nil nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "semantic-matlab" '("semantic-" "matlab-mode")))
+
 ;;;***
 
-;;;### (autoloads (tlc-mode) "tlc" "tlc.el" (21412 24717 732810 568000))
+;;;### (autoloads nil "semanticdb-matlab" "semanticdb-matlab.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from semanticdb-matlab.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "semanticdb-matlab" '("semantic" "matlab-mode")))
+
+;;;***
+
+;;;### (autoloads nil "srecode-matlab" "srecode-matlab.el" (0 0 0
+;;;;;;  0))
+;;; Generated autoloads from srecode-matlab.el
+
+(autoload 'srecode-semantic-handle-:matlab "srecode-matlab" "\
+Add macros into the dictionary DICT based on the current MATLAB buffer.
+Adds the following:
+FILE_SYMBOL - The file name as a symbol.
+FILE_DOC_SYMBOL - The file name as a symbol for doc strings.
+PACKAGE - The package this file is in, or empty if none.
+FILE_CLASS - Show section if filename should be a class.
+FILE_FUNCTION - Show setion if filename is a function.
+
+On class prediction - when filling in an empty file, if the filename and directory it is in
+match, for example @foo/foo.m then foo should be a classdef.
+
+\(fn DICT)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil "tlc" "tlc.el" (0 0 0 0))
 ;;; Generated autoloads from tlc.el
 
 (autoload 'tlc-mode "tlc" "\
 Major mode for editing Tlc files, or files found in tlc directories.
 
 \(fn)" t nil)
-(add-to-list 'auto-mode-alist '("\\.tlc$" .tlc-mode))
+(add-to-list 'auto-mode-alist '("\\.tlc$" . tlc-mode))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tlc" '("tlc-")))
 
 ;;;***
 
-;;;### (autoloads nil nil ("matlab-load.el" "matlab-mode-pkg.el"
-;;;;;;  "matlab-publish.el" "semanticdb-matlab.el") (21412 24717
-;;;;;;  800230 109000))
+;;;### (autoloads nil nil ("matlab-mode-pkg.el") (0 0 0 0))
 
 ;;;***
 
-(provide 'matlab-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
