@@ -35,6 +35,7 @@
 (add-hook 'dired-mode-hook
           (lambda ()
             ;; Set dired-x buffer-local variables here.  For example:
+            (auto-revert-mode)
             (dired-omit-mode 1)
             (setq dired-omit-files "^\\.?#\\|^\\.[^.].+$")
             (setq dired-omit-extensions
@@ -49,4 +50,8 @@
     (setq insert-directory-program "/opt/local/bin/gls"))
 ;; (setq dired-listing-switches "-alph --color=auto --group-directories-first")
 (setq dired-listing-switches "-alph --group-directories-first")
+
+(require 'dired-details)
+(setq-default dired-details-hidden-string "--- ")
+(setq dired-dwim-target t)
 

@@ -9,8 +9,8 @@
 ;; (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))
 
 (defsubst add-clojure-paredit (mode-type)
-  ;; (define-key mode-type (kbd "(") 'paredit-open-parenthesis)
-  ;; (define-key mode-type (kbd ")") 'paredit-close-parenthesis)
+  ;; (define-key mode-type (kbd "(") 'paredit-open-round)
+  ;; (define-key mode-type (kbd ")") 'paredit-close-round)
   (define-key mode-type (kbd "[") 'paredit-open-square)
   (define-key mode-type (kbd "]") 'paredit-close-square)
   (define-key mode-type (kbd "{") 'paredit-open-curly)

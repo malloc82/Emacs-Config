@@ -16,6 +16,8 @@
 (put 'narrow-to-region 'disable nil)  ;; focus on a region
 (put 'erase-buffer 'disabled nil)
 (setq undo-limit 100000) ;; Increase number of undo
+;; After first C-u C-SPC, keep pressing C-SPC to jump to previous positions
+(setq set-mark-command-repeat-pop t)
 (when (or (eq system-type 'darwin) (eq system-type 'gnu/linux))
   (setq shell-file-name "/bin/bash"))
 
