@@ -46,6 +46,9 @@
 (global-set-key        [?\M-\[] 'previous-buffer)
 (global-set-key        [?\M-\]] 'next-buffer)
 
+;; helm
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+
 ;; ==========================================
 ;; Frame move settings
 ;; ------------------------------------------
@@ -55,18 +58,18 @@
 ;; ==========================================
 
 (unless window-system
-    (progn
-      (global-set-key (kbd "C-c [") 'windmove-left)
-      (global-set-key (kbd "C-c ]") 'windmove-right)
-      (global-set-key (kbd "C-c +") 'windmove-up)
-      (global-set-key (kbd "C-c -") 'windmove-down)
-      (global-set-key (kbd "C-c (") 'backward-sexp)
-      (global-set-key (kbd "C-c )") 'forward-sexp)
-      (global-set-key (kbd "C-c u") 'backward-up-list)
-      (global-set-key (kbd "C-c d") 'down-list)
+  (progn
+    (global-set-key (kbd "C-c [") 'windmove-left)
+    (global-set-key (kbd "C-c ]") 'windmove-right)
+    (global-set-key (kbd "C-c +") 'windmove-up)
+    (global-set-key (kbd "C-c -") 'windmove-down)
+    (global-set-key (kbd "C-c (") 'backward-sexp)
+    (global-set-key (kbd "C-c )") 'forward-sexp)
+    (global-set-key (kbd "C-c u") 'backward-up-list)
+    (global-set-key (kbd "C-c d") 'down-list)
 
-      (global-set-key (kbd "C-c j") 'forward-paragraph)
-      (global-set-key (kbd "C-c k") 'backward-paragraph)))
+    (global-set-key (kbd "C-c j") 'forward-paragraph)
+    (global-set-key (kbd "C-c k") 'backward-paragraph)))
 
 ;; forward-word M-f
 ;; backward-word M-b
@@ -152,8 +155,54 @@
 ;; ----------------------------------------------------------------------------
 (global-set-key (kbd "C-c g") 'magit-status)
 
+
+;; Multi Cursor
+(require 'multiple-cursors)
+;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;; (global-set-key (kbd "C->")         'mc/mark-next-like-this-symbol)
+;; (global-set-key (kbd "C-<")         'mc/mark-previous-like-this-symbol)
+;; (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
+;; (global-set-key (kbd "C-S-p")       'mc/mark-pop)
+
 ;; keyboard macro yank, can be repeated with C-u
 (fset 'kbd-yank
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("" 0 "%d")) arg)))
 (global-set-key (kbd "C-c C-y") 'kbd-yank)
 
+
+;; source: https://emacs.stackexchange.com/questions/1020/problems-with-keybindings-when-using-terminal
+;; xterm with the resource ?.VT100.modifyOtherKeys: 1
+;; GNU Emacs >=24.4 sets xterm in this mode and define
+;; some of the escape sequences but not all of them.
+(defun character-apply-modifiers (c &rest modifiers)
+  "Apply modifiers to the character C.
+MODIFIERS must be a list of symbols amongst (meta control shift).
+Return an event vector."
+  (if (memq 'control modifiers) (setq c (if (or (and (<= ?@ c) (<= c ?_))
+                                                (and (<= ?a c) (<= c ?z)))
+                                            (logand c ?\x1f)
+                                          (logior (lsh 1 26) c))))
+  (if (memq 'meta modifiers) (setq c (logior (lsh 1 27) c)))
+  (if (memq 'shift modifiers) (setq c (logior (lsh 1 25) c)))
+  (vector c))
+(defun my-eval-after-load-xterm ()
+  (when (and (boundp 'xterm-extra-capabilities) (boundp 'xterm-function-map))
+    (let ((c 32))
+      (while (<= c 126)
+        (mapc (lambda (x)
+                (define-key xterm-function-map (format (car x) c)
+                  (apply 'character-apply-modifiers c (cdr x))))
+              '(;; with ?.VT100.formatOtherKeys: 0
+                ("\e\[27;3;%d~" meta)
+                ("\e\[27;5;%d~" control)
+                ("\e\[27;6;%d~" control shift)
+                ("\e\[27;7;%d~" control meta)
+                ("\e\[27;8;%d~" control meta shift)
+                ;; with ?.VT100.formatOtherKeys: 1
+                ("\e\[%d;3~" meta)
+                ("\e\[%d;5~" control)
+                ("\e\[%d;6~" control shift)
+                ("\e\[%d;7~" control meta)
+                ("\e\[%d;8~" control meta shift)))
+        (setq c (1+ c))))))
+(eval-after-load "xterm" '(my-eval-after-load-xterm))
