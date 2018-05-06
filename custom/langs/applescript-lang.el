@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; AppleScript
 
 ;; Allow editing of binary .plist files.

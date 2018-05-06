@@ -48,7 +48,7 @@
          ("\\.tex$"                    . LaTeX-mode)
          ("\\.org$"                    . org-mode)
          ("\\.css\\'"                  . css-mode)
-         ("\\.el$"                     . lisp-mode)
+         ;; ("\\.el$"                     . emacs-lisp-mode)
          ("\\.ASM$"                    . asm-mode)
          ("\\.[Kk][Aa][Nn]"            . jde-mode)
          ;; ("\\.m$"                      . objc-mode)

@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Go settings
 
 (autoload 'go-mode "go-mode" "\

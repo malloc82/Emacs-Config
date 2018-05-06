@@ -1,4 +1,5 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
+
 (setq confirm-kill-emacs 'yes-or-no-p)
 (setq debug-on-error nil)
 ;; (setq visible-bell 1)
@@ -68,9 +69,9 @@
 
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill) ;; turn on word wrapping in text mode
 
-;; ==================================================================
+;; ===============================
 ;; Interractively Do Things (ido)
-;; ------------------------------------------------------------------
+;; ===============================
 (require 'ido)
 (ido-mode t)
 (setq ido-use-filename-at-point nil)
@@ -80,6 +81,8 @@
       (lambda()
         (interactive)
         (ido-initiate-auto-merge (current-buffer))))
+;; (setq ido-separator "\n")
+;; (setq ido-enable-flex-matching t)
 
 ;; ;; From starter-kit
 ;; (ido-ubiquitous t)
@@ -96,6 +99,8 @@
 ;; ido bahavior for smex, modified keys in my-keys for smex
 (require 'smex)
 (smex-initialize)
+(global-set-key (kbd "C-c M-x") 'execute-extended-command) ;; original M-x
+
 ;; ==================================================================
 
 ;; ============================================

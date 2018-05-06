@@ -1,4 +1,4 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Terminal inside emacs
 
 (require 'multi-term)

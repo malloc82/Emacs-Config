@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*- 
+;; -*- mode: Emacs-Lisp -*-
 ;; Custom faces
 
 (defface esk-paren-face

@@ -1,4 +1,4 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Auto completion settings
 
 (eval-after-load "auto-complete"

@@ -1,4 +1,4 @@
-;; -*- mode: Lisp; lexical-binding: t -*-
+;; -*- mode: Emacs-Lisp; lexical-binding: t -*-
 (setq lexical-binding t)
 
 ;; Etags setting

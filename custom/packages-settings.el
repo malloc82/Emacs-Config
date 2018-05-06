@@ -17,6 +17,8 @@
                                 (jedi         . "melpa-stable")
                                 (go-mode      . "melpa-stable")
                                 (magit        . "melpa-stable")
+                                (helm         . "emlpa-stable")
+                                (helm-core    . "emlpa-stable")
                                 (matlab-mode  . "melpha")
                                 (pabbrev      . "gnu")
                                 (elpy         . "https://jorgenschaefer.github.io/packages/")))

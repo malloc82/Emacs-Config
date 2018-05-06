@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Web related langauges
 
 ;; ===========================
@@ -12,7 +12,7 @@
 ;; (require 'htmlize)
 
 ;; ===========================
-;; JavaScript  
+;; JavaScript
 ;; ===========================
 (add-hook 'javascript-mode-hook
           '(autoload 'javascript-mode "javascript" nil t))

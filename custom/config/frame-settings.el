@@ -1,4 +1,4 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Frame settings
 
 ;; (setq special-display-buffer-names '("*compilation*"

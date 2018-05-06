@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; MatLab
 
 ;; (autoload 'matlab-mode "matlab.elc" "Enter Matlab mode." t)

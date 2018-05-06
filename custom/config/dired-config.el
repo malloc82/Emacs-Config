@@ -1,4 +1,4 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Dired mode configuration
 
 ;; (put 'dired-find-alternate-file 'disabled nil)

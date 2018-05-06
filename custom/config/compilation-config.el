@@ -1,4 +1,4 @@
-;; -*- mode: Lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Compilation settings
 
 (setq compilation-scroll-output t)

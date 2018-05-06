@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 
 ;; ===========================
 ;; Lisp Mode
@@ -107,11 +107,14 @@
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()
+              (setq show-trailing-whitespace t)
+              (paredit-mode)
               ;; (paredit-mode)
               (add-lisp-paredit emacs-lisp-mode-map)))
 
 (add-hook 'scheme-mode-hook
           #'(lambda ()
+              (setq show-trailing-whitespace t)
               (paredit-mode)
               (add-lisp-paredit scheme-mode-map)
               (load-library "my-scheme")))

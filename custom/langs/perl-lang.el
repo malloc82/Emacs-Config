@@ -1,9 +1,9 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 
-;; Perl 
+;; Perl
 
-;; cperl-mode is preferred to perl-mode                                        
-;; "Brevity is the soul of wit" <foo at acm.org>                               
+;; cperl-mode is preferred to perl-mode
+;; "Brevity is the soul of wit" <foo at acm.org>
 (defalias 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook
           #'(lambda ()

@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Ocaml Settings
 
 (autoload 'caml-mode "ocaml" (interactive)

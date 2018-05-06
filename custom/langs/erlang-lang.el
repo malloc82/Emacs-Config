@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 ;; Erlang settings
 
 (let ((path (find-expand-file-path "/opt/local/lib/erlang/lib/" "emacs")))

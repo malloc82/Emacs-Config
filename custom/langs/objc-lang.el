@@ -1,8 +1,8 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: Emacs-Lisp -*-
 
 ;; Objective-C
 
-;; Handle header files 
+;; Handle header files
 (defun bh-choose-header-mode ()
   (interactive)
   (if (string-equal (substring (buffer-file-name) -2) ".h")
@@ -17,7 +17,7 @@
                 )
               (if (file-exists-p dot-cpp-file)
                   (c++-mode)))))))
- 
+
 (add-hook 'find-file-hook 'bh-choose-header-mode)
 
 
