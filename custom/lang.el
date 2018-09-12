@@ -7,7 +7,7 @@
 (require 'cperl-mode)
 ;; (require 'gas-mode)
 (autoload 'gas-mode "gas-mode" "Major mode for editing assembly code" t nil)
-;; (require 'cuda-mode)
+(require 'cuda-mode)
 ;; (when (string= system-type "gnu/linux")
 ;;   (require 'apt-sources))
 (autoload 'apt-sources "apt-sources" "Major mode for editing debian's apt config file" t nil)
@@ -33,7 +33,7 @@
          ("\\.[Hh]$"                   . c++-mode)
          ("\\.i$"                      . c++-mode) ;; swig
          ("\\.inl$"                    . c++-mode) ;; template functions
-         ;; ("\\.cu$"                     . c-mode)
+         ("\\.cu$"                     . cuda-mode)
          ("\\.go$"                     . go-mode)
          ("\\.d$"                      . d-mode)   ;; dtrace
          ("\\.[Cc][Uu]$"               . c++-mode) ;;cuda-mode)
