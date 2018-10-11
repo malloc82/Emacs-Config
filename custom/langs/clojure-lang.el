@@ -8,26 +8,16 @@
 ;; (require 'clojure-test-mode) ;; requires slime
 ;; (font-lock-add-keywords 'clojure-mode '(("(\\|)" . 'esk-paren-face)))
 
-(defsubst add-clojure-paredit (mode-type)
-  ;; (define-key mode-type (kbd "(") 'paredit-open-round)
-  ;; (define-key mode-type (kbd ")") 'paredit-close-round)
-  (define-key mode-type (kbd "[") 'paredit-open-square)
-  (define-key mode-type (kbd "]") 'paredit-close-square)
-  (define-key mode-type (kbd "{") 'paredit-open-curly)
-  (define-key mode-type (kbd "}") 'paredit-close-curly)
+(defsubst paredit-extension (mode-type)
   (define-key mode-type (kbd "M-0") 'paredit-escape) ;; also try : \
-
-  (define-key mode-type (kbd "\"") 'paredit-doublequote)
-  (define-key mode-type (kbd "\\") 'paredit-backslash)
-
   ;; ;; Can't have these for clojure mode
   ;; (define-key mode-type (kbd "RET") 'paredit-newline)
   ;; (define-key mode-type (kbd "<return>") 'paredit-newline)
   ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with
-  (define-key mode-type (kbd "C-<backspace>")  'delete-backward-char)
-  (define-key mode-type (kbd "M-<backspace>>")   'paredit-backward-kill-word)
-  (define-key mode-type (kbd "C-M-<right>")      'forward-sexp)
-  (define-key mode-type (kbd "C-M-<left>")       'backward-sexp)
+  (define-key mode-type (kbd "C-<backspace>")    'delete-backward-char)
+  ;; (define-key mode-type (kbd "M-<backspace>>")   'paredit-backward-kill-word)
+  ;; (define-key mode-type (kbd "C-M-<right>")      'forward-sexp)
+  ;; (define-key mode-type (kbd "C-M-<left>")       'backward-sexp)
   ;; (define-key mode-type (kbd "C-<return>") 'paredit-newline)
 
   ;; ;; nb: this assumes dvorak key layout
@@ -61,18 +51,17 @@
               (setq show-trailing-whitespace t)
               (eldoc-mode)
               (enable-paredit-mode)
-              (add-clojure-paredit clojure-mode-map)))
+              (paredit-extension clojure-mode-map)))
 
 (add-hook 'cider-repl-mode-hook
           #'(lambda ()
               (eldoc-mode)
-              ;; (cider-turn-on-eldoc-mode)
               (enable-paredit-mode)
               (add-to-list 'paredit-space-for-delimiter-predicates
                            'clojure-space-for-delimiter-p
                            'clojure-no-space-after-tag)
               (rainbow-delimiters-mode)
-              (add-clojure-paredit  cider-repl-mode-map)))
+              (paredit-extension  cider-repl-mode-map)))
 
 (eval-after-load 'clojure-mode
   '(progn

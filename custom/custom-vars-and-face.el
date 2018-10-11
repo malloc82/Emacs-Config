@@ -16,7 +16,7 @@
  (if window-system
      '(custom-enabled-themes '(dark-night-gray))
    '(custom-enabled-themes '(base16-default)))
- '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
+ ;; '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
  '(fci-rule-color "#383838"))
 
 (custom-set-faces
@@ -32,7 +32,9 @@
               )
              ((eq system-type 'darwin)
               ;; '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))) ;; emacs-24
-              '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
-              ;; '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+              ;; '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
+              '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+              ;; '((t (:family "Fira Code"   :foundry "Unknown" :slant normal :weight normal :height 120 :width normal)))
+              ;; '((t (:family "Monoid"      :foundry "Unknown" :slant normal :weight normal :height 120 :width normal)))
               ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
               ))))

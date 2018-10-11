@@ -16,7 +16,6 @@
       (insert char)                     ; (Is there a better way to
       nil))                             ; express the rubout char?
                                         ; ?\^? works, but ugh...)
-
 (defsubst add-lisp-paredit (mode-type)
   (define-key mode-type (kbd "(") 'paredit-open-round)
   (define-key mode-type (kbd ")") 'paredit-close-round)
@@ -29,8 +28,9 @@
   (define-key mode-type (kbd "\"") 'paredit-doublequote)
   (define-key mode-type (kbd "\\") 'paredit-backslash)
 
-  (if (equal mode-type lisp-interaction-mode-map)
-    (define-key mode-type (kbd "C-<return>")   'paredit-newline)
+  (if (or (equal mode-type 'emacs-lisp-mode-map)
+          (equal mode-type 'lisp-interaction-mode-map))
+      (define-key mode-type (kbd "C-<return>")   'paredit-newline)
     (define-key mode-type (kbd "C-j")          'paredit-newline))
   (define-key mode-type (kbd "C-<backspace>")  'delete-backward-char)
   (define-key mode-type (kbd "M-<backspace>>") 'paredit-backward-kill-word)
@@ -100,17 +100,14 @@
 
 (add-hook 'lisp-interaction-mode-hook
           #'(lambda ()
-              ;; (paredit-mode)
               (add-lisp-paredit lisp-interaction-mode-map)
-              ;; (define-key lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)
-              ))
+              (define-key lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)))
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()
               (setq show-trailing-whitespace t)
-              (paredit-mode)
-              ;; (paredit-mode)
               (add-lisp-paredit emacs-lisp-mode-map)))
+
 
 (add-hook 'scheme-mode-hook
           #'(lambda ()

@@ -1,5 +1,9 @@
 (setq package-selected-packages
       '(
+        inflections
+        hydra
+        dired-details
+
         ;; lisp
         elisp-slime-nav
         slime
@@ -11,6 +15,7 @@
         clojure-snippets
         clojure-cheatsheet
         clojure-mode-extra-font-locking
+        helm-cider
         edn
 
         ;; auto completion
@@ -62,6 +67,7 @@
         haskell-snippets
         julia-mode
         go-mode
+        cuda-mode
 
         ;; java
         javap-mode

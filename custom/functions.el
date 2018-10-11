@@ -223,3 +223,46 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   "Align region to coma"
   (interactive "r")
   (align-regexp begin end "\\(\\s-*\\)&" 1 1 t))
+
+
+(defsubst add-paredit (mode-type)
+  (define-key mode-type (kbd "(") 'paredit-open-round)
+  (define-key mode-type (kbd ")") 'paredit-close-round)
+  (define-key mode-type (kbd "[") 'paredit-open-square)
+  (define-key mode-type (kbd "]") 'paredit-close-square)
+  (define-key mode-type (kbd "{") 'paredit-open-curly)
+  (define-key mode-type (kbd "}") 'paredit-close-curly)
+  (define-key mode-type (kbd "M-0") 'paredit-escape) ;; also try : \
+
+  (define-key mode-type (kbd "\"") 'paredit-doublequote)
+  (define-key mode-type (kbd "\\") 'paredit-backslash)
+
+  ;; ;; Can't have these for clojure mode
+  ;; (define-key mode-type (kbd "RET") 'paredit-newline)
+  ;; (define-key mode-type (kbd "<return>") 'paredit-newline)
+  ;; (define-key mode-type (kbd "C-j") 'newline) ;; conflict with
+  (define-key mode-type (kbd "C-<backspace>")  'delete-backward-char)
+  (define-key mode-type (kbd "M-<backspace>")  'paredit-backward-kill-word)
+  (define-key mode-type (kbd "C-M-<right>")      'forward-sexp)
+  (define-key mode-type (kbd "C-M-<left>")       'backward-sexp)
+  ;; (define-key mode-type (kbd "C-<return>") 'paredit-newline)
+
+  ;; ;; nb: this assumes dvorak key layout
+  ;; (define-key mode-type (kbd "C-k") 'kill-sexp)
+  ;; (define-key mode-type (kbd "C-t") 'transpose-sexps)
+  ;; (define-key mode-type (kbd "C-M-t") 'transpose-chars)
+  (define-key mode-type (kbd "C-M-k") 'paredit-kill)
+  ;; ;; (define-key mode-type (kbd "C-'") 'paredit-splice-sexp)
+  ;; (define-key mode-type (kbd "C-M-l") 'paredit-recentre-on-sexp)
+  ;; (define-key mode-type (kbd "C-,") 'paredit-backward-slurp-sexp)
+  ;; (define-key mode-type (kbd "C-.") 'paredit-forward-slurp-sexp)
+  ;; (define-key mode-type (kbd "C-<") 'paredit-backward-barf-sexp)
+  ;; (define-key mode-type (kbd "C->") 'paredit-forward-barf-sexp)
+  ;; ;; (define-key mode-type (kbd "C-/") 'backward-up-list)
+  ;; (define-key mode-type (kbd "C-=") 'down-list)
+  ;; ;; this may seem strange, but i often use the C-<whatever> motion
+  ;; ;; commands in sequence to reformat code and having to take a finger off of control
+  ;; ;; to add a return is a pain
+  ;; (define-key mode-type (kbd "C-c .") 'etags-select-find-tag)
+  (define-key mode-type (kbd "<backspace>") 'paredit-backward-delete))
+
