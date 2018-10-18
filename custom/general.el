@@ -141,6 +141,7 @@
 ;; kill trailing white space on save
 ;; -------- (autoload 'nuke-trailing-whitespace "whitespace" nil t)
 ;; -------- (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;; (add-hook 'first-change-hook

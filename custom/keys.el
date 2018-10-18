@@ -158,11 +158,11 @@
 
 ;; Multi Cursor
 (require 'multiple-cursors)
-;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-;; (global-set-key (kbd "C->")         'mc/mark-next-like-this-symbol)
-;; (global-set-key (kbd "C-<")         'mc/mark-previous-like-this-symbol)
-;; (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
-;; (global-set-key (kbd "C-S-p")       'mc/mark-pop)
+(global-set-key (kbd "C-s-c C-s-c") 'mc/edit-lines)
+(global-set-key (kbd "C->")         'mc/mark-next-like-this-symbol)
+(global-set-key (kbd "C-<")         'mc/mark-previous-like-this-symbol)
+(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
+(global-set-key (kbd "C-s-p")       'mc/mark-pop)
 
 ;; keyboard macro yank, can be repeated with C-u
 (fset 'kbd-yank
