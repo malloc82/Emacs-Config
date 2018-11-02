@@ -206,3 +206,12 @@ Return an event vector."
                 ("\e\[%d;8~" control meta shift)))
         (setq c (1+ c))))))
 (eval-after-load "xterm" '(my-eval-after-load-xterm))
+
+
+(when (not window-system) ;; Only use in tty-sessions.
+  (defvar arrow-keys-map (make-sparse-keymap) "Keymap for arrow keys")
+  (define-key esc-map "[" arrow-keys-map)
+  (define-key arrow-keys-map "A" 'previous-line)
+  (define-key arrow-keys-map "B" 'next-line)
+  (define-key arrow-keys-map "C" 'forward-char)
+  (define-key arrow-keys-map "D" 'backward-char))
