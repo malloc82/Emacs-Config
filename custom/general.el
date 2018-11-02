@@ -139,8 +139,6 @@
 
 
 ;; kill trailing white space on save
-;; -------- (autoload 'nuke-trailing-whitespace "whitespace" nil t)
-;; -------- (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
@@ -171,6 +169,6 @@
 ;; (command-frequency-autosave-mode 1)
 
 ;; Minimap setting
-(setq minimap-hide-scroll-bar t)
-(setq minimap-window-location 'right)
-(setq minimap-recenter-type 'middle)
+;; (setq minimap-hide-scroll-bar t)
+;; (setq minimap-window-location 'right)
+;; (setq minimap-recenter-type 'middle)
