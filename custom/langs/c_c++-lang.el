@@ -1,27 +1,25 @@
 ;; -*- mode: Emacs-Lisp -*-
 ;; C/C++ configurations
 
-(require 'autopair)
 (add-hook 'c++-mode-hook  #'(lambda ()
                               (irony-mode +1)
-                              (autopair-mode +1)
+                              (electric-pair-mode +1)
                               (setq show-trailing-whitespace t)))
-;; (add-hook 'c++-mode-hook  'autopair-mode)
+
 (add-hook 'c-mode-hook    #'(lambda ()
                               (irony-mode +1)
-                              (autopair-mode +1)
+                              (electric-pair-mode +1)
                               (setq show-trailing-whitespace t)))
-;; (add-hook 'c-mode-hook    'autopair-mode)
+
 (add-hook 'objc-mode-hook #'(lambda ()
                               (irony-mode +1)
-                              (autopair-mode +1)
+                              (electric-pair-mode +1)
                               (setq show-trailing-whitespace t)))
-;; (add-hook 'objc-mode-hook 'autopair-mode)
 
 
 (add-hook 'cuda-mode-hook #'(lambda ()
                               ;; (irony-mode +1)
-                              (autopair-mode +1)
+                              (electric-pair-mode +1)
                               (setq show-trailing-whitespace t)))
 
 (eval-after-load 'company

@@ -93,7 +93,7 @@
         vlf
 
         ;; others
-        autopair
+        ;; autopair
         flycheck
         workgroups
         visible-mark

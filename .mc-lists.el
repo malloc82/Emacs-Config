@@ -5,6 +5,7 @@
       '(
         kill-region
         paredit-backward
+        paredit-backward-kill-word
         paredit-forward
         slime-space
         ))

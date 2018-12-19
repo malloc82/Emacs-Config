@@ -215,3 +215,10 @@ Return an event vector."
   (define-key arrow-keys-map "B" 'next-line)
   (define-key arrow-keys-map "C" 'forward-char)
   (define-key arrow-keys-map "D" 'backward-char))
+
+
+(require 'anzu)
+(global-set-key (kbd "M-s-5") 'query-replace)
+(global-anzu-mode +1)
+(global-set-key [remap query-replace] 'anzu-query-replace)
+(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)

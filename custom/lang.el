@@ -1,5 +1,7 @@
 
 ;; (setq initial-major-mode 'org-mode)
+(require 'org)
+
 ;; (require 'cc-mode)
 ;; (require 'vhdl-mode)
 ;; (require 'verilog-mode)
@@ -66,7 +68,12 @@
          ;; ("\\.js\\'"                   . javascript-mode)
          ("\\.vim\\(rc\\)?\\'"         . vimrc-mode)
          ("\\.[Xx][Dd][Cc]$"           . vivado-mode)
+         ("\\.boot$"                   . clojure-mode)
          ) auto-mode-alist))
+
+
+(add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
+
 ;; ===========================================================================================
 
 ;; ============================================================================

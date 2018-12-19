@@ -12,7 +12,6 @@
                                 (paredit      . "melpa-stable")
                                 (clojure-mode . "melpa-stable")
                                 (cider        . "melpa-stable")
-                                (use-package  . "melpa-stable")
                                 (python-mode  . "melpa-stable")
                                 (jedi         . "melpa-stable")
                                 (go-mode      . "melpa-stable")

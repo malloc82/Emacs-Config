@@ -15,6 +15,12 @@
 ;; (ac-config-default)
 ;; =============================
 
+;; (add-hook 'python-mode-hook 'electric-pair-mode)
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (electric-pair-mode)
+              (setq-local show-trailing-whitespace t)))
+
 (elpy-enable)
 ;; (elpy-mode 1)
 (when (require 'flycheck nil t)
@@ -32,7 +38,8 @@
 
 (outline-minor-mode 1)
 
-(set-variable 'py-indent-offset 4)
+(set-variable 'python-indent-offset 4)
+(set-variable 'py-indent-offset python-indent-offset)
 (set-variable 'py-smart-indentation nil)
 (set-variable 'indent-tabs-mode nil)
 
@@ -45,4 +52,8 @@
       python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
       python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-(setq show-trailing-whitespace t)
+;; (setq show-trailing-whitespace t)
+
+;; (define-key python-mode-map (kbd "C-M-x") 'python-shell-send-defun) ;; should be default
+(define-key python-mode-map (kbd "C-M-r") 'python-shell-send-region)
+(define-key python-mode-map (kbd "C-M-s") 'python-shell-send-string)

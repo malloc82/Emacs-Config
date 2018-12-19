@@ -1,5 +1,13 @@
+(cond ((eq system-type 'darwin)
+       (setq mac-command-modifier 'meta) ; make cmd key do Meta
+       (setq mac-option-modifier 'super) ; make opt key do Super
+       ;; (setq mac-control-modifier 'control) ; make Control key do Control
+       (setq ns-function-modifier 'hyper) ; make Fn key do Hyper
+       ))
+
 (dolist (path `(,(expand-file-name "~/.emacs.d/custom")
                 ,(expand-file-name "~/.emacs.d/custom/langs")
+                ,(expand-file-name "~/.emacs.d/custom/config")
                 ,(expand-file-name "~/.emacs.d/vendor")
                 "PACKAGE_DIRECTORY"))
   (add-to-list 'load-path path))
@@ -42,6 +50,8 @@
 (setq-default indent-tabs-mode nil) ;; Tabs
 (setq-default tab-width 4)
 (setq next-line-add-newlines nil)
+(when (or (eq system-type 'darwin) (eq system-type 'gnu/linux))
+  (setq shell-file-name "/bin/bash"))
 
 (require 'mic-paren)
 (setq show-paren-style 'parenthesis) ;; Showing matching parentheses in GNU Emacs
@@ -50,12 +60,29 @@
 (require 'hl-line+)
 (setq global-hl-line-highlight t)
 
+
+(when (eq system-type 'darwin)
+    (setq insert-directory-program "/opt/local/bin/gls"))
+(setq dired-listing-switches "-alh --group-directories-first")
+
+(require 'dired-details)
+(setq-default dired-details-hidden-string "--- ")
+(setq dired-dwim-target t)
+
+
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c u") 'uncomment-region)
 (global-set-key (kbd "M-c")   'comment-or-uncomment-region)
 
 (load "lisp-lang")
+;; (load "tramp-config")
+;; (load "shell-mode-config")
+;; (load "dired-config")
+;; (load "env")
+
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/custom/themes"))
+
+(elpy-enable)
 
 (custom-set-variables
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
@@ -64,4 +91,3 @@
      default))
  '(custom-enabled-themes '(base16-default))
  '(fci-rule-color "#383838"))
-
