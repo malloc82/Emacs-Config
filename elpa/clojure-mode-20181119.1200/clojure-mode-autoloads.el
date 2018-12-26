@@ -52,7 +52,7 @@ Change a surrounding if to if-not, or vice-versa.\n\nSee: https://github.com/clo
 Change a surrounding when to when-not, or vice-versa.\n\n(fn)" t nil)
 
 (autoload 'clojure-let-backward-slurp-sexp "clojure-mode" "\
-Slurp the s-expression before the let form into the let form.\nWith a numberic prefix argument slurp the previous N s-expression into the let form.\n\n(fn &optional N)" t nil)
+Slurp the s-expression before the let form into the let form.\nWith a numberic prefix argument slurp the previous N s-expression\ninto the let form.\n\n(fn &optional N)" t nil)
 
 (autoload 'clojure-let-forward-slurp-sexp "clojure-mode" "\
 Slurp the next s-expression after the let form into the let form.\nWith a numeric prefix argument slurp the next N s-expressions into the let form.\n\n(fn &optional N)" t nil)

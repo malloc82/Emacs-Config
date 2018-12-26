@@ -19,7 +19,7 @@ Restart sesman session.\nWhen WHICH is nil, restart the current session; when a 
 Terminate a Sesman session.\nWhen WHICH is nil, kill only the current session; when a single universal\nargument or 'linked, kill all linked sessions; when a double universal argument,\nt or 'all, kill all sessions. For programmatic use, WHICH can also be a session\nor a name of the session, in which case that session is killed.\n\n(fn &optional WHICH)" t nil)
 
 (autoload 'sesman-info "sesman" "\
-Display linked sessions info.\nWhen ALL is non-nil, show info for all sessions.\n\n(fn &optional ALL)" t nil)
+Display info for all current sessions (`sesman-current-sessions').\nIn the resulting minibuffer display linked sessions are numbered and the\nother (friendly) sessions are not. When ALL is non-nil, show info for all\nsessions.\n\n(fn &optional ALL)" t nil)
 
 (autoload 'sesman-link-with-buffer "sesman" "\
 Ask for SESSION and link with BUFFER.\nBUFFER defaults to current buffer. On universal argument, or if BUFFER is 'ask,\nask for buffer.\n\n(fn &optional BUFFER SESSION)" t nil)
@@ -35,6 +35,7 @@ Ask for SESSION and link with the least specific context available.\nNormally th
 
 (autoload 'sesman-unlink "sesman" "\
 Break any of the previously created links.\n\n(fn)" t nil)
+ (autoload 'sesman-map "sesman" "Session management prefix keymap." t 'keymap)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sesman" '("sesman-")))
 
