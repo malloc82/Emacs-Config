@@ -4,6 +4,11 @@
         hydra
         dired-details
 
+        anzu
+        diminish
+        ;; org-mode
+        org-ref
+
         ;; lisp
         elisp-slime-nav
         slime

@@ -1,5 +1,6 @@
 .DS_Store
 .smex-items
+.cask/
 *.elc
 *.swp
 *~
@@ -10,6 +11,7 @@ ac-comphist.dat
 bookmarks
 tramp
 places
+eshell/
 auto-save-list/
 emacs_autosaves/
 emacs_backups/

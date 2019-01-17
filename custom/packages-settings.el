@@ -6,21 +6,139 @@
   (add-to-list 'package-archives repo))
 
 (load "selected-packages")
-(setq package-pinned-archives '((use-package  . "melpa-stable")
-                                (smex         . "melpa-stable")
-                                (company      . "melpa-stable")
-                                (paredit      . "melpa-stable")
-                                (clojure-mode . "melpa-stable")
-                                (cider        . "melpa-stable")
-                                (python-mode  . "melpa-stable")
-                                (jedi         . "melpa-stable")
-                                (go-mode      . "melpa-stable")
-                                (magit        . "melpa-stable")
-                                (helm         . "emlpa-stable")
-                                (helm-core    . "emlpa-stable")
-                                (matlab-mode  . "melpha")
-                                (pabbrev      . "gnu")
-                                (elpy         . "https://jorgenschaefer.github.io/packages/")))
+
+(setq pinned-melpa-stable-pkgs
+      (mapcar '(lambda (pkg) (cons pkg "melpa-stable"))
+              '(anaconda-mode
+                auctex
+                autctex-latexmk smex company
+                ;; cider clojure-mode
+                company-irony company-irony-c-headers company-ghc
+                concurrent
+                cuda-mode
+                dash
+                diminish
+                edn
+                ein
+                epc
+                epl
+                f
+                find-file-in-project
+                flycheck
+                ghc
+                ghub
+                go-mode
+                haskell-mode
+                helm-bibtex
+                helm-cider
+                paredit
+                magit git-commit
+                python-mode jedi
+                helm helm-core
+                highlight-symbol
+                hydra
+                ido-completing-read+
+                inflections
+                irony
+                ivy
+                jedi-core
+                key-chord
+                magit magit-popu
+                markdown-mode
+                multi-term ;; ??
+                org-ref
+                parsebib
+                popup
+                pyvenv
+                rainbow-delimiters
+                request request-deferred
+                simple-httpd
+                skewer-mode
+                smartparens
+                use-package
+                tablist
+                websocket
+                with-editor)))
+
+(setq pinned-melpa-pkgs
+      (mapcar '(lambda (pkg) (cons pkg  "melpa"))
+              '(;; anaconda-mode
+                ;; cider clojure-mode
+                ctable
+                deferred
+                eclim
+                elisp-slime-nav
+                elixir-mode
+                exec-path-from-shell
+                fzf
+                haskell-snippets
+                haskell-tab-indent
+                highlight
+                highlight-indentation
+                javadoc-lookup
+                javap-mode
+                js2-mode
+                julia-mode
+                memoize
+                mic-paren
+                multiple-cursors
+                neotree
+                pdf-tools
+                peg
+                pkg-info
+                py-autopep8
+                python-environment
+                pythonic
+                quack
+                s
+                scion
+                shell-command
+                ssh
+                virtualenv
+                visible-mark
+                vlf
+                workgroups
+                yasnippet
+                yasnippet-snippets
+                )))
+
+(setq pinned-gnu-pkgs
+      (mapcar '(lambda (pkg) (cons pkg "gnu"))
+              '(flymake)))
+
+(setq package-pinned-packages
+      (append pinned-melpa-stable-pkgs
+              pinned-melpa-pkgs
+              pinned-gnu-pkgs))
+
+;; check: ghci-completion ghub idle-highlight-mode
+
+
+;; (setq package-pinned-packages
+;;       '((use-package    . "melpa-stable")
+;;         (auctex         . "melpa-stable")
+;;         (auctex-latexmk . "melpa-stable")
+;;         (smex           . "melpa-stable")
+;;         (company        . "melpa-stable")
+;;         (company-irony  . "melpa-stable")
+;;         (company-irony-c-headers . "melpa-stable")
+;;         (paredit      . "melpa-stable")
+;;         (clojure-mode . "melpa-stable")
+;;         (cider        . "melpa")
+;;         (python-mode  . "melpa-stable")
+;;         (jedi         . "melpa-stable")
+;;         (go-mode      . "melpa-stable")
+;;         (magit        . "melpa-stable")
+;;         (helm         . "melpa-stable")
+;;         (helm-core    . "melpa-stable")
+;;         (matlab-mode  . "melpa")
+;;         (slime        . "melpa-stable")
+;;         (rust-mode    . "melpa-stable")
+;;         (pabbrev      . "gnu")
+;;         (elpy         . "https://jorgenschaefer.github.io/packages/")))
+
+
+
 (package-initialize)
 
 (use-package smex :ensure t)

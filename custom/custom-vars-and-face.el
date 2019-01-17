@@ -19,22 +19,26 @@
  ;; '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
  '(fci-rule-color "#383838"))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- `(default ,(cond
-             ((eq system-type 'gnu/linux)
-              '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
-              ;; '((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 99 :width normal)))
-              ;; '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 117 :width normal)))
-              )
-             ((eq system-type 'darwin)
-              ;; '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))) ;; emacs-24
-              ;; '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
-              '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
-              ;; '((t (:family "Fira Code"   :foundry "Unknown" :slant normal :weight normal :height 120 :width normal)))
-              ;; '((t (:family "Monoid"      :foundry "Unknown" :slant normal :weight normal :height 120 :width normal)))
-              ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
-              ))))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/profiles"))
+
+(load "mac_external_monitor")
+
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  `(default ,(cond
+;;              ((eq system-type 'gnu/linux)
+;;               '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+;;               ;; '((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 99 :width normal)))
+;;               ;; '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 117 :width normal)))
+;;               )
+;;              ((eq system-type 'darwin)
+;;               ;; '((t (:font "-apple-monaco-medium-r-normal--10-120-72-72-m-120-mac-roman"))) ;; emacs-24
+;;               ;; '((t (:family "ProggyCleanTTSZ" :foundry "unknown" :slant normal :weight normal :height 160 :width normal)))
+;;               '((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))
+;;               ;; '((t (:family "Fira Code"   :foundry "Unknown" :slant normal :weight normal :height 120 :width normal)))
+;;               ;; '((t (:family "Monoid"      :foundry "Unknown" :slant normal :weight normal :height 120 :width normal)))
+;;               ;; '((t (:font "-*-Monaco-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")))
+;;               ))))
