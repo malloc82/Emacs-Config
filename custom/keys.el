@@ -222,3 +222,15 @@ Return an event vector."
 (global-anzu-mode +1)
 (global-set-key [remap query-replace] 'anzu-query-replace)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+
+
+(defun kill-buffer-and-delete-frame2 ()
+  "kill current buffer, then delete current window or frame if there is more than one frame opened"
+  (interactive)
+  (kill-buffer)
+  (if (> (length (window-list)) 1)
+      (delete-window)
+    (if (> (length (frame-list)) 1)
+        (delete-frame))))
+
+(global-set-key (kbd "C-x 5 k") 'kill-buffer-and-delete-frame2)
