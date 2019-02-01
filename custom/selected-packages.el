@@ -7,6 +7,7 @@
         anzu
         diminish
         ;; org-mode
+        org
         org-ref
 
         ;; lisp

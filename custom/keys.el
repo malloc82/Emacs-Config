@@ -153,7 +153,7 @@
 ;; ============================================================================
 ;; Magit
 ;; ----------------------------------------------------------------------------
-(global-set-key (kbd "C-c g") 'magit-status)
+;; (global-set-key (kbd "C-c g") 'magit-status)
 
 
 ;; Multi Cursor
@@ -227,10 +227,22 @@ Return an event vector."
 (defun kill-buffer-and-delete-frame2 ()
   "kill current buffer, then delete current window or frame if there is more than one frame opened"
   (interactive)
-  (kill-buffer)
-  (if (> (length (window-list)) 1)
-      (delete-window)
-    (if (> (length (frame-list)) 1)
-        (delete-frame))))
+  (when (kill-buffer)
+    (if (> (length (window-list)) 1)
+        (delete-window)
+      (if (> (length (frame-list)) 1)
+          (delete-frame)))))
 
 (global-set-key (kbd "C-x 5 k") 'kill-buffer-and-delete-frame2)
+
+
+(defun delete-trailing-whitespace-and-save ()
+  (interactive)
+  (delete-trailing-whitespace)
+  (save-buffer))
+
+(define-prefix-command 'ctrl-c-0-map)
+(global-set-key (kbd "C-c 0") 'ctrl-c-0-map)
+(define-key ctrl-c-0-map (kbd "s") 'delete-trailing-whitespace-and-save)
+(define-key ctrl-c-0-map (kbd "g") 'magit-status)
+(define-key ctrl-c-0-map (kbd "h") 'helm-comint-input-ring)

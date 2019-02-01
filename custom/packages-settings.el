@@ -104,7 +104,8 @@
 
 (setq pinned-gnu-pkgs
       (mapcar '(lambda (pkg) (cons pkg "gnu"))
-              '(flymake)))
+              '(flymake
+                org)))
 
 (setq package-pinned-packages
       (append pinned-melpa-stable-pkgs
