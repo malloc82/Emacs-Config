@@ -1,25 +1,30 @@
 ;; -*- mode: Emacs-Lisp -*-
 ;; C/C++ configurations
+(require 'yasnippet)
 
 (add-hook 'c++-mode-hook  #'(lambda ()
                               (irony-mode +1)
                               (electric-pair-mode +1)
+                              (yas-minor-mode +1)
                               (setq show-trailing-whitespace t)))
 
 (add-hook 'c-mode-hook    #'(lambda ()
                               (irony-mode +1)
                               (electric-pair-mode +1)
+                              (yas-minor-mode +1)
                               (setq show-trailing-whitespace t)))
 
 (add-hook 'objc-mode-hook #'(lambda ()
                               (irony-mode +1)
                               (electric-pair-mode +1)
+                              (yas-minor-mode +1)
                               (setq show-trailing-whitespace t)))
 
 
 (add-hook 'cuda-mode-hook #'(lambda ()
                               ;; (irony-mode +1)
                               (electric-pair-mode +1)
+                              (yas-minor-mode +1)
                               (setq show-trailing-whitespace t)))
 
 (eval-after-load 'company

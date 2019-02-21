@@ -9,7 +9,8 @@
         ;; org-mode
         org
         org-ref
-
+        org-pomodoro
+        ox-gfm
         ;; lisp
         elisp-slime-nav
         slime
@@ -48,6 +49,7 @@
         ;; latex
         auctex
         auctex-latexmk
+        company-auctex
 
         ;; parendit
         paredit
@@ -124,6 +126,8 @@
         exec-path-from-shell
         anaconda-mode
         yasnippet
+        yasnippet-snippets
+        yasnippet-classic-snippets
         frame-fns
         frame-cmds
         flymake

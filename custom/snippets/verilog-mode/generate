@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: generate
+# key: gen
+# --
+generate
+   ${1:genvar i;}
+   $0
+endgenerate

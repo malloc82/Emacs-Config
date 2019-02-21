@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: initial
+# key: initial
+# --
+initial
+  begin ${1:}
+  $0
+  end

@@ -46,7 +46,6 @@
                 magit magit-popu
                 markdown-mode
                 multi-term ;; ??
-                org-ref
                 parsebib
                 popup
                 pyvenv
@@ -83,6 +82,7 @@
                 mic-paren
                 multiple-cursors
                 neotree
+                org-ref
                 pdf-tools
                 peg
                 pkg-info

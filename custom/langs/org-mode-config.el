@@ -1,7 +1,9 @@
 (require 'org-ref)
 (require 'org-tempo)
+(require 'org-pomodoro)
 (require 'doi-utils)
-(require 'ox-md)
+;; (require 'ox-md)
+(require 'ox-gfm nil t)
 
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
 (load "auctex.el" nil t t)
@@ -23,10 +25,36 @@
 (setq org-odd-levels-only t)
 (setq org-return-follows-link t)
 
-(define-key org-mode-map (kbd "C-c l") 'org-store-link)
-(define-key org-mode-map (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files '("~/Documents/org"))
+;; also check: org-agenda-text-search-extra-files
+;; (setq org-agenda-text-search-extra-files
+;;       '(agenda-archives
+;;         "~/org/subdir/textfile1.txt"
+;;         "~/org/subdir/textfile1.txt"))
 
-(define-key org-mode-map (kbd "C-S-f") 'org-shiftright)
+;; source: https://stackoverflow.com/questions/11384516/how-to-make-all-org-files-under-a-folder-added-in-agenda-list-automatically
+;;         https://github.com/suvayu/.emacs.d/blob/master/lisp/nifty.el
+;;
+;; (defun sa-org-find-notes (&optional regexp)
+;;   "Run occur on ORG files in the present directory, prompt for REGEXP."
+;;   (interactive "MRegexp: ")
+;;   (let* ((files (directory-files default-directory t "^[^.#].*\.org"))
+;; 	 (regexp (or (unless (equal regexp "") regexp) "{{{\\(todo\\|note\\|mark\\)(")))
+;;     (print files)
+;;     (sa-multi-occur-files files regexp)))
+
+
+(setq org-refile-targets '((nil :maxlevel . 9)
+                           (org-agenda-files :maxlevel . 9)))
+(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+(setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+
+
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(define-key org-mode-map (kbd "C-S-f") 'org-x52shiftright)
 (define-key org-mode-map (kbd "C-S-b") 'org-shiftleft)
 (define-key org-mode-map (kbd "C-S-p") 'org-shiftup)
 (define-key org-mode-map (kbd "C-S-n") 'org-shiftdown)

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: tabular
+# key: tabu
+# -- 
+\begin{tabular}[${1:}]
+\hline
+$0 & &
+\end{tabular}

@@ -1,3 +1,4 @@
+(require 'eshell)
 
 ;; (setenv "PATH" (concat (getenv "PATH") ":/opt/local/libexec/git-core"))
 
@@ -41,9 +42,8 @@
               (paredit-mode)
               (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
 
-
 ;; for shell-mode
-(define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)
+;; (define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)
 ;; ======================================================================================
 
 ;; scroll to bottom for eshell

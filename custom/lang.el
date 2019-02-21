@@ -80,7 +80,9 @@
 ;; yasnippet
 ;; ----------------------------------------------------------------------------
 (require 'yasnippet)
-(yas-global-mode 1)
+;; (yas-global-mode 1)
+(setq yas-snippet-dirs (append '("~/.emacs.d/custom/snippets") yas-snippet-dirs))
+
 ;; ============================================================================
 ;; (setq c-default-style '((c-mode    . "stroustrup")
 ;;                         (c++-mode  . "stroustrup")

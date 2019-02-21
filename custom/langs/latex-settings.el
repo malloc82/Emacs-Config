@@ -20,9 +20,14 @@
 ;; (add-to-list 'load-path "~/.emacs.d/auctex/")
 
 (require 'tex-site)
-(require 'auto-complete-auctex)
+;; (require 'auto-complete-auctex)
+(require 'company-auctex)
 (require 'smartparens)
 (require 'smartparens-latex)
+(require 'yasnippet)
+(yas-minor-mode +1)
+(smartparens-mode 1)
+(electric-pair-mode -1)
 (outline-minor-mode 1)
 (setq LaTeX-math-mode t)
 (setq LaTeX-command "latex -file-line-error")
@@ -56,12 +61,10 @@
        (setq TeX-view-program-list
              (quote (("kdvi" "kdvi  %o"))))
        (setq TeX-view-program-selection
-             (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open")))))
-      )
-(setq load-path (append '("~/.emacs.d/auto-complete-auctex") load-path))
+             (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open"))))))
 
-(outline-minor-mode 1)
-(smartparens-mode 1)
+(setq load-path (append '("~/.emacs.d/elpa/auto-complete-auctex") load-path))
+
 (setq TeX-command-default "latexmk")
 (push
  '("latexmk"

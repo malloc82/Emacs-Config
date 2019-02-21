@@ -104,9 +104,9 @@
 ;; ============================================
 ;; Workgroups
 ;; --------------------------------------------
-(require 'workgroups)
-(setq wg-prefix-key (kbd "C-c w"))
-(workgroups-mode 1)
+;; (require 'workgroups)
+;; (setq wg-prefix-key (kbd "C-c w"))
+;; (workgroups-mode 1)
 ;; (wg-load "/path/to/saved/workgroups")
 ;; ============================================
 
@@ -141,7 +141,6 @@
 (setq show-trailing-whitespace t)
 (setq next-line-add-newlines nil)
 
-
 ;; (add-hook 'first-change-hook
 ;;           #'(lambda nil
 ;;               ;; set for all 'regular' buffers
@@ -172,3 +171,29 @@
 ;; (setq minimap-hide-scroll-bar t)
 ;; (setq minimap-window-location 'right)
 ;; (setq minimap-recenter-type 'middle)
+
+;; Neotree
+(setq neo-window-fixed-size nil)
+
+
+(defun my-split-window-sensibly (&optional window)
+  (let ((window (or window (selected-window))))
+    (or (and (window-splittable-p window t)
+             ;; Split window vertically.
+             (with-selected-window window
+               (split-window-below)))
+        (and (window-splittable-p window)
+             (with-selected-window window
+             ;; Split window horizontally.
+               (split-window-right)))
+        (and (eq window (frame-root-window (window-frame window)))
+             (not (window-minibuffer-p window))
+             ;; If WINDOW is the only window on its frame and is not the
+             ;; minibuffer window, try to split it horizontally disregarding
+             ;; the value of `split-width-threshold'.
+             (let ((split-width-threshold 0))
+               (when (window-splittable-p window t)
+                 (with-selected-window window
+                   (split-window-right))))))))
+
+;; (setq split-window-preferred-function nil)

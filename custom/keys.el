@@ -145,9 +145,9 @@
 ;; ============================================================================
 ;; alignment
 ;; ----------------------------------------------------------------------------
-(global-set-key (kbd "C-c a =")
-  (lambda () (interactive)
-    (align-regexp (region-beginning) (region-end) "\\(\\s-*\\)=" 1 1 nil)))
+;; (global-set-key (kbd "C-c a =")
+;;   (lambda () (interactive)
+;;     (align-regexp (region-beginning) (region-end) "\\(\\s-*\\)=" 1 1 nil)))
 ;; ============================================================================
 
 ;; ============================================================================
@@ -246,3 +246,33 @@ Return an event vector."
 (define-key ctrl-c-0-map (kbd "s") 'delete-trailing-whitespace-and-save)
 (define-key ctrl-c-0-map (kbd "g") 'magit-status)
 (define-key ctrl-c-0-map (kbd "h") 'helm-comint-input-ring)
+(define-key ctrl-c-0-map (kbd "t") 'neotree-toggle)
+
+(require 'recentf)
+(recentf-mode t)
+(setq recentf-max-menu-items 50)
+(run-at-time nil (* 5 60) 'recentf-save-list)
+
+;; (defun recentf-ido-find-file ()
+;;   "Find a recent file using Ido."
+;;   (interactive)
+;;   (let* ((file-assoc-list
+;; 	      (mapcar (lambda (x)
+;; 		            (cons (file-name-nondirectory x)
+;; 			              x))
+;; 		          recentf-list))
+;; 	     (filename-list
+;; 	      (remove-duplicates (mapcar #'car file-assoc-list)
+;; 			                 :test #'string=))
+;; 	     (filename (ido-completing-read "Choose recent file: "
+;; 					                    filename-list
+;; 					                    nil
+;; 					                    t)))
+;;     (when filename
+;;       (find-file (cdr (assoc filename
+;; 			                 file-assoc-list))))))
+
+;; (define-key ctrl-c-0-map (kbd "r") 'recentf-open-files)
+;; (define-key ctrl-c-0-map (kbd "r") 'recentf-ido-find-file)
+(define-key ctrl-c-0-map (kbd "r") 'recentf-open-files)
+

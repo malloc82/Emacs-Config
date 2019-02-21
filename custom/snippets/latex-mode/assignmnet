@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: assignment
+# key: assignment
+# -- 
+\documentclass{assignment}
+
+\title{${1:title}}
+
+\author{${2:auther}}
+
+\begin{document}
+
+$0
+
+\end{document}
