@@ -67,37 +67,37 @@
 
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill) ;; turn on word wrapping in text mode
 
-;; ===============================
-;; Interractively Do Things (ido)
-;; ===============================
-(require 'ido)
-(ido-mode t)
-(setq ido-use-filename-at-point nil)
-;; Preventing auto-searches unless called explicitly
-(setq ido-auto-merge-work-directories-length -1)
-(define-key ido-file-dir-completion-map (kbd "C-c C-s")
-      (lambda()
-        (interactive)
-        (ido-initiate-auto-merge (current-buffer))))
-;; (setq ido-separator "\n")
-;; (setq ido-enable-flex-matching t)
+;; ;; ===============================
+;; ;; Interractively Do Things (ido)
+;; ;; ===============================
+;; (require 'ido)
+;; (ido-mode t)
+;; (setq ido-use-filename-at-point nil)
+;; ;; Preventing auto-searches unless called explicitly
+;; (setq ido-auto-merge-work-directories-length -1)
+;; (define-key ido-file-dir-completion-map (kbd "C-c C-s")
+;;       (lambda()
+;;         (interactive)
+;;         (ido-initiate-auto-merge (current-buffer))))
+;; ;; (setq ido-separator "\n")
+;; ;; (setq ido-enable-flex-matching t)
 
-;; ;; From starter-kit
-;; (ido-ubiquitous t)
-;; (setq ido-enable-prefix nil
-;;       ido-enable-flex-matching t
-;;       ido-auto-merge-work-directories-length nil
-;;       ido-create-new-buffer 'always
-;;       ido-use-filename-at-point 'guess
-;;       ido-use-virtual-buffers t
-;;       ido-handle-duplicate-virtual-buffers 2
-;;       ido-max-prospects 10)
+;; ;; ;; From starter-kit
+;; ;; (ido-ubiquitous t)
+;; ;; (setq ido-enable-prefix nil
+;; ;;       ido-enable-flex-matching t
+;; ;;       ido-auto-merge-work-directories-length nil
+;; ;;       ido-create-new-buffer 'always
+;; ;;       ido-use-filename-at-point 'guess
+;; ;;       ido-use-virtual-buffers t
+;; ;;       ido-handle-duplicate-virtual-buffers 2
+;; ;;       ido-max-prospects 10)
 
 
-;; ido bahavior for smex, modified keys in my-keys for smex
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "C-c M-x") 'execute-extended-command) ;; original M-x
+;; ;; ido bahavior for smex, modified keys in my-keys for smex
+;; (require 'smex)
+;; (smex-initialize)
+;; (global-set-key (kbd "C-c M-x") 'execute-extended-command) ;; original M-x
 
 ;; ==================================================================
 
@@ -120,7 +120,7 @@
 
 (require 'hl-line+)
 (setq global-hl-line-highlight t)
-;; check out hl-line-overlay-priority
+:;; check out hl-line-overlay-priority
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/config"))
 (dolist (config-file '("backup"
@@ -168,9 +168,13 @@
 ;; (command-frequency-autosave-mode 1)
 
 ;; Minimap setting
-;; (setq minimap-hide-scroll-bar t)
-;; (setq minimap-window-location 'right)
+(setq minimap-hide-scroll-bar t)
+(setq minimap-window-location 'right)
+(setq minimap-width-fraction 0.10)
+(setq minimap-minimum-width 25)
+(setq minimap-update-delay 0)
 ;; (setq minimap-recenter-type 'middle)
+
 
 ;; Neotree
 (setq neo-window-fixed-size nil)
@@ -197,3 +201,6 @@
                    (split-window-right))))))))
 
 ;; (setq split-window-preferred-function nil)
+
+
+

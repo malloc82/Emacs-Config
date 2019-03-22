@@ -3,6 +3,8 @@
         inflections
         hydra
         dired-details
+        swiper
+        counsel
 
         anzu
         diminish
