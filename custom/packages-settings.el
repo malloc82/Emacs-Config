@@ -12,6 +12,10 @@
               '(anaconda-mode
                 auctex
                 autctex-latexmk smex company
+                ;; swiper
+                swiper
+                counsel
+                ivy
                 ;; cider clojure-mode
                 company-irony company-irony-c-headers company-ghc
                 concurrent

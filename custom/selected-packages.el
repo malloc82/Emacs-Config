@@ -4,6 +4,7 @@
         hydra
         dired-details
         swiper
+        ivy
         counsel
 
         anzu
