@@ -3,6 +3,7 @@
 # key: module
 # --
 module ${1:module_name} #(${2:})
-         (${3:});
-$0
+         (${3:input}
+          $0);
+
 endmodule // $1

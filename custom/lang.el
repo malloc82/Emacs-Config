@@ -82,6 +82,14 @@
 (require 'yasnippet)
 ;; (yas-global-mode 1)
 (setq yas-snippet-dirs (append '("~/.emacs.d/custom/snippets") yas-snippet-dirs))
+(defun yas-newline ()
+  (interactive)
+  (newline))
+
+(eval-after-load 'yasnippet
+  '(progn
+     (define-key yas-keymap (kbd "<return>") 'yas-newline)
+     (define-key yas-keymap (kbd "C-g")      'yas-abort-snippet)))
 
 ;; ============================================================================
 ;; (setq c-default-style '((c-mode    . "stroustrup")
