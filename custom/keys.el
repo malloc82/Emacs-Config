@@ -286,12 +286,12 @@ Return an event vector."
 (use-package ivy
   :ensure t
   :diminish ivy-mode
+  :bind (("C-x b" . ivy-switch-buffer))
   :config
   (progn
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "%d/%d ")
     (setq ivy-display-style 'fancy)))
-
 
 (use-package swiper
   :ensure t
