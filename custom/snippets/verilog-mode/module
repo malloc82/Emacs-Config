@@ -2,8 +2,7 @@
 # name: module
 # key: module
 # --
-module ${1:module_name} #(${2:})
-         (${3:input}
-          $0);
-
+module ${1:module_name} ${2:#()}
+         (${3:});
+   $0
 endmodule // $1
