@@ -21,8 +21,8 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/profiles"))
 
-;; (load "mac_external_monitor")
-(load "linux_proggy")
+(cond ((eq system-type 'darwin)    (load "mac_external_monitor"))
+      ((eq system-type 'gnu/linux) (load "linux_proggy")))
 
 ;; (custom-set-faces
 ;;  ;; custom-set-faces was added by Custom.
