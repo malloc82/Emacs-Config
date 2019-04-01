@@ -286,6 +286,10 @@ Return an event vector."
 (use-package ivy
   :ensure t
   :diminish ivy-mode
+  :bind (("C-x b"    . ivy-switch-buffer)
+         :map ivy-minibuffer-map
+         ("TAB"      . ivy-partial)
+         ("<return>" . ivy-alt-done))
   :config
   (progn
     (setq ivy-use-virtual-buffers t)
