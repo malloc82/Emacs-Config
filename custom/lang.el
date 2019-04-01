@@ -82,14 +82,6 @@
 (require 'yasnippet)
 ;; (yas-global-mode 1)
 (setq yas-snippet-dirs (append '("~/.emacs.d/custom/snippets") yas-snippet-dirs))
-(defun yas-newline ()
-  (interactive)
-  (newline))
-
-(eval-after-load 'yasnippet
-  '(progn
-     (define-key yas-keymap (kbd "<return>") 'yas-newline)
-     (define-key yas-keymap (kbd "C-g")      'yas-abort-snippet)))
 
 ;; ============================================================================
 ;; (setq c-default-style '((c-mode    . "stroustrup")
@@ -111,25 +103,25 @@
                         "lisp-lang"
                         "clojure-lang"
                         "perl-lang"
-                        "python-config"
+                        ;; "python-config"
                         "web"))
   (load-library lang-setting))
 
 
-;; python packages
-(defvar python-packages
-  '(ein
-    elpy
-    flycheck
-    py-autopep8))
+;; ;; python packages
+;; (defvar python-packages
+;;   '(ein
+;;     elpy
+;;     flycheck
+;;     py-autopep8))
 
-(mapc #'(lambda (package)
-          (unless (package-installed-p package)
-            (package-install package)))
-      python-packages)
+;; (mapc #'(lambda (package)
+;;           (unless (package-installed-p package)
+;;             (package-install package)))
+;;       python-packages)
 
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
-(dolist (hook '((LaTeX-mode-hook   . "latex-settings")
+(dolist (hook '(;; (LaTeX-mode-hook   . "latex-settings")
                 ;; (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")
                 (erlang-mode-hook  . "erlang-lang")
