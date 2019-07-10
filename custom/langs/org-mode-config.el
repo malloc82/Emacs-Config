@@ -100,3 +100,8 @@
 (advice-add 'org-archive-default-command :after #'org-save-all-org-buffers)
 
 ;; (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+
+
+;; org-journal
+(setq org-journal-dir "~/Documents/Journal")
+(setq org-journal-date-format "%A, %d %B %Y")
