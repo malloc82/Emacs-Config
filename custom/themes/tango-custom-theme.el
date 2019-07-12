@@ -52,6 +52,7 @@ Semantic, and Ansi-Color faces are included.")
    `(cursor ((t (:background ,blue-3))))
    ;; Highlighting faces
    `(fringe ((,class (:background "gray80"))))   ;; alum-2
+   `(linum  ((,class (:background "gray80" :foreground "medium blue"))))
    `(highlight ((,class (:background "gray87")))) ;; alum-3
    `(region ((,class (:background "#a4cdff" :distant-foreground "#808080")))) ;; alum-3
    `(secondary-selection ((,class (:background ,blue-0 :distant-foreground "black"))))
@@ -74,7 +75,8 @@ Semantic, and Ansi-Color faces are included.")
    `(success ((,class (:foreground ,cham-3))))
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground ,plum-2))))
-   `(font-lock-comment-face ((,class (:slant italic :foreground "gray60")))) ;; ,alum-5
+   ;; `(font-lock-comment-face ((,class (:slant italic :foreground "gray60")))) ;; ,alum-5
+   `(font-lock-comment-face ((,class (:foreground "gray60")))) ;; ,alum-5
    `(font-lock-constant-face ((,class (:foreground "dark cyan"))))           ;; ,blue-3 :weight bold
    `(font-lock-function-name-face ((,class (:foreground "Blue1"))))          ;; ,red-3
    `(font-lock-keyword-face ((,class (:foreground "Purple"))))               ;; ,cham-4

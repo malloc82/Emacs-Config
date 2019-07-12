@@ -23,7 +23,8 @@
   (setq shell-file-name "/bin/bash"))
 
 (require 'linum+)
-(setq linum-format (if window-system "%4d" "%4d \u2502 "))
+(setq linum-format (if window-system "%4d\u2502" "%4d \u2502 "))
+
 
 (global-linum-mode t)
 (column-number-mode t)
@@ -33,7 +34,8 @@
            window-system)
   (tool-bar-mode -1)
   (menu-bar-mode +1)
-  (scroll-bar-mode t)) ;; tool bar / menu bar
+  (scroll-bar-mode -1)) ;; tool bar / menu bar
+;; more info on tool bar: https://www.emacswiki.org/emacs/ScrollBar
 
 ;; (require 'which-function)
 (which-function-mode t)
