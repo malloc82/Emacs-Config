@@ -6,7 +6,10 @@
 (require 'ox-gfm nil t)
 
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
+(setq org-latex-create-formula-image-program 'dvipng)
+
 (load "auctex.el" nil t t)
+(turn-on-reftex)
 
 (electric-pair-mode)
 (setq-local electric-pair-inhibit-predicate
@@ -25,7 +28,7 @@
 (setq org-odd-levels-only t)
 (setq org-return-follows-link t)
 
-(setq org-agenda-files '("~/Documents/org"))
+(setq org-agenda-files '("~/Documents/Journal/"))
 ;; also check: org-agenda-text-search-extra-files
 ;; (setq org-agenda-text-search-extra-files
 ;;       '(agenda-archives
@@ -104,4 +107,6 @@
 
 ;; org-journal
 (setq org-journal-dir "~/Documents/Journal")
-(setq org-journal-date-format "%A, %d %B %Y")
+(setq org-journal-date-format "%B %d, %A, %Y")
+(setq org-journal-enable-agenda-integration t)
+

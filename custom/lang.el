@@ -69,8 +69,32 @@
          ("\\.vim\\(rc\\)?\\'"         . vimrc-mode)
          ("\\.[Xx][Dd][Cc]$"           . vivado-mode)
          ("\\.boot$"                   . clojure-mode)
+         ("\\.[Cc][Ll][Jj]\\([CcSsXx]\\)?$" . clojure-mode)
+         ("\\.[Ll][Oo][Gg]$"           . auto-revert-tail-mode)
          ) auto-mode-alist))
 
+
+(add-hook 'auto-revert-tail-mode-hook '(lambda ()
+                                         (end-of-buffer)
+                                         (make-variable-buffer-local 'auto-revert-interval)
+                                         (setq auto-revert-interval 1)
+                                         (auto-revert-set-timer)
+                                         (make-variable-buffer-local 'auto-revert-verbose)
+                                         (setq auto-revert-verbose nil)
+                                         (read-only-mode t)
+                                         (font-lock-mode 0)
+                                         (company-mode -1)
+                                         (pyvenv-mode -1)
+                                         (electric-indent-mode -1)
+                                         (when (fboundp 'show-smartparens-mode)
+                                           (show-smartparens-mode 0))))
+
+(add-hook 'itail-mode-hook '(lambda ()
+                              (end-of-buffer)
+                              (font-lock-mode 0)
+                              (company-mode -1)
+                              (electric-indent-mode -1)
+                              (pyvenv-mode -1)))
 
 (add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
 
@@ -129,6 +153,11 @@
       python-packages)
 
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
+
+(require 'org-journal)
+(setq org-journal-file-format "%Y-Week-%2W.org")
+(setq org-journal-file-type 'weekly)
+
 (dolist (hook '((LaTeX-mode-hook   . "latex-settings")
                 ;; (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")

@@ -249,10 +249,10 @@ Return an event vector."
 (define-key ctrl-c-0-map (kbd "h") 'helm-comint-input-ring)
 (define-key ctrl-c-0-map (kbd "t") 'neotree-toggle)
 
-(require 'recentf)
-(recentf-mode t)
-(setq recentf-max-menu-items 50)
-(run-at-time nil (* 5 60) 'recentf-save-list)
+;; (require 'recentf)
+;; (recentf-mode t)
+;; (setq recentf-max-menu-items 50)
+;; (run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;; (defun recentf-ido-find-file ()
 ;;   "Find a recent file using Ido."
@@ -275,7 +275,7 @@ Return an event vector."
 
 ;; (define-key ctrl-c-0-map (kbd "r") 'recentf-ido-find-file)
 ;; (define-key ctrl-c-0-map (kbd "r") 'recentf-open-files)
-(define-key ctrl-c-0-map (kbd "r") 'counsel-recentf)
+;; (define-key ctrl-c-0-map (kbd "r") 'counsel-recentf)
 
 (use-package counsel
   :ensure t

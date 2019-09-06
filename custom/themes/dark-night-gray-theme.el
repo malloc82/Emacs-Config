@@ -7,6 +7,7 @@
   ;; '(default ((t (:background "#292424" :foreground "#b1b1b1"))))
   '(default ((t (:background "#292424" :foreground "gray90"))))
   '(fringe ((t (:background "#373333"  :foreground "#838383"))))
+  '(linum  ((t (:background "#373333" :foreground  "gray95"))))
   '(isearch ((t (:background "magenta3" :foreground "lightskyblue1"))))
   '(lazy-highlight ((t (:background "paleturquoise" :distant-foreground "black"))))
   '(link ((t (:foreground "CadetBlue3" :underline t))))

@@ -5,20 +5,23 @@
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(custom-safe-themes
    '("88e7e16a25bc0986f6c769961c21fa92d318ebbfe4d52f1913486cfbcc8bde77" ;; misterioso-custom
-     "cf72e0a50f17c83cdb5eac7d61e6a90ec3a7572095c612abddf1e5f4dd81d6cc" ;; dark-night-gray no italic comment
-     ;; "2e4033c81d9465003246dfcac05220adaf303910d92cbb330c9cbd3e76f14c4f" ;; dark-night-gray
+     "e08aa0022c3558978a3a36ad018c122320708084adde761c8fd1ed3e90e1791a" ;; dark-night-gray no italic comment
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
-     "d222cbb69ad7626ecdbdcc84f69d69bd59a277d383132dc3020222c14609ad18" ;; tango-custom
+     "506643b49c7a6fa521fff9ba4ca3f46792c57bc8fe7cc15276bb008dd71743a2" ;; tango-custom
      "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
      "5973b028c7b67e82d5e6d5cf715c8721e6699e376650fbc7170416541ce0cc4a" ;; base16-default, for running things in terminal
+     "4f28dd3d47fcbd3b504235a55651225fa6befb09ab56156678c7470218a71cc2" ;; tron-legacy
      default))
- (if window-system
-     ;; '(custom-enabled-themes '(dark-night-gray))
-     '(custom-enabled-themes '(tango-custom))
-     '(custom-enabled-themes '(base16-default)))
+
  ;; '(ns-antialias-text nil) ;; for proggy font on mac with second monitor
  '(fci-rule-color "#383838"))
+
+(if window-system
+    ;; (setq custom-enabled-themes '(dark-night-gray))
+    ;; (load-theme 'tron-legacy)
+    (load-theme 'tango-custom)
+  (load-theme 'base16-default))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/profiles"))
 

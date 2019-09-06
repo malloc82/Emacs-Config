@@ -76,7 +76,7 @@ Semantic, and Ansi-Color faces are included.")
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground ,plum-2))))
    ;; `(font-lock-comment-face ((,class (:slant italic :foreground "gray60")))) ;; ,alum-5
-   `(font-lock-comment-face ((,class (:foreground "gray60")))) ;; ,alum-5
+   `(font-lock-comment-face ((,class (:slant normal :foreground "gray60")))) ;; ,alum-5
    `(font-lock-constant-face ((,class (:foreground "dark cyan"))))           ;; ,blue-3 :weight bold
    `(font-lock-function-name-face ((,class (:foreground "Blue1"))))          ;; ,red-3
    `(font-lock-keyword-face ((,class (:foreground "Purple"))))               ;; ,cham-4
