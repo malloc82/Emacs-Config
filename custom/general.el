@@ -22,11 +22,15 @@
 (when (or (eq system-type 'darwin) (eq system-type 'gnu/linux))
   (setq shell-file-name "/bin/bash"))
 
-(require 'linum+)
-(setq linum-format (if window-system "%4d\u2502" "%4d \u2502 "))
+;; (require 'linum+)
+;; (setq linum-format (if window-system "%4d\u2502" "%4d \u2502 "))
+;; (global-linum-mode t)
+
+(require 'nlinum)
+(setq nlinum-format (if window-system "%4d\u2502" "%4d \u2502 "))
+(global-nlinum-mode t)
 
 
-(global-linum-mode t)
 (column-number-mode t)
 (global-hl-line-mode t)
 
@@ -205,4 +209,4 @@
 ;; (setq split-window-preferred-function nil)
 
 
-
+(setq frame-title-format '("%b@" (:eval (or (file-remote-p default-directory 'host) system-name)) " — Emacs"))

@@ -31,6 +31,11 @@
 
 ;; (define-key global-map '[f7] 'compile)
 ;; set up the compiling options
+
+;; (global-set-key (kbd "<up>")   (lambda () (interactive) (previous-line 7)))
+;; (global-set-key (kbd "<down>") (lambda () (interactive) (next-line 7)))
+
+
 (setq compile-command "make"
       compilation-ask-about-save nil
       ;; compilation-window-height 40
@@ -298,7 +303,7 @@ Return an event vector."
 
 (use-package swiper
   :ensure t
-  :bind (("C-s"     . swiper)
+  :bind (("C-s"     . counsel-grep-or-swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x"     . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
@@ -319,4 +324,7 @@ Return an event vector."
     (setq enable-recursive-minibuffers t)
     ;; (setq ivy-count-format "%d/%d ")
     ;; (setq ivy-display-style 'fancy)
-    (define-key read-expression-map (kbd "C-r")  'counsel-expression-history)))
+    (define-key read-expression-map (kbd "C-r")  'counsel-expression-history)
+    (advice-add 'swiper--update-input-ivy
+                :after #'(lambda () (with-ivy-window
+                                      (which-func-update-1 (selected-window)))))))

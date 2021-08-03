@@ -4,7 +4,20 @@
 (require 'doi-utils)
 ;; (require 'ox-md)
 (require 'ox-gfm nil t)
+(require 'org-bullets)
+(org-bullets-mode 1)
 
+(setq org-hide-emphasis-markers t)
+
+(setq org-bullets-bullet-list
+      '("◉"
+        "○"
+        "●"
+        "➤"
+        ;; "➩"
+        ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
+        ;;  ► • ★ ▸
+        ))
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
 (setq org-latex-create-formula-image-program 'dvipng)
 
@@ -25,7 +38,7 @@
 (setq org-log-done 'time)
 
 (setq org-hide-leading-stars t)
-(setq org-odd-levels-only t)
+;; (setq org-odd-levels-only t)
 (setq org-return-follows-link t)
 
 (setq org-agenda-files '("~/Documents/Journal/"))
@@ -57,7 +70,7 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
-(define-key org-mode-map (kbd "C-S-f") 'org-x52shiftright)
+(define-key org-mode-map (kbd "C-S-f") 'org-shiftright)
 (define-key org-mode-map (kbd "C-S-b") 'org-shiftleft)
 (define-key org-mode-map (kbd "C-S-p") 'org-shiftup)
 (define-key org-mode-map (kbd "C-S-n") 'org-shiftdown)
@@ -110,3 +123,8 @@
 (setq org-journal-date-format "%B %d, %A, %Y")
 (setq org-journal-enable-agenda-integration t)
 
+
+
+(require 'ob-clojure)
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
