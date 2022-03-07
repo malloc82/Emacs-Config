@@ -84,7 +84,7 @@ Semantic, and Ansi-Color faces are included.")
    `(success ((,class (:foreground ,cham-1))))
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground ,plum-1))))
-   `(font-lock-comment-face ((,class (:foreground ,cham-2))))
+   `(font-lock-comment-face ((,class (:foreground "CadetBlue4")))) ;; ,cham-2 
    `(font-lock-constant-face ((,class (:foreground ,plum-0))))
    `(font-lock-function-name-face ((,class (:foreground ,butter-1))))
    `(font-lock-keyword-face ((,class (:foreground ,cham-0))))

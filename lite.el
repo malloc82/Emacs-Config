@@ -28,8 +28,9 @@
   :ensure t
   :init (bind-key "C-c g" 'magit-status))
 
-(require 'linum+)
+(require 'nlinum)
 (setq linum-format (if window-system "%4d" "%4d \u2502 "))
+(global-nlinum-mode t)
 
 (require 'ido)
 (ido-mode t)

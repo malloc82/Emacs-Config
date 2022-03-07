@@ -12,4 +12,6 @@
 
 (setq mc/cmds-to-run-once
       '(
+        org-todo
+        org-toggle-time-stamp-overlays
         ))

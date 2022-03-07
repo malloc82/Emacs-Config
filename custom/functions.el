@@ -220,9 +220,14 @@ source: http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-
   (align-regexp begin end "\\(\\s-*\\)(" 1 1 t))
 
 (defun align-to-& (begin end)
-  "Align region to coma"
+  "Align region to &, for latex tables"
   (interactive "r")
   (align-regexp begin end "\\(\\s-*\\)&" 1 1 t))
+
+(defun align-to-| (begin end)
+  "Align region to |"
+  (interactive "r")
+  (align-regexp begin end "\\(\\s-*\\)\|" 1 1 t))
 
 
 (defsubst add-paredit (mode-type)

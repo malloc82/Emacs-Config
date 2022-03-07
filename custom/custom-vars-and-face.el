@@ -10,7 +10,7 @@
      "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      "04fe541ec94a5fe0b5d54537eaaa9935f8efc0d94290834d0ee78e644c5c4441" ;; tango-custom
-     "bcf64603c4f487738683539c87378deec176ef27ebb88a14a01e398ce790ec4c" ;; tango-dark-custom
+     "873ee90761000e554314ff3e3b2340860df43ff4416c56a380c91f78e8f3154b" ;; tango-dark-custom
      "5973b028c7b67e82d5e6d5cf715c8721e6699e376650fbc7170416541ce0cc4a" ;; base16-default, for running things in terminal
      "4f28dd3d47fcbd3b504235a55651225fa6befb09ab56156678c7470218a71cc2" ;; tron-legacy
      default))

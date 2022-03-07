@@ -5,6 +5,8 @@
                 ("melpa-stable" . "https://stable.melpa.org/packages/")))
   (add-to-list 'package-archives repo))
 
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (load "selected-packages")
 
 (setq pinned-melpa-stable-pkgs
@@ -20,7 +22,7 @@
                 company-irony company-irony-c-headers company-ghc
                 concurrent
                 cuda-mode
-                dash
+                ;; dash ;; magit 3.3.0 need a version from mepha
                 diminish
                 edn
                 ein

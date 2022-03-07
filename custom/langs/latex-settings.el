@@ -22,7 +22,7 @@
 (require 'tex-site)
 ;; (require 'auto-complete-auctex)
 (require 'company-auctex)
-(require 'smartparens)
+;; (require 'smartparens)
 (require 'smartparens-latex)
 (require 'yasnippet)
 (yas-minor-mode +1)
