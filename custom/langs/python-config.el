@@ -25,13 +25,16 @@
 ;; (elpy-mode 1)
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (setq flycheck-python-flake8-executable     "flake8")
+  (setq flycheck-python-pycompile-executable  "python3")
+  (setq flycheck-python-pylint-executable     "pylint")
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 (setq py-autopep8-options '("--max-line-length=100"
-                            "--ignore E221"
-                            "--ignore E203"))
+                            "--ignore=E221,E203"))
+
 ;; also need to update ~/.config/flake8, so that these errors won't be marked
 ;; [flake8]
 ;; ignore = E501, E203, E221
@@ -44,7 +47,7 @@
 (set-variable 'indent-tabs-mode nil)
 
 ;; (elpy-use-ipython "/usr/local/bin/ipython")
-(setq python-shell-interpreter (concat (getenv "HOME") "/anaconda3/bin/ipython") ;; "/Users/zcai/anaconda3/bin/ipython"
+(setq python-shell-interpreter "ipython3";; (concat (getenv "HOME") "/anaconda3/bin/ipython") ;; "/Users/zcai/anaconda3/bin/ipython"
       python-shell-interpreter-args "--colors=Linux --simple-prompt -i" ;; Linux, LightBG, NoColor
       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "

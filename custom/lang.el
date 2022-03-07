@@ -154,10 +154,6 @@
 
 ;; (add-hook 'python-mode-hook (load-library "python-lang"))
 
-(require 'org-journal)
-(setq org-journal-file-format "%Y-Week-%2W.org")
-(setq org-journal-file-type 'weekly)
-
 (dolist (hook '((LaTeX-mode-hook   . "latex-settings")
                 ;; (python-mode-hook  . "python-config")
                 (haskell-mode-hook . "haskell-lang")

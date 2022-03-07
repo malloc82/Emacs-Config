@@ -46,12 +46,25 @@
 ;; (eval-after-load "auto-complete"
 ;;   '(add-to-list 'ac-modes 'cider-repl-mode))
 
+(add-hook 'cider-repl-mode-hook #'company-mode)
+(add-hook 'cider-mode-hook #'company-mode)
+(setq company-idle-delay nil) ; never start completions automatically
+
+(global-set-key (kbd "C-M-i") #'company-complete) ; use M-TAB, a.k.a. C-M-i, as manual trigger
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+
+(add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+(add-hook 'cider-mode-hook      #'cider-company-enable-fuzzy-completion)
+
+
 (add-hook 'clojure-mode-hook
           #'(lambda ()
               (setq show-trailing-whitespace t)
               (eldoc-mode)
               (enable-paredit-mode)
-              (paredit-extension clojure-mode-map)))
+              (paredit-extension clojure-mode-map)
+              ;; (lsp)
+              ))
 
 (add-hook 'cider-repl-mode-hook
           #'(lambda ()
@@ -61,7 +74,11 @@
                            'clojure-space-for-delimiter-p
                            'clojure-no-space-after-tag)
               (rainbow-delimiters-mode)
-              (paredit-extension  cider-repl-mode-map)))
+              (paredit-extension  cider-repl-mode-map)
+              ;; (lsp)
+              ))
+
+;; (add-hook 'clojurescript-mode-hook 'lsp)
 
 (eval-after-load 'clojure-mode
   '(progn
@@ -89,3 +106,16 @@
 (setq cider-repl-use-clojure-font-lock t)
 (setq nrepl-hide-special-buffers t)
 (setq cider-popup-stacktraces nil)
+
+
+;; ;; lsp setup
+;; (setq lsp-clojure-custom-server-command '("bash" "-c" "/usr/local/bin/clojure-lsp"))
+;; (setq gc-cons-threshold (* 100 1024 1024)
+;;       read-process-output-max (* 1024 1024)
+;;       treemacs-space-between-root-nodes nil
+;;       company-minimum-prefix-length 1
+;;       lsp-lens-enable nil
+;;       lsp-signature-auto-activate nil
+;;       ; lsp-enable-indentation nil ; uncomment to use cider indentation instead of lsp
+;;       ; lsp-enable-completion-at-point nil ; uncomment to use cider completion instead of lsp
+;;       )

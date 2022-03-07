@@ -16,7 +16,7 @@
                 swiper
                 counsel
                 ivy
-                ;; cider clojure-mode
+                cider clojure-mode
                 company-irony company-irony-c-headers company-ghc
                 concurrent
                 cuda-mode

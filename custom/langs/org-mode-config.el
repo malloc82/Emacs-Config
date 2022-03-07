@@ -7,6 +7,15 @@
 (require 'org-bullets)
 (org-bullets-mode 1)
 
+;; display '-' as "•"
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+;; (require 'org-journal)
+(setq org-journal-file-format "%Y-Week-%2W.org")
+(setq org-journal-file-type 'weekly)
+
 (setq org-hide-emphasis-markers t)
 
 (setq org-bullets-bullet-list
@@ -86,7 +95,7 @@
    (C      . t)
    (python . t)))
 
-
+(setq org-src-tab-acts-natively t)
 (setq-local show-trailing-whitespace t)
 
 

@@ -2,7 +2,7 @@
 ;; Dired mode configuration
 
 ;; (put 'dired-find-alternate-file 'disabled nil)
-
+;; (setq-default  dired-omit-verbose nil)
 (setq-default  dired-use-ls-dired nil)
 
 ;; ;Make sure each dired buffer doesn't spawn new dired buffers
@@ -42,15 +42,19 @@
                   (append '(".dvi" ".aux" ".blg" ".toc" ".log"
                             ".fdb_latexmk" ".synctex.gz" ".fls" ".out" ".pdf")
                           dired-omit-extensions))
+            ;; (when (file-remote-p dired-directory)
+            ;;   (message "==>  tramp-remote-path: %s\n" tramp-remote-path)
+            ;;   (message "===> tramp-remote-process-environment: %s" tramp-remote-process-environment))
             ;; (setq dired-omit-files
             ;;       (concat dired-omit-files "\\|^\\..+$"))
             ))
 
-(when (eq system-type 'darwin)
-    (setq insert-directory-program "/opt/local/bin/gls"))
-;; (setq dired-listing-switches "-alph --color=auto --group-directories-first")
-;; (setq dired-listing-switches "-alph --group-directories-first")
-(setq dired-listing-switches "-alh --group-directories-first")
+(cond
+ ((eq system-type 'darwin)    (setq insert-directory-program "/opt/local/bin/gls"))
+ ((eq system-type 'gnu/linux) (setq insert-directory-program "ls")))
+
+;; (setq dired-listing-switches "-alh") ;; for BSD system
+(setq dired-listing-switches "-alhv --group-directories-first")
 
 (require 'dired-details)
 (setq-default dired-details-hidden-string "--- ")

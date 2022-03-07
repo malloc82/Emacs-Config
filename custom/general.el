@@ -130,7 +130,7 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/config"))
 (dolist (config-file '("backup"
-                       "ac-config"
+                       ;; "ac-config"
                        "compilation-config"
                        "dired-config"
                        "eshell-config"
@@ -210,3 +210,6 @@
 
 
 (setq frame-title-format '("%b@" (:eval (or (file-remote-p default-directory 'host) system-name)) " — Emacs"))
+
+;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag
+(setq auto-window-vscroll nil)
