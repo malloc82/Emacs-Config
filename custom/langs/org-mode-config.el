@@ -13,16 +13,17 @@
                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; (require 'org-journal)
-(setq org-journal-file-format "%Y-Week-%2W.org")
-(setq org-journal-file-type 'weekly)
-
-(setq org-hide-emphasis-markers t)
+(setq org-journal-file-format "%Y-Week-%2W.org"
+      org-journal-file-type 'weekly
+      org-hide-emphasis-markers t
+      )
 
 (setq org-bullets-bullet-list
       '("◉"
         "○"
         "●"
-        "➤"
+        "▶"
+        ;; "➤"
         ;; "➩"
         ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
         ;;  ► • ★ ▸
@@ -41,14 +42,15 @@
 (setq org-blank-before-new-entry '((heading) (plain-list-item)))
 (setq org-latex-prefer-user-labels t)
 
-(setq org-replace-disputed-keys t)
-(setq org-support-shift-select t)
+;; (setq org-log-done 'time)
 
-(setq org-log-done 'time)
-
-(setq org-hide-leading-stars t)
-;; (setq org-odd-levels-only t)
-(setq org-return-follows-link t)
+(setq org-replace-disputed-keys t
+      org-support-shift-select t
+      org-adapt-indentation t  ;; force indentation upon return
+      org-hide-leading-stars t
+      org-odd-levels-only t
+      org-return-follows-link t
+      )
 
 (setq org-agenda-files '("~/Documents/Journal/"))
 ;; also check: org-agenda-text-search-extra-files

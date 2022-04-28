@@ -32,8 +32,10 @@
 
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+;; Note: need to also update flake8 config file (.flake8)
 (setq py-autopep8-options '("--max-line-length=100"
-                            "--ignore=E221,E203"))
+                            "--ignore=E231,E701,E704,E501"))
 
 ;; also need to update ~/.config/flake8, so that these errors won't be marked
 ;; [flake8]

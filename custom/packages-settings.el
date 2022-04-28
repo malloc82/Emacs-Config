@@ -1,6 +1,6 @@
 (require 'package)
 (dolist (repo '(("gnu"          . "http://elpa.gnu.org/packages/")
-                ("marmalade"    . "http://marmalade-repo.org/packages/")
+                ;; ("marmalade"    . "http://marmalade-repo.org/packages/")
                 ("melpa"        . "https://melpa.org/packages/") ;; snapshots
                 ("melpa-stable" . "https://stable.melpa.org/packages/")))
   (add-to-list 'package-archives repo))
