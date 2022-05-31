@@ -122,6 +122,8 @@ Semantic, and Ansi-Color faces are included.")
      `(org-level-3 ((,class (:inherit outline-3 :height 1.0))))
      `(org-level-2 ((,class (:inherit outline-2 :height 1.0))))
      `(org-level-1 ((,class (:inherit outline-1 :height 1.0))))
+     ;; Magit
+     '(magit-section-highlight ((t (:extend t :background "grey85"))))
      ;; Button and link faces
      `(link ((,class (:underline t :foreground ,blue-3))))
      `(link-visited ((,class (:underline t :foreground ,blue-2))))

@@ -92,6 +92,8 @@ Semantic, and Ansi-Color faces are included.")
    `(font-lock-number-face ((,class (:foreground "VioletRed3"))))
    `(font-lock-type-face ((,class (:foreground ,blue-0))))
    `(font-lock-variable-name-face ((,class (:foreground ,orange-1))))
+   ;; magit
+   '(magit-section-highlight ((t (:extend t :background "grey25"))))
    ;; Button and link faces
    `(link ((,class (:underline t :foreground ,blue-1))))
    `(link-visited ((,class (:underline t :foreground ,blue-2))))
