@@ -71,6 +71,7 @@
          ("\\.boot$"                   . clojure-mode)
          ("\\.[Cc][Ll][Jj]\\([CcSsXx]\\)?$" . clojure-mode)
          ("\\.[Ll][Oo][Gg]$"           . auto-revert-tail-mode)
+         ("\\.drl$"                    . drools-mode)
          ) auto-mode-alist))
 
 

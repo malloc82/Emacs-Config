@@ -50,7 +50,7 @@
             ))
 
 (cond
- ((eq system-type 'darwin)    (setq insert-directory-program "/opt/local/bin/gls"))
+ ((eq system-type 'darwin)    (setq insert-directory-program "gls"))
  ((eq system-type 'gnu/linux) (setq insert-directory-program "ls")))
 
 ;; (setq dired-listing-switches "-alh") ;; for BSD system
