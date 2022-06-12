@@ -1,8 +1,9 @@
 (require 'package)
-(dolist (repo '(("gnu"          . "http://elpa.gnu.org/packages/")
+(dolist (repo '(("melpa"        . "https://melpa.org/packages/") ;; snapshots
+                ("melpa-stable" . "https://stable.melpa.org/packages/")
                 ;; ("marmalade"    . "http://marmalade-repo.org/packages/")
-                ("melpa"        . "https://melpa.org/packages/") ;; snapshots
-                ("melpa-stable" . "https://stable.melpa.org/packages/")))
+                ;; ("gnu"          . "http://elpa.gnu.org/packages/")
+                ))
   (add-to-list 'package-archives repo))
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -12,7 +13,7 @@
 (setq pinned-melpa-stable-pkgs
       (mapcar '(lambda (pkg) (cons pkg "melpa-stable"))
               '(anaconda-mode
-                auctex
+                ;; auctex
                 autctex-latexmk smex company
                 ;; swiper
                 swiper

@@ -7,10 +7,11 @@
  '(custom-safe-themes
    '("88e7e16a25bc0986f6c769961c21fa92d318ebbfe4d52f1913486cfbcc8bde77" ;; misterioso-custom
      "e08aa0022c3558978a3a36ad018c122320708084adde761c8fd1ed3e90e1791a" ;; dark-night-gray no italic comment
-     "b4f25520a8e15ee3a81b932e32f0694bd51a0505c91537948bbdfb97e298a84e" ;; dark-night-white
+     "cb2cfd82d2a8834bf53d3c30d35b929eceb44e3eb4f21dedfb029226ae7aacca" ;; dark-night-gray2
+     "ed41ef9ffc12486776bc736cb5fd9940441586d0123a338716a1ee3161c21f43" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      "616a92727cab6c74727abbadfa2a02420b3bc84079bd5d4b32d1d655565e5acc" ;; tango-custom
-     "9f47e6729fc22d3e86d79f440d21f588006d733439f54ff4544d092f2a993563" ;; tango-dark-custom
+     "ebcacd8a6b362e95ecd1275a34af758040ab74d6df4ed3125349ad1ae872a8cf" ;; tango-dark-custom
      "5973b028c7b67e82d5e6d5cf715c8721e6699e376650fbc7170416541ce0cc4a" ;; base16-default, for running things in terminal
      "4f28dd3d47fcbd3b504235a55651225fa6befb09ab56156678c7470218a71cc2" ;; tron-legacy
      default))
