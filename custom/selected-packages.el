@@ -14,6 +14,8 @@
         org-ref
         org-pomodoro
         ox-gfm
+        org-ql
+        org-journal
         ;; lisp
         elisp-slime-nav
         slime
@@ -79,6 +81,10 @@
         julia-mode
         go-mode
         cuda-mode
+        csv-mode
+        groovy-mode
+        lsp-mode
+        jenkinsfile-mode
 
         ;; java
         javap-mode
@@ -91,13 +97,14 @@
         etags-select
 
         ;; useful tools
-        magit
+        magit magit-popup
         highlight
         highlight-symbol
         framemove
         smex ;; smart M-x enhancement
         minimap
         neotree
+        treemacs
         multiple-cursors
         redo+
         fzf
@@ -137,4 +144,10 @@
         command-frequency
         alchemist
         websocket
+
+        yafolding
+        fold-this
+
+        eldoc
+        all-the-icons
         ))

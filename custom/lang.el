@@ -26,7 +26,6 @@
 ;; (require 'vimrc-mode)
 (autoload 'vimrc-mode "vimrc-mode" "Major mode for vimrc files" t nil)
 (autoload 'vivado-mode "vivado-mode" "Major mode for Xilinx XDC files" t nil)
-(autoload 'drools-mode "drools-mode" "Major mode for drools files" t nil)
 ;; ===========================================================================================
 ;; Set up which modes to use for which file extensions
 ;; -------------------------------------------------------------------------------------------
@@ -74,7 +73,6 @@
          ("\\.[Cc][Ll][Jj]\\([Cc]\\)?$"                         . clojurec-mode)
          ("\\.[Cc][Ll][Jj]\\([CcSs]\\)?$"                       . clojurescript-mode)
          ("\\.[Ll][Oo][Gg]$"                                    . auto-revert-tail-mode)
-         ("\\.drl$"                                             . drools-mode)
          ) auto-mode-alist))
 
 
@@ -215,3 +213,40 @@
 ;;     '((lambda ()
 ;;         (modify-syntax-entry ?\" ".")))
 ;;     "Generic mode for Vim configuration files.")
+
+(use-package org-mode
+  :mode "\\.[Oo][Rr][Gg]$"
+  :bind (("s-<up>"    . org-priority-up)
+         ("s-<down>"  . org-priority-down)
+         ("S-<right>" . 'windmove-right)
+         ("S-<left>"  . 'windmove-left)
+         ("S-<up>"    . 'windmove-up)
+         ("S-<down>"  . 'windmove-down)
+         ("C-S-f"     . 'org-shiftright)
+         ("C-S-b"     . 'org-shiftleft)
+         ("C-S-p"     . 'org-shiftupt)
+         ("C-S-n"     . 'org-shiftdown)
+         ("C-c l"     . 'org-store-link)
+         ("C-c a"     . 'org-agenda)
+         ("C-c c"     . 'org-capture))
+  :custom
+  (org-replace-disputed-keys t)
+  (org-support-shift-select t)
+  (org-adapt-indentation t "force indentation upon return")
+  (org-hide-leading-stars t)
+  (org-odd-levels-only t)
+  (org-return-follows-link t)
+  )
+
+(use-package org-journal
+  :custom
+  (org-journal-file-format "%Y-Week-%2W.org")
+  (org-journal-file-type 'weekly)
+  (org-hide-emphasis-markers t)
+  )
+
+(use-package drools-mode
+  :mode "\\.[Dd][Rr][Ll]$"
+  :custom
+  (comment-start "//")
+  )

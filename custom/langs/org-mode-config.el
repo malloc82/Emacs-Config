@@ -12,19 +12,24 @@
                         '(("^ +\\([-*]\\) "
                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
-;; (require 'org-journal)
-(setq org-journal-file-format "%Y-Week-%2W.org"
-      org-journal-file-type 'weekly
-      org-hide-emphasis-markers t
-      )
+(require 'org-journal)
+;; (setq org-journal-file-format "%Y-Week-%2W.org"
+;;       org-journal-file-type 'weekly
+;;       org-hide-emphasis-markers t)
 
 (setq org-bullets-bullet-list
-      '("◉"
-        "○"
+      '(;; "⦾"
+        ;; "►"
         "●"
-        "▶"
+        "○"
+        "◆"
+        "→"
+        ;; "⦿"
+        ;;
+        ;; "▶"
+        ;; "◉"
         ;; "➤"
-        ;; "➩"
+        ;; "➩▻"
         ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
         ;;  ► • ★ ▸
         ))
@@ -44,13 +49,13 @@
 
 ;; (setq org-log-done 'time)
 
-(setq org-replace-disputed-keys t
-      org-support-shift-select t
-      org-adapt-indentation t  ;; force indentation upon return
-      org-hide-leading-stars t
-      org-odd-levels-only t
-      org-return-follows-link t
-      )
+;; (setq org-replace-disputed-keys t
+;;       org-support-shift-select t
+;;       org-adapt-indentation t  ;; force indentation upon return
+;;       org-hide-leading-stars t
+;;       org-odd-levels-only t
+;;       org-return-follows-link t
+;;       )
 
 (setq org-agenda-files '("~/Documents/Journal/"))
 ;; also check: org-agenda-text-search-extra-files
@@ -81,15 +86,15 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
-(define-key org-mode-map (kbd "C-S-f") 'org-shiftright)
-(define-key org-mode-map (kbd "C-S-b") 'org-shiftleft)
-(define-key org-mode-map (kbd "C-S-p") 'org-shiftup)
-(define-key org-mode-map (kbd "C-S-n") 'org-shiftdown)
+;; (define-key org-mode-map (kbd "C-S-f") 'org-shiftright)
+;; (define-key org-mode-map (kbd "C-S-b") 'org-shiftleft)
+;; (define-key org-mode-map (kbd "C-S-p") 'org-shiftup)
+;; (define-key org-mode-map (kbd "C-S-n") 'org-shiftdown)
 
-(define-key org-mode-map (kbd "S-<right>") 'windmove-right)
-(define-key org-mode-map (kbd "S-<left>")  'windmove-left)
-(define-key org-mode-map (kbd "S-<up>")    'windmove-up)
-(define-key org-mode-map (kbd "S-<down>")  'windmove-down)
+;; (define-key org-mode-map (kbd "S-<right>") 'windmove-right)
+;; (define-key org-mode-map (kbd "S-<left>")  'windmove-left)
+;; (define-key org-mode-map (kbd "S-<up>")    'windmove-up)
+;; (define-key org-mode-map (kbd "S-<down>")  'windmove-down)
 
 (org-babel-do-load-languages
  'org-babel-load-languages
