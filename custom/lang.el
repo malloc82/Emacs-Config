@@ -135,7 +135,7 @@
 (dolist (lang-setting '("c_c++-lang"
                         "objc-lang"
                         "lisp-lang"
-                        "clojure-lang"
+                        ;; "clojure-lang"
                         "perl-lang"
                         "python-config"
                         "web"))
@@ -216,31 +216,63 @@
 
 (use-package org-mode
   :mode "\\.[Oo][Rr][Gg]$"
-  :bind (("s-<up>"    . org-priority-up)
-         ("s-<down>"  . org-priority-down)
-         ("S-<right>" . 'windmove-right)
-         ("S-<left>"  . 'windmove-left)
-         ("S-<up>"    . 'windmove-up)
-         ("S-<down>"  . 'windmove-down)
-         ("C-S-f"     . 'org-shiftright)
-         ("C-S-b"     . 'org-shiftleft)
-         ("C-S-p"     . 'org-shiftupt)
-         ("C-S-n"     . 'org-shiftdown)
-         ("C-c l"     . 'org-store-link)
-         ("C-c a"     . 'org-agenda)
-         ("C-c c"     . 'org-capture))
+  :init
+  (use-package ob-clojure)
+  (use-package ob-http)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   (append org-babel-load-languages
+           '((latex  . t)
+             (C      . t)
+             (python . t)
+             (awk    . t)
+             (calc   . t)
+             (shell  . t)
+             (http   . t)  ;; https://github.com/zweifisch/ob-http
+             )))
+  :bind (:map org-mode-map
+              ("s-<up>"    . org-priority-up)
+              ("s-<down>"  . org-priority-down)
+              ("S-<right>" . 'windmove-right)
+              ("S-<left>"  . 'windmove-left)
+              ("S-<up>"    . 'windmove-up)
+              ("S-<down>"  . 'windmove-down)
+
+              ("C-S-f"     . 'org-shiftright)
+              ("C-S-b"     . 'org-shiftleft)
+              ("C-S-p"     . 'org-shiftupt)
+              ("C-S-n"     . 'org-shiftdown)
+
+              ("C-c l"     . 'org-store-link)
+              ("C-c a"     . 'org-agenda)
+              ("C-c c"     . 'org-capture)
+              )
   :custom
+  (org-bullets-bullet-list '("●" "○" "◆" "→"))
   (org-replace-disputed-keys t)
   (org-support-shift-select t)
   (org-adapt-indentation t "force indentation upon return")
   (org-hide-leading-stars t)
   (org-odd-levels-only t)
   (org-return-follows-link t)
+  (org-src-tab-acts-natively t)
+  (show-trailing-whitespace  t)
+  :custom-face
+  (outline-4 ((t (:inherit font-lock-string-face))))
+  ;; (outline-7 ((t (:inherit font-lock-string-face)))) ;; original: font-lock-builtin-face
+  (outline-8 ((t (:inherit font-lock-comment-face))))
+  )
+
+(use-package ob-clojure
+  :custom
+  (org-babel-clojure-backend 'cider)
+  :config
+  (use-package cider)
   )
 
 (use-package org-journal
   :custom
-  (org-journal-file-format "%Y-Week-%2W.org")
+  (journal-org-file-format "%Y-Week-%2W.org")
   (org-journal-file-type 'weekly)
   (org-hide-emphasis-markers t)
   )
@@ -250,3 +282,110 @@
   :custom
   (comment-start "//")
   )
+
+
+;; (use-package lisp-mode
+;;   :init
+;;   (use-package paredit)
+;;   (use-package company)
+;;   (add-hook 'lisp-mode-hook
+;;             #'(lambda ()
+;;                 (eldoc-mode)
+;;                 (enable-paredit-mode)))
+;;   :bind (:map lisp-mode-map
+;;          ("M-0"           . 'paredit-escape)
+;;          ("C-<backspace>" . 'delete-backward-char)
+;;          ("C-M-k"         . 'paredit-kill)
+;;          ("C-M-i"         . #'company-complete)
+;;          ("TAB"           . #'company-indent-or-complete-common)
+;;          )
+;;   )
+
+(use-package elisp-mode
+  :init
+  (use-package paredit)
+  (use-package company)
+  (add-hook 'emacs-lisp-mode-hook
+            #'(lambda ()
+                (eldoc-mode)
+                (enable-paredit-mode)))
+  :bind (:map emacs-lisp-mode-map
+         ("M-0"           . 'paredit-escape)
+         ("C-<backspace>" . 'delete-backward-char)
+         ("C-M-k"         . 'paredit-kill)
+         ("C-M-i"         . #'company-complete)
+         ("TAB"           . #'company-indent-or-complete-common)
+         )
+  )
+
+
+(use-package clojure-mode
+  :mode (("\\.[Cc][Ll][Jj]$"     . clojure-mode)
+         ("\\.[Cc][Ll][Jj][Ss]$" . clojurescript-mode))
+  :init
+  (use-package paredit)
+  (use-package company)
+  (add-hook 'clojure-mode-hook
+            #'(lambda ()
+                ;; (lsp)
+                (eldoc-mode)
+                (enable-paredit-mode)))
+  (font-lock-add-keywords
+   'clojure-mode `(("(\\(fn\\>\\)"
+                    (0 (progn (compose-region (match-beginning 1)
+                                              (match-end 1) "ƒ")
+                              nil)))
+                   ("(\\|)" . 'esk-paren-face)))
+  :bind (:map clojure-mode-map
+         ("M-0"           . 'paredit-escape)
+         ("C-<backspace>" . 'delete-backward-char)
+         ("C-M-k"         . 'paredit-kill)
+         ("C-M-i"         . #'company-complete)
+         ("TAB"           . #'company-indent-or-complete-common)
+         )
+  :custom
+  (show-trailing-whitespace t)
+  )
+
+
+(use-package cider
+  :init
+  (use-package paredit)
+  (use-package company)
+  :bind (:map cider-repl-mode-map
+         ("M-0"           . 'paredit-escape)
+         ("C-<backspace>" . 'delete-backward-char)
+         ("C-M-k"         . 'paredit-kill)
+         ("C-M-i"         . #'company-complete)
+         ("TAB"           . #'company-indent-or-complete-common)
+         )
+  :custom
+  (company-idle-delay nil)
+  (cider-repl-use-clojure-font-lock t)
+  (nrepl-hide-special-buffers t)
+  :config
+  (font-lock-add-keywords
+   'cider-repl-mode `(("(\\(fn\\>\\)"
+                       (0 (progn (compose-region (match-beginning 1)
+                                                 (match-end 1) "ƒ")
+                                 nil)))
+                      ("(\\|)" . 'esk-paren-face)))
+  (add-hook 'cider-repl-mode-hook
+            #'(lambda ()
+                (eldoc-mode)
+                (enable-paredit-mode)
+                (company-mode)
+                (message "loading cider-repl-mode-hook ...")
+                (cider-company-enable-fuzzy-completion)
+                (add-to-list 'paredit-space-for-delimiter-predicates
+                             'clojure-space-for-delimiter-p
+                             'clojure-no-space-after-tag)
+                (rainbow-delimiters-mode)
+                ;; (lsp)
+                ))
+  (add-hook 'cider-mode-hook
+            #'(lambda ()
+                (company-mode)
+                (cider-company-enable-fuzzy-completion)))
+  )
+

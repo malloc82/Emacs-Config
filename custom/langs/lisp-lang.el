@@ -103,11 +103,6 @@
               (add-lisp-paredit lisp-interaction-mode-map)
               (define-key lisp-interaction-mode-map (kbd "C-j") 'eval-print-last-sexp)))
 
-(add-hook 'emacs-lisp-mode-hook
-          #'(lambda ()
-              (setq show-trailing-whitespace t)
-              (add-lisp-paredit emacs-lisp-mode-map)))
-
 
 (add-hook 'scheme-mode-hook
           #'(lambda ()

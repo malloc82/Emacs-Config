@@ -31,10 +31,10 @@
        (load "mac_inconsolata.el"))
       ((eq system-type 'gnu/linux) (load "linux_proggy")))
 
-(custom-set-faces
- '(outline-4 ((t (:inherit font-lock-string-face))))
- ;; '(outline-7 ((t (:inherit font-lock-string-face)))) ;; original: font-lock-builtin-face
- '(outline-8 ((t (:inherit font-lock-comment-face)))))
+;; (custom-set-faces
+;;  '(outline-4 ((t (:inherit font-lock-string-face))))
+;;  ;; '(outline-7 ((t (:inherit font-lock-string-face)))) ;; original: font-lock-builtin-face
+;;  '(outline-8 ((t (:inherit font-lock-comment-face)))))
 
 ;; (custom-set-faces
 ;;  ;; custom-set-faces was added by Custom.

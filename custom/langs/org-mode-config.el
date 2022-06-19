@@ -17,22 +17,22 @@
 ;;       org-journal-file-type 'weekly
 ;;       org-hide-emphasis-markers t)
 
-(setq org-bullets-bullet-list
-      '(;; "⦾"
-        ;; "►"
-        "●"
-        "○"
-        "◆"
-        "→"
-        ;; "⦿"
-        ;;
-        ;; "▶"
-        ;; "◉"
-        ;; "➤"
-        ;; "➩▻"
-        ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
-        ;;  ► • ★ ▸
-        ))
+;; (setq org-bullets-bullet-list
+;;       '(;; "⦾"
+;;         ;; "►"
+;;         "●"
+;;         "○"
+;;         "◆"
+;;         "→"
+;;         ;; "⦿"
+;;         ;;
+;;         ;; "▶"
+;;         ;; "◉"
+;;         ;; "➤"
+;;         ;; "➩▻"
+;;         ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
+;;         ;;  ► • ★ ▸
+;;         ))
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
 (setq org-latex-create-formula-image-program 'dvipng)
 
@@ -82,9 +82,9 @@
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
 
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+;; (global-set-key (kbd "C-c l") 'org-store-link)
+;; (global-set-key (kbd "C-c a") 'org-agenda)
+;; (global-set-key (kbd "C-c c") 'org-capture)
 
 ;; (define-key org-mode-map (kbd "C-S-f") 'org-shiftright)
 ;; (define-key org-mode-map (kbd "C-S-b") 'org-shiftleft)
@@ -96,14 +96,16 @@
 ;; (define-key org-mode-map (kbd "S-<up>")    'windmove-up)
 ;; (define-key org-mode-map (kbd "S-<down>")  'windmove-down)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((latex  . t)
-   (C      . t)
-   (python . t)))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((latex  . t)
+;;    (C      . t)
+;;    (python . t)
+;;    (shell  . t)
+;;    ))
 
-(setq org-src-tab-acts-natively t)
-(setq-local show-trailing-whitespace t)
+;; (setq org-src-tab-acts-natively t)
+;; (setq-local show-trailing-whitespace t)
 
 
 ;; source: https://emacs.stackexchange.com/questions/34561/summing-properties-across-subheadings-org-mode
@@ -141,6 +143,6 @@
 
 
 
-(require 'ob-clojure)
-(setq org-babel-clojure-backend 'cider)
-(require 'cider)
+;; (require 'ob-clojure)
+;; (setq org-babel-clojure-backend 'cider)
+;; (require 'cider)

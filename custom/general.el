@@ -134,7 +134,7 @@
                        "compilation-config"
                        "dired-config"
                        "eshell-config"
-                       "etags-config"
+                       ;; "etags-config"   ;; conflict with cider M-.
                        "frame-settings"
                        "shell-mode-config"
                        "terminal-config"

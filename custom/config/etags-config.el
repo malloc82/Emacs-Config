@@ -7,8 +7,8 @@
 ;; (require 'etags-table)
 (setq etags-select-mode t)
 
-(global-set-key "\M-?" 'etags-select-find-tag-at-point)
-(global-set-key "\M-." 'etags-select-find-tag)
+;; (global-set-key "\M-?" 'etags-select-find-tag-at-point)
+;; (global-set-key "\M-." 'etags-select-find-tag)
 
 (setq tags-revert-without-query t)
 
@@ -44,7 +44,7 @@ otherwise raises an error."
 
 ;; settings to run ctags to generate tag table
 
-(defvar ctags-bin "/opt/local/bin/ctags")
+;; (defvar ctags-bin "/opt/local/bin/ctags")
 (defvar ctags-project-folder nil)
 (defvar ctags-tag-file nil)
 (defvar ctags-sources nil)
