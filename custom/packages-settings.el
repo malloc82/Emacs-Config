@@ -152,7 +152,7 @@
 (use-package smex :ensure t)
 (use-package company
   :ensure t
-  :bind (("C-c /". company-complete))
+  :bind (("C-M-i". company-complete))
   :config (global-company-mode))
 
 (use-package markdown-mode

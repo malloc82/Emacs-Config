@@ -36,6 +36,7 @@
 (setq custom-file "~/.emacs.d/custom-init.el")
 (setq current-path (getenv "PWD"))
 (cd "~/.emacs.d/custom") ;; all sub dir will be added to the load-path
+(normal-top-level-add-subdirs-to-load-path)
 
 (dolist (path `(,(expand-file-name "~/.emacs.d/custom")
                 ,(expand-file-name "~/.emacs.d/vendor")
@@ -51,24 +52,32 @@
 ;;               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
 
-(load "env") ;; takes 1s to loade
+;; (load "env") ;; takes 1s to loade
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :custom
+  (exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA_HOME" "CLASSPATH" "PYTHONPATH" "SCIPY_PIL_IMAGE_VIEWER"))
+  :config
+  (exec-path-from-shell-initialize))
+
 (load "keys")
 
 (if (eq current-path nil)
     (cd "~/.")
   (cd current-path))
 
+(load "faces")
+(load "custom-vars-and-face")
+
 (load "functions")
 (load "general")  ;; takes 2s to load
-(load "faces")
 (load "lang") ;; takes 1s to load
 
 (message "Emacs config loaded in %ds"
          (destructuring-bind (hi lo ms &optional ps) (current-time)
            (- (+ hi lo)
               (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
-
-(load "custom-vars-and-face")
 
 ;;
 ;; END init.el
