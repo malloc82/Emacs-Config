@@ -1,9 +1,9 @@
 SHELL := /bin/bash
 OS    := $(shell uname -s 2>/dev/null | tr [:upper:] [:lower:])
 ifeq ($(OS), linux)
-	EMACS := /usr/local/bin/emacs-24.5
+	EMACS := /usr/local/bin/emacs
 else ifeq ($(OS), darwin)
-	EMACS := /Applications/Emacs-24.5.app/Contents/MacOS/Emacs
+	EMACS := /Applications/Emacs.app/Contents/MacOS/Emacs
 else
 	ERR := $(error os is not supported)
 endif
@@ -14,7 +14,7 @@ FONT_DIR   := /usr/share/fonts/truetype/custom
 install-linux-fonts:
 	if [ "$(OS)" == "linux" ]; then \
 		sudo mkdir -p $(FONT_DIR); \
-		sudo find ~/.emacs.d/fonts/ -type f -iname "*.ttf" -or -iname "*.otf" -exec cp -t $(FONT_DIR) '{}' + ; \
+		sudo find ~/.emacs.d/fonts/ -type f \( -iname "*.ttf" -or -iname "*.otf" \) -exec cp -t $(FONT_DIR) '{}' + ; \
 		sudo fc-cache -f -v; \
 	fi
 setup:
