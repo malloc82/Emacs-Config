@@ -128,5 +128,5 @@
               (add-lisp-paredit slime-repl-mode-map)))
 
 ;; (add-hook 'inferior-scheme-mode-hook
-;;           '(lambda ()
+;;           #'(lambda ()
 ;;              (add-lisp-paredit inferior-scheme-mode-map)))

@@ -66,9 +66,9 @@
 
       ;; lisp-mode-addon is defined in my-syntax.el
       (add-hook 'slime-mode-hook
-                '(lambda ()
-                  (add-lisp-paredit  slime-mode-map)
-                  (slime-mode-addon slime-mode-map)))
+                #'(lambda ()
+                    (add-lisp-paredit  slime-mode-map)
+                    (slime-mode-addon slime-mode-map)))
 
 
       ;; ;;;; nb: this assumes dvorak key layout
@@ -96,12 +96,12 @@
       (autoload 'install-bridge "bridge" "Install a process bridge." t)
 
       (setq bridge-hook
-            '(lambda ()
-              ;; Example options
-              (setq bridge-source-insert nil) ;Don't insert in source buffer
-              (setq bridge-destination-insert nil) ;Don't insert in dest buffer
-              ;; Handle copy-it messages yourself
-              ))
+            #'(lambda ()
+                ;; Example options
+                (setq bridge-source-insert nil) ;Don't insert in source buffer
+                (setq bridge-destination-insert nil) ;Don't insert in dest buffer
+                ;; Handle copy-it messages yourself
+                ))
 
       (defvar slime-auto-compile-timer nil)
 

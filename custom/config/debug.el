@@ -44,20 +44,20 @@
 (setq gdb-show-main t)
 (setq gdb-use-separate-io-buffer t)
 
-;;(add-hook 'gdb-mode-hook '(lambda () (require 'gdb-highlight)))
+;;(add-hook 'gdb-mode-hook #'(lambda () (require 'gdb-highlight)))
 
 (add-hook 'gud-mode-hook
-          '(lambda ()
-            (local-set-key [home]        ; move to beginning of line, after prompt
-             'comint-bol)
-            (local-set-key [up]          ; cycle backward through command history
-             '(lambda () (interactive)
-               (if (comint-after-pmark-p)
-                   (comint-previous-input 1)
-                   (previous-line 1))))
-            (local-set-key [down]        ; cycle forward through command history
-             '(lambda () (interactive)
-               (if (comint-after-pmark-p)
-                   (comint-next-input 1)
-                   (forward-line 1))))
-            ))
+          #'(lambda ()
+              (local-set-key [home]        ; move to beginning of line, after prompt
+                             'comint-bol)
+              (local-set-key [up]          ; cycle backward through command history
+                             #'(lambda () (interactive)
+                                 (if (comint-after-pmark-p)
+                                     (comint-previous-input 1)
+                                   (previous-line 1))))
+              (local-set-key [down]        ; cycle forward through command history
+                             #'(lambda () (interactive)
+                                 (if (comint-after-pmark-p)
+                                     (comint-next-input 1)
+                                   (forward-line 1))))
+              ))

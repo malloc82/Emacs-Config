@@ -31,8 +31,7 @@
 ;; -------------------------------------------------------------------------------------------
 (setq auto-mode-alist
       (append
-       '(
-         ("\\.[Hh]$"                                            . c++-mode)
+       '(("\\.[Hh]$"                                            . c++-mode)
          ("\\.i$"                                               . c++-mode) ;; swig
          ("\\.inl$"                                             . c++-mode) ;; template functions
          ("\\.cu$"                                              . cuda-mode)
@@ -76,27 +75,27 @@
          ) auto-mode-alist))
 
 
-(add-hook 'auto-revert-tail-mode-hook '(lambda ()
-                                         (end-of-buffer)
-                                         (make-variable-buffer-local 'auto-revert-interval)
-                                         (setq auto-revert-interval 1)
-                                         (auto-revert-set-timer)
-                                         (make-variable-buffer-local 'auto-revert-verbose)
-                                         (setq auto-revert-verbose nil)
-                                         (read-only-mode t)
-                                         (font-lock-mode 0)
-                                         (company-mode -1)
-                                         (pyvenv-mode -1)
-                                         (electric-indent-mode -1)
-                                         (when (fboundp 'show-smartparens-mode)
-                                           (show-smartparens-mode 0))))
+(add-hook 'auto-revert-tail-mode-hook #'(lambda ()
+                                          (end-of-buffer)
+                                          (make-variable-buffer-local 'auto-revert-interval)
+                                          (setq auto-revert-interval 1)
+                                          (auto-revert-set-timer)
+                                          (make-variable-buffer-local 'auto-revert-verbose)
+                                          (setq auto-revert-verbose nil)
+                                          (read-only-mode t)
+                                          (font-lock-mode 0)
+                                          (company-mode -1)
+                                          (pyvenv-mode -1)
+                                          (electric-indent-mode -1)
+                                          (when (fboundp 'show-smartparens-mode)
+                                            (show-smartparens-mode 0))))
 
-(add-hook 'itail-mode-hook '(lambda ()
-                              (end-of-buffer)
-                              (font-lock-mode 0)
-                              (company-mode -1)
-                              (electric-indent-mode -1)
-                              (pyvenv-mode -1)))
+(add-hook 'itail-mode-hook #'(lambda ()
+                               (end-of-buffer)
+                               (font-lock-mode 0)
+                               (company-mode -1)
+                               (electric-indent-mode -1)
+                               (pyvenv-mode -1)))
 
 (add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
 
@@ -229,6 +228,7 @@
              (calc   . t)
              (shell  . t)
              (http   . t)  ;; https://github.com/zweifisch/ob-http
+             (R      . t)
              )))
   :bind (:map org-mode-map
               ("s-<up>"    . org-priority-up)
@@ -257,6 +257,7 @@
   (org-return-follows-link t)
   (org-src-tab-acts-natively t)
   (show-trailing-whitespace  t)
+  (org-babel-R-command "/opt/local/bin/R --slave --no-save")
   :custom-face
   (outline-4 ((t (:inherit font-lock-string-face))))
   ;; (outline-7 ((t (:inherit font-lock-string-face)))) ;; original: font-lock-builtin-face
@@ -363,6 +364,7 @@
   (company-idle-delay nil)
   (cider-repl-use-clojure-font-lock t)
   (nrepl-hide-special-buffers t)
+  (cider-print-quota 1024)
   :config
   (font-lock-add-keywords
    'cider-repl-mode `(("(\\(fn\\>\\)"
@@ -389,3 +391,7 @@
                 (cider-company-enable-fuzzy-completion)))
   )
 
+
+
+;; (use-package ess
+;;   :mode (("\\.[Rr]$" . ess-r-mode)))

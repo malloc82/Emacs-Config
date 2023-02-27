@@ -1,7 +1,7 @@
 (require 'package)
 (dolist (repo '(("melpa"        . "https://melpa.org/packages/") ;; snapshots
                 ("melpa-stable" . "https://stable.melpa.org/packages/")
-                ;; ("marmalade"    . "http://marmalade-repo.org/packages/")
+                ;; ("marmalade"    . "http://marmalade-repo.org/packages/") ;; sometimes not available
                 ;; ("gnu"          . "http://elpa.gnu.org/packages/")
                 ))
   (add-to-list 'package-archives repo))
@@ -11,7 +11,7 @@
 (load "selected-packages")
 
 (setq pinned-melpa-stable-pkgs
-      (mapcar '(lambda (pkg) (cons pkg "melpa-stable"))
+      (mapcar #'(lambda (pkg) (cons pkg "melpa-stable"))
               '(anaconda-mode
                 ;; auctex
                 autctex-latexmk smex company
@@ -67,7 +67,7 @@
                 with-editor)))
 
 (setq pinned-melpa-pkgs
-      (mapcar '(lambda (pkg) (cons pkg  "melpa"))
+      (mapcar #'(lambda (pkg) (cons pkg  "melpa"))
               '(;; anaconda-mode
                 ;; cider clojure-mode
                 ctable
@@ -110,7 +110,7 @@
                 )))
 
 (setq pinned-gnu-pkgs
-      (mapcar '(lambda (pkg) (cons pkg "gnu"))
+      (mapcar #'(lambda (pkg) (cons pkg "gnu"))
               '(flymake
                 org)))
 
