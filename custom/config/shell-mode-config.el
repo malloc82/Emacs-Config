@@ -3,4 +3,5 @@
           #'(lambda ()
               (ansi-color-for-comint-mode-on)
               (electric-pair-mode)
+              (show-trailing-whitespace nil)
               (auto-complete-mode -1)))

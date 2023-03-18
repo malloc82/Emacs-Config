@@ -5,10 +5,10 @@
 (custom-set-variables
  '(ansi-color-names-vector ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
  '(custom-safe-themes
-   '("88e7e16a25bc0986f6c769961c21fa92d318ebbfe4d52f1913486cfbcc8bde77" ;; misterioso-custom
+   '("f505076c95251cfbe4d080f816172264e5d857e575527634df2dde142e3b33e3" ;; misterioso-custom
      "e08aa0022c3558978a3a36ad018c122320708084adde761c8fd1ed3e90e1791a" ;; dark-night-gray no italic comment
      "cb2cfd82d2a8834bf53d3c30d35b929eceb44e3eb4f21dedfb029226ae7aacca" ;; dark-night-gray2
-     "ed41ef9ffc12486776bc736cb5fd9940441586d0123a338716a1ee3161c21f43" ;; dark-night-white
+     "5552a29cf4d7df419cbb9a9ade8ac303a2afcd544a242d5e4da6289148cbf8f5" ;; dark-night-white
      "d9c7b4341ddd9e78a1116f925a586f789aa613888053710fb5956a815e84183f" ;; radiance
      "616a92727cab6c74727abbadfa2a02420b3bc84079bd5d4b32d1d655565e5acc" ;; tango-custom
      "ebcacd8a6b362e95ecd1275a34af758040ab74d6df4ed3125349ad1ae872a8cf" ;; tango-dark-custom

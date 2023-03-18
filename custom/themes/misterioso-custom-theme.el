@@ -33,11 +33,12 @@
 	       (:background "#2d3743" :foreground "#e1e1e0"))
 	      (,class
 	       (:background "#3a3a3a" :foreground "#e1e1e0"))))
-   `(cursor ((,class (:background "#415160"))))
+   `(cursor ((,class (:background "gray75"))))
    ;; Highlighting faces
    `(fringe ((,class (:background "#2e3748"))))
-   `(highlight ((,class (:background "#338f86" :foreground "#e1e1e0"))))
-   `(region ((,class (:background "#2d4948" :foreground "#e1e1e0"))))
+   `(highlight ((,class (:background "#338f86" :foreground nil))))
+   `(hl-line ((,class (:background "gray25" :foreground nil))))
+   `(region ((,class (:background "blue4" :foreground nil))))
    `(isearch ((,class (:background "#fcffad" :foreground "#000000"))))
    `(lazy-highlight ((,class (:background "#338f86"))))
    `(trailing-whitespace ((,class (:background "#ff4242"))))
