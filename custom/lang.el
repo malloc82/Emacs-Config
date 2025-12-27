@@ -256,7 +256,7 @@
   (org-odd-levels-only t)
   (org-return-follows-link t)
   (org-src-tab-acts-natively t)
-  (show-trailing-whitespace  t)
+  ;; (show-trailing-whitespace  t)
   (org-babel-R-command "/opt/local/bin/R --slave --no-save")
   :custom-face
   (outline-4 ((t (:inherit font-lock-string-face))))
@@ -311,14 +311,16 @@
                 (eldoc-mode)
                 (enable-paredit-mode)))
   :bind (:map emacs-lisp-mode-map
-         ("M-0"           . 'paredit-escape)
-         ("C-<backspace>" . 'delete-backward-char)
-         ("C-M-k"         . 'paredit-kill)
-         ("C-M-i"         . #'company-complete)
-         ("TAB"           . #'company-indent-or-complete-common)
-         )
+              ("M-0"           . 'paredit-escape)
+              ("C-<backspace>" . 'delete-backward-char)
+              ("C-M-k"         . 'paredit-kill)
+              ("C-M-i"         . #'company-complete)
+              ("TAB"           . #'company-indent-or-complete-common)
+              )
   )
 
+(use-package flycheck-clj-kondo
+  :ensure t)
 
 (use-package clojure-mode
   :mode (("\\.[Cc][Ll][Jj]$"     . clojure-mode)
@@ -338,14 +340,16 @@
                               nil)))
                    ("(\\|)" . 'esk-paren-face)))
   :bind (:map clojure-mode-map
-         ("M-0"           . 'paredit-escape)
-         ("C-<backspace>" . 'delete-backward-char)
-         ("C-M-k"         . 'paredit-kill)
-         ("C-M-i"         . #'company-complete)
-         ("TAB"           . #'company-indent-or-complete-common)
-         )
+              ("M-0"           . 'paredit-escape)
+              ("C-<backspace>" . 'delete-backward-char)
+              ("C-M-k"         . 'paredit-kill)
+              ("C-M-i"         . #'company-complete)
+              ("TAB"           . #'company-indent-or-complete-common)
+              )
   :custom
   (show-trailing-whitespace t)
+  :config
+  (require 'flycheck-clj-kondo)
   )
 
 
@@ -354,12 +358,12 @@
   (use-package paredit)
   (use-package company)
   :bind (:map cider-repl-mode-map
-         ("M-0"           . 'paredit-escape)
-         ("C-<backspace>" . 'delete-backward-char)
-         ("C-M-k"         . 'paredit-kill)
-         ("C-M-i"         . #'company-complete)
-         ("TAB"           . #'company-indent-or-complete-common)
-         )
+              ("M-0"           . 'paredit-escape)
+              ("C-<backspace>" . 'delete-backward-char)
+              ("C-M-k"         . 'paredit-kill)
+              ("C-M-i"         . #'company-complete)
+              ("TAB"           . #'company-indent-or-complete-common)
+              )
   :custom
   (company-idle-delay nil)
   (cider-repl-use-clojure-font-lock t)
@@ -395,3 +399,5 @@
 
 ;; (use-package ess
 ;;   :mode (("\\.[Rr]$" . ess-r-mode)))
+
+(setq treesit-extra-load-path '("/opt/local/lib"))

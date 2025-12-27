@@ -10,6 +10,7 @@
         (run-with-timer 0.1 nil 'invert-face 'mode-line)))
 (blink-cursor-mode t)
 ;; (setq-default fill-column 120)
+(setq explicit-shell-file-name "/bin/bash")
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-message t) ;; disable startup message
 (setq frame-title-format "emacs - %b") ;; format the title-bar to always include the buffer name
@@ -213,3 +214,6 @@
 
 ;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag
 (setq auto-window-vscroll nil)
+
+(require 'grep+)
+(grep-apply-setting 'grep-find-command '("find . -not \\( -name \"TAGS\" -o -ipath \"*/.git/*\" -o -ipath \"*/target/*\" -o -ipath \"*/.idea/*\" \\) -type f -exec grep --color=auto -InH --null -e  \\{\\} +" . 145))

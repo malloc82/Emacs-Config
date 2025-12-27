@@ -17,22 +17,22 @@
 ;;       org-journal-file-type 'weekly
 ;;       org-hide-emphasis-markers t)
 
-;; (setq org-bullets-bullet-list
-;;       '(;; "⦾"
-;;         ;; "►"
-;;         "●"
-;;         "○"
-;;         "◆"
-;;         "→"
-;;         ;; "⦿"
-;;         ;;
-;;         ;; "▶"
-;;         ;; "◉"
-;;         ;; "➤"
-;;         ;; "➩▻"
-;;         ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
-;;         ;;  ► • ★ ▸
-;;         ))
+(setq org-bullets-bullet-list
+      '(;; "⦾"
+        ;; "►"
+        "●"
+        "○"
+        "◆"
+        "→"
+        ;; "⦿"
+        ;;
+        ;; "▶"
+        ;; "◉"
+        ;; "➤"
+        ;; "➩▻"
+        ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
+        ;;  ► • ★ ▸
+        ))
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
 (setq org-latex-create-formula-image-program 'dvipng)
 
