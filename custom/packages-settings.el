@@ -8,6 +8,14 @@
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
+;; (setq old-elpa-packages '("~/.emacs.d/elpa/framemove-20130328.1133"
+;;                           "~/.emacs.d/elpa/redo+-20131117.1151"
+;;                           "~/.emacs.d/elpa/concurrent-20140609.1940"
+;;                           "~/.emacs.d/elpa/epc-20140609.2234"
+;;                           "~/.emacs.d/elpa/multi-term-20140827.704"))
+
+;; (setq load-path (append load-path old-elpa-packages))
+
 (load "selected-packages")
 
 (setq pinned-melpa-stable-pkgs
@@ -153,7 +161,19 @@
 (use-package company
   :ensure t
   :bind (("C-M-i". company-complete))
-  :config (global-company-mode))
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
+  ;; To prevent default down-casing.
+  ;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text
+  (setq company-dabbrev-downcase nil)
+  ;; 2023-01-13 From a Reddit post on mixed case issue.
+  (setq company-dabbrev-ignore-case nil)
+  (setq company-dabbrev-code-ignore-case nil)
+  (global-company-mode))
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package markdown-mode
   :ensure t

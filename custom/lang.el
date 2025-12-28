@@ -131,7 +131,8 @@
 ;; (elpy-enable)
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom/langs"))
-(dolist (lang-setting '("c_c++-lang"
+(dolist (lang-setting '(;; "c_c++-lang"
+                        "c-cpp-config"
                         "objc-lang"
                         "lisp-lang"
                         ;; "clojure-lang"
