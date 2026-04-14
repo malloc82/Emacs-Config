@@ -104,9 +104,16 @@
 ;; ============================================================================
 ;; yasnippet
 ;; ----------------------------------------------------------------------------
-(require 'yasnippet)
-;; (yas-global-mode 1)
-(setq yas-snippet-dirs (append '("~/.emacs.d/custom/snippets") yas-snippet-dirs))
+(use-package yasnippet
+  :ensure t
+  :config
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/custom/snippets")
+  (yas-global-mode 1))
+;; (setq yas-snippet-dirs (append '("~/.emacs.d/custom/snippets") yas-snippet-dirs))
+
+(use-package yasnippet-snippets
+  :ensure t)
+
 (defun yas-newline ()
   (interactive)
   (newline))
@@ -396,6 +403,29 @@
                 (cider-company-enable-fuzzy-completion)))
   )
 
+;; JSON file setting
+
+(use-package json-mode
+  :ensure t
+  :mode "\\.json\\'"
+  :hook ((json-mode . eglot-ensure)
+         (json-mode . (lambda ()
+                        ;; 1. Tell Eglot/LSP to use 2 spaces for formatting
+                        (setq-local tab-width 2)
+                        ;; 2. Tell Emacs native behavior to use 2 spaces
+                        (setq-local js-indent-level 2)
+                        ;; 3. Add auto-format on save strictly to the local buffer
+                        (add-hook 'before-save-hook #'eglot-format-buffer nil t))))
+  :config
+  (with-eval-after-load 'eglot
+    ;; Ensure Eglot maps json-mode to the correct executable
+    (add-to-list 'eglot-server-programs
+                 '(json-mode . ("vscode-json-language-server" "--stdio")))
+
+    ;; Optional: Pass workspace config to the server to explicitly enable validation
+    (setq-default eglot-workspace-configuration
+                  '(:json (:format (:enable t)
+                           :validate (:enable t))))))
 
 
 ;; (use-package ess

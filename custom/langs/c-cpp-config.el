@@ -1,9 +1,9 @@
-(message "loading cpp-config ")
 
 (require 'eglot)
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 (add-hook 'c-or-c++-mode-hook 'eglot-ensure)
+(add-hook 'c-mode-common-hook 'eglot-ensure)
 
 (use-package highlight-symbol
   :ensure t
@@ -16,15 +16,29 @@
   :config
   (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 
+(add-hook 'c++-mode-hook
+          (lambda ()
+            ;; Use company-capf (LSP/Clangd) AND company-dabbrev-code (Buffer words)
+            ;; The list inside a list '(X Y) means "try both and merge results"
+            (setq-local company-backends
+                        '((company-capf company-dabbrev-code)
+                          company-dabbrev))
+            (local-set-key (kbd "<tab>") 'company-indent-or-complete-common)))
+
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
 
 (defun my/c-cpp-setup ()
   ;; see ~/.clang-format
   (setq c-basic-offset 4)
-  (setq indent-tabs-mode nil))
+  (setq indent-tabs-mode nil)
+  (c-set-offset 'defun-block-intro '+)
+  (c-set-offset 'statement-block-intro '+)
+  (c-set-offset 'substatement-open 0)
+  )
 
 (add-hook 'c-mode-common-hook 'my/c-cpp-setup)
+(add-hook 'c-mode-common-hook 'electric-pair-local-mode)
 
 (require 'flymake)
 
@@ -52,5 +66,3 @@
 ;; (keymap-set c-mode-map "<Return>" 'electric-newline-and-maybe-indent)
 ;; (keymap-set c++-mode-map "<Return>" 'electric-newline-and-maybe-indent)
 
-(require 'yasnippet)
-(require 'yasnippet-snippets)

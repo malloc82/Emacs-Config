@@ -63,7 +63,7 @@
 ;;       python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 
-(setq python-shell-interpreter (concat (getenv "HOME") "/.pyenv/shims/jupyter") ;; (concat (getenv "HOME") "/anaconda3/bin/ipython") ;; "/Users/zcai/anaconda3/bin/ipython"
+(setq python-shell-interpreter (concat (getenv "HOME") "/.local/bin/jupyter") ;; (concat (getenv "HOME") "/anaconda3/bin/ipython") ;; "/Users/zcai/anaconda3/bin/ipython"
       python-shell-interpreter-args "console --simple-prompt" ;; Linux, LightBG, NoColor
       python-shell-prompt-detect-failure-warning nil)
 (add-to-list 'python-shell-completion-native-disabled-interpreters

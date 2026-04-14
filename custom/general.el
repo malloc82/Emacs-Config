@@ -217,3 +217,14 @@
 
 (require 'grep+)
 (grep-apply-setting 'grep-find-command '("find . -not \\( -name \"TAGS\" -o -ipath \"*/.git/*\" -o -ipath \"*/target/*\" -o -ipath \"*/.idea/*\" \\) -type f -exec grep --color=auto -InH --null -e  \\{\\} +" . 145))
+
+
+(use-package agent-shell
+  :ensure t
+  :custom
+  (agent-shell-prefer-view-port-interaction t)
+  (agent-shell-toggle-logging)
+  ;; (agent-shell-permission-responder-function #'agent-shell-permission-allow-always)
+  (agent-shell-anthropic-authentication (agent-shell-anthropic-make-authentication :login t))
+  (agent-shell-google-authentication (agent-shell-google-make-authentication :login t))
+)

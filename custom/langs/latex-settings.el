@@ -4,168 +4,51 @@
 ;; AUCTeX Settings
 ;; ============================
 
-;; (let ((tex-site-dir  nil))
-;;   (cond ((string= system-type "darwin")
-;;          (setq tex-site-dir
-;;                (concat invocation-directory "../Resources/site-lisp/tex-site.el")))
-;;         ((string= system-type "gnu/linux")
-;;          (when (string-match "\\.\\([[:digit:]]\\)*$" emacs-version)
-;;            (setq tex-site-dir
-;;                  (concat invocation-directory "../share/emacs/" (replace-match "" nil nil emacs-version) "/site-lisp/tex-site.el"))))
-;;         )
-;;   (when (and tex-site-dir (file-exists-p tex-site-dir))
-;;     (message "==> AUCTeX is installed, loading tex settings")
-;;     (message "==> tex-site.el: %s" tex-site-dir)
+;; Ensure AUCTeX configuration is applied only after it's loaded
+(with-eval-after-load 'tex
 
-;; (add-to-list 'load-path "~/.emacs.d/auctex/")
+  ;; Basic AUCTeX settings
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq LaTeX-math-mode t)
+  (setq LaTeX-command "latex -file-line-error")
+  (setq LaTeX-math-menu-unicode t)
 
-(require 'tex-site)
-;; (require 'auto-complete-auctex)
-(require 'company-auctex)
-;; (require 'smartparens)
-;; (require 'smartparens-latex)
-(require 'yasnippet)
-(yas-minor-mode +1)
-(smartparens-mode 1)
-(electric-pair-mode -1)
-(outline-minor-mode 1)
-(setq LaTeX-math-mode t)
-(setq LaTeX-command "latex -file-line-error")
-(setq LaTeX-math-menu-unicode t)
-(setq show-trailing-whitespace t)
-(turn-on-reftex)
-;; make latexmk available via C-c C-c
-;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+  ;; Setup Viewer (macOS / Linux)
+  (cond ((string= system-type "darwin")
+         (add-to-list 'TeX-view-program-list
+                      '("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"))
+         (add-to-list 'TeX-view-program-selection '(output-pdf "Skim")))
+        (t
+         (add-to-list 'TeX-view-program-list '("kdvi" "kdvi %o"))
+         (add-to-list 'TeX-view-program-selection '(output-dvi "kdvi"))
+         (add-to-list 'TeX-view-program-selection '(output-pdf "Evince"))))
 
-;; use Skim as default pdf viewer
-;; Skim's displayline is used for forward search (from .tex to .pdf)
-;; option -b highlights the current line; option -g opens Skim in the background
+  ;; Add Latexmk as a command
+  (add-to-list 'TeX-command-list
+               '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t        :help "Run latexmk on file"))
+  (add-to-list 'TeX-command-list
+               '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t  :help "Run XeLaTeX for Chinese language tex files"))
+  (add-to-list 'TeX-command-list
+               '("latexmk-xe" "latexmk -xelatex %s" TeX-run-TeX nil t :help "Run latexmk with XeLaTeX engine"))
+  (setq TeX-command-default "latexmk"))
 
-(cond ((string= system-type "darwin")
-       (setq TeX-output-view-style
-             (quote (("^dvi$" "." "simpdftex --maxpfb %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-       ;; (setq TeX-view-program-list
-       ;;       (quote (("Preview" "preivew %o") ("simpdftex" "simpdftex --maxpfb %o"))))
-       (setq TeX-view-program-list
-             (quote (("Preview" "preivew %o")
-                     ("simpdftex" "simpdftex --maxpfb %o")
-                     ("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"))))
-       (setq TeX-view-program-selection
-             (quote ((output-dvi "simpdftex")
-                     ;; (output-pdf "Preview")
-                     (output-pdf "PDF Viewer")
-                     (output-html "xdg-open")))))
-      (t
-       (setq TeX-output-view-style
-             (quote (("^dvi$" "." "kdvi %o") ("^pdf$" "." "open %o") ("^html?$" "." "open %o"))))
-       (setq TeX-view-program-list
-             (quote (("kdvi" "kdvi  %o"))))
-       (setq TeX-view-program-selection
-             (quote ((output-dvi "kdvi") (output-pdf "Evince") (output-html "xdg-open"))))))
+;; Apply minor modes specifically when entering LaTeX mode
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (yas-minor-mode 1)
+            (smartparens-mode 1)
+            (electric-pair-local-mode -1)
+            (outline-minor-mode 1)
+            (turn-on-reftex)
+            (setq-local show-trailing-whitespace t)
 
-(setq load-path (append '("~/.emacs.d/elpa/auto-complete-auctex") load-path))
+            ;; RefTeX needs to know about AUCTeX
+            (setq reftex-plug-into-AUCTeX t)))
 
-(setq TeX-command-default "latexmk")
-(push
- '("latexmk"
-   "latexmk -pdf %s"
-   TeX-run-TeX nil t
-   :help
-   "Run latexmk on file")
- TeX-command-list)
-(push
- '("Skim"
-   "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"
-   TeX-run-discard-or-function t t
-   :help
-   "Run Skim")
- TeX-command-list)
-
-;; ;; Example function:
-
-;; (defun begin-align ()
-;;   (interactive)
-;;   (insert "\\begin{align}\n\n")
-;;   (insert "\\end{align}\n")
-;;   (forward-line -2))
-
-;; Need to make sure the alignment is good for each inserted lines
-(defmacro insert-latex-block (bname &optional p1 p2)
-  (let* ((p1 (if (null p1) "" p1))
-         (p2 (if (null p2) "" p2))
-         (function-name  (format "begin-%s" bname))
-         (begin-block    (format "\\begin{%s}%s%s\n" bname p1 p2))
-         (end-block      (format "\\end{%s}" bname)))
-    `(defun ,(intern function-name) ()
-       (interactive)
-       (indent-according-to-mode) (insert ,begin-block)
-       (indent-according-to-mode)
-       (save-excursion
-         (newline)
-         (insert ,end-block)
-         (indent-according-to-mode)))))
-
-(defmacro insert-latex-line (lname &optional p1 p2)
-  (let* ((p1 (if (null p1) "" p1))
-         (p2 (if (null p2) "" p2))
-         (cmd-name (format "%s" lname))
-         (cmd (format "%s[%s]{%s}" lname p1 p2)))
-    `(defun ,(intern cmd-name) ()
-       (interactive)
-       (indent-according-to-mode)
-       (insert ,cmd))))
-
-(insert-latex-block "document")
-
-;; LaTeX equations
-(insert-latex-block "equation")
-(insert-latex-block "eqnarray")
-(insert-latex-block "eqnarray*")
-(insert-latex-block "align")
-(insert-latex-block "align*")
-(insert-latex-block "dcases")
-(insert-latex-block "cases")
-(insert-latex-block "cases*")
-(insert-latex-block "rcases")
-(insert-latex-block "rcases*")
-
-;; LaTeX matrices
-(insert-latex-block "array")
-(insert-latex-block "matrix")
-
-(insert-latex-block "bmatrix")
-(insert-latex-block "bmatrix*")
-
-(insert-latex-block "Bmatrix")
-(insert-latex-block "Bmatrix*")
-
-(insert-latex-block "pmatrix")
-(insert-latex-block "pmatrix*")
-
-(insert-latex-block "vmatrix")
-(insert-latex-block "vmatrix*")
-
-(insert-latex-block "Vmatrix")
-(insert-latex-block "Vmatrix*")
-
-(insert-latex-block "smallmatrix")
-
-;; LaTeX list structures
-(insert-latex-block "itemize")
-(insert-latex-block "enumerate")
-(insert-latex-block "description")
-(insert-latex-block "easaylist")
-
-;; LaTeX figures
-(insert-latex-block "figure" "[!h]")
-(insert-latex-block "minipage" "[b]" "{5in}")
-
-(insert-latex-block "center")
-
-;; LaTeX tables
-(insert-latex-block "tabular")
-
-;; Code listing
-(insert-latex-block "lstlisting" "[language=<language>, caption={<commends>}]")
-
-(insert-latex-line "includegraphics" "width=5in")
+;; Note on Environments:
+;; Instead of the `insert-latex-block` macro, use AUCTeX's built-in feature:
+;; Press `C-c C-e` (LaTeX-environment) inside a .tex file.
+;; It will prompt you for an environment (e.g., "equation", "matrix")
+;; and insert both the \begin and \end tags perfectly formatted.
